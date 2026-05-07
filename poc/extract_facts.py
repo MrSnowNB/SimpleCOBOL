@@ -40,9 +40,28 @@ def cobc_expand(prog: str) -> list:
 
 # -- 2. REKT: sentence originalText + exec order ------------------------------
 def rekt_load(prog: str) -> dict:
+    # 1. Try standard path
     p = REKT_DIR / f"{prog}.cbl.report/cfg/cfg-{prog}.cbl.json"
+    
+    # 2. Try nested path (happens in some CardDemo reports)
     if not p.exists():
+        p = REKT_DIR / f"{prog}.cbl.report/{prog}.cbl.report/cfg/cfg-{prog}.cbl.json"
+    
+    # 3. Try uppercase .CBL nested path
+    if not p.exists():
+        p = REKT_DIR / f"{prog}.cbl.report/{prog}.CBL.report/cfg/cfg-{prog}.cbl.json"
+    if not p.exists():
+        p = REKT_DIR / f"{prog}.cbl.report/{prog}.CBL.report/cfg/cfg-{prog}.Cbl.json"
+
+    # 4. Fallback: recursive glob for this specific program's CFG
+    if not p.exists():
+        matches = list(REKT_DIR.glob(f"**/{prog}.*.report/**/cfg-{prog}.*.json"))
+        if matches:
+            p = matches[0]
+
+    if not p.exists() or not p.is_file():
         return {"nodes": [], "edges": [], "rekt_available": False}
+    
     raw = json.loads(p.read_text(encoding="utf-8"))
     raw["rekt_available"] = True
     return raw
@@ -71,7 +90,7 @@ def rekt_cics(sentences: list) -> list:
     return hits
 
 # -- 3. Paragraph extraction from expanded source ----------------------------
-PARA_RE = re.compile(r'^[ ]{6,}([A-Z0-9][A-Z0-9\-]{2,})\.\s*$')
+PARA_RE = re.compile(r'^[ ]{0,7}([A-Z0-9][A-Z0-9\-]{2,})\.\s*$')
 PERF_RE = re.compile(r'\bPERFORM\s+([A-Z0-9][A-Z0-9\-]+)(?:\s+THRU\s+([A-Z0-9][A-Z0-9\-]+))?')
 GOTO_RE = re.compile(r'\bGO\s+TO\s+((?:[A-Z0-9][A-Z0-9\-]+\s*)+?)(?:\s+DEPENDING|\.)', re.IGNORECASE)
 TERM_RE = re.compile(r'\b(STOP\s+RUN|GOBACK|EXIT\s+PROGRAM)\b', re.IGNORECASE)
