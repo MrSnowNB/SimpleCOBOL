@@ -1,0 +1,2187 @@
+{
+  "nodes": [
+    {
+      "id": "d0f5c257-372c-4084-ad61-1f0de1ff35c1",
+      "label": "ProcedureDivisionBodyContext/d0f5c257-372c-4084-ad61-1f0de1ff35c1",
+      "name": "ProcedureDivisionBodyContext/d0f5c257-372c-4084-ad61-1f0de1ff35c1",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBCUS01C\u0027.\n           PERFORM 0000-CUSTFILE-OPEN.\n       \n           PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CUSTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CUSTOMER-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.\n       \n           PERFORM 9000-CUSTFILE-CLOSE.\n       \n           DISPLAY \u0027END OF EXECUTION OF PROGRAM CBCUS01C\u0027.\n       \n           GOBACK.\n       \n       \n       \n       \n       1000-CUSTFILE-GET-NEXT.\n           READ CUSTFILE-FILE INTO CUSTOMER-RECORD.\n           IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               DISPLAY CUSTOMER-RECORD\n           ELSE\n               IF  CUSTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CUSTOMER FILE\u0027\n                   MOVE CUSTFILE-STATUS TO IO-STATUS\n                   PERFORM Z-DISPLAY-IO-STATUS\n                   PERFORM Z-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.\n       \n       0000-CUSTFILE-OPEN.\n           MOVE 8 TO APPL-RESULT.\n           OPEN INPUT CUSTFILE-FILE\n           IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING CUSTFILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9000-CUSTFILE-CLOSE.\n           ADD 8 TO ZERO GIVING APPL-RESULT.\n           CLOSE CUSTFILE-FILE\n           IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING CUSTOMER FILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       Z-ABEND-PROGRAM.\n           DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING.\n       \n       \n       Z-DISPLAY-IO-STATUS.\n           IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+      "type": "PROCEDURE_DIVISION_BODY",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a815def9-ff91-44c1-9dc5-262746463fcd",
+      "label": "DISPLAY\u0027START O",
+      "name": "DISPLAY\u0027START O",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBCUS01C\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c00aa027-daf4-43cb-b3a6-289d924e5363",
+      "label": "PERFORM0000-CUS",
+      "name": "PERFORM0000-CUS",
+      "originalText": "PERFORM 0000-CUSTFILE-OPEN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7a7ab1fb-cb48-4a6c-b998-c357320a5a20",
+      "label": "PERFORMUNTILEND",
+      "name": "PERFORMUNTILEND",
+      "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CUSTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CUSTOMER-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "70478a14-61f1-43f0-9a34-60fce04d840f",
+      "label": "PERFORM9000-CUS",
+      "name": "PERFORM9000-CUS",
+      "originalText": "PERFORM 9000-CUSTFILE-CLOSE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "27ea496a-23b5-4628-8d19-a7726645cf30",
+      "label": "DISPLAY\u0027END OF ",
+      "name": "DISPLAY\u0027END OF ",
+      "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBCUS01C\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "cb979ad6-589b-4a17-afde-d2d77c291fe8",
+      "label": "GOBACK.",
+      "name": "GOBACK.",
+      "originalText": "GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "accf82cd-63fb-4013-bbf7-c0980fcec763",
+      "label": "1000-CUSTFILE-GET-NEXT",
+      "name": "1000-CUSTFILE-GET-NEXT",
+      "originalText": "1000-CUSTFILE-GET-NEXT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "52100b65-17ef-4b16-b4d6-07cad31374c5",
+      "label": "READCUSTFILE-FI",
+      "name": "READCUSTFILE-FI",
+      "originalText": "READ CUSTFILE-FILE INTO CUSTOMER-RECORD.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9614217f-fdab-40d7-8ffb-f763efa2ad46",
+      "label": "IFCUSTFILE-STAT",
+      "name": "IFCUSTFILE-STAT",
+      "originalText": "IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               DISPLAY CUSTOMER-RECORD\n           ELSE\n               IF  CUSTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CUSTOMER FILE\u0027\n                   MOVE CUSTFILE-STATUS TO IO-STATUS\n                   PERFORM Z-DISPLAY-IO-STATUS\n                   PERFORM Z-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0eb963be-ac27-45a5-8931-f84fac090f53",
+      "label": "0000-CUSTFILE-OPEN",
+      "name": "0000-CUSTFILE-OPEN",
+      "originalText": "0000-CUSTFILE-OPEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5b807041-8468-4726-97b4-f3620a540014",
+      "label": "MOVE8TOAPPL-RES",
+      "name": "MOVE8TOAPPL-RES",
+      "originalText": "MOVE 8 TO APPL-RESULT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "38551df7-1d09-46c9-b463-3eb921bfb8d1",
+      "label": "OPENINPUTCUSTFI",
+      "name": "OPENINPUTCUSTFI",
+      "originalText": "OPEN INPUT CUSTFILE-FILE\n           IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING CUSTFILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0ed70ce4-5cc3-4f44-a6fa-73864bae742e",
+      "label": "9000-CUSTFILE-CLOSE",
+      "name": "9000-CUSTFILE-CLOSE",
+      "originalText": "9000-CUSTFILE-CLOSE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b2d9b05b-c470-4adc-a33e-2359ede069b1",
+      "label": "ADD8TOZEROGIVIN",
+      "name": "ADD8TOZEROGIVIN",
+      "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "41482623-fcfb-4f43-a0df-8f70fa6cef29",
+      "label": "CLOSECUSTFILE-F",
+      "name": "CLOSECUSTFILE-F",
+      "originalText": "CLOSE CUSTFILE-FILE\n           IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING CUSTOMER FILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "label": "Z-ABEND-PROGRAM",
+      "name": "Z-ABEND-PROGRAM",
+      "originalText": "Z-ABEND-PROGRAM.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2c14c9c1-a8ab-4171-9ea6-e543b6c8c9a7",
+      "label": "DISPLAY\u0027ABENDIN",
+      "name": "DISPLAY\u0027ABENDIN",
+      "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "label": "Z-DISPLAY-IO-STATUS",
+      "name": "Z-DISPLAY-IO-STATUS",
+      "originalText": "Z-DISPLAY-IO-STATUS.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b70e2262-dce3-4664-94cc-5652cca214a5",
+      "label": "IFIO-STATUSNOTN",
+      "name": "IFIO-STATUSNOTN",
+      "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3ced90db-588e-4d3f-83e8-96984853e09f",
+      "label": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+      "name": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+      "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8a107cd4-3b53-48a9-b514-88c2057b4504",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5b62d9c7-9a60-48cd-9eb9-ffa07ed4b5e5",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1429328f-e831-433c-83fa-cc4b1b7e2f93",
+      "label": "MOVEIO-STAT1TOI",
+      "name": "MOVEIO-STAT1TOI",
+      "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6c86e41a-d002-425c-9dcc-a53e6f22dbfb",
+      "label": "MOVE0TOTWO-BYTE",
+      "name": "MOVE0TOTWO-BYTE",
+      "originalText": "MOVE 0        TO TWO-BYTES-BINARY",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c1120659-c961-493e-bad3-017e71f66fb3",
+      "label": "MOVEIO-STAT2TOT",
+      "name": "MOVEIO-STAT2TOT",
+      "originalText": "MOVE IO-STAT2 TO TWO-BYTES-RIGHT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d0b4dde8-9801-4e58-b51c-111c7224ff3e",
+      "label": "MOVETWO-BYTES-B",
+      "name": "MOVETWO-BYTES-B",
+      "originalText": "MOVE TWO-BYTES-BINARY TO IO-STATUS-0403",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "62c6adfe-8dbc-44ae-bc77-796a117816b0",
+      "label": "DISPLAY\u0027FILE ST",
+      "name": "DISPLAY\u0027FILE ST",
+      "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f29a9558-9519-4927-9e4b-eec6325f1f32",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "173cd33f-6e53-4f65-bdd3-52bb52fa0474",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7417c4fa-5e4b-4507-80f6-2ccd5374fe19",
+      "label": "MOVE\u00270000\u0027TOIO-",
+      "name": "MOVE\u00270000\u0027TOIO-",
+      "originalText": "MOVE \u00270000\u0027 TO IO-STATUS-04",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "113a8254-cafb-43d1-bda0-fa37e3e46b16",
+      "label": "MOVEIO-STATUSTO",
+      "name": "MOVEIO-STATUSTO",
+      "originalText": "MOVE IO-STATUS TO IO-STATUS-04(3:2)",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "45f21417-1e69-4ae2-abd3-1c7db9e36805",
+      "label": "DISPLAY\u0027FILE ST",
+      "name": "DISPLAY\u0027FILE ST",
+      "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8ef90e67-8a68-4557-a4ab-c4ae06776d65",
+      "label": "DISPLAY\u0027ABENDIN",
+      "name": "DISPLAY\u0027ABENDIN",
+      "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e82a60ad-3029-400b-8d22-6302d01c074e",
+      "label": "MOVE0TOTIMING",
+      "name": "MOVE0TOTIMING",
+      "originalText": "MOVE 0 TO TIMING",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6cb73de4-c1fb-48d1-bd32-6e87c8d8e980",
+      "label": "MOVE999TOABCODE",
+      "name": "MOVE999TOABCODE",
+      "originalText": "MOVE 999 TO ABCODE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b7e8171f-93af-4d7d-94b2-3403efd1dac4",
+      "label": "CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING",
+      "name": "CALL\u0027CEE3ABD\u0027US",
+      "originalText": "CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING",
+      "type": "CALL",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3833c7f9-d25e-4efa-977a-d29325d81752",
+      "label": "CLOSECUSTFILE-F",
+      "name": "CLOSECUSTFILE-F",
+      "originalText": "CLOSE CUSTFILE-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2ce959bc-06f1-474d-b295-17c0f27c8d4e",
+      "label": "IS \nCUSTFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nCUSTFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b8a7b4d6-b67e-4405-9853-a2e503097534",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING CUSTOMER FILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7b7c60c5-8538-447c-b7ad-e8103b4dd753",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f388b293-0d16-43c4-845a-342acbdbc505",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "cc272894-96d1-4386-8cae-cddc3e0e3653",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "25324a67-a89f-49a1-a0ff-447a0ba23a8e",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               DISPLAY \u0027ERROR CLOSING CUSTOMER FILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "af97edfb-ecae-4ec1-a041-4e046c283fb3",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5818d432-2a12-4871-9239-2035f9b0c49d",
+      "label": "DISPLAY\u0027ERROR C",
+      "name": "DISPLAY\u0027ERROR C",
+      "originalText": "DISPLAY \u0027ERROR CLOSING CUSTOMER FILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "82cd8844-7831-4dec-b51c-7fd15a5fde96",
+      "label": "MOVECUSTFILE-ST",
+      "name": "MOVECUSTFILE-ST",
+      "originalText": "MOVE CUSTFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "label": "PERFORM Z-DISPLAY-IO-STATUS",
+      "name": "PERFORMZ-DISPLA",
+      "originalText": "PERFORM Z-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2e81a5c3-04a8-4edb-a18b-132eb3fd76e1",
+      "label": "PERFORM Z-ABEND-PROGRAM",
+      "name": "PERFORMZ-ABEND-",
+      "originalText": "PERFORM Z-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ee675daa-2529-43ad-823c-0d4fc6ab24a5",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fc606541-7aa4-455f-b1da-b63ab7592622",
+      "label": "SUBTRACTAPPL-RE",
+      "name": "SUBTRACTAPPL-RE",
+      "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+      "type": "SUBTRACT",
+      "categories": [
+        "COMPUTATIONAL",
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a954ed74-68f5-4ddd-bacf-667de15cb7fc",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3284a6c0-0411-4881-a546-7efbcf76f21e",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6e8d6068-67e1-4402-9af9-320b743aab2d",
+      "label": "ADD12TOZEROGIVI",
+      "name": "ADD12TOZEROGIVI",
+      "originalText": "ADD 12 TO ZERO GIVING APPL-RESULT",
+      "type": "ADD",
+      "categories": [
+        "COMPUTATIONAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4421ec12-246f-46e2-ae2a-22ba9c1ec64d",
+      "label": "ADD8TOZEROGIVIN",
+      "name": "ADD8TOZEROGIVIN",
+      "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT",
+      "type": "ADD",
+      "categories": [
+        "COMPUTATIONAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ffb35afc-8e49-4567-8c85-9b2d8f566f5e",
+      "label": "OPENINPUTCUSTFI",
+      "name": "OPENINPUTCUSTFI",
+      "originalText": "OPEN INPUT CUSTFILE-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "00dbd704-de00-4f55-ab13-6b96a5ee0146",
+      "label": "IS \nCUSTFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nCUSTFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "17085d2c-e135-4df5-b6df-5ca36a747277",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING CUSTFILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d4cdd4cf-7417-4ea8-8f86-a61f0c583fb1",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6f3d14ca-af35-4b3e-9351-6fa95dc30540",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fd5a4f50-0552-4ed0-8db7-5f3dcc405529",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "92ee56eb-bc19-46f9-91aa-42117da629f1",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               DISPLAY \u0027ERROR OPENING CUSTFILE\u0027\n               MOVE CUSTFILE-STATUS TO IO-STATUS\n               PERFORM Z-DISPLAY-IO-STATUS\n               PERFORM Z-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "14916810-9c68-44af-b2ea-7355f683ef0a",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6cded5c0-ffa9-44c9-95b3-30f70e481bb3",
+      "label": "DISPLAY\u0027ERROR O",
+      "name": "DISPLAY\u0027ERROR O",
+      "originalText": "DISPLAY \u0027ERROR OPENING CUSTFILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c290b437-9fca-4163-a8f0-e753b1a6c724",
+      "label": "MOVECUSTFILE-ST",
+      "name": "MOVECUSTFILE-ST",
+      "originalText": "MOVE CUSTFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "label": "PERFORM Z-DISPLAY-IO-STATUS",
+      "name": "PERFORMZ-DISPLA",
+      "originalText": "PERFORM Z-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a46ef187-634f-4f40-8aec-3283d9770889",
+      "label": "PERFORM Z-ABEND-PROGRAM",
+      "name": "PERFORMZ-ABEND-",
+      "originalText": "PERFORM Z-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f8a5b340-ea10-459d-b900-29cdc07d81e9",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a80f00e6-7d32-4e30-b6c7-784b8223e38c",
+      "label": "MOVE0TOAPPL-RES",
+      "name": "MOVE0TOAPPL-RES",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0b1d1b96-6d60-44f5-a792-a92d5631b791",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE 12 TO APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "50dd8896-71df-4464-a64e-58e1b8744758",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b1a92f86-376d-499d-b1a1-03914b9e92b7",
+      "label": "MOVE12TOAPPL-RE",
+      "name": "MOVE12TOAPPL-RE",
+      "originalText": "MOVE 12 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8d1101ca-7637-4bc0-83ae-605240947a1f",
+      "label": "MOVE8TOAPPL-RES",
+      "name": "MOVE8TOAPPL-RES",
+      "originalText": "MOVE 8 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "51ec9380-683c-4bcb-ade5-e4f05051e643",
+      "label": "IS \nCUSTFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nCUSTFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  CUSTFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               DISPLAY CUSTOMER-RECORD\n           ELSE\n               IF  CUSTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "69ffa8f7-3764-409a-b779-4b88eb13746d",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CUSTOMER FILE\u0027\n                   MOVE CUSTFILE-STATUS TO IO-STATUS\n                   PERFORM Z-DISPLAY-IO-STATUS\n                   PERFORM Z-ABEND-PROGRAM\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fe1fe681-c983-41e0-b197-4abb9b3e20ae",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0c3864da-1bcf-4bed-a1e6-9c9c7d9738db",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "df6cc597-400c-4de0-9335-b2e45428f5a6",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "87e0e157-f47d-4da6-9b33-0da6c2c7079c",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CUSTOMER FILE\u0027\n                   MOVE CUSTFILE-STATUS TO IO-STATUS\n                   PERFORM Z-DISPLAY-IO-STATUS\n                   PERFORM Z-ABEND-PROGRAM\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5a42e45b-0122-4a86-826e-5a3f616f3136",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9131abb7-3d39-40af-afa3-f3fe4df36daa",
+      "label": "IS \nAPPL-EOF?\n",
+      "name": "IS \nAPPL-EOF?\n",
+      "originalText": "IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CUSTOMER FILE\u0027\n                   MOVE CUSTFILE-STATUS TO IO-STATUS\n                   PERFORM Z-DISPLAY-IO-STATUS\n                   PERFORM Z-ABEND-PROGRAM\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ddc4c91d-deca-4a05-ad95-349e07a20bf7",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6ed28a41-9973-4f05-9754-59d282c51670",
+      "label": "MOVE\u0027Y\u0027TOEND-OF",
+      "name": "MOVE\u0027Y\u0027TOEND-OF",
+      "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6ce936e3-3e00-4a30-99c4-2d9d7e3abd5b",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   DISPLAY \u0027ERROR READING CUSTOMER FILE\u0027\n                   MOVE CUSTFILE-STATUS TO IO-STATUS\n                   PERFORM Z-DISPLAY-IO-STATUS\n                   PERFORM Z-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e2a75d54-5b55-4f50-bf79-75ce06811bf3",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "321d7eb1-e464-4355-8572-4ee1c33e1d7e",
+      "label": "DISPLAY\u0027ERROR R",
+      "name": "DISPLAY\u0027ERROR R",
+      "originalText": "DISPLAY \u0027ERROR READING CUSTOMER FILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4c95fa32-a4d3-44e0-8c31-c39751dc4ca0",
+      "label": "MOVECUSTFILE-ST",
+      "name": "MOVECUSTFILE-ST",
+      "originalText": "MOVE CUSTFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "label": "PERFORM Z-DISPLAY-IO-STATUS",
+      "name": "PERFORMZ-DISPLA",
+      "originalText": "PERFORM Z-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "label": "PERFORM Z-ABEND-PROGRAM",
+      "name": "PERFORMZ-ABEND-",
+      "originalText": "PERFORM Z-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1a295ab5-8619-49d6-8fb4-23ade41accfe",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 0 TO APPL-RESULT\n               DISPLAY CUSTOMER-RECORD",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d71e7eec-bd55-4a20-bfdb-a7028ef1735a",
+      "label": "MOVE0TOAPPL-RES",
+      "name": "MOVE0TOAPPL-RES",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "52a4457d-6130-4673-8f0e-64da6614c81a",
+      "label": "DISPLAYCUSTOMER",
+      "name": "DISPLAYCUSTOMER",
+      "originalText": "DISPLAY CUSTOMER-RECORD",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fb7ab9e1-4568-4c19-affb-2e0f4a916231",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               IF  CUSTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ba4948d7-3d3c-4b3d-b0be-afc8ef883652",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "04306e83-2de8-415b-aac4-85e0620e7301",
+      "label": "IS \nCUSTFILE-STATUS \u003d \u002710\u0027?\n",
+      "name": "IS \nCUSTFILE-STATUS \u003d \u002710\u0027?\n",
+      "originalText": "IF  CUSTFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "28b2aeaf-78cc-4b48-9063-cdd17d720908",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 16 TO APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1426721b-b794-4a8b-9b24-bc8972455b08",
+      "label": "MOVE16TOAPPL-RE",
+      "name": "MOVE16TOAPPL-RE",
+      "originalText": "MOVE 16 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "01405f11-2e00-4380-b4e6-3cbcaca22a9e",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   MOVE 12 TO APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b5633ec5-9391-493a-a598-8a6104adbbdd",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f2d12725-9584-4db4-a219-38d181a4b6a3",
+      "label": "MOVE12TOAPPL-RE",
+      "name": "MOVE12TOAPPL-RE",
+      "originalText": "MOVE 12 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3807b3ec-42f0-4b6a-af74-b7966f1cb2bc",
+      "label": "READCUSTFILE-FI",
+      "name": "READCUSTFILE-FI",
+      "originalText": "READ CUSTFILE-FILE INTO CUSTOMER-RECORD",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "feba4881-9fca-4a24-a2a9-6c92febdb33d",
+      "label": "GOBACK",
+      "name": "GOBACK",
+      "originalText": "GOBACK",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0551ab1d-7388-4942-baef-e105ef60c1ab",
+      "label": "DISPLAY\u0027END OF ",
+      "name": "DISPLAY\u0027END OF ",
+      "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBCUS01C\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6f81a299-c597-4d17-8eff-c67ca10377f9",
+      "label": "PERFORM 9000-CUSTFILE-CLOSE",
+      "name": "PERFORM9000-CUS",
+      "originalText": "PERFORM 9000-CUSTFILE-CLOSE",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "efa868a0-6dbf-46bc-b4e8-35469f811328",
+      "label": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y",
+      "name": "PERFORMUNTILEND",
+      "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CUSTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CUSTOMER-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM",
+      "type": "PERFORM",
+      "categories": [
+        "LOOP"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7b565bcf-f291-43e9-8b5c-8f539bae72b6",
+      "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CUSTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CUSTOMER-RECORD\n                   END-IF\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8bf9ee50-2fab-489c-8226-65f43ebfa3bf",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "PERFORM 1000-CUSTFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CUSTOMER-RECORD\n                   END-IF",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3db12553-6016-491f-82f4-d533657e8d75",
+      "label": "PERFORM 1000-CUSTFILE-GET-NEXT",
+      "name": "PERFORM1000-CUS",
+      "originalText": "PERFORM 1000-CUSTFILE-GET-NEXT",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e9ff8a4e-3131-4f95-8ca5-3a303c5f3245",
+      "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CUSTOMER-RECORD\n                   END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "101cee42-cf00-422b-a2a7-a8fa7c4c153d",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "DISPLAY CUSTOMER-RECORD",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1ce0a23c-0fea-4662-b7aa-35d26d48ee3e",
+      "label": "DISPLAYCUSTOMER",
+      "name": "DISPLAYCUSTOMER",
+      "originalText": "DISPLAY CUSTOMER-RECORD",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7db54386-391d-4e82-93ed-6895975bc50e",
+      "label": "PERFORM 0000-CUSTFILE-OPEN",
+      "name": "PERFORM0000-CUS",
+      "originalText": "PERFORM 0000-CUSTFILE-OPEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "45e873f5-c162-4044-b405-0a208fd207c0",
+      "label": "DISPLAY\u0027START O",
+      "name": "DISPLAY\u0027START O",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBCUS01C\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "edges": [
+    {
+      "id": "32d6e117-190f-4d8a-97cc-3c208c5eb138",
+      "fromNodeID": "d0f5c257-372c-4084-ad61-1f0de1ff35c1",
+      "toNodeID": "a815def9-ff91-44c1-9dc5-262746463fcd",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "61612702-17a1-4ece-976b-f655eb6b821e",
+      "fromNodeID": "a815def9-ff91-44c1-9dc5-262746463fcd",
+      "toNodeID": "c00aa027-daf4-43cb-b3a6-289d924e5363",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "37d8c5e5-b67b-43e0-9fda-5b0362c14a41",
+      "fromNodeID": "c00aa027-daf4-43cb-b3a6-289d924e5363",
+      "toNodeID": "7a7ab1fb-cb48-4a6c-b998-c357320a5a20",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "56cf77b5-9170-4965-aeb8-0376d484da59",
+      "fromNodeID": "7a7ab1fb-cb48-4a6c-b998-c357320a5a20",
+      "toNodeID": "70478a14-61f1-43f0-9a34-60fce04d840f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2851cf39-3999-419a-bcc0-c69238691379",
+      "fromNodeID": "70478a14-61f1-43f0-9a34-60fce04d840f",
+      "toNodeID": "27ea496a-23b5-4628-8d19-a7726645cf30",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "375d3248-6ad5-4187-ab26-d135f6b47962",
+      "fromNodeID": "27ea496a-23b5-4628-8d19-a7726645cf30",
+      "toNodeID": "cb979ad6-589b-4a17-afde-d2d77c291fe8",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "21ed8e33-606a-42d5-b423-bbe11503dbd3",
+      "fromNodeID": "cb979ad6-589b-4a17-afde-d2d77c291fe8",
+      "toNodeID": "accf82cd-63fb-4013-bbf7-c0980fcec763",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8b90245f-3eda-4b2c-ac4d-f95e2b5c2bd9",
+      "fromNodeID": "accf82cd-63fb-4013-bbf7-c0980fcec763",
+      "toNodeID": "52100b65-17ef-4b16-b4d6-07cad31374c5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6ca2e60c-db50-4419-ad26-4d7008706784",
+      "fromNodeID": "52100b65-17ef-4b16-b4d6-07cad31374c5",
+      "toNodeID": "9614217f-fdab-40d7-8ffb-f763efa2ad46",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "aabf776b-1c1a-4c62-b727-b3db1105e883",
+      "fromNodeID": "9614217f-fdab-40d7-8ffb-f763efa2ad46",
+      "toNodeID": "0eb963be-ac27-45a5-8931-f84fac090f53",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7861554f-6117-4ba7-ac21-ea892fd71714",
+      "fromNodeID": "0eb963be-ac27-45a5-8931-f84fac090f53",
+      "toNodeID": "5b807041-8468-4726-97b4-f3620a540014",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9d8e2764-ca16-477e-8623-597340765f82",
+      "fromNodeID": "5b807041-8468-4726-97b4-f3620a540014",
+      "toNodeID": "38551df7-1d09-46c9-b463-3eb921bfb8d1",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "eeaf610e-d10a-427d-8236-89d8a287d6db",
+      "fromNodeID": "38551df7-1d09-46c9-b463-3eb921bfb8d1",
+      "toNodeID": "0ed70ce4-5cc3-4f44-a6fa-73864bae742e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2d65bada-6a9f-4a8c-92b3-2c17635bac47",
+      "fromNodeID": "0ed70ce4-5cc3-4f44-a6fa-73864bae742e",
+      "toNodeID": "b2d9b05b-c470-4adc-a33e-2359ede069b1",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b23736f1-9787-4024-8c4e-d1790501782e",
+      "fromNodeID": "b2d9b05b-c470-4adc-a33e-2359ede069b1",
+      "toNodeID": "41482623-fcfb-4f43-a0df-8f70fa6cef29",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ed56dc86-45eb-42a6-81ef-51fd75524662",
+      "fromNodeID": "41482623-fcfb-4f43-a0df-8f70fa6cef29",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1fbc49b9-660b-463c-b843-f127ab9634fa",
+      "fromNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "toNodeID": "2c14c9c1-a8ab-4171-9ea6-e543b6c8c9a7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6b99bcff-ca32-4f61-9af7-e93b3ef2f3df",
+      "fromNodeID": "2c14c9c1-a8ab-4171-9ea6-e543b6c8c9a7",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7ab7010c-c913-4c47-9f90-a65ac26bdead",
+      "fromNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "toNodeID": "b70e2262-dce3-4664-94cc-5652cca214a5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7026f258-8c6c-4713-82e3-73004ded8510",
+      "fromNodeID": "b70e2262-dce3-4664-94cc-5652cca214a5",
+      "toNodeID": "3ced90db-588e-4d3f-83e8-96984853e09f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "66fe7f8a-1923-4ad9-9837-ccaaeee95db3",
+      "fromNodeID": "3ced90db-588e-4d3f-83e8-96984853e09f",
+      "toNodeID": "8a107cd4-3b53-48a9-b514-88c2057b4504",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "98adab99-6b45-4782-80f0-b2e726f2f802",
+      "fromNodeID": "3ced90db-588e-4d3f-83e8-96984853e09f",
+      "toNodeID": "5b62d9c7-9a60-48cd-9eb9-ffa07ed4b5e5",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "5070c01d-70b6-40f8-b988-46699c4b1e3b",
+      "fromNodeID": "3ced90db-588e-4d3f-83e8-96984853e09f",
+      "toNodeID": "f29a9558-9519-4927-9e4b-eec6325f1f32",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "4fe2b652-2bb2-4f41-8d27-47b512adb5f6",
+      "fromNodeID": "5b62d9c7-9a60-48cd-9eb9-ffa07ed4b5e5",
+      "toNodeID": "1429328f-e831-433c-83fa-cc4b1b7e2f93",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "70b49a3e-e043-4859-ab92-56126f19da29",
+      "fromNodeID": "1429328f-e831-433c-83fa-cc4b1b7e2f93",
+      "toNodeID": "6c86e41a-d002-425c-9dcc-a53e6f22dbfb",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "84d1f68e-47c0-4fd5-be3a-6335e491371e",
+      "fromNodeID": "6c86e41a-d002-425c-9dcc-a53e6f22dbfb",
+      "toNodeID": "c1120659-c961-493e-bad3-017e71f66fb3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ee69ee70-a327-44ec-a208-a5ce9b726cf8",
+      "fromNodeID": "c1120659-c961-493e-bad3-017e71f66fb3",
+      "toNodeID": "d0b4dde8-9801-4e58-b51c-111c7224ff3e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c00308ab-f5e9-4930-9f1a-65f05e360c94",
+      "fromNodeID": "d0b4dde8-9801-4e58-b51c-111c7224ff3e",
+      "toNodeID": "62c6adfe-8dbc-44ae-bc77-796a117816b0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6519664f-5fb1-48e1-8032-48459630a641",
+      "fromNodeID": "f29a9558-9519-4927-9e4b-eec6325f1f32",
+      "toNodeID": "173cd33f-6e53-4f65-bdd3-52bb52fa0474",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0acc1d61-f367-47ae-bf40-48a99aa8b4b7",
+      "fromNodeID": "173cd33f-6e53-4f65-bdd3-52bb52fa0474",
+      "toNodeID": "7417c4fa-5e4b-4507-80f6-2ccd5374fe19",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8ccf6c0f-9a40-43ca-9946-4d76ac730f4d",
+      "fromNodeID": "7417c4fa-5e4b-4507-80f6-2ccd5374fe19",
+      "toNodeID": "113a8254-cafb-43d1-bda0-fa37e3e46b16",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "15dbf769-1794-4ec4-96a5-17cde9284ecd",
+      "fromNodeID": "113a8254-cafb-43d1-bda0-fa37e3e46b16",
+      "toNodeID": "45f21417-1e69-4ae2-abd3-1c7db9e36805",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "506f2d18-9ab3-4879-8f07-bf2b3df2941c",
+      "fromNodeID": "2c14c9c1-a8ab-4171-9ea6-e543b6c8c9a7",
+      "toNodeID": "8ef90e67-8a68-4557-a4ab-c4ae06776d65",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "14b0a26d-817e-4896-a411-b429e038632b",
+      "fromNodeID": "8ef90e67-8a68-4557-a4ab-c4ae06776d65",
+      "toNodeID": "e82a60ad-3029-400b-8d22-6302d01c074e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "dc7ad3a6-23a3-4481-8e58-903348e4d3a4",
+      "fromNodeID": "e82a60ad-3029-400b-8d22-6302d01c074e",
+      "toNodeID": "6cb73de4-c1fb-48d1-bd32-6e87c8d8e980",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ad208fc0-4079-4783-b6db-2d32e2ac1632",
+      "fromNodeID": "6cb73de4-c1fb-48d1-bd32-6e87c8d8e980",
+      "toNodeID": "b7e8171f-93af-4d7d-94b2-3403efd1dac4",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1246b227-5074-4a75-9818-fa7ec9b79b9b",
+      "fromNodeID": "41482623-fcfb-4f43-a0df-8f70fa6cef29",
+      "toNodeID": "3833c7f9-d25e-4efa-977a-d29325d81752",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3ee7eac2-08b3-40aa-a81b-3e6092d91e46",
+      "fromNodeID": "3833c7f9-d25e-4efa-977a-d29325d81752",
+      "toNodeID": "2ce959bc-06f1-474d-b295-17c0f27c8d4e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b16c8cf1-a34b-4230-bef3-b737d59343a2",
+      "fromNodeID": "2ce959bc-06f1-474d-b295-17c0f27c8d4e",
+      "toNodeID": "b8a7b4d6-b67e-4405-9853-a2e503097534",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "55c6d4de-a28a-414d-9026-681f2ea0a075",
+      "fromNodeID": "b8a7b4d6-b67e-4405-9853-a2e503097534",
+      "toNodeID": "7b7c60c5-8538-447c-b7ad-e8103b4dd753",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "37b835c0-39cd-4dc2-95d0-0e5f6de75e5d",
+      "fromNodeID": "b8a7b4d6-b67e-4405-9853-a2e503097534",
+      "toNodeID": "f388b293-0d16-43c4-845a-342acbdbc505",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "36686ef3-8031-4c06-a2a9-571d84043d26",
+      "fromNodeID": "b8a7b4d6-b67e-4405-9853-a2e503097534",
+      "toNodeID": "25324a67-a89f-49a1-a0ff-447a0ba23a8e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "12e37f78-4081-4128-9e82-8dca1b274288",
+      "fromNodeID": "f388b293-0d16-43c4-845a-342acbdbc505",
+      "toNodeID": "cc272894-96d1-4386-8cae-cddc3e0e3653",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "708d9184-ed89-4eb4-a18b-153de98447ee",
+      "fromNodeID": "25324a67-a89f-49a1-a0ff-447a0ba23a8e",
+      "toNodeID": "af97edfb-ecae-4ec1-a041-4e046c283fb3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "fabc4309-21e2-4109-9cf8-1db39eeb31e2",
+      "fromNodeID": "af97edfb-ecae-4ec1-a041-4e046c283fb3",
+      "toNodeID": "5818d432-2a12-4871-9239-2035f9b0c49d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "23dbd07a-a5f3-4cca-a8a5-e20e9e20084f",
+      "fromNodeID": "5818d432-2a12-4871-9239-2035f9b0c49d",
+      "toNodeID": "82cd8844-7831-4dec-b51c-7fd15a5fde96",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "44306f9f-ea64-4c33-9a69-639aac4d5686",
+      "fromNodeID": "82cd8844-7831-4dec-b51c-7fd15a5fde96",
+      "toNodeID": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c1c87d18-a8dd-4628-973e-790570226897",
+      "fromNodeID": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "toNodeID": "2e81a5c3-04a8-4edb-a18b-132eb3fd76e1",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "73ca607d-7d73-4710-8ec6-be9ddb5ed5dc",
+      "fromNodeID": "2e81a5c3-04a8-4edb-a18b-132eb3fd76e1",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "9e4c716a-1aa1-497e-b5c6-69e3733582e6",
+      "fromNodeID": "2e81a5c3-04a8-4edb-a18b-132eb3fd76e1",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "946df49d-5c0c-4246-815e-5ef88fab23f4",
+      "fromNodeID": "2e81a5c3-04a8-4edb-a18b-132eb3fd76e1",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "60c8ea94-4ec9-4ef5-a5fe-b65dbbe87502",
+      "fromNodeID": "2e81a5c3-04a8-4edb-a18b-132eb3fd76e1",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "9c03edcf-c144-4f48-9a05-5afb1f24eddb",
+      "fromNodeID": "2e81a5c3-04a8-4edb-a18b-132eb3fd76e1",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "4d82e9f7-64e9-4037-9e22-3e39ab4605f8",
+      "fromNodeID": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f066a564-4b37-47fe-b738-73d24eab636a",
+      "fromNodeID": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "45a0f56b-eac7-4568-addb-db281e3dfcb7",
+      "fromNodeID": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "3d26862a-1958-42cb-a7c4-e9ff0183a394",
+      "fromNodeID": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7e1a93dc-cb96-464b-ac82-242d92402b61",
+      "fromNodeID": "9b49df83-03c4-4367-8c3c-69047b562128",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e0a67357-ff53-4a5b-ba09-e8b17c2e5394",
+      "fromNodeID": "2ce959bc-06f1-474d-b295-17c0f27c8d4e",
+      "toNodeID": "ee675daa-2529-43ad-823c-0d4fc6ab24a5",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "68d2d75b-b767-4291-9d31-859dfd640109",
+      "fromNodeID": "2ce959bc-06f1-474d-b295-17c0f27c8d4e",
+      "toNodeID": "a954ed74-68f5-4ddd-bacf-667de15cb7fc",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "9a4e9ddd-b4b5-4b40-a658-a4f5ef7c5c88",
+      "fromNodeID": "ee675daa-2529-43ad-823c-0d4fc6ab24a5",
+      "toNodeID": "fc606541-7aa4-455f-b1da-b63ab7592622",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "62a6015e-e3fd-4aca-93df-6c3729834e8e",
+      "fromNodeID": "a954ed74-68f5-4ddd-bacf-667de15cb7fc",
+      "toNodeID": "3284a6c0-0411-4881-a546-7efbcf76f21e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c6ec9f2d-d4b9-40a0-b2b6-c5759e34ed44",
+      "fromNodeID": "3284a6c0-0411-4881-a546-7efbcf76f21e",
+      "toNodeID": "6e8d6068-67e1-4402-9af9-320b743aab2d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6e0a45d4-fea4-4b70-8196-28d162758184",
+      "fromNodeID": "b2d9b05b-c470-4adc-a33e-2359ede069b1",
+      "toNodeID": "4421ec12-246f-46e2-ae2a-22ba9c1ec64d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d4e5b5a5-8d20-42fb-b60e-1cf947837a2e",
+      "fromNodeID": "38551df7-1d09-46c9-b463-3eb921bfb8d1",
+      "toNodeID": "ffb35afc-8e49-4567-8c85-9b2d8f566f5e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d33bc8f5-a008-42a0-a31d-887abd650e78",
+      "fromNodeID": "ffb35afc-8e49-4567-8c85-9b2d8f566f5e",
+      "toNodeID": "00dbd704-de00-4f55-ab13-6b96a5ee0146",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ab358e7d-eaeb-4ab3-b39c-ec6155cd2b75",
+      "fromNodeID": "00dbd704-de00-4f55-ab13-6b96a5ee0146",
+      "toNodeID": "17085d2c-e135-4df5-b6df-5ca36a747277",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "368591bc-8c85-4040-8aef-ee29d7e3b5b7",
+      "fromNodeID": "17085d2c-e135-4df5-b6df-5ca36a747277",
+      "toNodeID": "d4cdd4cf-7417-4ea8-8f86-a61f0c583fb1",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0d1a4107-748d-430c-9aa7-3b98983c8e08",
+      "fromNodeID": "17085d2c-e135-4df5-b6df-5ca36a747277",
+      "toNodeID": "6f3d14ca-af35-4b3e-9351-6fa95dc30540",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2653105a-0c4f-4d81-9d34-569b08750342",
+      "fromNodeID": "17085d2c-e135-4df5-b6df-5ca36a747277",
+      "toNodeID": "92ee56eb-bc19-46f9-91aa-42117da629f1",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e7c73c8d-8559-47a7-8654-af44b884d48a",
+      "fromNodeID": "6f3d14ca-af35-4b3e-9351-6fa95dc30540",
+      "toNodeID": "fd5a4f50-0552-4ed0-8db7-5f3dcc405529",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "80686b00-66e5-4e01-b906-c8e2e8299f2d",
+      "fromNodeID": "92ee56eb-bc19-46f9-91aa-42117da629f1",
+      "toNodeID": "14916810-9c68-44af-b2ea-7355f683ef0a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "bf8dafa3-1107-480c-b173-d3bcab356820",
+      "fromNodeID": "14916810-9c68-44af-b2ea-7355f683ef0a",
+      "toNodeID": "6cded5c0-ffa9-44c9-95b3-30f70e481bb3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1fd23a13-89fe-41dd-8332-2013308f422e",
+      "fromNodeID": "6cded5c0-ffa9-44c9-95b3-30f70e481bb3",
+      "toNodeID": "c290b437-9fca-4163-a8f0-e753b1a6c724",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2b7e88ff-71b8-472a-a4c7-018460dcef74",
+      "fromNodeID": "c290b437-9fca-4163-a8f0-e753b1a6c724",
+      "toNodeID": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ea12a695-035e-4a68-a6b7-6f4889eaad93",
+      "fromNodeID": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "toNodeID": "a46ef187-634f-4f40-8aec-3283d9770889",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b91cb045-b9c0-4e5c-9a76-414cdba04716",
+      "fromNodeID": "a46ef187-634f-4f40-8aec-3283d9770889",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "973e0dea-d250-4484-893a-2e9cc2f99629",
+      "fromNodeID": "a46ef187-634f-4f40-8aec-3283d9770889",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f808330a-b7f2-4051-b1a0-b525bb7e854d",
+      "fromNodeID": "a46ef187-634f-4f40-8aec-3283d9770889",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8ebf3131-706b-421b-9f06-76466ab71e2a",
+      "fromNodeID": "a46ef187-634f-4f40-8aec-3283d9770889",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "3d452589-7220-4c02-8c6b-9e661e6c5026",
+      "fromNodeID": "a46ef187-634f-4f40-8aec-3283d9770889",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "00e50c5f-3947-479b-bc38-18d40bd39ef2",
+      "fromNodeID": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a635111f-5ec0-401d-9d25-f0efc979f9c5",
+      "fromNodeID": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "0030c4d8-a729-49bb-85db-5a9a1f8b9207",
+      "fromNodeID": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "eb6d6fab-a202-4e2b-8131-15876d0717ea",
+      "fromNodeID": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c0dd9b4e-9d45-40d9-927d-e791e9661dc0",
+      "fromNodeID": "b549900a-dc63-413b-9820-15d4746e41c0",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c15f314c-88f1-40cd-9b31-dbd2c7215220",
+      "fromNodeID": "00dbd704-de00-4f55-ab13-6b96a5ee0146",
+      "toNodeID": "f8a5b340-ea10-459d-b900-29cdc07d81e9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0e7cb744-93ca-4d6b-ab54-4ae637133b5f",
+      "fromNodeID": "00dbd704-de00-4f55-ab13-6b96a5ee0146",
+      "toNodeID": "0b1d1b96-6d60-44f5-a792-a92d5631b791",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "51fa62b6-4831-4058-85cc-e5ce7f55a45d",
+      "fromNodeID": "f8a5b340-ea10-459d-b900-29cdc07d81e9",
+      "toNodeID": "a80f00e6-7d32-4e30-b6c7-784b8223e38c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "00b987ee-bb71-4ac6-8e92-016c10da147e",
+      "fromNodeID": "0b1d1b96-6d60-44f5-a792-a92d5631b791",
+      "toNodeID": "50dd8896-71df-4464-a64e-58e1b8744758",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "35643e15-3014-40c3-be9b-7b69fc16be7c",
+      "fromNodeID": "50dd8896-71df-4464-a64e-58e1b8744758",
+      "toNodeID": "b1a92f86-376d-499d-b1a1-03914b9e92b7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e0492bee-88e2-441c-8dd5-2744427a2a61",
+      "fromNodeID": "5b807041-8468-4726-97b4-f3620a540014",
+      "toNodeID": "8d1101ca-7637-4bc0-83ae-605240947a1f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2f5f63d8-2a04-4120-8a4d-911fc0171e6f",
+      "fromNodeID": "9614217f-fdab-40d7-8ffb-f763efa2ad46",
+      "toNodeID": "51ec9380-683c-4bcb-ade5-e4f05051e643",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "380a4be3-0914-48ec-8e49-ee095be534f4",
+      "fromNodeID": "51ec9380-683c-4bcb-ade5-e4f05051e643",
+      "toNodeID": "69ffa8f7-3764-409a-b779-4b88eb13746d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e2637a86-074c-469a-9447-b7dd875d5306",
+      "fromNodeID": "69ffa8f7-3764-409a-b779-4b88eb13746d",
+      "toNodeID": "fe1fe681-c983-41e0-b197-4abb9b3e20ae",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "40f26060-2d70-4a21-b269-1a40f4da2181",
+      "fromNodeID": "69ffa8f7-3764-409a-b779-4b88eb13746d",
+      "toNodeID": "0c3864da-1bcf-4bed-a1e6-9c9c7d9738db",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d799913c-0d80-4a29-a864-2f9525a731e5",
+      "fromNodeID": "69ffa8f7-3764-409a-b779-4b88eb13746d",
+      "toNodeID": "87e0e157-f47d-4da6-9b33-0da6c2c7079c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b31f80e6-d1c3-4dc0-bf0d-cf03d8a12cce",
+      "fromNodeID": "0c3864da-1bcf-4bed-a1e6-9c9c7d9738db",
+      "toNodeID": "df6cc597-400c-4de0-9335-b2e45428f5a6",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "4e542434-a35a-46e2-b522-54c6f9d10cf1",
+      "fromNodeID": "87e0e157-f47d-4da6-9b33-0da6c2c7079c",
+      "toNodeID": "5a42e45b-0122-4a86-826e-5a3f616f3136",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "481fc73b-9cf3-4134-b365-3c6a43a02513",
+      "fromNodeID": "5a42e45b-0122-4a86-826e-5a3f616f3136",
+      "toNodeID": "9131abb7-3d39-40af-afa3-f3fe4df36daa",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "da721274-fb3b-4ba3-9ae0-a7d3e1e753cf",
+      "fromNodeID": "9131abb7-3d39-40af-afa3-f3fe4df36daa",
+      "toNodeID": "ddc4c91d-deca-4a05-ad95-349e07a20bf7",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f6c0266e-c27c-4dd6-99a1-cad52115351f",
+      "fromNodeID": "9131abb7-3d39-40af-afa3-f3fe4df36daa",
+      "toNodeID": "6ce936e3-3e00-4a30-99c4-2d9d7e3abd5b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0ae4d620-7a74-44b6-a8e1-f747a68b5035",
+      "fromNodeID": "ddc4c91d-deca-4a05-ad95-349e07a20bf7",
+      "toNodeID": "6ed28a41-9973-4f05-9754-59d282c51670",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "019fc3ab-a6e5-4d70-a0c5-2bab3c1609c5",
+      "fromNodeID": "6ce936e3-3e00-4a30-99c4-2d9d7e3abd5b",
+      "toNodeID": "e2a75d54-5b55-4f50-bf79-75ce06811bf3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c596895a-fe26-4495-ad9e-6747aeac625f",
+      "fromNodeID": "e2a75d54-5b55-4f50-bf79-75ce06811bf3",
+      "toNodeID": "321d7eb1-e464-4355-8572-4ee1c33e1d7e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7753e256-7000-4004-8361-2b91186c9323",
+      "fromNodeID": "321d7eb1-e464-4355-8572-4ee1c33e1d7e",
+      "toNodeID": "4c95fa32-a4d3-44e0-8c31-c39751dc4ca0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "fe4f2a57-cbf2-4dbb-a9f5-542ee13b058c",
+      "fromNodeID": "4c95fa32-a4d3-44e0-8c31-c39751dc4ca0",
+      "toNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9e9c72ce-79b3-4156-8064-9115fa4536f2",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f647b3df-bce4-4bc9-a88e-ba91c459af37",
+      "fromNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5db38f66-00ba-477d-836f-13f45d2a9913",
+      "fromNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a5fadcc9-35b6-4cfa-92fc-1f159a25bf86",
+      "fromNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f30e044e-1054-4122-b8fb-bf76aa30c92e",
+      "fromNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f5d3d9c1-f97b-4669-9b51-7e813295161b",
+      "fromNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7bb27e8b-6053-4fe3-bc6b-ce5bc93157dc",
+      "fromNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b662330c-dd69-4060-8051-5df15218e308",
+      "fromNodeID": "f0564253-ac05-4d4e-8f8a-9b24d9cf3647",
+      "toNodeID": "50099d63-3093-48cc-a5c5-f9a33e434f66",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a33ec277-c9d4-4341-a2c4-704ab0820444",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f697e0bf-2c54-4f7e-8ef7-28cc8582974c",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "0475ecab-429d-49f3-b864-2c431689d673",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "306305be-a154-404f-b2e4-580ba1d1f804",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7488e73a-952e-48be-872f-c8c7e19bda2d",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a79e2bd8-f063-4f25-9b0d-9941972480b4",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e477afa1-0a9f-4797-9ffd-13e70f3b7797",
+      "fromNodeID": "e9c905ce-b632-44cd-9587-3fd78f9464ca",
+      "toNodeID": "b2104c12-cdc9-440a-8d32-4de14a6069c5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e6f39717-d88c-4dbe-bbc9-92135485e7fa",
+      "fromNodeID": "51ec9380-683c-4bcb-ade5-e4f05051e643",
+      "toNodeID": "1a295ab5-8619-49d6-8fb4-23ade41accfe",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "44b45593-72e5-4547-9d04-7bd63d672c05",
+      "fromNodeID": "51ec9380-683c-4bcb-ade5-e4f05051e643",
+      "toNodeID": "fb7ab9e1-4568-4c19-affb-2e0f4a916231",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1233c4ec-6e8a-4cf2-912e-cb81468354c4",
+      "fromNodeID": "1a295ab5-8619-49d6-8fb4-23ade41accfe",
+      "toNodeID": "d71e7eec-bd55-4a20-bfdb-a7028ef1735a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "276cf482-fe2d-4947-affd-ad3178ceeebc",
+      "fromNodeID": "d71e7eec-bd55-4a20-bfdb-a7028ef1735a",
+      "toNodeID": "52a4457d-6130-4673-8f0e-64da6614c81a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c8110549-c305-45e7-bf44-c8e0150c01f1",
+      "fromNodeID": "fb7ab9e1-4568-4c19-affb-2e0f4a916231",
+      "toNodeID": "ba4948d7-3d3c-4b3d-b0be-afc8ef883652",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6d24475c-dd0c-454c-82bd-88b8e22fbe95",
+      "fromNodeID": "ba4948d7-3d3c-4b3d-b0be-afc8ef883652",
+      "toNodeID": "04306e83-2de8-415b-aac4-85e0620e7301",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "20cfd6c1-57dd-47aa-9760-86295a667c6a",
+      "fromNodeID": "04306e83-2de8-415b-aac4-85e0620e7301",
+      "toNodeID": "28b2aeaf-78cc-4b48-9063-cdd17d720908",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "70a7390c-880b-4f98-9c40-743c6a775ff5",
+      "fromNodeID": "04306e83-2de8-415b-aac4-85e0620e7301",
+      "toNodeID": "01405f11-2e00-4380-b4e6-3cbcaca22a9e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e464b9ad-833e-4517-b4bd-25ac0473a656",
+      "fromNodeID": "28b2aeaf-78cc-4b48-9063-cdd17d720908",
+      "toNodeID": "1426721b-b794-4a8b-9b24-bc8972455b08",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "fef6e3cf-8d3f-4d73-b98e-154fa2c6ca33",
+      "fromNodeID": "01405f11-2e00-4380-b4e6-3cbcaca22a9e",
+      "toNodeID": "b5633ec5-9391-493a-a598-8a6104adbbdd",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "72a0087a-54b0-48fe-9a6b-dbdf6eaf8fb0",
+      "fromNodeID": "b5633ec5-9391-493a-a598-8a6104adbbdd",
+      "toNodeID": "f2d12725-9584-4db4-a219-38d181a4b6a3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a402a582-86b6-4ef9-be56-39e4fa43d619",
+      "fromNodeID": "52100b65-17ef-4b16-b4d6-07cad31374c5",
+      "toNodeID": "3807b3ec-42f0-4b6a-af74-b7966f1cb2bc",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "34ac0494-6a29-4204-9a40-3c1701f0e6cf",
+      "fromNodeID": "cb979ad6-589b-4a17-afde-d2d77c291fe8",
+      "toNodeID": "feba4881-9fca-4a24-a2a9-6c92febdb33d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "9bd2c25a-9057-41ba-8fed-13543a24359a",
+      "fromNodeID": "27ea496a-23b5-4628-8d19-a7726645cf30",
+      "toNodeID": "0551ab1d-7388-4942-baef-e105ef60c1ab",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e459af18-31f4-416e-8c2a-e3ea47d12bea",
+      "fromNodeID": "70478a14-61f1-43f0-9a34-60fce04d840f",
+      "toNodeID": "6f81a299-c597-4d17-8eff-c67ca10377f9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f08ff4cf-04e5-4bf1-9855-b64d33be5e34",
+      "fromNodeID": "6f81a299-c597-4d17-8eff-c67ca10377f9",
+      "toNodeID": "0ed70ce4-5cc3-4f44-a6fa-73864bae742e",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e0cdbb59-355f-46f7-bba1-5750dac03b1d",
+      "fromNodeID": "6f81a299-c597-4d17-8eff-c67ca10377f9",
+      "toNodeID": "0ed70ce4-5cc3-4f44-a6fa-73864bae742e",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c76f6275-d078-44f9-ac9e-2f1d5f51f9fd",
+      "fromNodeID": "6f81a299-c597-4d17-8eff-c67ca10377f9",
+      "toNodeID": "0ed70ce4-5cc3-4f44-a6fa-73864bae742e",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e4f2b3d6-7acc-494c-970d-b88d5423ac8b",
+      "fromNodeID": "7a7ab1fb-cb48-4a6c-b998-c357320a5a20",
+      "toNodeID": "efa868a0-6dbf-46bc-b4e8-35469f811328",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d925029b-050b-4cb8-8262-079bf004c2b3",
+      "fromNodeID": "efa868a0-6dbf-46bc-b4e8-35469f811328",
+      "toNodeID": "7b565bcf-f291-43e9-8b5c-8f539bae72b6",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "485f48b4-b5fb-4c43-8342-312965a60aa0",
+      "fromNodeID": "7b565bcf-f291-43e9-8b5c-8f539bae72b6",
+      "toNodeID": "8bf9ee50-2fab-489c-8226-65f43ebfa3bf",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "53c5e126-ebc2-4585-82d4-9104c5703e9b",
+      "fromNodeID": "8bf9ee50-2fab-489c-8226-65f43ebfa3bf",
+      "toNodeID": "3db12553-6016-491f-82f4-d533657e8d75",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "9afff4d5-aea1-440a-95a7-ea3ecfb283b7",
+      "fromNodeID": "3db12553-6016-491f-82f4-d533657e8d75",
+      "toNodeID": "e9ff8a4e-3131-4f95-8ca5-3a303c5f3245",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "815ec4c7-74e1-4581-a8af-c07ffeb1f0de",
+      "fromNodeID": "e9ff8a4e-3131-4f95-8ca5-3a303c5f3245",
+      "toNodeID": "101cee42-cf00-422b-a2a7-a8fa7c4c153d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "38846a9a-218e-4b1f-bf63-b0fcc3a39be3",
+      "fromNodeID": "101cee42-cf00-422b-a2a7-a8fa7c4c153d",
+      "toNodeID": "1ce0a23c-0fea-4662-b7aa-35d26d48ee3e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2f808682-118f-43ac-9276-194e4e19e201",
+      "fromNodeID": "3db12553-6016-491f-82f4-d533657e8d75",
+      "toNodeID": "accf82cd-63fb-4013-bbf7-c0980fcec763",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5339990f-dd08-48a4-bc01-b49f518c99d0",
+      "fromNodeID": "3db12553-6016-491f-82f4-d533657e8d75",
+      "toNodeID": "accf82cd-63fb-4013-bbf7-c0980fcec763",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ec406b9e-3a32-4b93-aada-659ba7051539",
+      "fromNodeID": "3db12553-6016-491f-82f4-d533657e8d75",
+      "toNodeID": "accf82cd-63fb-4013-bbf7-c0980fcec763",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "560ca27d-1ae4-4707-81c9-0851b941eee1",
+      "fromNodeID": "efa868a0-6dbf-46bc-b4e8-35469f811328",
+      "toNodeID": "dcd4fa63-c18c-47be-8c09-9c692b8d4e09",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e82a5601-f940-4081-aa8e-f3506e6c4470",
+      "fromNodeID": "c00aa027-daf4-43cb-b3a6-289d924e5363",
+      "toNodeID": "7db54386-391d-4e82-93ed-6895975bc50e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1bb9237a-69d7-4f16-994b-dd50f06bb0d1",
+      "fromNodeID": "7db54386-391d-4e82-93ed-6895975bc50e",
+      "toNodeID": "0eb963be-ac27-45a5-8931-f84fac090f53",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "294202b7-4843-46b7-b9fd-384d713d069c",
+      "fromNodeID": "7db54386-391d-4e82-93ed-6895975bc50e",
+      "toNodeID": "0eb963be-ac27-45a5-8931-f84fac090f53",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d66bd24a-8ca0-4429-9581-4e4f5e0d68e0",
+      "fromNodeID": "7db54386-391d-4e82-93ed-6895975bc50e",
+      "toNodeID": "0eb963be-ac27-45a5-8931-f84fac090f53",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "fce10ff2-f0af-4886-ae0c-2ce78e353808",
+      "fromNodeID": "a815def9-ff91-44c1-9dc5-262746463fcd",
+      "toNodeID": "45e873f5-c162-4044-b405-0a208fd207c0",
+      "edgeType": "STARTS_WITH"
+    }
+  ],
+  "idProvider": {}
+}

@@ -1,0 +1,1211 @@
+{
+  "children": [
+    {
+      "children": [],
+      "id": "12260e04-2912-41e7-b62e-f34d3315aead",
+      "label": "0000-START",
+      "name": "0000-START",
+      "originalText": "0000-START.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "bc5a5d97-7d55-4d96-9849-2097aaad1474",
+          "label": "EVALUATE",
+          "name": "EVALUATE",
+          "originalText": "EVALUATE LK-M03B-DD\n             WHEN \u0027TRNXFILE\u0027\n               PERFORM 1000-TRNXFILE-PROC THRU 1999-EXIT\n             WHEN \u0027XREFFILE\u0027\n               PERFORM 2000-XREFFILE-PROC THRU 2999-EXIT\n             WHEN \u0027CUSTFILE\u0027\n               PERFORM 3000-CUSTFILE-PROC THRU 3999-EXIT\n             WHEN \u0027ACCTFILE\u0027\n               PERFORM 4000-ACCTFILE-PROC THRU 4999-EXIT\n             WHEN OTHER\n               GO TO 9999-GOBACK",
+          "type": "EVALUATE",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "62677bb5-24da-42dd-b24f-9bdf1bbee81d",
+      "label": "EVALUATELK-M03B",
+      "name": "EVALUATELK-M03B",
+      "originalText": "EVALUATE LK-M03B-DD\n             WHEN \u0027TRNXFILE\u0027\n               PERFORM 1000-TRNXFILE-PROC THRU 1999-EXIT\n             WHEN \u0027XREFFILE\u0027\n               PERFORM 2000-XREFFILE-PROC THRU 2999-EXIT\n             WHEN \u0027CUSTFILE\u0027\n               PERFORM 3000-CUSTFILE-PROC THRU 3999-EXIT\n             WHEN \u0027ACCTFILE\u0027\n               PERFORM 4000-ACCTFILE-PROC THRU 4999-EXIT\n             WHEN OTHER\n               GO TO 9999-GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "bec018fd-a47b-484a-a502-c289c6a97408",
+      "label": "9999-GOBACK",
+      "name": "9999-GOBACK",
+      "originalText": "9999-GOBACK.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "12b7000b-2183-439c-b285-35c7a5eb81b1",
+          "label": "GOBACK",
+          "name": "GOBACK",
+          "originalText": "GOBACK",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "2e9be52f-ece4-4d48-a941-115796b92f20",
+      "label": "GOBACK.",
+      "name": "GOBACK.",
+      "originalText": "GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "dd796b77-58ad-4d3b-a103-899af9dc5bfa",
+      "label": "1000-TRNXFILE-PROC",
+      "name": "1000-TRNXFILE-PROC",
+      "originalText": "1000-TRNXFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "c0ef8277-55f6-468c-8d26-8c5c5bd832c8",
+                  "label": "OPENINPUTTRNX-F",
+                  "name": "OPENINPUTTRNX-F",
+                  "originalText": "OPEN INPUT TRNX-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "adda5da9-1422-4597-843e-8f6a576c7722",
+                  "label": "GO TO 1900-EXIT",
+                  "name": "GOTO1900-EXIT",
+                  "originalText": "GO TO 1900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "3b8b46b4-e6b9-4a54-b94b-04933a98c600",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "d44cfc5a-aa8d-4c03-81c7-8a167772498a",
+          "label": "IS \nM03B-OPEN?\n",
+          "name": "IS \nM03B-OPEN?\n",
+          "originalText": "IF M03B-OPEN\n               OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "507b0c13-4cee-4322-ab3a-61dbe4fcb9d6",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "36893c40-0449-44df-8570-2cd05a81f6be",
+                  "label": "READTRNX-FILEIN",
+                  "name": "READTRNX-FILEIN",
+                  "originalText": "READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "db6693f8-5eb9-4359-be23-30843aa64dff",
+                  "label": "GO TO 1900-EXIT",
+                  "name": "GOTO1900-EXIT",
+                  "originalText": "GO TO 1900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "7f668e9e-c612-4706-8082-3dc520d3d91d",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "dc3780c0-dd72-4b56-8b3e-4d7f4f110273",
+          "label": "IS \nM03B-READ?\n",
+          "name": "IS \nM03B-READ?\n",
+          "originalText": "IF M03B-READ\n               READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "0b32c731-cbdd-475c-a786-02dba4d6ee7f",
+      "label": "IFM03B-READREAD",
+      "name": "IFM03B-READREAD",
+      "originalText": "IF M03B-READ\n               READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "f7d16265-c9a1-4254-9f78-db6176e45837",
+                  "label": "CLOSETRNX-FILE",
+                  "name": "CLOSETRNX-FILE",
+                  "originalText": "CLOSE TRNX-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "b5659e74-544c-4fc2-a9b7-df4ba971458c",
+                  "label": "GO TO 1900-EXIT",
+                  "name": "GOTO1900-EXIT",
+                  "originalText": "GO TO 1900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "2787b642-a38e-446e-9976-945b7b43ffbd",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "CLOSE TRNX-FILE\n               GO TO 1900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "243a2b7a-75c8-4c03-b737-739546420d39",
+          "label": "IS \nM03B-CLOSE?\n",
+          "name": "IS \nM03B-CLOSE?\n",
+          "originalText": "IF M03B-CLOSE\n               CLOSE TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "782c7288-780b-43f7-b2be-deda5998aac0",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "e74e2e1d-ca10-4f0e-9ab2-d6c1a60d3b53",
+      "label": "1900-EXIT",
+      "name": "1900-EXIT",
+      "originalText": "1900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "da66947b-6d34-47a1-bec9-7972239172ea",
+          "label": "MOVETRNXFILE-ST",
+          "name": "MOVETRNXFILE-ST",
+          "originalText": "MOVE TRNXFILE-STATUS TO LK-M03B-RC",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "7b6d8384-fe27-4dd5-9263-59fd8b55b2e4",
+      "label": "MOVETRNXFILE-ST",
+      "name": "MOVETRNXFILE-ST",
+      "originalText": "MOVE TRNXFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "620019ac-418d-482e-846a-1272457c5d59",
+      "label": "1999-EXIT",
+      "name": "1999-EXIT",
+      "originalText": "1999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "a56ac24d-565e-4eb0-be6a-7ea63f44c6ad",
+          "label": "EXIT",
+          "name": "EXIT",
+          "originalText": "EXIT",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "b992d624-57e6-4849-a5ce-7f0c0ea98d1e",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "527a27f5-78ab-4023-ba33-5fc908fbda44",
+      "label": "2000-XREFFILE-PROC",
+      "name": "2000-XREFFILE-PROC",
+      "originalText": "2000-XREFFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "30b9e7ac-fe39-4519-b8a2-ca9d13f0f19c",
+                  "label": "OPENINPUTXREF-F",
+                  "name": "OPENINPUTXREF-F",
+                  "originalText": "OPEN INPUT XREF-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "3769fcde-5696-45f1-afb0-9a300af3610a",
+                  "label": "GO TO 2900-EXIT",
+                  "name": "GOTO2900-EXIT",
+                  "originalText": "GO TO 2900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "0c5a1b9b-0974-486d-80a4-ac09d6ccbbf6",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "747f94da-2bc6-4fe1-8b36-9f6dca326a86",
+          "label": "IS \nM03B-OPEN?\n",
+          "name": "IS \nM03B-OPEN?\n",
+          "originalText": "IF M03B-OPEN\n               OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "b88bdfa5-cc07-4c29-ac48-e44f987414e7",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "51a85d39-78ff-4559-bcae-a0284e1df055",
+                  "label": "READXREF-FILEIN",
+                  "name": "READXREF-FILEIN",
+                  "originalText": "READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "deca71c6-cdae-48e9-b46e-0fe7e64196e5",
+                  "label": "GO TO 2900-EXIT",
+                  "name": "GOTO2900-EXIT",
+                  "originalText": "GO TO 2900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "ee71334c-e61d-4398-b353-30359d07a40f",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "94c757b4-4aaa-474f-8b7e-c13f2d1f58ef",
+          "label": "IS \nM03B-READ?\n",
+          "name": "IS \nM03B-READ?\n",
+          "originalText": "IF M03B-READ\n               READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "b5c1b537-35a1-4bc9-9acb-fcb4290c46ee",
+      "label": "IFM03B-READREAD",
+      "name": "IFM03B-READREAD",
+      "originalText": "IF M03B-READ\n               READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "202abd70-5666-40b4-b84c-48c8ba13fedf",
+                  "label": "CLOSEXREF-FILE",
+                  "name": "CLOSEXREF-FILE",
+                  "originalText": "CLOSE XREF-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "5e54dceb-b89f-4351-8b85-170399199807",
+                  "label": "GO TO 2900-EXIT",
+                  "name": "GOTO2900-EXIT",
+                  "originalText": "GO TO 2900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "e8067056-9549-4972-94fe-3ff7979c2906",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "CLOSE XREF-FILE\n               GO TO 2900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "b4d96f2f-c6be-4c91-a9d6-f11e33223471",
+          "label": "IS \nM03B-CLOSE?\n",
+          "name": "IS \nM03B-CLOSE?\n",
+          "originalText": "IF M03B-CLOSE\n               CLOSE XREF-FILE\n               GO TO 2900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "39da1e1c-89e9-45d7-9e08-d820b7bba36f",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "d6381736-ed59-4fb9-a08a-c69d4c560962",
+      "label": "2900-EXIT",
+      "name": "2900-EXIT",
+      "originalText": "2900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "8372cfeb-2903-4f02-9ed8-ff9b3a02789a",
+          "label": "MOVEXREFFILE-ST",
+          "name": "MOVEXREFFILE-ST",
+          "originalText": "MOVE XREFFILE-STATUS TO LK-M03B-RC",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "5a197567-782f-485d-b98c-1e55e1cc80e0",
+      "label": "MOVEXREFFILE-ST",
+      "name": "MOVEXREFFILE-ST",
+      "originalText": "MOVE XREFFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "24c9dce0-cf2a-476f-9b1f-3139e56943d3",
+      "label": "2999-EXIT",
+      "name": "2999-EXIT",
+      "originalText": "2999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "9f41a6a1-ff8a-4918-bd9b-0724f2e7f6b9",
+          "label": "EXIT",
+          "name": "EXIT",
+          "originalText": "EXIT",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "04e4340e-29d4-4844-b837-0aad67a2ecdc",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "507c3490-1be6-4b1e-ac71-3a382bd5d64a",
+      "label": "3000-CUSTFILE-PROC",
+      "name": "3000-CUSTFILE-PROC",
+      "originalText": "3000-CUSTFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "8129f8b1-8e24-4b5f-aabc-53b79f802a46",
+                  "label": "OPENINPUTCUST-F",
+                  "name": "OPENINPUTCUST-F",
+                  "originalText": "OPEN INPUT CUST-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "ecadda0d-f6a4-40ea-8e02-9f40c66f9194",
+                  "label": "GO TO 3900-EXIT",
+                  "name": "GOTO3900-EXIT",
+                  "originalText": "GO TO 3900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "f63b22f3-380b-479d-943e-4668e372c517",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "499e3c18-cb45-4a02-90d4-8358685295d4",
+          "label": "IS \nM03B-OPEN?\n",
+          "name": "IS \nM03B-OPEN?\n",
+          "originalText": "IF M03B-OPEN\n               OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "aa13e439-bece-4250-bef6-481b1f3e856e",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "1b4dd710-c478-4849-b6ce-2efcd1d0ddbc",
+                  "label": "MOVELK-M03B-KEY",
+                  "name": "MOVELK-M03B-KEY",
+                  "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "3f52b9da-bc9c-41d0-b1cf-6e7565fd5951",
+                  "label": "READCUST-FILEIN",
+                  "name": "READCUST-FILEIN",
+                  "originalText": "READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "ae14549a-febc-4996-9f06-ae8d55a2f81b",
+                  "label": "GO TO 3900-EXIT",
+                  "name": "GOTO3900-EXIT",
+                  "originalText": "GO TO 3900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "2f9b1c37-9ed8-4404-9790-a63e8ed6551f",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "847184cf-fa9b-41c2-a92f-eee5304d53f0",
+          "label": "IS \nM03B-READ-K?\n",
+          "name": "IS \nM03B-READ-K?\n",
+          "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "bece76df-32f7-4ae9-9073-19b437437cf2",
+      "label": "IFM03B-READ-KMO",
+      "name": "IFM03B-READ-KMO",
+      "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "2c77a0dd-5e81-41ba-ab01-f4514e75b57f",
+                  "label": "CLOSECUST-FILE",
+                  "name": "CLOSECUST-FILE",
+                  "originalText": "CLOSE CUST-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "aea48cdd-b19f-482b-93c5-bc554f6eb42d",
+                  "label": "GO TO 3900-EXIT",
+                  "name": "GOTO3900-EXIT",
+                  "originalText": "GO TO 3900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "3fe61d8c-3d92-4a28-99fa-5cc0edfa3846",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "CLOSE CUST-FILE\n               GO TO 3900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "2b99af36-f04e-4f8a-88a7-3ef9cd2efa35",
+          "label": "IS \nM03B-CLOSE?\n",
+          "name": "IS \nM03B-CLOSE?\n",
+          "originalText": "IF M03B-CLOSE\n               CLOSE CUST-FILE\n               GO TO 3900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "0036a7da-2dd0-458d-9d11-b73845baf97e",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "1c5f256f-e986-44fd-9226-be65ed2e2dd8",
+      "label": "3900-EXIT",
+      "name": "3900-EXIT",
+      "originalText": "3900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "926d8faf-986b-457d-acbc-844828d6a7b3",
+          "label": "MOVECUSTFILE-ST",
+          "name": "MOVECUSTFILE-ST",
+          "originalText": "MOVE CUSTFILE-STATUS TO LK-M03B-RC",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "51a7d790-ae81-4ac5-a8f6-93687e8a20e9",
+      "label": "MOVECUSTFILE-ST",
+      "name": "MOVECUSTFILE-ST",
+      "originalText": "MOVE CUSTFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "f62a9813-4e1a-4df7-98ed-d4f42bbe7b5e",
+      "label": "3999-EXIT",
+      "name": "3999-EXIT",
+      "originalText": "3999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "57306446-1368-4556-9214-48449b71de33",
+          "label": "EXIT",
+          "name": "EXIT",
+          "originalText": "EXIT",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "eab461e1-dde5-4fc8-bd05-3e515727ee57",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "956703a2-91a5-4b05-8d0f-d26dfa354171",
+      "label": "4000-ACCTFILE-PROC",
+      "name": "4000-ACCTFILE-PROC",
+      "originalText": "4000-ACCTFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "78bcc81f-dd87-4cf1-b67d-4b6e5318118e",
+                  "label": "OPENINPUTACCT-F",
+                  "name": "OPENINPUTACCT-F",
+                  "originalText": "OPEN INPUT ACCT-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "944f1734-3dc8-4c55-8c33-2864b87c35eb",
+                  "label": "GO TO 4900-EXIT",
+                  "name": "GOTO4900-EXIT",
+                  "originalText": "GO TO 4900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "e42c9b1a-facc-49a8-8752-97b20857203c",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "5e78de38-d97e-4092-9647-0bcb9f1c5af7",
+          "label": "IS \nM03B-OPEN?\n",
+          "name": "IS \nM03B-OPEN?\n",
+          "originalText": "IF M03B-OPEN\n               OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "375fa9af-e10a-42e8-8ba6-af700dce2130",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "f39d69e6-489e-45e0-a589-c2f8f8b3a69a",
+                  "label": "MOVELK-M03B-KEY",
+                  "name": "MOVELK-M03B-KEY",
+                  "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "d3c14242-fe18-47e1-8f34-f5882d55a1b4",
+                  "label": "READACCT-FILEIN",
+                  "name": "READACCT-FILEIN",
+                  "originalText": "READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "48358e7d-873f-45f8-be30-bd8581ed51b6",
+                  "label": "GO TO 4900-EXIT",
+                  "name": "GOTO4900-EXIT",
+                  "originalText": "GO TO 4900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "a9ee862c-0db2-4131-835c-0673cd4722a3",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "7ca0b8bf-69bf-4ddc-97eb-f5efcc885c16",
+          "label": "IS \nM03B-READ-K?\n",
+          "name": "IS \nM03B-READ-K?\n",
+          "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "a058526c-fe7d-4506-a82b-a26709be13f0",
+      "label": "IFM03B-READ-KMO",
+      "name": "IFM03B-READ-KMO",
+      "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "8d6eee85-7d12-497e-910a-2c637e7c00de",
+                  "label": "CLOSEACCT-FILE",
+                  "name": "CLOSEACCT-FILE",
+                  "originalText": "CLOSE ACCT-FILE",
+                  "type": "GENERIC_STATEMENT",
+                  "categories": [
+                    "GENERIC_CODE"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "0ee4272f-f317-4726-ad77-efe882cb60c2",
+                  "label": "GO TO 4900-EXIT",
+                  "name": "GOTO4900-EXIT",
+                  "originalText": "GO TO 4900-EXIT",
+                  "type": "GOTO",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "0936b352-429b-450c-82bb-51a42d14903f",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "CLOSE ACCT-FILE\n               GO TO 4900-EXIT",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "932276be-501c-4e32-8455-28ae43e1ca06",
+          "label": "IS \nM03B-CLOSE?\n",
+          "name": "IS \nM03B-CLOSE?\n",
+          "originalText": "IF M03B-CLOSE\n               CLOSE ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "dc733656-fa96-48a7-9bcf-5e673aa29d33",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "70f347a4-b582-40bc-9925-0837b69826cf",
+      "label": "4900-EXIT",
+      "name": "4900-EXIT",
+      "originalText": "4900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "361cfcaa-2819-4bf6-821e-e1ecc3e966c5",
+          "label": "MOVEACCTFILE-ST",
+          "name": "MOVEACCTFILE-ST",
+          "originalText": "MOVE ACCTFILE-STATUS TO LK-M03B-RC",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "5dc6501b-a5dc-487d-af6b-33c6298f1ac0",
+      "label": "MOVEACCTFILE-ST",
+      "name": "MOVEACCTFILE-ST",
+      "originalText": "MOVE ACCTFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "7aa1f3d5-3428-4d70-a50e-e8a147556a7e",
+      "label": "4999-EXIT",
+      "name": "4999-EXIT",
+      "originalText": "4999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "43689a6d-dcbe-4dfb-b9fd-da813c0c8f85",
+          "label": "EXIT",
+          "name": "EXIT",
+          "originalText": "EXIT",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "367879a8-649b-45ea-90e8-2dfea85715c6",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "id": "c7360221-2343-4bbe-a1dd-89b67d4d93f0",
+  "label": "ProcedureDivisionBodyContext/c7360221-2343-4bbe-a1dd-89b67d4d93f0",
+  "name": "ProcedureDivisionBodyContext/c7360221-2343-4bbe-a1dd-89b67d4d93f0",
+  "originalText": "0000-START.\n       \n           EVALUATE LK-M03B-DD\n             WHEN \u0027TRNXFILE\u0027\n               PERFORM 1000-TRNXFILE-PROC THRU 1999-EXIT\n             WHEN \u0027XREFFILE\u0027\n               PERFORM 2000-XREFFILE-PROC THRU 2999-EXIT\n             WHEN \u0027CUSTFILE\u0027\n               PERFORM 3000-CUSTFILE-PROC THRU 3999-EXIT\n             WHEN \u0027ACCTFILE\u0027\n               PERFORM 4000-ACCTFILE-PROC THRU 4999-EXIT\n             WHEN OTHER\n               GO TO 9999-GOBACK.\n       \n       9999-GOBACK.\n           GOBACK.\n       \n       1000-TRNXFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.\n       \n           IF M03B-READ\n               READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.\n       \n       1900-EXIT.\n           MOVE TRNXFILE-STATUS TO LK-M03B-RC.\n       \n       1999-EXIT.\n           EXIT.\n       \n       2000-XREFFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.\n       \n           IF M03B-READ\n               READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.\n       \n       2900-EXIT.\n           MOVE XREFFILE-STATUS TO LK-M03B-RC.\n       \n       2999-EXIT.\n           EXIT.\n       \n       3000-CUSTFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.\n       \n           IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.\n       \n       3900-EXIT.\n           MOVE CUSTFILE-STATUS TO LK-M03B-RC.\n       \n       3999-EXIT.\n           EXIT.\n       \n       4000-ACCTFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.\n       \n           IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.\n       \n       4900-EXIT.\n           MOVE ACCTFILE-STATUS TO LK-M03B-RC.\n       \n       4999-EXIT.\n           EXIT.",
+  "type": "PROCEDURE_DIVISION_BODY",
+  "categories": [
+    "CODE_BLOCK"
+  ],
+  "nodeType": "CODE_VERTEX"
+}

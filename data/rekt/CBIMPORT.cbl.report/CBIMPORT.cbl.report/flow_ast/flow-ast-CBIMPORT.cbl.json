@@ -1,0 +1,2638 @@
+{
+  "children": [
+    {
+      "children": [],
+      "id": "33b96da9-a69b-4d69-9383-f3359dfe9684",
+      "label": "0000-MAIN-PROCESSING",
+      "name": "0000-MAIN-PROCESSING",
+      "originalText": "0000-MAIN-PROCESSING.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "62694a7a-29d6-414a-8979-e77703ec7311",
+          "label": "PERFORM 1000-INITIALIZE",
+          "name": "PERFORM1000-INI",
+          "originalText": "PERFORM 1000-INITIALIZE",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b23abe6f-5a52-42e8-a499-56e4582482ce",
+          "label": "PERFORM 2000-PROCESS-EXPORT-FI",
+          "name": "PERFORM2000-PRO",
+          "originalText": "PERFORM 2000-PROCESS-EXPORT-FILE",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b2cb12e7-eee2-43ac-ae27-9801d0b6ff28",
+          "label": "PERFORM 3000-VALIDATE-IMPORT",
+          "name": "PERFORM3000-VAL",
+          "originalText": "PERFORM 3000-VALIDATE-IMPORT",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5a270dfa-7158-42cb-a79a-b6070cadfa4a",
+          "label": "PERFORM 4000-FINALIZE",
+          "name": "PERFORM4000-FIN",
+          "originalText": "PERFORM 4000-FINALIZE",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b43ecb72-3239-4fbb-908c-45af58146c82",
+          "label": "GOBACK",
+          "name": "GOBACK",
+          "originalText": "GOBACK",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "0de9c3b6-4999-4567-a547-2c30f3608faf",
+      "label": "PERFORM1000-INI",
+      "name": "PERFORM1000-INI",
+      "originalText": "PERFORM 1000-INITIALIZE\n           PERFORM 2000-PROCESS-EXPORT-FILE\n           PERFORM 3000-VALIDATE-IMPORT\n           PERFORM 4000-FINALIZE\n           GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "9f27f42f-64f4-456d-a3d8-70d83956875f",
+      "label": "1000-INITIALIZE",
+      "name": "1000-INITIALIZE",
+      "originalText": "1000-INITIALIZE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "26d5df6d-f736-4f36-95cb-8b0ef16d7b0f",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Starting Customer Data Import\u0027",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "51721a3a-cd2c-4e90-959d-42cac786b5b8",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE(1:4) TO WS-IMPORT-DATE(1:4)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "aab2df98-c6ba-4735-844c-f45db80f93d5",
+          "label": "MOVE\u0027-\u0027TOWS-IMP",
+          "name": "MOVE\u0027-\u0027TOWS-IMP",
+          "originalText": "MOVE \u0027-\u0027 TO WS-IMPORT-DATE(5:1)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "337dae36-28ee-49d6-96d3-37bd01f1481f",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE(5:2) TO WS-IMPORT-DATE(6:2)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "04c4bddc-1373-45c1-8962-1a3a39838671",
+          "label": "MOVE\u0027-\u0027TOWS-IMP",
+          "name": "MOVE\u0027-\u0027TOWS-IMP",
+          "originalText": "MOVE \u0027-\u0027 TO WS-IMPORT-DATE(8:1)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5b3d70cc-b9e8-4983-9d1e-52edb8c7af23",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE(7:2) TO WS-IMPORT-DATE(9:2)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c3dead51-9198-4460-aba9-9e7a054aafd7",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE(9:2) TO WS-IMPORT-TIME(1:2)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7b66a0ea-46a8-4b2e-a438-fa4d0ff514df",
+          "label": "MOVE\u0027:\u0027TOWS-IMP",
+          "name": "MOVE\u0027:\u0027TOWS-IMP",
+          "originalText": "MOVE \u0027:\u0027 TO WS-IMPORT-TIME(3:1)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "d7210359-c0eb-4e24-a452-e020e80f552e",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE(11:2) TO WS-IMPORT-TIME(4:2)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "9cfd0635-d0e2-4c31-8328-88ce57920088",
+          "label": "MOVE\u0027:\u0027TOWS-IMP",
+          "name": "MOVE\u0027:\u0027TOWS-IMP",
+          "originalText": "MOVE \u0027:\u0027 TO WS-IMPORT-TIME(6:1)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b3a3d27b-3af9-46a7-b0b0-9540b3b58555",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE(13:2) TO WS-IMPORT-TIME(7:2)",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "27232fdc-eeea-4b18-8c2b-c76de416f0b5",
+          "label": "PERFORM 1100-OPEN-FILES",
+          "name": "PERFORM1100-OPE",
+          "originalText": "PERFORM 1100-OPEN-FILES",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "78223db9-be56-4bfb-b117-68613e8c1e94",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Import Date: \u0027 WS-IMPORT-DATE",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "1843a905-eaa2-4945-9ff8-058378453b06",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Import Time: \u0027 WS-IMPORT-TIME",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "9224edc5-b9f6-49dc-8b7f-e7e40a23f38f",
+      "label": "DISPLAY\u0027CBIMPOR",
+      "name": "DISPLAY\u0027CBIMPOR",
+      "originalText": "DISPLAY \u0027CBIMPORT: Starting Customer Data Import\u0027\n       \n           MOVE FUNCTION CURRENT-DATE(1:4) TO WS-IMPORT-DATE(1:4)\n           MOVE \u0027-\u0027 TO WS-IMPORT-DATE(5:1)\n           MOVE FUNCTION CURRENT-DATE(5:2) TO WS-IMPORT-DATE(6:2)\n           MOVE \u0027-\u0027 TO WS-IMPORT-DATE(8:1)\n           MOVE FUNCTION CURRENT-DATE(7:2) TO WS-IMPORT-DATE(9:2)\n       \n           MOVE FUNCTION CURRENT-DATE(9:2) TO WS-IMPORT-TIME(1:2)\n           MOVE \u0027:\u0027 TO WS-IMPORT-TIME(3:1)\n           MOVE FUNCTION CURRENT-DATE(11:2) TO WS-IMPORT-TIME(4:2)\n           MOVE \u0027:\u0027 TO WS-IMPORT-TIME(6:1)\n           MOVE FUNCTION CURRENT-DATE(13:2) TO WS-IMPORT-TIME(7:2)\n       \n           PERFORM 1100-OPEN-FILES\n       \n           DISPLAY \u0027CBIMPORT: Import Date: \u0027 WS-IMPORT-DATE\n           DISPLAY \u0027CBIMPORT: Import Time: \u0027 WS-IMPORT-TIME.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "3f1fcea4-924b-4580-87d6-a403d0053fad",
+      "label": "1100-OPEN-FILES",
+      "name": "1100-OPEN-FILES",
+      "originalText": "1100-OPEN-FILES.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "db4fd4c3-fc57-4709-a126-b435ab00f02d",
+          "label": "OPENINPUTEXPORT",
+          "name": "OPENINPUTEXPORT",
+          "originalText": "OPEN INPUT EXPORT-INPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "dccae3f4-29ef-4ae1-a6d9-bda99fd4e2cf",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Cannot open EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "71166c7c-859b-4dc6-bf2a-f5998603083f",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "f1b6fc63-1de5-44a2-87cf-aefec51e263a",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Cannot open EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "4ff44e19-42e8-4940-91dd-84213db2ec9c",
+          "label": "IS \nNOT WS-EXPORT-OK?\n",
+          "name": "IS \nNOT WS-EXPORT-OK?\n",
+          "originalText": "IF NOT WS-EXPORT-OK\n               DISPLAY \u0027ERROR: Cannot open EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "cbf3d8ab-2929-4db8-9a8c-d8265077b35c",
+          "label": "OPENOUTPUTCUSTO",
+          "name": "OPENOUTPUTCUSTO",
+          "originalText": "OPEN OUTPUT CUSTOMER-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "53aa9921-3a2b-45b7-9364-031288b78c38",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Cannot open CUSTOMER-OUTPUT, Status: \u0027\n                       WS-CUSTOMER-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "16792f3a-8f14-4fd4-ad3c-0aa1fd076a8a",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "59e5ab49-e2db-448d-803e-3e703ffeffce",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Cannot open CUSTOMER-OUTPUT, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "aaf7da73-8690-4000-854f-6a860d043fec",
+          "label": "IS \nNOT WS-CUSTOMER-OK?\n",
+          "name": "IS \nNOT WS-CUSTOMER-OK?\n",
+          "originalText": "IF NOT WS-CUSTOMER-OK\n               DISPLAY \u0027ERROR: Cannot open CUSTOMER-OUTPUT, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "55fb09ce-301a-42bc-b936-98b5e3704fa0",
+          "label": "OPENOUTPUTACCOU",
+          "name": "OPENOUTPUTACCOU",
+          "originalText": "OPEN OUTPUT ACCOUNT-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "621d398b-88cc-4763-8528-03aaf6cebadb",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Cannot open ACCOUNT-OUTPUT, Status: \u0027\n                       WS-ACCOUNT-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "f42d18f3-2e07-4c03-ac93-50d6303f7763",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "b95d14ee-bb62-496b-a429-99607f667abd",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Cannot open ACCOUNT-OUTPUT, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "3ad08748-fe0f-4c76-ba82-0667ee5c6756",
+          "label": "IS \nNOT WS-ACCOUNT-OK?\n",
+          "name": "IS \nNOT WS-ACCOUNT-OK?\n",
+          "originalText": "IF NOT WS-ACCOUNT-OK\n               DISPLAY \u0027ERROR: Cannot open ACCOUNT-OUTPUT, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "56c041f6-51b6-40f7-b241-006264ca1b3c",
+          "label": "OPENOUTPUTXREF-",
+          "name": "OPENOUTPUTXREF-",
+          "originalText": "OPEN OUTPUT XREF-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "b1edaf78-01e7-44e4-b731-2f40901e22f2",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Cannot open XREF-OUTPUT, Status: \u0027\n                       WS-XREF-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "9c55a5cf-f93c-495b-aea8-e3d78a903d09",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "d985dd1a-05c0-457c-9db6-d2858a5600f0",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Cannot open XREF-OUTPUT, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "0b7420c8-eca1-400c-97e8-d151cdba3247",
+          "label": "IS \nNOT WS-XREF-OK?\n",
+          "name": "IS \nNOT WS-XREF-OK?\n",
+          "originalText": "IF NOT WS-XREF-OK\n               DISPLAY \u0027ERROR: Cannot open XREF-OUTPUT, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "d0740b1a-1e4d-4633-ba2d-21b5cf3e203c",
+          "label": "OPENOUTPUTTRANS",
+          "name": "OPENOUTPUTTRANS",
+          "originalText": "OPEN OUTPUT TRANSACTION-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "0b3c455d-02ff-4c2e-9807-bbf17e778b18",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Cannot open TRANSACTION-OUTPUT, Status: \u0027\n                       WS-TRANSACTION-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "d0ed322f-32bd-4e3e-bc91-cc213b427383",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "2cfb816d-0bc3-4299-babc-14228baddb97",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Cannot open TRANSACTION-OUTPUT, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "b338ac80-a333-4fdd-b6b1-68a605e77674",
+          "label": "IS \nNOT WS-TRANSACTION-OK?\n",
+          "name": "IS \nNOT WS-TRANSACTION-OK?\n",
+          "originalText": "IF NOT WS-TRANSACTION-OK\n               DISPLAY \u0027ERROR: Cannot open TRANSACTION-OUTPUT, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "bcbeb8f2-a7c3-4a12-aac6-ddc7f054917e",
+          "label": "OPENOUTPUTCARD-",
+          "name": "OPENOUTPUTCARD-",
+          "originalText": "OPEN OUTPUT CARD-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "c740ef62-b901-4b90-98bb-3092dbbbad47",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Cannot open CARD-OUTPUT, Status: \u0027\n                       WS-CARD-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "32a9f901-1fe0-49d3-90ed-474e517a163f",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "b6cd1393-8680-4bc6-8e49-2e447866bdee",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Cannot open CARD-OUTPUT, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "0e90d5ff-50e4-4d38-9870-f7aa403e4279",
+          "label": "IS \nNOT WS-CARD-OK?\n",
+          "name": "IS \nNOT WS-CARD-OK?\n",
+          "originalText": "IF NOT WS-CARD-OK\n               DISPLAY \u0027ERROR: Cannot open CARD-OUTPUT, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "2090e245-95aa-4eed-9589-5794860277d3",
+          "label": "OPENOUTPUTERROR",
+          "name": "OPENOUTPUTERROR",
+          "originalText": "OPEN OUTPUT ERROR-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "683a4ecf-7e06-4a3c-a929-6c3871817ac3",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Cannot open ERROR-OUTPUT, Status: \u0027\n                       WS-ERROR-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "1f2963ef-bb19-4f6b-adf2-0a015de72b1d",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "41932c70-8bbc-4190-8c31-cf38db466d83",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Cannot open ERROR-OUTPUT, Status: \u0027\n                       WS-ERROR-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "800c490a-6bf0-4c0b-95ab-d0a95d6b0e09",
+          "label": "IS \nNOT WS-ERROR-OK?\n",
+          "name": "IS \nNOT WS-ERROR-OK?\n",
+          "originalText": "IF NOT WS-ERROR-OK\n               DISPLAY \u0027ERROR: Cannot open ERROR-OUTPUT, Status: \u0027\n                       WS-ERROR-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "8919e34d-7070-47a5-8870-6c93faeb57c8",
+      "label": "OPENINPUTEXPORT",
+      "name": "OPENINPUTEXPORT",
+      "originalText": "OPEN INPUT EXPORT-INPUT\n           IF NOT WS-EXPORT-OK\n               DISPLAY \u0027ERROR: Cannot open EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT CUSTOMER-OUTPUT\n           IF NOT WS-CUSTOMER-OK\n               DISPLAY \u0027ERROR: Cannot open CUSTOMER-OUTPUT, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT ACCOUNT-OUTPUT\n           IF NOT WS-ACCOUNT-OK\n               DISPLAY \u0027ERROR: Cannot open ACCOUNT-OUTPUT, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT XREF-OUTPUT\n           IF NOT WS-XREF-OK\n               DISPLAY \u0027ERROR: Cannot open XREF-OUTPUT, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT TRANSACTION-OUTPUT\n           IF NOT WS-TRANSACTION-OK\n               DISPLAY \u0027ERROR: Cannot open TRANSACTION-OUTPUT, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT CARD-OUTPUT\n           IF NOT WS-CARD-OK\n               DISPLAY \u0027ERROR: Cannot open CARD-OUTPUT, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT ERROR-OUTPUT\n           IF NOT WS-ERROR-OK\n               DISPLAY \u0027ERROR: Cannot open ERROR-OUTPUT, Status: \u0027\n                       WS-ERROR-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "2fef21d2-37ae-4bd3-885c-1a5391db1fb5",
+      "label": "2000-PROCESS-EXPORT-FILE",
+      "name": "2000-PROCESS-EXPORT-FILE",
+      "originalText": "2000-PROCESS-EXPORT-FILE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "0876fd87-fc67-493b-b91f-38ce05c94f5a",
+          "label": "PERFORM 2100-READ-EXPORT-RECOR",
+          "name": "PERFORM2100-REA",
+          "originalText": "PERFORM 2100-READ-EXPORT-RECORD",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "id": "02887570-3663-41ae-9264-86be2f16e651",
+              "label": "ADD1TOWS-TOTAL-",
+              "name": "ADD1TOWS-TOTAL-",
+              "originalText": "ADD 1 TO WS-TOTAL-RECORDS-READ",
+              "type": "ADD",
+              "categories": [
+                "COMPUTATIONAL"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [],
+              "id": "b0eba72b-745c-46ed-b348-4bcff4e8f390",
+              "label": "PERFORM 2200-PROCESS-RECORD-BY",
+              "name": "PERFORM2200-PRO",
+              "originalText": "PERFORM 2200-PROCESS-RECORD-BY-TYPE",
+              "type": "PERFORM",
+              "categories": [
+                "CONTROL_FLOW"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [],
+              "id": "2e225a41-bbfe-4ba1-8940-152d38b927d5",
+              "label": "PERFORM 2100-READ-EXPORT-RECOR",
+              "name": "PERFORM2100-REA",
+              "originalText": "PERFORM 2100-READ-EXPORT-RECORD",
+              "type": "PERFORM",
+              "categories": [
+                "CONTROL_FLOW"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "ac3400c8-31d7-4af1-b3ab-111835f7248e",
+          "label": "PERFORM UNTIL WS-EXPORT-EOF\n  ",
+          "name": "PERFORMUNTILWS-",
+          "originalText": "PERFORM UNTIL WS-EXPORT-EOF\n               ADD 1 TO WS-TOTAL-RECORDS-READ\n               PERFORM 2200-PROCESS-RECORD-BY-TYPE\n               PERFORM 2100-READ-EXPORT-RECORD\n           END-PERFORM",
+          "type": "PERFORM",
+          "categories": [
+            "LOOP"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "31bcb1e7-dc62-4593-a418-7adfb935bcaa",
+      "label": "PERFORM2100-REA",
+      "name": "PERFORM2100-REA",
+      "originalText": "PERFORM 2100-READ-EXPORT-RECORD\n       \n           PERFORM UNTIL WS-EXPORT-EOF\n               ADD 1 TO WS-TOTAL-RECORDS-READ\n               PERFORM 2200-PROCESS-RECORD-BY-TYPE\n               PERFORM 2100-READ-EXPORT-RECORD\n           END-PERFORM.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "28a1f24c-63fb-4b8c-b45d-d94eb24b5ce4",
+      "label": "2100-READ-EXPORT-RECORD",
+      "name": "2100-READ-EXPORT-RECORD",
+      "originalText": "2100-READ-EXPORT-RECORD.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "5244835d-a9d0-4e31-b4a6-075327e84a9f",
+          "label": "READEXPORT-INPU",
+          "name": "READEXPORT-INPU",
+          "originalText": "READ EXPORT-INPUT INTO EXPORT-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "0f08352a-9b00-4b19-aaed-0488e725f91d",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Reading EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "1b2e2ab6-cdcc-4b2e-8544-2f02ff016615",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "39c6b63b-85c3-45ce-ab61-6835b8e78592",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Reading EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "bc15704d-0c17-4b40-a964-974ba2e1cc01",
+          "label": "IS \nNOT WS-EXPORT-OK AND NOT WS-EXPORT-EOF?\n",
+          "name": "IS \nNOT WS-EXPORT-OK AND NOT WS-EXPORT-EOF?\n",
+          "originalText": "IF NOT WS-EXPORT-OK AND NOT WS-EXPORT-EOF\n               DISPLAY \u0027ERROR: Reading EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "f8848d6b-25f9-4df8-b8e4-613f740327e3",
+      "label": "READEXPORT-INPU",
+      "name": "READEXPORT-INPU",
+      "originalText": "READ EXPORT-INPUT INTO EXPORT-RECORD\n       \n           IF NOT WS-EXPORT-OK AND NOT WS-EXPORT-EOF\n               DISPLAY \u0027ERROR: Reading EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "7365c9fa-4d49-4d5c-964a-0441c5b3cf13",
+      "label": "2200-PROCESS-RECORD-BY-TYPE",
+      "name": "2200-PROCESS-RECORD-BY-TYPE",
+      "originalText": "2200-PROCESS-RECORD-BY-TYPE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "b975709f-9dfc-4d6d-b677-4ca641d0e455",
+          "label": "EVALUATE",
+          "name": "EVALUATE",
+          "originalText": "EVALUATE EXPORT-REC-TYPE\n               WHEN \u0027C\u0027\n                   PERFORM 2300-PROCESS-CUSTOMER-RECORD\n               WHEN \u0027A\u0027\n                   PERFORM 2400-PROCESS-ACCOUNT-RECORD\n               WHEN \u0027X\u0027\n                   PERFORM 2500-PROCESS-XREF-RECORD\n               WHEN \u0027T\u0027\n                   PERFORM 2600-PROCESS-TRAN-RECORD\n               WHEN \u0027D\u0027\n                   PERFORM 2650-PROCESS-CARD-RECORD\n               WHEN OTHER\n                   PERFORM 2700-PROCESS-UNKNOWN-RECORD\n           END-EVALUATE",
+          "type": "EVALUATE",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "71445703-08f6-4e92-b386-532063eefc26",
+      "label": "EVALUATEEXPORT-",
+      "name": "EVALUATEEXPORT-",
+      "originalText": "EVALUATE EXPORT-REC-TYPE\n               WHEN \u0027C\u0027\n                   PERFORM 2300-PROCESS-CUSTOMER-RECORD\n               WHEN \u0027A\u0027\n                   PERFORM 2400-PROCESS-ACCOUNT-RECORD\n               WHEN \u0027X\u0027\n                   PERFORM 2500-PROCESS-XREF-RECORD\n               WHEN \u0027T\u0027\n                   PERFORM 2600-PROCESS-TRAN-RECORD\n               WHEN \u0027D\u0027\n                   PERFORM 2650-PROCESS-CARD-RECORD\n               WHEN OTHER\n                   PERFORM 2700-PROCESS-UNKNOWN-RECORD\n           END-EVALUATE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "66ae0c71-18cb-4614-a5fb-f6868f986832",
+      "label": "2300-PROCESS-CUSTOMER-RECORD",
+      "name": "2300-PROCESS-CUSTOMER-RECORD",
+      "originalText": "2300-PROCESS-CUSTOMER-RECORD.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "74e0df71-795f-4abd-8997-bd038688ff52",
+          "label": "INITIALIZECUSTO",
+          "name": "INITIALIZECUSTO",
+          "originalText": "INITIALIZE CUSTOMER-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "8a52cda6-264a-464b-818b-d842f801d76f",
+          "label": "MOVEEXP-CUST-ID",
+          "name": "MOVEEXP-CUST-ID",
+          "originalText": "MOVE EXP-CUST-ID TO CUST-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7c7fadae-72aa-47e9-9878-07421c57d000",
+          "label": "MOVEEXP-CUST-FI",
+          "name": "MOVEEXP-CUST-FI",
+          "originalText": "MOVE EXP-CUST-FIRST-NAME TO CUST-FIRST-NAME",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "95e9d86a-ec41-4001-9726-b8c90b12ae3c",
+          "label": "MOVEEXP-CUST-MI",
+          "name": "MOVEEXP-CUST-MI",
+          "originalText": "MOVE EXP-CUST-MIDDLE-NAME TO CUST-MIDDLE-NAME",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "1784406a-4b02-4438-9083-6abf4ed32a00",
+          "label": "MOVEEXP-CUST-LA",
+          "name": "MOVEEXP-CUST-LA",
+          "originalText": "MOVE EXP-CUST-LAST-NAME TO CUST-LAST-NAME",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "41e3b59c-4cd4-4529-9baa-ff1b68bec96f",
+          "label": "MOVEEXP-CUST-AD",
+          "name": "MOVEEXP-CUST-AD",
+          "originalText": "MOVE EXP-CUST-ADDR-LINE(1) TO CUST-ADDR-LINE-1",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "fab4dc1f-9035-4cd8-b1fa-01343f6daee8",
+          "label": "MOVEEXP-CUST-AD",
+          "name": "MOVEEXP-CUST-AD",
+          "originalText": "MOVE EXP-CUST-ADDR-LINE(2) TO CUST-ADDR-LINE-2",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "57729ad2-1547-4d60-9082-8daa628b8643",
+          "label": "MOVEEXP-CUST-AD",
+          "name": "MOVEEXP-CUST-AD",
+          "originalText": "MOVE EXP-CUST-ADDR-LINE(3) TO CUST-ADDR-LINE-3",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "571d2f75-b27e-450a-9557-aaf37be01f5d",
+          "label": "MOVEEXP-CUST-AD",
+          "name": "MOVEEXP-CUST-AD",
+          "originalText": "MOVE EXP-CUST-ADDR-STATE-CD TO CUST-ADDR-STATE-CD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "83859921-53b1-4da5-bd34-e87e78aad06a",
+          "label": "MOVEEXP-CUST-AD",
+          "name": "MOVEEXP-CUST-AD",
+          "originalText": "MOVE EXP-CUST-ADDR-COUNTRY-CD TO CUST-ADDR-COUNTRY-CD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7c8074d5-99dd-4e95-9945-85c3db942950",
+          "label": "MOVEEXP-CUST-AD",
+          "name": "MOVEEXP-CUST-AD",
+          "originalText": "MOVE EXP-CUST-ADDR-ZIP TO CUST-ADDR-ZIP",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "bb208c1d-53a2-4dc0-b018-ec2f2caeeb18",
+          "label": "MOVEEXP-CUST-PH",
+          "name": "MOVEEXP-CUST-PH",
+          "originalText": "MOVE EXP-CUST-PHONE-NUM(1) TO CUST-PHONE-NUM-1",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "f94ec0c5-e7ff-4a2e-84d3-cd6688b1f4fd",
+          "label": "MOVEEXP-CUST-PH",
+          "name": "MOVEEXP-CUST-PH",
+          "originalText": "MOVE EXP-CUST-PHONE-NUM(2) TO CUST-PHONE-NUM-2",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "98445d38-cefc-4bd6-a943-792426d48ced",
+          "label": "MOVEEXP-CUST-SS",
+          "name": "MOVEEXP-CUST-SS",
+          "originalText": "MOVE EXP-CUST-SSN TO CUST-SSN",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c8cf7ed6-c29d-42d8-9c90-44e4c8c87bc6",
+          "label": "MOVEEXP-CUST-GO",
+          "name": "MOVEEXP-CUST-GO",
+          "originalText": "MOVE EXP-CUST-GOVT-ISSUED-ID TO CUST-GOVT-ISSUED-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "276a1a29-0c45-474f-a18b-fbeaa357bac4",
+          "label": "MOVEEXP-CUST-DO",
+          "name": "MOVEEXP-CUST-DO",
+          "originalText": "MOVE EXP-CUST-DOB-YYYY-MM-DD TO CUST-DOB-YYYY-MM-DD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7c305c8b-ce36-4037-895d-4715664dd0ad",
+          "label": "MOVEEXP-CUST-EF",
+          "name": "MOVEEXP-CUST-EF",
+          "originalText": "MOVE EXP-CUST-EFT-ACCOUNT-ID TO CUST-EFT-ACCOUNT-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "0742132f-2ba4-4565-89f3-ad2b3cdff7cc",
+          "label": "MOVEEXP-CUST-PR",
+          "name": "MOVEEXP-CUST-PR",
+          "originalText": "MOVE EXP-CUST-PRI-CARD-HOLDER-IND TO CUST-PRI-CARD-HOLDER-IND",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "25090c9d-ae9d-4bd7-be05-780ca603e756",
+          "label": "MOVEEXP-CUST-FI",
+          "name": "MOVEEXP-CUST-FI",
+          "originalText": "MOVE EXP-CUST-FICO-CREDIT-SCORE TO CUST-FICO-CREDIT-SCORE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "858b801c-1e7a-4aa3-abb4-b4285494e823",
+          "label": "WRITECUSTOMER-R",
+          "name": "WRITECUSTOMER-R",
+          "originalText": "WRITE CUSTOMER-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "bb4151ae-d270-44dd-9413-3a0ee0ddb20d",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Writing customer record, Status: \u0027\n                       WS-CUSTOMER-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "8556338c-aa4b-4e1a-9fb6-3f691222bf9d",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "7cfb9c5b-4b21-4f1a-acc3-49188add483f",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Writing customer record, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "d92d1b8a-bf66-4cdf-911d-427ffac02712",
+          "label": "IS \nNOT WS-CUSTOMER-OK?\n",
+          "name": "IS \nNOT WS-CUSTOMER-OK?\n",
+          "originalText": "IF NOT WS-CUSTOMER-OK\n               DISPLAY \u0027ERROR: Writing customer record, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "93f5277c-f870-4d55-9fb9-27ef373a71f5",
+          "label": "ADD1TOWS-CUSTOM",
+          "name": "ADD1TOWS-CUSTOM",
+          "originalText": "ADD 1 TO WS-CUSTOMER-RECORDS-IMPORTED",
+          "type": "ADD",
+          "categories": [
+            "COMPUTATIONAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "653650be-2f40-4158-9a89-4d80bc06b281",
+      "label": "INITIALIZECUSTO",
+      "name": "INITIALIZECUSTO",
+      "originalText": "INITIALIZE CUSTOMER-RECORD\n       \n       \n           MOVE EXP-CUST-ID TO CUST-ID\n           MOVE EXP-CUST-FIRST-NAME TO CUST-FIRST-NAME\n           MOVE EXP-CUST-MIDDLE-NAME TO CUST-MIDDLE-NAME\n           MOVE EXP-CUST-LAST-NAME TO CUST-LAST-NAME\n           MOVE EXP-CUST-ADDR-LINE(1) TO CUST-ADDR-LINE-1\n           MOVE EXP-CUST-ADDR-LINE(2) TO CUST-ADDR-LINE-2\n           MOVE EXP-CUST-ADDR-LINE(3) TO CUST-ADDR-LINE-3\n           MOVE EXP-CUST-ADDR-STATE-CD TO CUST-ADDR-STATE-CD\n           MOVE EXP-CUST-ADDR-COUNTRY-CD TO CUST-ADDR-COUNTRY-CD\n           MOVE EXP-CUST-ADDR-ZIP TO CUST-ADDR-ZIP\n           MOVE EXP-CUST-PHONE-NUM(1) TO CUST-PHONE-NUM-1\n           MOVE EXP-CUST-PHONE-NUM(2) TO CUST-PHONE-NUM-2\n           MOVE EXP-CUST-SSN TO CUST-SSN\n           MOVE EXP-CUST-GOVT-ISSUED-ID TO CUST-GOVT-ISSUED-ID\n           MOVE EXP-CUST-DOB-YYYY-MM-DD TO CUST-DOB-YYYY-MM-DD\n           MOVE EXP-CUST-EFT-ACCOUNT-ID TO CUST-EFT-ACCOUNT-ID\n           MOVE EXP-CUST-PRI-CARD-HOLDER-IND TO CUST-PRI-CARD-HOLDER-IND\n           MOVE EXP-CUST-FICO-CREDIT-SCORE TO CUST-FICO-CREDIT-SCORE\n       \n           WRITE CUSTOMER-RECORD\n       \n           IF NOT WS-CUSTOMER-OK\n               DISPLAY \u0027ERROR: Writing customer record, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-CUSTOMER-RECORDS-IMPORTED.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "88ea58de-6d1e-42be-b701-e18278ce283c",
+      "label": "2400-PROCESS-ACCOUNT-RECORD",
+      "name": "2400-PROCESS-ACCOUNT-RECORD",
+      "originalText": "2400-PROCESS-ACCOUNT-RECORD.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "88c67c93-9e39-4bad-b5a6-6437459a0676",
+          "label": "INITIALIZEACCOU",
+          "name": "INITIALIZEACCOU",
+          "originalText": "INITIALIZE ACCOUNT-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b95ae069-65fd-4eea-b346-0ce9ae6dc911",
+          "label": "MOVEEXP-ACCT-ID",
+          "name": "MOVEEXP-ACCT-ID",
+          "originalText": "MOVE EXP-ACCT-ID TO ACCT-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "e4ce3fe6-7a86-4c84-8340-b7ce9bc213d8",
+          "label": "MOVEEXP-ACCT-AC",
+          "name": "MOVEEXP-ACCT-AC",
+          "originalText": "MOVE EXP-ACCT-ACTIVE-STATUS TO ACCT-ACTIVE-STATUS",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "24c5cfea-9ed1-47aa-9f83-d0781728bf82",
+          "label": "MOVEEXP-ACCT-CU",
+          "name": "MOVEEXP-ACCT-CU",
+          "originalText": "MOVE EXP-ACCT-CURR-BAL TO ACCT-CURR-BAL",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "9215965d-cd03-423b-8b45-5ca63118534c",
+          "label": "MOVEEXP-ACCT-CR",
+          "name": "MOVEEXP-ACCT-CR",
+          "originalText": "MOVE EXP-ACCT-CREDIT-LIMIT TO ACCT-CREDIT-LIMIT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7ae24b00-5976-4785-a0bd-ca0f4d736664",
+          "label": "MOVEEXP-ACCT-CA",
+          "name": "MOVEEXP-ACCT-CA",
+          "originalText": "MOVE EXP-ACCT-CASH-CREDIT-LIMIT TO ACCT-CASH-CREDIT-LIMIT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "9a364b62-60f4-4bf5-860b-22ac9653980b",
+          "label": "MOVEEXP-ACCT-OP",
+          "name": "MOVEEXP-ACCT-OP",
+          "originalText": "MOVE EXP-ACCT-OPEN-DATE TO ACCT-OPEN-DATE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "61f0e977-78cc-440f-9770-357a1f6da370",
+          "label": "MOVEEXP-ACCT-EX",
+          "name": "MOVEEXP-ACCT-EX",
+          "originalText": "MOVE EXP-ACCT-EXPIRAION-DATE TO ACCT-EXPIRAION-DATE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7682175d-b8ba-4b58-80a4-e6f2a11de703",
+          "label": "MOVEEXP-ACCT-RE",
+          "name": "MOVEEXP-ACCT-RE",
+          "originalText": "MOVE EXP-ACCT-REISSUE-DATE TO ACCT-REISSUE-DATE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "2be014ed-9f0f-4aeb-b48e-50a1e0e24c69",
+          "label": "MOVEEXP-ACCT-CU",
+          "name": "MOVEEXP-ACCT-CU",
+          "originalText": "MOVE EXP-ACCT-CURR-CYC-CREDIT TO ACCT-CURR-CYC-CREDIT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "900961de-be3f-43f3-a92d-b0185b5ea609",
+          "label": "MOVEEXP-ACCT-CU",
+          "name": "MOVEEXP-ACCT-CU",
+          "originalText": "MOVE EXP-ACCT-CURR-CYC-DEBIT TO ACCT-CURR-CYC-DEBIT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "d89e3874-4fc0-489e-a4ff-19b61f434678",
+          "label": "MOVEEXP-ACCT-AD",
+          "name": "MOVEEXP-ACCT-AD",
+          "originalText": "MOVE EXP-ACCT-ADDR-ZIP TO ACCT-ADDR-ZIP",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5d3173a8-b8e5-4821-a458-0aa2c1d5b925",
+          "label": "MOVEEXP-ACCT-GR",
+          "name": "MOVEEXP-ACCT-GR",
+          "originalText": "MOVE EXP-ACCT-GROUP-ID TO ACCT-GROUP-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b5f8676f-0677-48d3-9f1b-479611d131ad",
+          "label": "WRITEACCOUNT-RE",
+          "name": "WRITEACCOUNT-RE",
+          "originalText": "WRITE ACCOUNT-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "78487996-3ea6-40bb-ac6e-a9ac30c9f3fd",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Writing account record, Status: \u0027\n                       WS-ACCOUNT-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "8500891c-bfff-4518-83a8-7085584807ed",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "f2a86b13-70c8-4400-b2c1-c29e8c94cce1",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Writing account record, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "188f417f-124c-43c8-bf20-0ed36ad09c31",
+          "label": "IS \nNOT WS-ACCOUNT-OK?\n",
+          "name": "IS \nNOT WS-ACCOUNT-OK?\n",
+          "originalText": "IF NOT WS-ACCOUNT-OK\n               DISPLAY \u0027ERROR: Writing account record, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "d7d47471-99b6-4cbe-b6f5-574088a7b7fa",
+          "label": "ADD1TOWS-ACCOUN",
+          "name": "ADD1TOWS-ACCOUN",
+          "originalText": "ADD 1 TO WS-ACCOUNT-RECORDS-IMPORTED",
+          "type": "ADD",
+          "categories": [
+            "COMPUTATIONAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "4a8e1026-10bd-4fb8-9c20-ac94013ff831",
+      "label": "INITIALIZEACCOU",
+      "name": "INITIALIZEACCOU",
+      "originalText": "INITIALIZE ACCOUNT-RECORD\n       \n       \n           MOVE EXP-ACCT-ID TO ACCT-ID\n           MOVE EXP-ACCT-ACTIVE-STATUS TO ACCT-ACTIVE-STATUS\n           MOVE EXP-ACCT-CURR-BAL TO ACCT-CURR-BAL\n           MOVE EXP-ACCT-CREDIT-LIMIT TO ACCT-CREDIT-LIMIT\n           MOVE EXP-ACCT-CASH-CREDIT-LIMIT TO ACCT-CASH-CREDIT-LIMIT\n           MOVE EXP-ACCT-OPEN-DATE TO ACCT-OPEN-DATE\n           MOVE EXP-ACCT-EXPIRAION-DATE TO ACCT-EXPIRAION-DATE\n           MOVE EXP-ACCT-REISSUE-DATE TO ACCT-REISSUE-DATE\n           MOVE EXP-ACCT-CURR-CYC-CREDIT TO ACCT-CURR-CYC-CREDIT\n           MOVE EXP-ACCT-CURR-CYC-DEBIT TO ACCT-CURR-CYC-DEBIT\n           MOVE EXP-ACCT-ADDR-ZIP TO ACCT-ADDR-ZIP\n           MOVE EXP-ACCT-GROUP-ID TO ACCT-GROUP-ID\n       \n           WRITE ACCOUNT-RECORD\n       \n           IF NOT WS-ACCOUNT-OK\n               DISPLAY \u0027ERROR: Writing account record, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-ACCOUNT-RECORDS-IMPORTED.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "41763611-4be5-41b4-9ec3-b6c0c402cb8c",
+      "label": "2500-PROCESS-XREF-RECORD",
+      "name": "2500-PROCESS-XREF-RECORD",
+      "originalText": "2500-PROCESS-XREF-RECORD.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "9d7f4da9-4275-45a1-8268-54ce9c86bdae",
+          "label": "INITIALIZECARD-",
+          "name": "INITIALIZECARD-",
+          "originalText": "INITIALIZE CARD-XREF-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "3906ce9e-8026-4e4f-bbf7-3d16df47deb5",
+          "label": "MOVEEXP-XREF-CA",
+          "name": "MOVEEXP-XREF-CA",
+          "originalText": "MOVE EXP-XREF-CARD-NUM TO XREF-CARD-NUM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "40c17bcb-4684-4dac-8d5a-0e213258d9e2",
+          "label": "MOVEEXP-XREF-CU",
+          "name": "MOVEEXP-XREF-CU",
+          "originalText": "MOVE EXP-XREF-CUST-ID TO XREF-CUST-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "1ad6cecc-092b-404d-a375-e1aab1e9069d",
+          "label": "MOVEEXP-XREF-AC",
+          "name": "MOVEEXP-XREF-AC",
+          "originalText": "MOVE EXP-XREF-ACCT-ID TO XREF-ACCT-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "a14247e7-3347-44f0-8aac-e6054dab486e",
+          "label": "WRITECARD-XREF-",
+          "name": "WRITECARD-XREF-",
+          "originalText": "WRITE CARD-XREF-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "1f048961-2d49-467b-ae57-56aba2bfc7cd",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Writing xref record, Status: \u0027\n                       WS-XREF-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "9c9a00d8-c1d0-41f5-90cf-9bf4fdaf5f2e",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "f9248afe-7354-476e-808b-e3e1805e7b45",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Writing xref record, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "d758c45e-c642-46eb-abdb-3e317fa33bfb",
+          "label": "IS \nNOT WS-XREF-OK?\n",
+          "name": "IS \nNOT WS-XREF-OK?\n",
+          "originalText": "IF NOT WS-XREF-OK\n               DISPLAY \u0027ERROR: Writing xref record, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "d8652877-2730-455c-b957-cb629188c344",
+          "label": "ADD1TOWS-XREF-R",
+          "name": "ADD1TOWS-XREF-R",
+          "originalText": "ADD 1 TO WS-XREF-RECORDS-IMPORTED",
+          "type": "ADD",
+          "categories": [
+            "COMPUTATIONAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "3ecacef0-713e-44ca-8f18-ae63af7840ce",
+      "label": "INITIALIZECARD-",
+      "name": "INITIALIZECARD-",
+      "originalText": "INITIALIZE CARD-XREF-RECORD\n       \n       \n           MOVE EXP-XREF-CARD-NUM TO XREF-CARD-NUM\n           MOVE EXP-XREF-CUST-ID TO XREF-CUST-ID\n           MOVE EXP-XREF-ACCT-ID TO XREF-ACCT-ID\n       \n           WRITE CARD-XREF-RECORD\n       \n           IF NOT WS-XREF-OK\n               DISPLAY \u0027ERROR: Writing xref record, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-XREF-RECORDS-IMPORTED.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "edb2e7df-6e52-4844-9e0f-de0042cc9458",
+      "label": "2600-PROCESS-TRAN-RECORD",
+      "name": "2600-PROCESS-TRAN-RECORD",
+      "originalText": "2600-PROCESS-TRAN-RECORD.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "1a3143ae-0218-4304-8879-d5cdb2a2ad76",
+          "label": "INITIALIZETRAN-",
+          "name": "INITIALIZETRAN-",
+          "originalText": "INITIALIZE TRAN-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "6eee10a3-2404-4e9d-bd08-8ba7e8bd382f",
+          "label": "MOVEEXP-TRAN-ID",
+          "name": "MOVEEXP-TRAN-ID",
+          "originalText": "MOVE EXP-TRAN-ID TO TRAN-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5b313c5c-cef7-4a05-b8b2-03dd05fded4e",
+          "label": "MOVEEXP-TRAN-TY",
+          "name": "MOVEEXP-TRAN-TY",
+          "originalText": "MOVE EXP-TRAN-TYPE-CD TO TRAN-TYPE-CD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "ab044edc-dd33-4cca-bded-9069a171f399",
+          "label": "MOVEEXP-TRAN-CA",
+          "name": "MOVEEXP-TRAN-CA",
+          "originalText": "MOVE EXP-TRAN-CAT-CD TO TRAN-CAT-CD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "95206913-cdc4-4ad6-b663-63b95d1546f6",
+          "label": "MOVEEXP-TRAN-SO",
+          "name": "MOVEEXP-TRAN-SO",
+          "originalText": "MOVE EXP-TRAN-SOURCE TO TRAN-SOURCE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "47cf59c8-464a-4674-8e42-7a93abac298e",
+          "label": "MOVEEXP-TRAN-DE",
+          "name": "MOVEEXP-TRAN-DE",
+          "originalText": "MOVE EXP-TRAN-DESC TO TRAN-DESC",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "3441be31-7599-4f99-8636-7e934b02b782",
+          "label": "MOVEEXP-TRAN-AM",
+          "name": "MOVEEXP-TRAN-AM",
+          "originalText": "MOVE EXP-TRAN-AMT TO TRAN-AMT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "faea42fd-cd2e-4326-a86e-1839dd31b8ae",
+          "label": "MOVEEXP-TRAN-ME",
+          "name": "MOVEEXP-TRAN-ME",
+          "originalText": "MOVE EXP-TRAN-MERCHANT-ID TO TRAN-MERCHANT-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c742d051-351f-4b27-b049-cec5cc8c667b",
+          "label": "MOVEEXP-TRAN-ME",
+          "name": "MOVEEXP-TRAN-ME",
+          "originalText": "MOVE EXP-TRAN-MERCHANT-NAME TO TRAN-MERCHANT-NAME",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c800a4fa-0a39-4344-9680-8a27f5c44fdb",
+          "label": "MOVEEXP-TRAN-ME",
+          "name": "MOVEEXP-TRAN-ME",
+          "originalText": "MOVE EXP-TRAN-MERCHANT-CITY TO TRAN-MERCHANT-CITY",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "122cafba-fa12-4989-89a5-2d9607b848a1",
+          "label": "MOVEEXP-TRAN-ME",
+          "name": "MOVEEXP-TRAN-ME",
+          "originalText": "MOVE EXP-TRAN-MERCHANT-ZIP TO TRAN-MERCHANT-ZIP",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "ddc94b5e-3ba1-4f5b-a001-b8cb134ba2e2",
+          "label": "MOVEEXP-TRAN-CA",
+          "name": "MOVEEXP-TRAN-CA",
+          "originalText": "MOVE EXP-TRAN-CARD-NUM TO TRAN-CARD-NUM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "91c7af29-1a15-4546-93e1-adca99ff6da3",
+          "label": "MOVEEXP-TRAN-OR",
+          "name": "MOVEEXP-TRAN-OR",
+          "originalText": "MOVE EXP-TRAN-ORIG-TS TO TRAN-ORIG-TS",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "073a1ffb-7aec-40f7-b0c5-ff7a2a64d5f1",
+          "label": "MOVEEXP-TRAN-PR",
+          "name": "MOVEEXP-TRAN-PR",
+          "originalText": "MOVE EXP-TRAN-PROC-TS TO TRAN-PROC-TS",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "ee7966d1-b163-419b-a5ad-df422bda6f2b",
+          "label": "WRITETRAN-RECOR",
+          "name": "WRITETRAN-RECOR",
+          "originalText": "WRITE TRAN-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "cab60202-357c-45e5-9173-e2ae4ff2ef0f",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Writing transaction record, Status: \u0027\n                       WS-TRANSACTION-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "e3f2d9c8-0143-4851-b571-834d1af6549b",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "d173d57b-f0fd-4fcd-a226-304c782e55df",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Writing transaction record, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "7a605ef0-fed7-4350-abca-03c06cac964b",
+          "label": "IS \nNOT WS-TRANSACTION-OK?\n",
+          "name": "IS \nNOT WS-TRANSACTION-OK?\n",
+          "originalText": "IF NOT WS-TRANSACTION-OK\n               DISPLAY \u0027ERROR: Writing transaction record, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "08ea54f6-a5cc-4602-8c96-edcfd4cdbf6f",
+          "label": "ADD1TOWS-TRAN-R",
+          "name": "ADD1TOWS-TRAN-R",
+          "originalText": "ADD 1 TO WS-TRAN-RECORDS-IMPORTED",
+          "type": "ADD",
+          "categories": [
+            "COMPUTATIONAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "4f576fe4-eadb-4f18-94d4-06834420b1e2",
+      "label": "INITIALIZETRAN-",
+      "name": "INITIALIZETRAN-",
+      "originalText": "INITIALIZE TRAN-RECORD\n       \n       \n           MOVE EXP-TRAN-ID TO TRAN-ID\n           MOVE EXP-TRAN-TYPE-CD TO TRAN-TYPE-CD\n           MOVE EXP-TRAN-CAT-CD TO TRAN-CAT-CD\n           MOVE EXP-TRAN-SOURCE TO TRAN-SOURCE\n           MOVE EXP-TRAN-DESC TO TRAN-DESC\n           MOVE EXP-TRAN-AMT TO TRAN-AMT\n           MOVE EXP-TRAN-MERCHANT-ID TO TRAN-MERCHANT-ID\n           MOVE EXP-TRAN-MERCHANT-NAME TO TRAN-MERCHANT-NAME\n           MOVE EXP-TRAN-MERCHANT-CITY TO TRAN-MERCHANT-CITY\n           MOVE EXP-TRAN-MERCHANT-ZIP TO TRAN-MERCHANT-ZIP\n           MOVE EXP-TRAN-CARD-NUM TO TRAN-CARD-NUM\n           MOVE EXP-TRAN-ORIG-TS TO TRAN-ORIG-TS\n           MOVE EXP-TRAN-PROC-TS TO TRAN-PROC-TS\n       \n           WRITE TRAN-RECORD\n       \n           IF NOT WS-TRANSACTION-OK\n               DISPLAY \u0027ERROR: Writing transaction record, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-TRAN-RECORDS-IMPORTED.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "e84433e4-df42-4e70-8419-c68a1e3d8df6",
+      "label": "2650-PROCESS-CARD-RECORD",
+      "name": "2650-PROCESS-CARD-RECORD",
+      "originalText": "2650-PROCESS-CARD-RECORD.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "45784564-fcd5-4159-87cc-d83000bb394a",
+          "label": "INITIALIZECARD-",
+          "name": "INITIALIZECARD-",
+          "originalText": "INITIALIZE CARD-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "3073c35f-b81e-4fc5-adc4-217f4e7565ae",
+          "label": "MOVEEXP-CARD-NU",
+          "name": "MOVEEXP-CARD-NU",
+          "originalText": "MOVE EXP-CARD-NUM TO CARD-NUM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "e6ca71e5-99a8-4632-b4ea-5f08b704e816",
+          "label": "MOVEEXP-CARD-AC",
+          "name": "MOVEEXP-CARD-AC",
+          "originalText": "MOVE EXP-CARD-ACCT-ID TO CARD-ACCT-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "dc74e580-cb7b-4331-a304-bb6c0e2e5d6f",
+          "label": "MOVEEXP-CARD-CV",
+          "name": "MOVEEXP-CARD-CV",
+          "originalText": "MOVE EXP-CARD-CVV-CD TO CARD-CVV-CD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b5033d79-0561-4bab-a4fd-537375871f7e",
+          "label": "MOVEEXP-CARD-EM",
+          "name": "MOVEEXP-CARD-EM",
+          "originalText": "MOVE EXP-CARD-EMBOSSED-NAME TO CARD-EMBOSSED-NAME",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "9341d6b7-0a15-4133-952e-c56e2f8be681",
+          "label": "MOVEEXP-CARD-EX",
+          "name": "MOVEEXP-CARD-EX",
+          "originalText": "MOVE EXP-CARD-EXPIRAION-DATE TO CARD-EXPIRAION-DATE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "54eae2ac-8c5a-45dc-9894-cd2dba1f67d0",
+          "label": "MOVEEXP-CARD-AC",
+          "name": "MOVEEXP-CARD-AC",
+          "originalText": "MOVE EXP-CARD-ACTIVE-STATUS TO CARD-ACTIVE-STATUS",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "66e5de4f-3d48-42b7-9cfa-1a04379ee861",
+          "label": "WRITECARD-RECOR",
+          "name": "WRITECARD-RECOR",
+          "originalText": "WRITE CARD-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "3141d36a-3a2e-4134-8bff-eb6f64272129",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Writing card record, Status: \u0027\n                       WS-CARD-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "6dd41d60-54f2-4b09-87ad-d30881d8cc3c",
+                  "label": "PERFORM 9999-ABEND-PROGRAM",
+                  "name": "PERFORM9999-ABE",
+                  "originalText": "PERFORM 9999-ABEND-PROGRAM",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "fbec394e-2a64-4015-8ce3-57a6a8bfcdda",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Writing card record, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "63001fef-2d80-41fa-8bc3-78abddc4ee23",
+          "label": "IS \nNOT WS-CARD-OK?\n",
+          "name": "IS \nNOT WS-CARD-OK?\n",
+          "originalText": "IF NOT WS-CARD-OK\n               DISPLAY \u0027ERROR: Writing card record, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "07d8d37f-72da-4234-b258-20c6a5dca434",
+          "label": "ADD1TOWS-CARD-R",
+          "name": "ADD1TOWS-CARD-R",
+          "originalText": "ADD 1 TO WS-CARD-RECORDS-IMPORTED",
+          "type": "ADD",
+          "categories": [
+            "COMPUTATIONAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "636a62d2-b0a7-441c-882e-e982c4106dae",
+      "label": "INITIALIZECARD-",
+      "name": "INITIALIZECARD-",
+      "originalText": "INITIALIZE CARD-RECORD\n       \n       \n           MOVE EXP-CARD-NUM TO CARD-NUM\n           MOVE EXP-CARD-ACCT-ID TO CARD-ACCT-ID\n           MOVE EXP-CARD-CVV-CD TO CARD-CVV-CD\n           MOVE EXP-CARD-EMBOSSED-NAME TO CARD-EMBOSSED-NAME\n           MOVE EXP-CARD-EXPIRAION-DATE TO CARD-EXPIRAION-DATE\n           MOVE EXP-CARD-ACTIVE-STATUS TO CARD-ACTIVE-STATUS\n       \n           WRITE CARD-RECORD\n       \n           IF NOT WS-CARD-OK\n               DISPLAY \u0027ERROR: Writing card record, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-CARD-RECORDS-IMPORTED.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "1c370b19-0f50-4b73-abd8-0078fba7e77b",
+      "label": "2700-PROCESS-UNKNOWN-RECORD",
+      "name": "2700-PROCESS-UNKNOWN-RECORD",
+      "originalText": "2700-PROCESS-UNKNOWN-RECORD.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "556e9ee5-6203-49c2-9e5a-175b913a1717",
+          "label": "ADD1TOWS-UNKNOW",
+          "name": "ADD1TOWS-UNKNOW",
+          "originalText": "ADD 1 TO WS-UNKNOWN-RECORD-TYPE-COUNT",
+          "type": "ADD",
+          "categories": [
+            "COMPUTATIONAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "e4173c24-b88e-4eed-83f9-4bcb675e4237",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE TO ERR-TIMESTAMP",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "65b91143-1065-4f6e-a25b-de150f6ff5b2",
+          "label": "MOVEEXPORT-REC-",
+          "name": "MOVEEXPORT-REC-",
+          "originalText": "MOVE EXPORT-REC-TYPE TO ERR-RECORD-TYPE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "0100f789-008e-4af7-949f-4c042a34ae09",
+          "label": "MOVEEXPORT-SEQU",
+          "name": "MOVEEXPORT-SEQU",
+          "originalText": "MOVE EXPORT-SEQUENCE-NUM TO ERR-SEQUENCE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "bb4980e1-bd1f-4ed2-b9a3-3b84548dd1dc",
+          "label": "MOVE\u0027Unknown re",
+          "name": "MOVE\u0027Unknown re",
+          "originalText": "MOVE \u0027Unknown record type encountered\u0027 TO ERR-MESSAGE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "63a2b8cb-4afb-4d2e-9d9b-70722811f728",
+          "label": "PERFORM 2750-WRITE-ERROR",
+          "name": "PERFORM2750-WRI",
+          "originalText": "PERFORM 2750-WRITE-ERROR",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "5f837405-7f44-49ea-a745-5c1c05422b0f",
+      "label": "ADD1TOWS-UNKNOW",
+      "name": "ADD1TOWS-UNKNOW",
+      "originalText": "ADD 1 TO WS-UNKNOWN-RECORD-TYPE-COUNT\n       \n           MOVE FUNCTION CURRENT-DATE TO ERR-TIMESTAMP\n           MOVE EXPORT-REC-TYPE TO ERR-RECORD-TYPE\n           MOVE EXPORT-SEQUENCE-NUM TO ERR-SEQUENCE\n           MOVE \u0027Unknown record type encountered\u0027 TO ERR-MESSAGE\n       \n           PERFORM 2750-WRITE-ERROR.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "cc88adca-3932-4a05-966b-3ba6d14a0c23",
+      "label": "2750-WRITE-ERROR",
+      "name": "2750-WRITE-ERROR",
+      "originalText": "2750-WRITE-ERROR.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "b74c8b7a-c122-4400-898e-789a6583ba54",
+          "label": "WRITEERROR-OUTP",
+          "name": "WRITEERROR-OUTP",
+          "originalText": "WRITE ERROR-OUTPUT-RECORD FROM WS-ERROR-RECORD",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "eee345b8-b6ee-44e5-aef0-60620508d23f",
+                  "label": "DISPLAY\u0027ERROR: ",
+                  "name": "DISPLAY\u0027ERROR: ",
+                  "originalText": "DISPLAY \u0027ERROR: Writing error record, Status: \u0027\n                       WS-ERROR-STATUS",
+                  "type": "DISPLAY",
+                  "categories": [
+                    "IO"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "5c53c476-e1c4-48b6-ab07-d23a4c41a2ac",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "DISPLAY \u0027ERROR: Writing error record, Status: \u0027\n                       WS-ERROR-STATUS",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "5208f836-5492-4104-bba7-6e458002883e",
+          "label": "IS \nNOT WS-ERROR-OK?\n",
+          "name": "IS \nNOT WS-ERROR-OK?\n",
+          "originalText": "IF NOT WS-ERROR-OK\n               DISPLAY \u0027ERROR: Writing error record, Status: \u0027\n                       WS-ERROR-STATUS\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "11d55a90-7948-41ee-a191-3495854372e8",
+          "label": "ADD1TOWS-ERROR-",
+          "name": "ADD1TOWS-ERROR-",
+          "originalText": "ADD 1 TO WS-ERROR-RECORDS-WRITTEN",
+          "type": "ADD",
+          "categories": [
+            "COMPUTATIONAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "2519cd06-475d-4bb0-b7bc-47820d4bce73",
+      "label": "WRITEERROR-OUTP",
+      "name": "WRITEERROR-OUTP",
+      "originalText": "WRITE ERROR-OUTPUT-RECORD FROM WS-ERROR-RECORD\n       \n           IF NOT WS-ERROR-OK\n               DISPLAY \u0027ERROR: Writing error record, Status: \u0027\n                       WS-ERROR-STATUS\n           END-IF\n       \n           ADD 1 TO WS-ERROR-RECORDS-WRITTEN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "f53503fa-951a-44e9-9098-4e14c4e09a55",
+      "label": "3000-VALIDATE-IMPORT",
+      "name": "3000-VALIDATE-IMPORT",
+      "originalText": "3000-VALIDATE-IMPORT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "0fad022f-88c5-41e3-b9c1-ffe8580c4612",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Import validation completed\u0027",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "36b26a4f-9fd5-4be8-81a9-7c6db285e7d7",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: No validation errors detected\u0027",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "b38bc231-5593-43dd-b578-3926ad5fb8b6",
+      "label": "DISPLAY\u0027CBIMPOR",
+      "name": "DISPLAY\u0027CBIMPOR",
+      "originalText": "DISPLAY \u0027CBIMPORT: Import validation completed\u0027\n           DISPLAY \u0027CBIMPORT: No validation errors detected\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "d9edcc31-9069-4968-91ad-934ebd1e2fc8",
+      "label": "4000-FINALIZE",
+      "name": "4000-FINALIZE",
+      "originalText": "4000-FINALIZE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "dfb9844c-4b93-4fc8-aa0c-ab3b008fa850",
+          "label": "CLOSEEXPORT-INP",
+          "name": "CLOSEEXPORT-INP",
+          "originalText": "CLOSE EXPORT-INPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "51d94e95-0d1a-42b4-9c59-41208d4a4609",
+          "label": "CLOSECUSTOMER-O",
+          "name": "CLOSECUSTOMER-O",
+          "originalText": "CLOSE CUSTOMER-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "27e96eeb-1823-4e5f-aaf8-6a8268954fa2",
+          "label": "CLOSEACCOUNT-OU",
+          "name": "CLOSEACCOUNT-OU",
+          "originalText": "CLOSE ACCOUNT-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "2a4bec0a-81dc-4cf0-a3a0-cd409c1fc4f8",
+          "label": "CLOSEXREF-OUTPU",
+          "name": "CLOSEXREF-OUTPU",
+          "originalText": "CLOSE XREF-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "93160bd3-b119-4a0b-aecc-0d86bcbcecb5",
+          "label": "CLOSETRANSACTIO",
+          "name": "CLOSETRANSACTIO",
+          "originalText": "CLOSE TRANSACTION-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "6d34c2f6-4747-4be9-8ff1-7fcf5334efe7",
+          "label": "CLOSECARD-OUTPU",
+          "name": "CLOSECARD-OUTPU",
+          "originalText": "CLOSE CARD-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "3b30255b-918a-46eb-97f6-7092db8ad733",
+          "label": "CLOSEERROR-OUTP",
+          "name": "CLOSEERROR-OUTP",
+          "originalText": "CLOSE ERROR-OUTPUT",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7391d878-14df-41df-9fe2-3498c5347812",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Import completed\u0027",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "ee510714-ba33-4b7b-a6ea-3ae78d03385e",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Total Records Read: \u0027\n           WS-TOTAL-RECORDS-READ",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "9c964d76-1ec8-432f-9c2e-12dc5b8c9eb9",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Customers Imported: \u0027\n                   WS-CUSTOMER-RECORDS-IMPORTED",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5c1d519d-d78f-47fe-a4df-2eeedc7bcd36",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Accounts Imported: \u0027\n                   WS-ACCOUNT-RECORDS-IMPORTED",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "d74b947f-a474-48fb-af1f-c2fedae82258",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: XRefs Imported: \u0027 WS-XREF-RECORDS-IMPORTED",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "f3ac3c38-d344-40f1-9f02-f3e6b93996f0",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Transactions Imported: \u0027\n                   WS-TRAN-RECORDS-IMPORTED",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c7f70069-4c47-443c-87e6-e180098d2a83",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Cards Imported: \u0027 WS-CARD-RECORDS-IMPORTED",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "2a0f73ba-8701-4ed2-89b0-4d3caaf9f109",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Errors Written: \u0027 WS-ERROR-RECORDS-WRITTEN",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5749994c-3aca-4055-b9c5-d8d616f513ca",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: Unknown Record Types: \u0027\n                   WS-UNKNOWN-RECORD-TYPE-COUNT",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "32b12eb7-16fc-46bc-afda-2cf3db6a83f1",
+      "label": "CLOSEEXPORT-INP",
+      "name": "CLOSEEXPORT-INP",
+      "originalText": "CLOSE EXPORT-INPUT\n           CLOSE CUSTOMER-OUTPUT\n           CLOSE ACCOUNT-OUTPUT\n           CLOSE XREF-OUTPUT\n           CLOSE TRANSACTION-OUTPUT\n           CLOSE CARD-OUTPUT\n           CLOSE ERROR-OUTPUT\n       \n           DISPLAY \u0027CBIMPORT: Import completed\u0027\n           DISPLAY \u0027CBIMPORT: Total Records Read: \u0027\n           WS-TOTAL-RECORDS-READ\n           DISPLAY \u0027CBIMPORT: Customers Imported: \u0027\n                   WS-CUSTOMER-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Accounts Imported: \u0027\n                   WS-ACCOUNT-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: XRefs Imported: \u0027 WS-XREF-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Transactions Imported: \u0027\n                   WS-TRAN-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Cards Imported: \u0027 WS-CARD-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Errors Written: \u0027 WS-ERROR-RECORDS-WRITTEN\n           DISPLAY \u0027CBIMPORT: Unknown Record Types: \u0027\n                   WS-UNKNOWN-RECORD-TYPE-COUNT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "03c4b84c-1b02-4be1-9ed4-e53cc31e2426",
+      "label": "9999-ABEND-PROGRAM",
+      "name": "9999-ABEND-PROGRAM",
+      "originalText": "9999-ABEND-PROGRAM.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "5b54ec20-b1ff-4860-abdf-f66950de2641",
+          "label": "DISPLAY\u0027CBIMPOR",
+          "name": "DISPLAY\u0027CBIMPOR",
+          "originalText": "DISPLAY \u0027CBIMPORT: ABENDING PROGRAM\u0027",
+          "type": "DISPLAY",
+          "categories": [
+            "IO"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "14d515c3-dc15-400b-9d70-acb29677e2cd",
+          "label": "CALL \u0027CEE3ABD\u0027",
+          "name": "CALL\u0027CEE3ABD\u0027",
+          "originalText": "CALL \u0027CEE3ABD\u0027",
+          "type": "CALL",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "6e0df5dd-c650-4f48-8409-c2c75e433d61",
+      "label": "DISPLAY\u0027CBIMPOR",
+      "name": "DISPLAY\u0027CBIMPOR",
+      "originalText": "DISPLAY \u0027CBIMPORT: ABENDING PROGRAM\u0027\n           CALL \u0027CEE3ABD\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "id": "15bc96d2-588a-47ef-a9c7-94a030c76eb8",
+  "label": "ProcedureDivisionBodyContext/15bc96d2-588a-47ef-a9c7-94a030c76eb8",
+  "name": "ProcedureDivisionBodyContext/15bc96d2-588a-47ef-a9c7-94a030c76eb8",
+  "originalText": "0000-MAIN-PROCESSING.\n       \n           PERFORM 1000-INITIALIZE\n           PERFORM 2000-PROCESS-EXPORT-FILE\n           PERFORM 3000-VALIDATE-IMPORT\n           PERFORM 4000-FINALIZE\n           GOBACK.\n       \n       \n       1000-INITIALIZE.\n       \n           DISPLAY \u0027CBIMPORT: Starting Customer Data Import\u0027\n       \n           MOVE FUNCTION CURRENT-DATE(1:4) TO WS-IMPORT-DATE(1:4)\n           MOVE \u0027-\u0027 TO WS-IMPORT-DATE(5:1)\n           MOVE FUNCTION CURRENT-DATE(5:2) TO WS-IMPORT-DATE(6:2)\n           MOVE \u0027-\u0027 TO WS-IMPORT-DATE(8:1)\n           MOVE FUNCTION CURRENT-DATE(7:2) TO WS-IMPORT-DATE(9:2)\n       \n           MOVE FUNCTION CURRENT-DATE(9:2) TO WS-IMPORT-TIME(1:2)\n           MOVE \u0027:\u0027 TO WS-IMPORT-TIME(3:1)\n           MOVE FUNCTION CURRENT-DATE(11:2) TO WS-IMPORT-TIME(4:2)\n           MOVE \u0027:\u0027 TO WS-IMPORT-TIME(6:1)\n           MOVE FUNCTION CURRENT-DATE(13:2) TO WS-IMPORT-TIME(7:2)\n       \n           PERFORM 1100-OPEN-FILES\n       \n           DISPLAY \u0027CBIMPORT: Import Date: \u0027 WS-IMPORT-DATE\n           DISPLAY \u0027CBIMPORT: Import Time: \u0027 WS-IMPORT-TIME.\n       \n       \n       1100-OPEN-FILES.\n       \n           OPEN INPUT EXPORT-INPUT\n           IF NOT WS-EXPORT-OK\n               DISPLAY \u0027ERROR: Cannot open EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT CUSTOMER-OUTPUT\n           IF NOT WS-CUSTOMER-OK\n               DISPLAY \u0027ERROR: Cannot open CUSTOMER-OUTPUT, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT ACCOUNT-OUTPUT\n           IF NOT WS-ACCOUNT-OK\n               DISPLAY \u0027ERROR: Cannot open ACCOUNT-OUTPUT, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT XREF-OUTPUT\n           IF NOT WS-XREF-OK\n               DISPLAY \u0027ERROR: Cannot open XREF-OUTPUT, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT TRANSACTION-OUTPUT\n           IF NOT WS-TRANSACTION-OK\n               DISPLAY \u0027ERROR: Cannot open TRANSACTION-OUTPUT, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT CARD-OUTPUT\n           IF NOT WS-CARD-OK\n               DISPLAY \u0027ERROR: Cannot open CARD-OUTPUT, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           OPEN OUTPUT ERROR-OUTPUT\n           IF NOT WS-ERROR-OK\n               DISPLAY \u0027ERROR: Cannot open ERROR-OUTPUT, Status: \u0027\n                       WS-ERROR-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF.\n       \n       \n       2000-PROCESS-EXPORT-FILE.\n       \n           PERFORM 2100-READ-EXPORT-RECORD\n       \n           PERFORM UNTIL WS-EXPORT-EOF\n               ADD 1 TO WS-TOTAL-RECORDS-READ\n               PERFORM 2200-PROCESS-RECORD-BY-TYPE\n               PERFORM 2100-READ-EXPORT-RECORD\n           END-PERFORM.\n       \n       \n       2100-READ-EXPORT-RECORD.\n       \n           READ EXPORT-INPUT INTO EXPORT-RECORD\n       \n           IF NOT WS-EXPORT-OK AND NOT WS-EXPORT-EOF\n               DISPLAY \u0027ERROR: Reading EXPORT-INPUT, Status: \u0027\n                       WS-EXPORT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF.\n       \n       \n       2200-PROCESS-RECORD-BY-TYPE.\n       \n           EVALUATE EXPORT-REC-TYPE\n               WHEN \u0027C\u0027\n                   PERFORM 2300-PROCESS-CUSTOMER-RECORD\n               WHEN \u0027A\u0027\n                   PERFORM 2400-PROCESS-ACCOUNT-RECORD\n               WHEN \u0027X\u0027\n                   PERFORM 2500-PROCESS-XREF-RECORD\n               WHEN \u0027T\u0027\n                   PERFORM 2600-PROCESS-TRAN-RECORD\n               WHEN \u0027D\u0027\n                   PERFORM 2650-PROCESS-CARD-RECORD\n               WHEN OTHER\n                   PERFORM 2700-PROCESS-UNKNOWN-RECORD\n           END-EVALUATE.\n       \n       \n       2300-PROCESS-CUSTOMER-RECORD.\n       \n           INITIALIZE CUSTOMER-RECORD\n       \n       \n           MOVE EXP-CUST-ID TO CUST-ID\n           MOVE EXP-CUST-FIRST-NAME TO CUST-FIRST-NAME\n           MOVE EXP-CUST-MIDDLE-NAME TO CUST-MIDDLE-NAME\n           MOVE EXP-CUST-LAST-NAME TO CUST-LAST-NAME\n           MOVE EXP-CUST-ADDR-LINE(1) TO CUST-ADDR-LINE-1\n           MOVE EXP-CUST-ADDR-LINE(2) TO CUST-ADDR-LINE-2\n           MOVE EXP-CUST-ADDR-LINE(3) TO CUST-ADDR-LINE-3\n           MOVE EXP-CUST-ADDR-STATE-CD TO CUST-ADDR-STATE-CD\n           MOVE EXP-CUST-ADDR-COUNTRY-CD TO CUST-ADDR-COUNTRY-CD\n           MOVE EXP-CUST-ADDR-ZIP TO CUST-ADDR-ZIP\n           MOVE EXP-CUST-PHONE-NUM(1) TO CUST-PHONE-NUM-1\n           MOVE EXP-CUST-PHONE-NUM(2) TO CUST-PHONE-NUM-2\n           MOVE EXP-CUST-SSN TO CUST-SSN\n           MOVE EXP-CUST-GOVT-ISSUED-ID TO CUST-GOVT-ISSUED-ID\n           MOVE EXP-CUST-DOB-YYYY-MM-DD TO CUST-DOB-YYYY-MM-DD\n           MOVE EXP-CUST-EFT-ACCOUNT-ID TO CUST-EFT-ACCOUNT-ID\n           MOVE EXP-CUST-PRI-CARD-HOLDER-IND TO CUST-PRI-CARD-HOLDER-IND\n           MOVE EXP-CUST-FICO-CREDIT-SCORE TO CUST-FICO-CREDIT-SCORE\n       \n           WRITE CUSTOMER-RECORD\n       \n           IF NOT WS-CUSTOMER-OK\n               DISPLAY \u0027ERROR: Writing customer record, Status: \u0027\n                       WS-CUSTOMER-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-CUSTOMER-RECORDS-IMPORTED.\n       \n       \n       2400-PROCESS-ACCOUNT-RECORD.\n       \n           INITIALIZE ACCOUNT-RECORD\n       \n       \n           MOVE EXP-ACCT-ID TO ACCT-ID\n           MOVE EXP-ACCT-ACTIVE-STATUS TO ACCT-ACTIVE-STATUS\n           MOVE EXP-ACCT-CURR-BAL TO ACCT-CURR-BAL\n           MOVE EXP-ACCT-CREDIT-LIMIT TO ACCT-CREDIT-LIMIT\n           MOVE EXP-ACCT-CASH-CREDIT-LIMIT TO ACCT-CASH-CREDIT-LIMIT\n           MOVE EXP-ACCT-OPEN-DATE TO ACCT-OPEN-DATE\n           MOVE EXP-ACCT-EXPIRAION-DATE TO ACCT-EXPIRAION-DATE\n           MOVE EXP-ACCT-REISSUE-DATE TO ACCT-REISSUE-DATE\n           MOVE EXP-ACCT-CURR-CYC-CREDIT TO ACCT-CURR-CYC-CREDIT\n           MOVE EXP-ACCT-CURR-CYC-DEBIT TO ACCT-CURR-CYC-DEBIT\n           MOVE EXP-ACCT-ADDR-ZIP TO ACCT-ADDR-ZIP\n           MOVE EXP-ACCT-GROUP-ID TO ACCT-GROUP-ID\n       \n           WRITE ACCOUNT-RECORD\n       \n           IF NOT WS-ACCOUNT-OK\n               DISPLAY \u0027ERROR: Writing account record, Status: \u0027\n                       WS-ACCOUNT-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-ACCOUNT-RECORDS-IMPORTED.\n       \n       \n       2500-PROCESS-XREF-RECORD.\n       \n           INITIALIZE CARD-XREF-RECORD\n       \n       \n           MOVE EXP-XREF-CARD-NUM TO XREF-CARD-NUM\n           MOVE EXP-XREF-CUST-ID TO XREF-CUST-ID\n           MOVE EXP-XREF-ACCT-ID TO XREF-ACCT-ID\n       \n           WRITE CARD-XREF-RECORD\n       \n           IF NOT WS-XREF-OK\n               DISPLAY \u0027ERROR: Writing xref record, Status: \u0027\n                       WS-XREF-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-XREF-RECORDS-IMPORTED.\n       \n       \n       2600-PROCESS-TRAN-RECORD.\n       \n           INITIALIZE TRAN-RECORD\n       \n       \n           MOVE EXP-TRAN-ID TO TRAN-ID\n           MOVE EXP-TRAN-TYPE-CD TO TRAN-TYPE-CD\n           MOVE EXP-TRAN-CAT-CD TO TRAN-CAT-CD\n           MOVE EXP-TRAN-SOURCE TO TRAN-SOURCE\n           MOVE EXP-TRAN-DESC TO TRAN-DESC\n           MOVE EXP-TRAN-AMT TO TRAN-AMT\n           MOVE EXP-TRAN-MERCHANT-ID TO TRAN-MERCHANT-ID\n           MOVE EXP-TRAN-MERCHANT-NAME TO TRAN-MERCHANT-NAME\n           MOVE EXP-TRAN-MERCHANT-CITY TO TRAN-MERCHANT-CITY\n           MOVE EXP-TRAN-MERCHANT-ZIP TO TRAN-MERCHANT-ZIP\n           MOVE EXP-TRAN-CARD-NUM TO TRAN-CARD-NUM\n           MOVE EXP-TRAN-ORIG-TS TO TRAN-ORIG-TS\n           MOVE EXP-TRAN-PROC-TS TO TRAN-PROC-TS\n       \n           WRITE TRAN-RECORD\n       \n           IF NOT WS-TRANSACTION-OK\n               DISPLAY \u0027ERROR: Writing transaction record, Status: \u0027\n                       WS-TRANSACTION-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-TRAN-RECORDS-IMPORTED.\n       \n       \n       2650-PROCESS-CARD-RECORD.\n       \n           INITIALIZE CARD-RECORD\n       \n       \n           MOVE EXP-CARD-NUM TO CARD-NUM\n           MOVE EXP-CARD-ACCT-ID TO CARD-ACCT-ID\n           MOVE EXP-CARD-CVV-CD TO CARD-CVV-CD\n           MOVE EXP-CARD-EMBOSSED-NAME TO CARD-EMBOSSED-NAME\n           MOVE EXP-CARD-EXPIRAION-DATE TO CARD-EXPIRAION-DATE\n           MOVE EXP-CARD-ACTIVE-STATUS TO CARD-ACTIVE-STATUS\n       \n           WRITE CARD-RECORD\n       \n           IF NOT WS-CARD-OK\n               DISPLAY \u0027ERROR: Writing card record, Status: \u0027\n                       WS-CARD-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n       \n           ADD 1 TO WS-CARD-RECORDS-IMPORTED.\n       \n       \n       2700-PROCESS-UNKNOWN-RECORD.\n       \n           ADD 1 TO WS-UNKNOWN-RECORD-TYPE-COUNT\n       \n           MOVE FUNCTION CURRENT-DATE TO ERR-TIMESTAMP\n           MOVE EXPORT-REC-TYPE TO ERR-RECORD-TYPE\n           MOVE EXPORT-SEQUENCE-NUM TO ERR-SEQUENCE\n           MOVE \u0027Unknown record type encountered\u0027 TO ERR-MESSAGE\n       \n           PERFORM 2750-WRITE-ERROR.\n       \n       \n       2750-WRITE-ERROR.\n       \n           WRITE ERROR-OUTPUT-RECORD FROM WS-ERROR-RECORD\n       \n           IF NOT WS-ERROR-OK\n               DISPLAY \u0027ERROR: Writing error record, Status: \u0027\n                       WS-ERROR-STATUS\n           END-IF\n       \n           ADD 1 TO WS-ERROR-RECORDS-WRITTEN.\n       \n       \n       3000-VALIDATE-IMPORT.\n       \n           DISPLAY \u0027CBIMPORT: Import validation completed\u0027\n           DISPLAY \u0027CBIMPORT: No validation errors detected\u0027.\n       \n       \n       4000-FINALIZE.\n       \n           CLOSE EXPORT-INPUT\n           CLOSE CUSTOMER-OUTPUT\n           CLOSE ACCOUNT-OUTPUT\n           CLOSE XREF-OUTPUT\n           CLOSE TRANSACTION-OUTPUT\n           CLOSE CARD-OUTPUT\n           CLOSE ERROR-OUTPUT\n       \n           DISPLAY \u0027CBIMPORT: Import completed\u0027\n           DISPLAY \u0027CBIMPORT: Total Records Read: \u0027\n           WS-TOTAL-RECORDS-READ\n           DISPLAY \u0027CBIMPORT: Customers Imported: \u0027\n                   WS-CUSTOMER-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Accounts Imported: \u0027\n                   WS-ACCOUNT-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: XRefs Imported: \u0027 WS-XREF-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Transactions Imported: \u0027\n                   WS-TRAN-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Cards Imported: \u0027 WS-CARD-RECORDS-IMPORTED\n           DISPLAY \u0027CBIMPORT: Errors Written: \u0027 WS-ERROR-RECORDS-WRITTEN\n           DISPLAY \u0027CBIMPORT: Unknown Record Types: \u0027\n                   WS-UNKNOWN-RECORD-TYPE-COUNT.\n       \n       \n       9999-ABEND-PROGRAM.\n       \n           DISPLAY \u0027CBIMPORT: ABENDING PROGRAM\u0027\n           CALL \u0027CEE3ABD\u0027.",
+  "type": "PROCEDURE_DIVISION_BODY",
+  "categories": [
+    "CODE_BLOCK"
+  ],
+  "nodeType": "CODE_VERTEX"
+}

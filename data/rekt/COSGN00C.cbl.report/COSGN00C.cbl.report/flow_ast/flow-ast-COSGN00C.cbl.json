@@ -1,0 +1,674 @@
+{
+  "children": [
+    {
+      "children": [],
+      "id": "43088657-d9e9-48fc-82fb-c4b12b38e97b",
+      "label": "MAIN-PARA",
+      "name": "MAIN-PARA",
+      "originalText": "MAIN-PARA.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "e593243c-104f-40ff-925b-8af840320868",
+          "label": "SETERR-FLG-OFFT",
+          "name": "SETERR-FLG-OFFT",
+          "originalText": "SET ERR-FLG-OFF TO TRUE",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "05e345ee-0a56-4a4e-b0b6-98e89f0278e4",
+          "label": "MOVESPACESTOWS-",
+          "name": "MOVESPACESTOWS-",
+          "originalText": "MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "3461c5a9-0efe-404d-ba8d-4f7c6ab46efb",
+                  "label": "MOVELOW-VALUEST",
+                  "name": "MOVELOW-VALUEST",
+                  "originalText": "MOVE LOW-VALUES TO COSGN0AO",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "142823ca-c206-4214-aee9-b40ba45a7fdc",
+                  "label": "MOVE-1TOUSERIDL",
+                  "name": "MOVE-1TOUSERIDL",
+                  "originalText": "MOVE -1       TO USERIDL OF COSGN0AI",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "d2631931-1d55-4455-9203-961f6aa6498e",
+                  "label": "PERFORM SEND-SIGNON-SCREEN",
+                  "name": "PERFORMSEND-SIG",
+                  "originalText": "PERFORM SEND-SIGNON-SCREEN",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "7902d6e8-85be-4a60-909c-4a10bd3a9e1e",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "MOVE LOW-VALUES TO COSGN0AO\n               MOVE -1       TO USERIDL OF COSGN0AI\n               PERFORM SEND-SIGNON-SCREEN",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "c949e09f-aa7e-4d25-abcd-fd628a0ca1c1",
+                  "label": "ELSE",
+                  "name": "ELSE",
+                  "originalText": "ELSE",
+                  "type": "SYMBOL",
+                  "categories": [
+                    "SYMBOL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "671886be-dc25-42b6-be4a-e259bf559fd2",
+                  "label": "EVALUATE",
+                  "name": "EVALUATE",
+                  "originalText": "EVALUATE EIBAID\n                   WHEN DFHENTER\n                       PERFORM PROCESS-ENTER-KEY\n                   WHEN DFHPF3\n                       MOVE CCDA-MSG-THANK-YOU        TO WS-MESSAGE\n                       PERFORM SEND-PLAIN-TEXT\n                   WHEN OTHER\n                       MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                       MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                       PERFORM SEND-SIGNON-SCREEN\n               END-EVALUATE",
+                  "type": "EVALUATE",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "1ef831ef-6b05-46e4-9863-8534e41ff29f",
+              "label": "No",
+              "name": "No",
+              "originalText": "ELSE\n               EVALUATE EIBAID\n                   WHEN DFHENTER\n                       PERFORM PROCESS-ENTER-KEY\n                   WHEN DFHPF3\n                       MOVE CCDA-MSG-THANK-YOU        TO WS-MESSAGE\n                       PERFORM SEND-PLAIN-TEXT\n                   WHEN OTHER\n                       MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                       MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                       PERFORM SEND-SIGNON-SCREEN\n               END-EVALUATE",
+              "type": "IF_NO",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "aabfe285-ff9d-44c8-b359-7838a67a41af",
+          "label": "IS \nEIBCALEN \u003d 0?\n",
+          "name": "IS \nEIBCALEN \u003d 0?\n",
+          "originalText": "IF EIBCALEN \u003d 0\n               MOVE LOW-VALUES TO COSGN0AO\n               MOVE -1       TO USERIDL OF COSGN0AI\n               PERFORM SEND-SIGNON-SCREEN\n           ELSE\n               EVALUATE EIBAID\n                   WHEN DFHENTER\n                       PERFORM PROCESS-ENTER-KEY\n                   WHEN DFHPF3\n                       MOVE CCDA-MSG-THANK-YOU        TO WS-MESSAGE\n                       PERFORM SEND-PLAIN-TEXT\n                   WHEN OTHER\n                       MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                       MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                       PERFORM SEND-SIGNON-SCREEN\n               END-EVALUATE\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "9dcf4ee7-1e65-4922-a377-de20cbe211b9",
+      "label": "SETERR-FLG-OFFT",
+      "name": "SETERR-FLG-OFFT",
+      "originalText": "SET ERR-FLG-OFF TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COSGN0AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE LOW-VALUES TO COSGN0AO\n               MOVE -1       TO USERIDL OF COSGN0AI\n               PERFORM SEND-SIGNON-SCREEN\n           ELSE\n               EVALUATE EIBAID\n                   WHEN DFHENTER\n                       PERFORM PROCESS-ENTER-KEY\n                   WHEN DFHPF3\n                       MOVE CCDA-MSG-THANK-YOU        TO WS-MESSAGE\n                       PERFORM SEND-PLAIN-TEXT\n                   WHEN OTHER\n                       MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                       MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                       PERFORM SEND-SIGNON-SCREEN\n               END-EVALUATE\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "6e73f109-a639-4a62-a329-9ab3ea5415df",
+          "label": "_DIALECT_1​​​​ ",
+          "name": "_DIALECT_1​​​​ ",
+          "originalText": "_DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n                     ​​​​​​​​ ​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "71dd3334-3507-4a29-9e36-1ebf0b0928c3",
+      "label": "_DIALECT_1​​​​ ",
+      "name": "_DIALECT_1​​​​ ",
+      "originalText": "_DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n                     ​​​​​​​​ ​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "4ee57865-1191-4a91-951a-f6c13622c192",
+      "label": "PROCESS-ENTER-KEY",
+      "name": "PROCESS-ENTER-KEY",
+      "originalText": "PROCESS-ENTER-KEY.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "3cf18292-98cd-48ab-9b9b-2c50919d9bb9",
+          "label": "_DIALECT_2​​​​ ",
+          "name": "_DIALECT_2​​​​ ",
+          "originalText": "_DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "394d8d76-46d2-42fb-8ded-6abdb61e2421",
+          "label": "EVALUATE",
+          "name": "EVALUATE",
+          "originalText": "EVALUATE TRUE\n               WHEN USERIDI OF COSGN0AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Please enter User ID ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN PASSWDI OF COSGN0AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Please enter Password ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO PASSWDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN OTHER\n                   CONTINUE\n           END-EVALUATE",
+          "type": "EVALUATE",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "3fcc730f-c86b-4dd3-9938-cdeff8dc6e59",
+      "label": "_DIALECT_2​​​​ ",
+      "name": "_DIALECT_2​​​​ ",
+      "originalText": "_DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE TRUE\n               WHEN USERIDI OF COSGN0AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Please enter User ID ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN PASSWDI OF COSGN0AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Please enter Password ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO PASSWDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN OTHER\n                   CONTINUE\n           END-EVALUATE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "d8b8642f-c758-4160-8ca7-536b0514cac2",
+          "label": "MOVEFUNCTIONUPP",
+          "name": "MOVEFUNCTIONUPP",
+          "originalText": "MOVE FUNCTION UPPER-CASE(USERIDI OF COSGN0AI) TO\n                           WS-USER-ID\n                           CDEMO-USER-ID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "ad70e32b-94e8-450e-b2c6-11e5a3e4ef2d",
+          "label": "MOVEFUNCTIONUPP",
+          "name": "MOVEFUNCTIONUPP",
+          "originalText": "MOVE FUNCTION UPPER-CASE(PASSWDI OF COSGN0AI) TO\n                           WS-USER-PWD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "38c54249-9f09-472d-9a7a-e11609787129",
+                  "label": "PERFORM READ-USER-SEC-FILE",
+                  "name": "PERFORMREAD-USE",
+                  "originalText": "PERFORM READ-USER-SEC-FILE",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "b211e45c-471c-4327-bd0e-c8604edead38",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "PERFORM READ-USER-SEC-FILE",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "61e6a5a1-2937-4bbf-8bf3-d1e859299250",
+          "label": "IS \nNOT ERR-FLG-ON?\n",
+          "name": "IS \nNOT ERR-FLG-ON?\n",
+          "originalText": "IF NOT ERR-FLG-ON\n               PERFORM READ-USER-SEC-FILE\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "1718b8ba-9bd6-4890-95d6-c11cc0fb3516",
+      "label": "MOVEFUNCTIONUPP",
+      "name": "MOVEFUNCTIONUPP",
+      "originalText": "MOVE FUNCTION UPPER-CASE(USERIDI OF COSGN0AI) TO\n                           WS-USER-ID\n                           CDEMO-USER-ID\n           MOVE FUNCTION UPPER-CASE(PASSWDI OF COSGN0AI) TO\n                           WS-USER-PWD\n       \n           IF NOT ERR-FLG-ON\n               PERFORM READ-USER-SEC-FILE\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "158cb4ef-fca8-4185-b3da-4d11ee2fc3ce",
+      "label": "SEND-SIGNON-SCREEN",
+      "name": "SEND-SIGNON-SCREEN",
+      "originalText": "SEND-SIGNON-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "e917ea62-e466-4bce-83b9-ec6941c3ec16",
+          "label": "PERFORM POPULATE-HEADER-INFO",
+          "name": "PERFORMPOPULATE",
+          "originalText": "PERFORM POPULATE-HEADER-INFO",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "84c142f9-470f-4647-8bb6-4253d850bd14",
+          "label": "MOVEWS-MESSAGET",
+          "name": "MOVEWS-MESSAGET",
+          "originalText": "MOVE WS-MESSAGE TO ERRMSGO OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "dabb99bc-ab36-445e-a59a-1d3e8d4a0e61",
+          "label": "_DIALECT_3​​​​ ",
+          "name": "_DIALECT_3​​​​ ",
+          "originalText": "_DIALECT_ 3 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "05981eb5-75b8-46aa-a5cb-5d60b264c148",
+      "label": "PERFORMPOPULATE",
+      "name": "PERFORMPOPULATE",
+      "originalText": "PERFORM POPULATE-HEADER-INFO\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF COSGN0AO\n       \n           _DIALECT_ 3 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "73eef258-1bdf-485d-be5b-2215a852b19d",
+      "label": "SEND-PLAIN-TEXT",
+      "name": "SEND-PLAIN-TEXT",
+      "originalText": "SEND-PLAIN-TEXT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "ec990005-8b0e-451f-8fac-a587ce91a1a6",
+          "label": "_DIALECT_4​​​​ ",
+          "name": "_DIALECT_4​​​​ ",
+          "originalText": "_DIALECT_ 4 ​​​​ ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​ ​​ ​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​.",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "65064912-ab90-4db2-a359-527e290460c9",
+          "label": "_DIALECT_5​​​​ ",
+          "name": "_DIALECT_5​​​​ ",
+          "originalText": "_DIALECT_ 5 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "cf3c2bba-3d42-4ac4-845b-826c61960036",
+      "label": "_DIALECT_4​​​​ ",
+      "name": "_DIALECT_4​​​​ ",
+      "originalText": "_DIALECT_ 4 ​​​​ ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​ ​​ ​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​.\n       \n           _DIALECT_ 5 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "97f52903-f6d8-4878-95ed-12b077bd4324",
+      "label": "POPULATE-HEADER-INFO",
+      "name": "POPULATE-HEADER-INFO",
+      "originalText": "POPULATE-HEADER-INFO.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "12eae385-81aa-464a-beba-1ae5e99b15e1",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "fc9e0eaf-a0a6-4580-98d6-14b1b41a8c80",
+          "label": "MOVECCDA-TITLE0",
+          "name": "MOVECCDA-TITLE0",
+          "originalText": "MOVE CCDA-TITLE01           TO TITLE01O OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "e8777a1c-515e-462c-bc7d-5d286d6a8da4",
+          "label": "MOVECCDA-TITLE0",
+          "name": "MOVECCDA-TITLE0",
+          "originalText": "MOVE CCDA-TITLE02           TO TITLE02O OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "243bf2ce-4603-4a11-9977-335a2783356f",
+          "label": "MOVEWS-TRANIDTO",
+          "name": "MOVEWS-TRANIDTO",
+          "originalText": "MOVE WS-TRANID              TO TRNNAMEO OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "945b0f05-38ee-4fe5-ac13-e4fea653d966",
+          "label": "MOVEWS-PGMNAMET",
+          "name": "MOVEWS-PGMNAMET",
+          "originalText": "MOVE WS-PGMNAME             TO PGMNAMEO OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "077e74fb-2f51-49eb-9e64-7089653029ff",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "34f1f361-2da1-43ae-a7df-f7f32120add7",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "d5b66b76-426c-46e0-aa66-547d5f09ead3",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "97aced2f-8207-4711-94e2-9ca0d1bc15d1",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "ec5c2a60-952b-45c2-b17b-b640a73ef362",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "91a93024-c7fc-4cb6-bfc4-bf8637324abe",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "8646a4f3-25b2-49df-8c63-8971f0a7cdbf",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "793ab462-a688-4a0e-b5cd-3a71d736d5af",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COSGN0AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "e9a075ef-702b-48b1-8be2-c876c33516ad",
+          "label": "_DIALECT_6​​​​ ",
+          "name": "_DIALECT_6​​​​ ",
+          "originalText": "_DIALECT_ 6 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "98dc73d5-3fdc-4663-a12a-cf01609252f3",
+          "label": "_DIALECT_7​​​​ ",
+          "name": "_DIALECT_7​​​​ ",
+          "originalText": "_DIALECT_ 7 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "b05b0d85-9661-47a7-be10-6890943fcd17",
+      "label": "MOVEFUNCTIONCUR",
+      "name": "MOVEFUNCTIONCUR",
+      "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF COSGN0AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF COSGN0AO\n           MOVE WS-TRANID              TO TRNNAMEO OF COSGN0AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF COSGN0AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COSGN0AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COSGN0AO\n       \n           _DIALECT_ 6 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​\n       \n           _DIALECT_ 7 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "5c8a6a1f-2aa5-4096-b72c-8fde94880b25",
+      "label": "READ-USER-SEC-FILE",
+      "name": "READ-USER-SEC-FILE",
+      "originalText": "READ-USER-SEC-FILE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "cb307e01-7b35-4a9a-a6d2-62c78ebae396",
+          "label": "_DIALECT_8​​​​ ",
+          "name": "_DIALECT_8​​​​ ",
+          "originalText": "_DIALECT_ 8 ​​​​ ​​​​ ​​​​\n                ​​​​​​​   ​​​​​​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​ ​​ ​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​​​​​​\n                ​​​​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​\n           ​​​​​​​​.",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "fd15ef1a-7fab-43bc-9566-e0f09d00b452",
+          "label": "EVALUATE",
+          "name": "EVALUATE",
+          "originalText": "EVALUATE WS-RESP-CD\n               WHEN 0\n                   IF SEC-USR-PWD \u003d WS-USER-PWD\n                       MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                       MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                       MOVE WS-USER-ID   TO CDEMO-USER-ID\n                       MOVE SEC-USR-TYPE TO CDEMO-USER-TYPE\n                       MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n       \n                       IF CDEMO-USRTYP-ADMIN\n                            _DIALECT_ 9 ​​​​ ​​​​ ​​​​\n                              ​​​​​​​ ​​​​​​​​​​​​\n                            ​​​​​​​​\n                       ELSE\n                            _DIALECT_ 10 ​​​​ ​​​​ ​​​​\n                              ​​​​​​​ ​​​​​​​​​​​​\n                            ​​​​​​​​\n                       END-IF\n                   ELSE\n                       MOVE \u0027Wrong Password. Try again ...\u0027 TO\n                                                          WS-MESSAGE\n                       MOVE -1       TO PASSWDL OF COSGN0AI\n                       PERFORM SEND-SIGNON-SCREEN\n                   END-IF\n               WHEN 13\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027User not found. Try again ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN OTHER\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Unable to verify the User ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n           END-EVALUATE",
+          "type": "EVALUATE",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "eab04e43-fda8-4d4d-9dc4-332eb883baa1",
+      "label": "_DIALECT_8​​​​ ",
+      "name": "_DIALECT_8​​​​ ",
+      "originalText": "_DIALECT_ 8 ​​​​ ​​​​ ​​​​\n                ​​​​​​​   ​​​​​​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​ ​​ ​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​​​​​​\n                ​​​​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE WS-RESP-CD\n               WHEN 0\n                   IF SEC-USR-PWD \u003d WS-USER-PWD\n                       MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                       MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                       MOVE WS-USER-ID   TO CDEMO-USER-ID\n                       MOVE SEC-USR-TYPE TO CDEMO-USER-TYPE\n                       MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n       \n                       IF CDEMO-USRTYP-ADMIN\n                            _DIALECT_ 9 ​​​​ ​​​​ ​​​​\n                              ​​​​​​​ ​​​​​​​​​​​​\n                            ​​​​​​​​\n                       ELSE\n                            _DIALECT_ 10 ​​​​ ​​​​ ​​​​\n                              ​​​​​​​ ​​​​​​​​​​​​\n                            ​​​​​​​​\n                       END-IF\n                   ELSE\n                       MOVE \u0027Wrong Password. Try again ...\u0027 TO\n                                                          WS-MESSAGE\n                       MOVE -1       TO PASSWDL OF COSGN0AI\n                       PERFORM SEND-SIGNON-SCREEN\n                   END-IF\n               WHEN 13\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027User not found. Try again ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN OTHER\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Unable to verify the User ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n           END-EVALUATE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "id": "29b0680d-ab55-4def-aa1e-d02740c95f68",
+  "label": "ProcedureDivisionBodyContext/29b0680d-ab55-4def-aa1e-d02740c95f68",
+  "name": "ProcedureDivisionBodyContext/29b0680d-ab55-4def-aa1e-d02740c95f68",
+  "originalText": "MAIN-PARA.\n       \n           SET ERR-FLG-OFF TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COSGN0AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE LOW-VALUES TO COSGN0AO\n               MOVE -1       TO USERIDL OF COSGN0AI\n               PERFORM SEND-SIGNON-SCREEN\n           ELSE\n               EVALUATE EIBAID\n                   WHEN DFHENTER\n                       PERFORM PROCESS-ENTER-KEY\n                   WHEN DFHPF3\n                       MOVE CCDA-MSG-THANK-YOU        TO WS-MESSAGE\n                       PERFORM SEND-PLAIN-TEXT\n                   WHEN OTHER\n                       MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                       MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                       PERFORM SEND-SIGNON-SCREEN\n               END-EVALUATE\n           END-IF.\n       \n           _DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n                     ​​​​​​​​ ​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       \n       PROCESS-ENTER-KEY.\n       \n           _DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE TRUE\n               WHEN USERIDI OF COSGN0AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Please enter User ID ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN PASSWDI OF COSGN0AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Please enter Password ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO PASSWDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN OTHER\n                   CONTINUE\n           END-EVALUATE.\n       \n           MOVE FUNCTION UPPER-CASE(USERIDI OF COSGN0AI) TO\n                           WS-USER-ID\n                           CDEMO-USER-ID\n           MOVE FUNCTION UPPER-CASE(PASSWDI OF COSGN0AI) TO\n                           WS-USER-PWD\n       \n           IF NOT ERR-FLG-ON\n               PERFORM READ-USER-SEC-FILE\n           END-IF.\n       \n       \n       \n       \n       SEND-SIGNON-SCREEN.\n       \n           PERFORM POPULATE-HEADER-INFO\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF COSGN0AO\n       \n           _DIALECT_ 3 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       SEND-PLAIN-TEXT.\n       \n           _DIALECT_ 4 ​​​​ ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​ ​​ ​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​.\n       \n           _DIALECT_ 5 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       POPULATE-HEADER-INFO.\n       \n           MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF COSGN0AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF COSGN0AO\n           MOVE WS-TRANID              TO TRNNAMEO OF COSGN0AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF COSGN0AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COSGN0AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COSGN0AO\n       \n           _DIALECT_ 6 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​\n       \n           _DIALECT_ 7 ​​​​ ​​​​ ​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       READ-USER-SEC-FILE.\n       \n           _DIALECT_ 8 ​​​​ ​​​​ ​​​​\n                ​​​​​​​   ​​​​​​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​ ​​ ​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​​​​​​\n                ​​​​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE WS-RESP-CD\n               WHEN 0\n                   IF SEC-USR-PWD \u003d WS-USER-PWD\n                       MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                       MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                       MOVE WS-USER-ID   TO CDEMO-USER-ID\n                       MOVE SEC-USR-TYPE TO CDEMO-USER-TYPE\n                       MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n       \n                       IF CDEMO-USRTYP-ADMIN\n                            _DIALECT_ 9 ​​​​ ​​​​ ​​​​\n                              ​​​​​​​ ​​​​​​​​​​​​\n                            ​​​​​​​​\n                       ELSE\n                            _DIALECT_ 10 ​​​​ ​​​​ ​​​​\n                              ​​​​​​​ ​​​​​​​​​​​​\n                            ​​​​​​​​\n                       END-IF\n                   ELSE\n                       MOVE \u0027Wrong Password. Try again ...\u0027 TO\n                                                          WS-MESSAGE\n                       MOVE -1       TO PASSWDL OF COSGN0AI\n                       PERFORM SEND-SIGNON-SCREEN\n                   END-IF\n               WHEN 13\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027User not found. Try again ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n               WHEN OTHER\n                   MOVE \u0027Y\u0027      TO WS-ERR-FLG\n                   MOVE \u0027Unable to verify the User ...\u0027 TO WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COSGN0AI\n                   PERFORM SEND-SIGNON-SCREEN\n           END-EVALUATE.",
+  "type": "PROCEDURE_DIVISION_BODY",
+  "categories": [
+    "CODE_BLOCK"
+  ],
+  "nodeType": "CODE_VERTEX"
+}

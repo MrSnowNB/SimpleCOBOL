@@ -1,0 +1,1613 @@
+{
+  "nodes": [
+    {
+      "id": "e1e8b8e3-c414-4697-a8d0-4db0fd88c693",
+      "label": "ProcedureDivisionBodyContext/e1e8b8e3-c414-4697-a8d0-4db0fd88c693",
+      "name": "ProcedureDivisionBodyContext/e1e8b8e3-c414-4697-a8d0-4db0fd88c693",
+      "originalText": "MAIN-PARA.\n       \n           SET ERR-FLG-OFF TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COMEN1AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-FROM-PROGRAM\n               PERFORM RETURN-TO-SIGNON-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COMEN1AO\n                   PERFORM SEND-MENU-SCREEN\n               ELSE\n                   PERFORM RECEIVE-MENU-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-SIGNON-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-MENU-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF\n       \n           _DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       PROCESS-ENTER-KEY.\n       \n           PERFORM VARYING WS-IDX\n                   FROM LENGTH OF OPTIONI OF COMEN1AI BY -1 UNTIL\n                   OPTIONI OF COMEN1AI(WS-IDX:1) NOT \u003d SPACES OR\n                   WS-IDX \u003d 1\n           END-PERFORM\n           MOVE OPTIONI OF COMEN1AI(1:WS-IDX) TO WS-OPTION-X\n           INSPECT WS-OPTION-X REPLACING ALL \u0027 \u0027 BY \u00270\u0027\n           MOVE WS-OPTION-X              TO WS-OPTION\n           MOVE WS-OPTION                TO OPTIONO OF COMEN1AO\n       \n           IF WS-OPTION IS NOT NUMERIC OR\n              WS-OPTION \u003e CDEMO-MENU-OPT-COUNT OR\n              WS-OPTION \u003d ZEROS\n               MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE \u0027Please enter a valid option number...\u0027 TO\n                               WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN\n           END-IF\n       \n           IF CDEMO-USRTYP-USER AND\n              CDEMO-MENU-OPT-USRTYPE(WS-OPTION) \u003d \u0027A\u0027\n               SET ERR-FLG-ON          TO TRUE\n               MOVE SPACES             TO WS-MESSAGE\n               MOVE \u0027No access - Admin Only option... \u0027 TO\n                                       WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN\n           END-IF\n       \n           IF NOT ERR-FLG-ON\n              EVALUATE TRUE\n                WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION) \u003d \u0027COPAUS0C\u0027\n                   _DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                       ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                   ​​​​​​​​\n                   IF EIBRESP \u003d _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                      MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                      MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                      MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                      _DIALECT_ 4 ​​​​ ​​​​ ​​​​\n                          ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                      ​​​​​​​​\n                   ELSE\n                      MOVE SPACES             TO WS-MESSAGE\n                      MOVE DFHRED             TO ERRMSGC  OF COMEN1AO\n                      STRING \u0027This option \u0027       DELIMITED BY SIZE\n                               CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                          DELIMITED BY \u0027  \u0027\n                            \u0027 is not installed...\u0027   DELIMITED BY SIZE\n                          INTO WS-MESSAGE\n                     END-IF\n                  WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION)(1:5) \u003d \u0027DUMMY\u0027\n                     MOVE SPACES             TO WS-MESSAGE\n                     MOVE DFHGREEN           TO ERRMSGC  OF COMEN1AO\n                     STRING \u0027This option \u0027       DELIMITED BY SIZE\n                             CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                         DELIMITED BY SPACE\n                            \u0027is coming soon ...\u0027   DELIMITED BY SIZE\n                       INTO WS-MESSAGE\n                  WHEN OTHER\n                     MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n       \n       \n                     MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                     _DIALECT_ 5 ​​​​ ​​​​\n                         ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​\n              END-EVALUATE\n       \n              PERFORM SEND-MENU-SCREEN\n           END-IF.\n       \n       \n       \n       \n       RETURN-TO-SIGNON-SCREEN.\n       \n           IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF\n           _DIALECT_ 6 ​​​​ ​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       SEND-MENU-SCREEN.\n       \n           PERFORM POPULATE-HEADER-INFO\n           PERFORM BUILD-MENU-OPTIONS\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF COMEN1AO\n       \n           _DIALECT_ 7 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       RECEIVE-MENU-SCREEN.\n       \n           _DIALECT_ 8 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       POPULATE-HEADER-INFO.\n       \n           MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF COMEN1AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF COMEN1AO\n           MOVE WS-TRANID              TO TRNNAMEO OF COMEN1AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF COMEN1AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COMEN1AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COMEN1AO.\n       \n       \n       \n       \n       BUILD-MENU-OPTIONS.\n       \n           PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL\n                           WS-IDX \u003e CDEMO-MENU-OPT-COUNT\n       \n               MOVE SPACES             TO WS-MENU-OPT-TXT\n       \n               STRING CDEMO-MENU-OPT-NUM(WS-IDX)  DELIMITED BY SIZE\n                      \u0027. \u0027                         DELIMITED BY SIZE\n                      CDEMO-MENU-OPT-NAME(WS-IDX) DELIMITED BY SIZE\n                 INTO WS-MENU-OPT-TXT\n       \n               EVALUATE WS-IDX\n                   WHEN 1\n                       MOVE WS-MENU-OPT-TXT TO OPTN001O\n                   WHEN 2\n                       MOVE WS-MENU-OPT-TXT TO OPTN002O\n                   WHEN 3\n                       MOVE WS-MENU-OPT-TXT TO OPTN003O\n                   WHEN 4\n                       MOVE WS-MENU-OPT-TXT TO OPTN004O\n                   WHEN 5\n                       MOVE WS-MENU-OPT-TXT TO OPTN005O\n                   WHEN 6\n                       MOVE WS-MENU-OPT-TXT TO OPTN006O\n                   WHEN 7\n                       MOVE WS-MENU-OPT-TXT TO OPTN007O\n                   WHEN 8\n                       MOVE WS-MENU-OPT-TXT TO OPTN008O\n                   WHEN 9\n                       MOVE WS-MENU-OPT-TXT TO OPTN009O\n                   WHEN 10\n                       MOVE WS-MENU-OPT-TXT TO OPTN010O\n                   WHEN 11\n                       MOVE WS-MENU-OPT-TXT TO OPTN011O\n                   WHEN 12\n                       MOVE WS-MENU-OPT-TXT TO OPTN012O\n                   WHEN OTHER\n                       CONTINUE\n               END-EVALUATE\n       \n           END-PERFORM.",
+      "type": "PROCEDURE_DIVISION_BODY",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "68c86160-3a2e-4d99-b7a3-334aa502bd4a",
+      "label": "MAIN-PARA",
+      "name": "MAIN-PARA",
+      "originalText": "MAIN-PARA.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9c392faa-7349-4f7a-8b28-7745b3da1137",
+      "label": "SETERR-FLG-OFFT",
+      "name": "SETERR-FLG-OFFT",
+      "originalText": "SET ERR-FLG-OFF TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COMEN1AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-FROM-PROGRAM\n               PERFORM RETURN-TO-SIGNON-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COMEN1AO\n                   PERFORM SEND-MENU-SCREEN\n               ELSE\n                   PERFORM RECEIVE-MENU-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-SIGNON-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-MENU-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF\n       \n           _DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f13dc8ce-6bbc-4b65-89be-8e2754c499aa",
+      "label": "PROCESS-ENTER-KEY",
+      "name": "PROCESS-ENTER-KEY",
+      "originalText": "PROCESS-ENTER-KEY.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "91586283-3b7a-490b-b0c3-4a8cc684f0ea",
+      "label": "PERFORMVARYINGW",
+      "name": "PERFORMVARYINGW",
+      "originalText": "PERFORM VARYING WS-IDX\n                   FROM LENGTH OF OPTIONI OF COMEN1AI BY -1 UNTIL\n                   OPTIONI OF COMEN1AI(WS-IDX:1) NOT \u003d SPACES OR\n                   WS-IDX \u003d 1\n           END-PERFORM\n           MOVE OPTIONI OF COMEN1AI(1:WS-IDX) TO WS-OPTION-X\n           INSPECT WS-OPTION-X REPLACING ALL \u0027 \u0027 BY \u00270\u0027\n           MOVE WS-OPTION-X              TO WS-OPTION\n           MOVE WS-OPTION                TO OPTIONO OF COMEN1AO\n       \n           IF WS-OPTION IS NOT NUMERIC OR\n              WS-OPTION \u003e CDEMO-MENU-OPT-COUNT OR\n              WS-OPTION \u003d ZEROS\n               MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE \u0027Please enter a valid option number...\u0027 TO\n                               WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN\n           END-IF\n       \n           IF CDEMO-USRTYP-USER AND\n              CDEMO-MENU-OPT-USRTYPE(WS-OPTION) \u003d \u0027A\u0027\n               SET ERR-FLG-ON          TO TRUE\n               MOVE SPACES             TO WS-MESSAGE\n               MOVE \u0027No access - Admin Only option... \u0027 TO\n                                       WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN\n           END-IF\n       \n           IF NOT ERR-FLG-ON\n              EVALUATE TRUE\n                WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION) \u003d \u0027COPAUS0C\u0027\n                   _DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                       ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                   ​​​​​​​​\n                   IF EIBRESP \u003d _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                      MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                      MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                      MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                      _DIALECT_ 4 ​​​​ ​​​​ ​​​​\n                          ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                      ​​​​​​​​\n                   ELSE\n                      MOVE SPACES             TO WS-MESSAGE\n                      MOVE DFHRED             TO ERRMSGC  OF COMEN1AO\n                      STRING \u0027This option \u0027       DELIMITED BY SIZE\n                               CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                          DELIMITED BY \u0027  \u0027\n                            \u0027 is not installed...\u0027   DELIMITED BY SIZE\n                          INTO WS-MESSAGE\n                     END-IF\n                  WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION)(1:5) \u003d \u0027DUMMY\u0027\n                     MOVE SPACES             TO WS-MESSAGE\n                     MOVE DFHGREEN           TO ERRMSGC  OF COMEN1AO\n                     STRING \u0027This option \u0027       DELIMITED BY SIZE\n                             CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                         DELIMITED BY SPACE\n                            \u0027is coming soon ...\u0027   DELIMITED BY SIZE\n                       INTO WS-MESSAGE\n                  WHEN OTHER\n                     MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n       \n       \n                     MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                     _DIALECT_ 5 ​​​​ ​​​​\n                         ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​\n              END-EVALUATE\n       \n              PERFORM SEND-MENU-SCREEN\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "label": "RETURN-TO-SIGNON-SCREEN",
+      "name": "RETURN-TO-SIGNON-SCREEN",
+      "originalText": "RETURN-TO-SIGNON-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "dd98742d-b5f6-4db9-b3eb-de5259f0553c",
+      "label": "IFCDEMO-TO-PROG",
+      "name": "IFCDEMO-TO-PROG",
+      "originalText": "IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF\n           _DIALECT_ 6 ​​​​ ​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "label": "SEND-MENU-SCREEN",
+      "name": "SEND-MENU-SCREEN",
+      "originalText": "SEND-MENU-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d42ef938-f4da-4ffa-84f4-a00a56b531fb",
+      "label": "PERFORMPOPULATE",
+      "name": "PERFORMPOPULATE",
+      "originalText": "PERFORM POPULATE-HEADER-INFO\n           PERFORM BUILD-MENU-OPTIONS\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF COMEN1AO\n       \n           _DIALECT_ 7 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "label": "RECEIVE-MENU-SCREEN",
+      "name": "RECEIVE-MENU-SCREEN",
+      "originalText": "RECEIVE-MENU-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6e9691d2-c0e4-425e-825f-c6dec8422aed",
+      "label": "_DIALECT_8​​​​ ",
+      "name": "_DIALECT_8​​​​ ",
+      "originalText": "_DIALECT_ 8 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c1ec00c6-c9e3-4948-bf45-58d350e9303d",
+      "label": "POPULATE-HEADER-INFO",
+      "name": "POPULATE-HEADER-INFO",
+      "originalText": "POPULATE-HEADER-INFO.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "59cef7fa-8dc9-4528-9d9c-ed94f6a21199",
+      "label": "MOVEFUNCTIONCUR",
+      "name": "MOVEFUNCTIONCUR",
+      "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF COMEN1AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF COMEN1AO\n           MOVE WS-TRANID              TO TRNNAMEO OF COMEN1AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF COMEN1AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COMEN1AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COMEN1AO.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9a9f5a0c-beaa-4b09-b978-99d5f05c9458",
+      "label": "BUILD-MENU-OPTIONS",
+      "name": "BUILD-MENU-OPTIONS",
+      "originalText": "BUILD-MENU-OPTIONS.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ee1e74a7-a821-49cd-9f6e-67cca655c4f4",
+      "label": "PERFORMVARYINGW",
+      "name": "PERFORMVARYINGW",
+      "originalText": "PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL\n                           WS-IDX \u003e CDEMO-MENU-OPT-COUNT\n       \n               MOVE SPACES             TO WS-MENU-OPT-TXT\n       \n               STRING CDEMO-MENU-OPT-NUM(WS-IDX)  DELIMITED BY SIZE\n                      \u0027. \u0027                         DELIMITED BY SIZE\n                      CDEMO-MENU-OPT-NAME(WS-IDX) DELIMITED BY SIZE\n                 INTO WS-MENU-OPT-TXT\n       \n               EVALUATE WS-IDX\n                   WHEN 1\n                       MOVE WS-MENU-OPT-TXT TO OPTN001O\n                   WHEN 2\n                       MOVE WS-MENU-OPT-TXT TO OPTN002O\n                   WHEN 3\n                       MOVE WS-MENU-OPT-TXT TO OPTN003O\n                   WHEN 4\n                       MOVE WS-MENU-OPT-TXT TO OPTN004O\n                   WHEN 5\n                       MOVE WS-MENU-OPT-TXT TO OPTN005O\n                   WHEN 6\n                       MOVE WS-MENU-OPT-TXT TO OPTN006O\n                   WHEN 7\n                       MOVE WS-MENU-OPT-TXT TO OPTN007O\n                   WHEN 8\n                       MOVE WS-MENU-OPT-TXT TO OPTN008O\n                   WHEN 9\n                       MOVE WS-MENU-OPT-TXT TO OPTN009O\n                   WHEN 10\n                       MOVE WS-MENU-OPT-TXT TO OPTN010O\n                   WHEN 11\n                       MOVE WS-MENU-OPT-TXT TO OPTN011O\n                   WHEN 12\n                       MOVE WS-MENU-OPT-TXT TO OPTN012O\n                   WHEN OTHER\n                       CONTINUE\n               END-EVALUATE\n       \n           END-PERFORM.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ab2b0495-11cf-42ca-91f6-6bc5a2b7a409",
+      "label": "PERFORM VARYING WS-IDX FROM 1 ",
+      "name": "PERFORMVARYINGW",
+      "originalText": "PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL\n                           WS-IDX \u003e CDEMO-MENU-OPT-COUNT\n       \n               MOVE SPACES             TO WS-MENU-OPT-TXT\n       \n               STRING CDEMO-MENU-OPT-NUM(WS-IDX)  DELIMITED BY SIZE\n                      \u0027. \u0027                         DELIMITED BY SIZE\n                      CDEMO-MENU-OPT-NAME(WS-IDX) DELIMITED BY SIZE\n                 INTO WS-MENU-OPT-TXT\n       \n               EVALUATE WS-IDX\n                   WHEN 1\n                       MOVE WS-MENU-OPT-TXT TO OPTN001O\n                   WHEN 2\n                       MOVE WS-MENU-OPT-TXT TO OPTN002O\n                   WHEN 3\n                       MOVE WS-MENU-OPT-TXT TO OPTN003O\n                   WHEN 4\n                       MOVE WS-MENU-OPT-TXT TO OPTN004O\n                   WHEN 5\n                       MOVE WS-MENU-OPT-TXT TO OPTN005O\n                   WHEN 6\n                       MOVE WS-MENU-OPT-TXT TO OPTN006O\n                   WHEN 7\n                       MOVE WS-MENU-OPT-TXT TO OPTN007O\n                   WHEN 8\n                       MOVE WS-MENU-OPT-TXT TO OPTN008O\n                   WHEN 9\n                       MOVE WS-MENU-OPT-TXT TO OPTN009O\n                   WHEN 10\n                       MOVE WS-MENU-OPT-TXT TO OPTN010O\n                   WHEN 11\n                       MOVE WS-MENU-OPT-TXT TO OPTN011O\n                   WHEN 12\n                       MOVE WS-MENU-OPT-TXT TO OPTN012O\n                   WHEN OTHER\n                       CONTINUE\n               END-EVALUATE\n       \n           END-PERFORM",
+      "type": "PERFORM",
+      "categories": [
+        "LOOP"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "71e304d3-01e7-46e5-a781-253f45807e48",
+      "label": "MOVESPACESTOWS-",
+      "name": "MOVESPACESTOWS-",
+      "originalText": "MOVE SPACES             TO WS-MENU-OPT-TXT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "57416f60-3180-4d3c-b6f2-6671fbad34e6",
+      "label": "STRINGCDEMO-MEN",
+      "name": "STRINGCDEMO-MEN",
+      "originalText": "STRING CDEMO-MENU-OPT-NUM(WS-IDX)  DELIMITED BY SIZE\n                      \u0027. \u0027                         DELIMITED BY SIZE\n                      CDEMO-MENU-OPT-NAME(WS-IDX) DELIMITED BY SIZE\n                 INTO WS-MENU-OPT-TXT",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "35b92c3b-5e22-4719-9d37-1aa044497ef7",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE WS-IDX\n                   WHEN 1\n                       MOVE WS-MENU-OPT-TXT TO OPTN001O\n                   WHEN 2\n                       MOVE WS-MENU-OPT-TXT TO OPTN002O\n                   WHEN 3\n                       MOVE WS-MENU-OPT-TXT TO OPTN003O\n                   WHEN 4\n                       MOVE WS-MENU-OPT-TXT TO OPTN004O\n                   WHEN 5\n                       MOVE WS-MENU-OPT-TXT TO OPTN005O\n                   WHEN 6\n                       MOVE WS-MENU-OPT-TXT TO OPTN006O\n                   WHEN 7\n                       MOVE WS-MENU-OPT-TXT TO OPTN007O\n                   WHEN 8\n                       MOVE WS-MENU-OPT-TXT TO OPTN008O\n                   WHEN 9\n                       MOVE WS-MENU-OPT-TXT TO OPTN009O\n                   WHEN 10\n                       MOVE WS-MENU-OPT-TXT TO OPTN010O\n                   WHEN 11\n                       MOVE WS-MENU-OPT-TXT TO OPTN011O\n                   WHEN 12\n                       MOVE WS-MENU-OPT-TXT TO OPTN012O\n                   WHEN OTHER\n                       CONTINUE\n               END-EVALUATE",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7e808095-4b2a-4537-acf7-248f15fcae2f",
+      "label": "MOVEFUNCTIONCUR",
+      "name": "MOVEFUNCTIONCUR",
+      "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "75fd3921-eeb3-4607-a90e-9c428a250f51",
+      "label": "MOVECCDA-TITLE0",
+      "name": "MOVECCDA-TITLE0",
+      "originalText": "MOVE CCDA-TITLE01           TO TITLE01O OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8369b4ca-14ab-4b5a-8e48-1db3be85e1e9",
+      "label": "MOVECCDA-TITLE0",
+      "name": "MOVECCDA-TITLE0",
+      "originalText": "MOVE CCDA-TITLE02           TO TITLE02O OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "30494a29-879b-4199-85af-ecff95557570",
+      "label": "MOVEWS-TRANIDTO",
+      "name": "MOVEWS-TRANIDTO",
+      "originalText": "MOVE WS-TRANID              TO TRNNAMEO OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6fe09ba3-de7b-4a55-a2af-b2add4e217ff",
+      "label": "MOVEWS-PGMNAMET",
+      "name": "MOVEWS-PGMNAMET",
+      "originalText": "MOVE WS-PGMNAME             TO PGMNAMEO OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c8dc35e3-6793-4dc3-b96f-97b4c0cefced",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bc06850c-dcc8-4502-8e11-9118e7c7d7ce",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5b4ae7fc-922a-4698-bd3b-e8fc7995842a",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "23a2c305-fa13-494f-8875-0369de8b6920",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9f4c8e20-a104-4d9a-9288-8204addd9e08",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "44c6b0b6-2ea3-4f75-a9b4-c3bca23b8762",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4935a5ba-a8dc-400d-986c-34a6bd57a8a6",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "81e62825-d952-4035-ba36-a0bec5a8b73f",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "08e763e6-2080-4b62-877e-636b64b1e50b",
+      "label": "_DIALECT_8​​​​ ",
+      "name": "_DIALECT_8​​​​ ",
+      "originalText": "_DIALECT_ 8 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "eeaf821a-bbdb-4103-b854-a6622d1d8959",
+      "label": "PERFORM POPULATE-HEADER-INFO",
+      "name": "PERFORMPOPULATE",
+      "originalText": "PERFORM POPULATE-HEADER-INFO",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d59e9fa3-3ce0-4865-bd2f-b80bcaf80488",
+      "label": "PERFORM BUILD-MENU-OPTIONS",
+      "name": "PERFORMBUILD-ME",
+      "originalText": "PERFORM BUILD-MENU-OPTIONS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7704732f-642d-42e0-8a41-d439bea8f793",
+      "label": "MOVEWS-MESSAGET",
+      "name": "MOVEWS-MESSAGET",
+      "originalText": "MOVE WS-MESSAGE TO ERRMSGO OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "640c64d8-4d61-4d16-aacf-30f0582ac067",
+      "label": "_DIALECT_7​​​​ ",
+      "name": "_DIALECT_7​​​​ ",
+      "originalText": "_DIALECT_ 7 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "432a234a-253a-4424-986b-7dbf04b519a1",
+      "label": "IS \nCDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES?\n",
+      "name": "IS \nCDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES?\n",
+      "originalText": "IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "91c61300-4270-47b5-8e74-5cbc1d9fefcb",
+      "label": "_DIALECT_6​​​​ ",
+      "name": "_DIALECT_6​​​​ ",
+      "originalText": "_DIALECT_ 6 ​​​​ ​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "67be9e3c-9a67-494b-80f2-65db8df3ea01",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "874a0dbe-3b8c-4686-9cff-81e430760dab",
+      "label": "MOVE\u0027COSGN00C\u0027T",
+      "name": "MOVE\u0027COSGN00C\u0027T",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "668b1d93-8aae-401b-8d04-b64bb8b162f2",
+      "label": "PERFORM VARYING WS-IDX\n       ",
+      "name": "PERFORMVARYINGW",
+      "originalText": "PERFORM VARYING WS-IDX\n                   FROM LENGTH OF OPTIONI OF COMEN1AI BY -1 UNTIL\n                   OPTIONI OF COMEN1AI(WS-IDX:1) NOT \u003d SPACES OR\n                   WS-IDX \u003d 1\n           END-PERFORM",
+      "type": "PERFORM",
+      "categories": [
+        "LOOP"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ce810cb8-9f16-4563-82d3-244483fde5ff",
+      "label": "MOVEOPTIONIOFCO",
+      "name": "MOVEOPTIONIOFCO",
+      "originalText": "MOVE OPTIONI OF COMEN1AI(1:WS-IDX) TO WS-OPTION-X",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6dbdc631-67b3-409b-8992-81f68f612c28",
+      "label": "INSPECTWS-OPTIO",
+      "name": "INSPECTWS-OPTIO",
+      "originalText": "INSPECT WS-OPTION-X REPLACING ALL \u0027 \u0027 BY \u00270\u0027",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f5b46479-b9e8-456c-80cc-a0f08b3b1753",
+      "label": "MOVEWS-OPTION-X",
+      "name": "MOVEWS-OPTION-X",
+      "originalText": "MOVE WS-OPTION-X              TO WS-OPTION",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "15da4b05-0ef2-4146-8600-fa6671dd1248",
+      "label": "MOVEWS-OPTIONTO",
+      "name": "MOVEWS-OPTIONTO",
+      "originalText": "MOVE WS-OPTION                TO OPTIONO OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "095b1a95-5003-4ebc-b4cf-2a4206496a05",
+      "label": "IS \nWS-OPTION IS NOT NUMERIC OR\n            ?\n",
+      "name": "IS \nWS-OPTION IS NOT NUMERIC OR\n            ?\n",
+      "originalText": "IF WS-OPTION IS NOT NUMERIC OR\n              WS-OPTION \u003e CDEMO-MENU-OPT-COUNT OR\n              WS-OPTION \u003d ZEROS\n               MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE \u0027Please enter a valid option number...\u0027 TO\n                               WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0e7ce1d8-7dd6-4962-834a-10c6b63892f5",
+      "label": "IS \nCDEMO-USRTYP-USER AND\n              CDEM?\n",
+      "name": "IS \nCDEMO-USRTYP-USER AND\n              CDEM?\n",
+      "originalText": "IF CDEMO-USRTYP-USER AND\n              CDEMO-MENU-OPT-USRTYPE(WS-OPTION) \u003d \u0027A\u0027\n               SET ERR-FLG-ON          TO TRUE\n               MOVE SPACES             TO WS-MESSAGE\n               MOVE \u0027No access - Admin Only option... \u0027 TO\n                                       WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "caef6e01-80a8-4539-af13-3bd30be8a300",
+      "label": "IS \nNOT ERR-FLG-ON?\n",
+      "name": "IS \nNOT ERR-FLG-ON?\n",
+      "originalText": "IF NOT ERR-FLG-ON\n              EVALUATE TRUE\n                WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION) \u003d \u0027COPAUS0C\u0027\n                   _DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                       ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                   ​​​​​​​​\n                   IF EIBRESP \u003d _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                      MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                      MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                      MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                      _DIALECT_ 4 ​​​​ ​​​​ ​​​​\n                          ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                      ​​​​​​​​\n                   ELSE\n                      MOVE SPACES             TO WS-MESSAGE\n                      MOVE DFHRED             TO ERRMSGC  OF COMEN1AO\n                      STRING \u0027This option \u0027       DELIMITED BY SIZE\n                               CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                          DELIMITED BY \u0027  \u0027\n                            \u0027 is not installed...\u0027   DELIMITED BY SIZE\n                          INTO WS-MESSAGE\n                     END-IF\n                  WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION)(1:5) \u003d \u0027DUMMY\u0027\n                     MOVE SPACES             TO WS-MESSAGE\n                     MOVE DFHGREEN           TO ERRMSGC  OF COMEN1AO\n                     STRING \u0027This option \u0027       DELIMITED BY SIZE\n                             CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                         DELIMITED BY SPACE\n                            \u0027is coming soon ...\u0027   DELIMITED BY SIZE\n                       INTO WS-MESSAGE\n                  WHEN OTHER\n                     MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n       \n       \n                     MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                     _DIALECT_ 5 ​​​​ ​​​​\n                         ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​\n              END-EVALUATE\n       \n              PERFORM SEND-MENU-SCREEN\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "741635b5-0dae-4d0e-98be-e8339d259e7a",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "EVALUATE TRUE\n                WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION) \u003d \u0027COPAUS0C\u0027\n                   _DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                       ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                   ​​​​​​​​\n                   IF EIBRESP \u003d _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                      MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                      MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                      MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                      _DIALECT_ 4 ​​​​ ​​​​ ​​​​\n                          ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                      ​​​​​​​​\n                   ELSE\n                      MOVE SPACES             TO WS-MESSAGE\n                      MOVE DFHRED             TO ERRMSGC  OF COMEN1AO\n                      STRING \u0027This option \u0027       DELIMITED BY SIZE\n                               CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                          DELIMITED BY \u0027  \u0027\n                            \u0027 is not installed...\u0027   DELIMITED BY SIZE\n                          INTO WS-MESSAGE\n                     END-IF\n                  WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION)(1:5) \u003d \u0027DUMMY\u0027\n                     MOVE SPACES             TO WS-MESSAGE\n                     MOVE DFHGREEN           TO ERRMSGC  OF COMEN1AO\n                     STRING \u0027This option \u0027       DELIMITED BY SIZE\n                             CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                         DELIMITED BY SPACE\n                            \u0027is coming soon ...\u0027   DELIMITED BY SIZE\n                       INTO WS-MESSAGE\n                  WHEN OTHER\n                     MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n       \n       \n                     MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                     _DIALECT_ 5 ​​​​ ​​​​\n                         ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​\n              END-EVALUATE\n       \n              PERFORM SEND-MENU-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "baa1dce1-211e-4f34-827e-5babec2f8078",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE TRUE\n                WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION) \u003d \u0027COPAUS0C\u0027\n                   _DIALECT_ 2 ​​​​ ​​​​ ​​​​​​​\n                       ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                   ​​​​​​​​\n                   IF EIBRESP \u003d _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                      MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                      MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                      MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                      _DIALECT_ 4 ​​​​ ​​​​ ​​​​\n                          ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                      ​​​​​​​​\n                   ELSE\n                      MOVE SPACES             TO WS-MESSAGE\n                      MOVE DFHRED             TO ERRMSGC  OF COMEN1AO\n                      STRING \u0027This option \u0027       DELIMITED BY SIZE\n                               CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                          DELIMITED BY \u0027  \u0027\n                            \u0027 is not installed...\u0027   DELIMITED BY SIZE\n                          INTO WS-MESSAGE\n                     END-IF\n                  WHEN CDEMO-MENU-OPT-PGMNAME(WS-OPTION)(1:5) \u003d \u0027DUMMY\u0027\n                     MOVE SPACES             TO WS-MESSAGE\n                     MOVE DFHGREEN           TO ERRMSGC  OF COMEN1AO\n                     STRING \u0027This option \u0027       DELIMITED BY SIZE\n                             CDEMO-MENU-OPT-NAME(WS-OPTION)\n                                         DELIMITED BY SPACE\n                            \u0027is coming soon ...\u0027   DELIMITED BY SIZE\n                       INTO WS-MESSAGE\n                  WHEN OTHER\n                     MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n                     MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n       \n       \n                     MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n                     _DIALECT_ 5 ​​​​ ​​​​\n                         ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​\n              END-EVALUATE",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4ec6a8fb-2b8a-4702-a4eb-24b5defcd104",
+      "label": "PERFORM SEND-MENU-SCREEN",
+      "name": "PERFORMSEND-MEN",
+      "originalText": "PERFORM SEND-MENU-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "75286eea-f815-4f32-9bd8-44405668a08e",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "SET ERR-FLG-ON          TO TRUE\n               MOVE SPACES             TO WS-MESSAGE\n               MOVE \u0027No access - Admin Only option... \u0027 TO\n                                       WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fe5a7a25-cbfb-4954-ac42-992134b9f7ce",
+      "label": "SETERR-FLG-ONTO",
+      "name": "SETERR-FLG-ONTO",
+      "originalText": "SET ERR-FLG-ON          TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0ae1c180-8d88-4b0e-bb56-b3f0b20c5235",
+      "label": "MOVESPACESTOWS-",
+      "name": "MOVESPACESTOWS-",
+      "originalText": "MOVE SPACES             TO WS-MESSAGE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ad91f218-d5f6-4ec4-a69f-87ac4d247b59",
+      "label": "MOVE\u0027No access ",
+      "name": "MOVE\u0027No access ",
+      "originalText": "MOVE \u0027No access - Admin Only option... \u0027 TO\n                                       WS-MESSAGE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "698335e1-6429-4145-85c4-9a5ba6d2ea99",
+      "label": "PERFORM SEND-MENU-SCREEN",
+      "name": "PERFORMSEND-MEN",
+      "originalText": "PERFORM SEND-MENU-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c1c161ab-c632-40ff-9aa6-3fc0f7a8b386",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE \u0027Please enter a valid option number...\u0027 TO\n                               WS-MESSAGE\n               PERFORM SEND-MENU-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2e668a84-a3d8-4cfc-a1e3-6e96556be910",
+      "label": "MOVE\u0027Y\u0027TOWS-ERR",
+      "name": "MOVE\u0027Y\u0027TOWS-ERR",
+      "originalText": "MOVE \u0027Y\u0027     TO WS-ERR-FLG",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c6af8dc2-5791-44a1-807f-e3e0bb6795e3",
+      "label": "MOVE\u0027Please ent",
+      "name": "MOVE\u0027Please ent",
+      "originalText": "MOVE \u0027Please enter a valid option number...\u0027 TO\n                               WS-MESSAGE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "277088d0-bf38-4ae8-a70e-7900da94338c",
+      "label": "PERFORM SEND-MENU-SCREEN",
+      "name": "PERFORMSEND-MEN",
+      "originalText": "PERFORM SEND-MENU-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f9e9c683-5c38-4dbf-bbf2-01d1f8a60ce7",
+      "label": "SETERR-FLG-OFFT",
+      "name": "SETERR-FLG-OFFT",
+      "originalText": "SET ERR-FLG-OFF TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fcaf2627-533a-4786-a040-989f9ca2e196",
+      "label": "MOVESPACESTOWS-",
+      "name": "MOVESPACESTOWS-",
+      "originalText": "MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "febc46d3-426b-4ba8-87b3-d8bab5bcca4f",
+      "label": "IS \nEIBCALEN \u003d 0?\n",
+      "name": "IS \nEIBCALEN \u003d 0?\n",
+      "originalText": "IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-FROM-PROGRAM\n               PERFORM RETURN-TO-SIGNON-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COMEN1AO\n                   PERFORM SEND-MENU-SCREEN\n               ELSE\n                   PERFORM RECEIVE-MENU-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-SIGNON-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-MENU-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "748fd8f7-39b1-4d24-af65-474df8797861",
+      "label": "_DIALECT_1​​​​ ",
+      "name": "_DIALECT_1​​​​ ",
+      "originalText": "_DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b3da7de5-18cc-441c-95cb-dc677057ab84",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-FROM-PROGRAM\n               PERFORM RETURN-TO-SIGNON-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d2bbc004-60d0-4720-b6e4-e52925d82758",
+      "label": "MOVE\u0027COSGN00C\u0027T",
+      "name": "MOVE\u0027COSGN00C\u0027T",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-FROM-PROGRAM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fa375d46-c5d7-4891-827a-f8c1433b5284",
+      "label": "PERFORM RETURN-TO-SIGNON-SCREE",
+      "name": "PERFORMRETURN-T",
+      "originalText": "PERFORM RETURN-TO-SIGNON-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6c043082-c33c-4743-8aa1-b4d0a818d01b",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COMEN1AO\n                   PERFORM SEND-MENU-SCREEN\n               ELSE\n                   PERFORM RECEIVE-MENU-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-SIGNON-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-MENU-SCREEN\n                   END-EVALUATE\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "caeb38b0-c7e7-4291-8d67-84aed2a41b17",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f87fd052-c7e0-48ab-9d4b-2d1db4e69311",
+      "label": "MOVEDFHCOMMAREA",
+      "name": "MOVEDFHCOMMAREA",
+      "originalText": "MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "62a0140e-8852-4705-817b-7a6a88bc9d8f",
+      "label": "IS \nNOT CDEMO-PGM-REENTER?\n",
+      "name": "IS \nNOT CDEMO-PGM-REENTER?\n",
+      "originalText": "IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COMEN1AO\n                   PERFORM SEND-MENU-SCREEN\n               ELSE\n                   PERFORM RECEIVE-MENU-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-SIGNON-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-MENU-SCREEN\n                   END-EVALUATE\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fe2b2363-9f36-4d27-bcbc-62a12a1eaec1",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COMEN1AO\n                   PERFORM SEND-MENU-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8842b250-df8c-4556-bc32-162ce4ef0eeb",
+      "label": "SETCDEMO-PGM-RE",
+      "name": "SETCDEMO-PGM-RE",
+      "originalText": "SET CDEMO-PGM-REENTER    TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "91d824d4-1f8b-4dda-b3f2-34d325250406",
+      "label": "MOVELOW-VALUEST",
+      "name": "MOVELOW-VALUEST",
+      "originalText": "MOVE LOW-VALUES          TO COMEN1AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "label": "PERFORM SEND-MENU-SCREEN",
+      "name": "PERFORMSEND-MEN",
+      "originalText": "PERFORM SEND-MENU-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "90c510c1-4aa6-402a-93ba-8d586a4635b0",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   PERFORM RECEIVE-MENU-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-SIGNON-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-MENU-SCREEN\n                   END-EVALUATE",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7967b768-4758-40c0-b8dc-667b893c03db",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "label": "PERFORM RECEIVE-MENU-SCREEN",
+      "name": "PERFORMRECEIVE-",
+      "originalText": "PERFORM RECEIVE-MENU-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2773eca8-63c1-413f-83f5-121ec1fa8bfe",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-SIGNON-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-MENU-SCREEN\n                   END-EVALUATE",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "edges": [
+    {
+      "id": "7c74ab44-6ef5-432b-a71b-68eaef8ca899",
+      "fromNodeID": "e1e8b8e3-c414-4697-a8d0-4db0fd88c693",
+      "toNodeID": "68c86160-3a2e-4d99-b7a3-334aa502bd4a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "ff086956-2b99-4bca-a4c6-37b72a80a1df",
+      "fromNodeID": "68c86160-3a2e-4d99-b7a3-334aa502bd4a",
+      "toNodeID": "9c392faa-7349-4f7a-8b28-7745b3da1137",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1878eb40-3071-44be-97a4-87cc8ccfdb1c",
+      "fromNodeID": "9c392faa-7349-4f7a-8b28-7745b3da1137",
+      "toNodeID": "f13dc8ce-6bbc-4b65-89be-8e2754c499aa",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "47b3041a-21d5-48b9-ac4c-db43a61f2186",
+      "fromNodeID": "f13dc8ce-6bbc-4b65-89be-8e2754c499aa",
+      "toNodeID": "91586283-3b7a-490b-b0c3-4a8cc684f0ea",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9dee69ac-7cc8-460f-917f-9fbe16fd5ab9",
+      "fromNodeID": "91586283-3b7a-490b-b0c3-4a8cc684f0ea",
+      "toNodeID": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0429c1c5-b90e-430f-8167-ab2a9b2ad181",
+      "fromNodeID": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "toNodeID": "dd98742d-b5f6-4db9-b3eb-de5259f0553c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d5733207-9475-4b1e-8562-49dcfa07e858",
+      "fromNodeID": "dd98742d-b5f6-4db9-b3eb-de5259f0553c",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "bf8c69e0-3888-495b-a016-c43a20666431",
+      "fromNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "toNodeID": "d42ef938-f4da-4ffa-84f4-a00a56b531fb",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "34c0b407-d4b1-40b4-8a8f-7f3a98c96b21",
+      "fromNodeID": "d42ef938-f4da-4ffa-84f4-a00a56b531fb",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "5d315579-a9d1-4e17-a074-3b9da2d22e24",
+      "fromNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "toNodeID": "6e9691d2-c0e4-425e-825f-c6dec8422aed",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "98ec7777-b892-49b7-a4e3-c3b2d61317c8",
+      "fromNodeID": "6e9691d2-c0e4-425e-825f-c6dec8422aed",
+      "toNodeID": "c1ec00c6-c9e3-4948-bf45-58d350e9303d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "24fea20f-9fe4-4e4a-a2a4-abe22eae74d9",
+      "fromNodeID": "c1ec00c6-c9e3-4948-bf45-58d350e9303d",
+      "toNodeID": "59cef7fa-8dc9-4528-9d9c-ed94f6a21199",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d9c4aa79-003a-4651-82cc-16c8d3c219ce",
+      "fromNodeID": "59cef7fa-8dc9-4528-9d9c-ed94f6a21199",
+      "toNodeID": "9a9f5a0c-beaa-4b09-b978-99d5f05c9458",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d4d1da58-2445-457c-a747-7bfc9d8cd992",
+      "fromNodeID": "9a9f5a0c-beaa-4b09-b978-99d5f05c9458",
+      "toNodeID": "ee1e74a7-a821-49cd-9f6e-67cca655c4f4",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2411e9c4-a2af-46c4-a201-3149339f03f8",
+      "fromNodeID": "ee1e74a7-a821-49cd-9f6e-67cca655c4f4",
+      "toNodeID": "ab2b0495-11cf-42ca-91f6-6bc5a2b7a409",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "eb7065bc-2562-462e-8c10-f938a3406606",
+      "fromNodeID": "ab2b0495-11cf-42ca-91f6-6bc5a2b7a409",
+      "toNodeID": "71e304d3-01e7-46e5-a781-253f45807e48",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b6a42bce-4ae5-45ce-9e9e-b07760245230",
+      "fromNodeID": "71e304d3-01e7-46e5-a781-253f45807e48",
+      "toNodeID": "57416f60-3180-4d3c-b6f2-6671fbad34e6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "59d3345a-f202-4fbe-8494-b0c75f372ebd",
+      "fromNodeID": "57416f60-3180-4d3c-b6f2-6671fbad34e6",
+      "toNodeID": "35b92c3b-5e22-4719-9d37-1aa044497ef7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e76607c6-819e-44d5-9919-1e5c84d71613",
+      "fromNodeID": "ab2b0495-11cf-42ca-91f6-6bc5a2b7a409",
+      "toNodeID": "2a390362-3bd0-4f82-ad5c-8de7f879ccf9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d4e88cdb-25e7-4f11-966e-269aed7312d2",
+      "fromNodeID": "59cef7fa-8dc9-4528-9d9c-ed94f6a21199",
+      "toNodeID": "7e808095-4b2a-4537-acf7-248f15fcae2f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "9faf365b-2673-4aa4-9b45-5311d1228c6c",
+      "fromNodeID": "7e808095-4b2a-4537-acf7-248f15fcae2f",
+      "toNodeID": "75fd3921-eeb3-4607-a90e-9c428a250f51",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c3482d34-d374-4c68-aa53-0785e28cc079",
+      "fromNodeID": "75fd3921-eeb3-4607-a90e-9c428a250f51",
+      "toNodeID": "8369b4ca-14ab-4b5a-8e48-1db3be85e1e9",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "474fa669-4189-4fb2-a675-17976cdcf2c5",
+      "fromNodeID": "8369b4ca-14ab-4b5a-8e48-1db3be85e1e9",
+      "toNodeID": "30494a29-879b-4199-85af-ecff95557570",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "cf3ad148-e55e-46b7-9165-5a9a439bbba3",
+      "fromNodeID": "30494a29-879b-4199-85af-ecff95557570",
+      "toNodeID": "6fe09ba3-de7b-4a55-a2af-b2add4e217ff",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "82b99442-7083-4de3-9878-e6bbacead38e",
+      "fromNodeID": "6fe09ba3-de7b-4a55-a2af-b2add4e217ff",
+      "toNodeID": "c8dc35e3-6793-4dc3-b96f-97b4c0cefced",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b606f094-4996-4103-9b2e-017ad0ced5ee",
+      "fromNodeID": "c8dc35e3-6793-4dc3-b96f-97b4c0cefced",
+      "toNodeID": "bc06850c-dcc8-4502-8e11-9118e7c7d7ce",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "bd27c8ba-8c91-4ada-8a73-c27b10951866",
+      "fromNodeID": "bc06850c-dcc8-4502-8e11-9118e7c7d7ce",
+      "toNodeID": "5b4ae7fc-922a-4698-bd3b-e8fc7995842a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8e038f24-bc11-433a-9f41-4d7faf875545",
+      "fromNodeID": "5b4ae7fc-922a-4698-bd3b-e8fc7995842a",
+      "toNodeID": "23a2c305-fa13-494f-8875-0369de8b6920",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "cd9403ec-0c0f-4ff8-9584-f3d41526507c",
+      "fromNodeID": "23a2c305-fa13-494f-8875-0369de8b6920",
+      "toNodeID": "9f4c8e20-a104-4d9a-9288-8204addd9e08",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "736bf177-a7dd-4ae9-9b00-984a953d46e6",
+      "fromNodeID": "9f4c8e20-a104-4d9a-9288-8204addd9e08",
+      "toNodeID": "44c6b0b6-2ea3-4f75-a9b4-c3bca23b8762",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "3c4e72e2-5519-4875-af91-b051f9bcacdc",
+      "fromNodeID": "44c6b0b6-2ea3-4f75-a9b4-c3bca23b8762",
+      "toNodeID": "4935a5ba-a8dc-400d-986c-34a6bd57a8a6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "fad4d87a-24b4-4b62-b158-6b2f599e10c6",
+      "fromNodeID": "4935a5ba-a8dc-400d-986c-34a6bd57a8a6",
+      "toNodeID": "81e62825-d952-4035-ba36-a0bec5a8b73f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a5452ca5-7b5a-4c64-b3f6-a501db970e33",
+      "fromNodeID": "6e9691d2-c0e4-425e-825f-c6dec8422aed",
+      "toNodeID": "08e763e6-2080-4b62-877e-636b64b1e50b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "79c09cc2-36a8-4119-b463-5547de48de85",
+      "fromNodeID": "d42ef938-f4da-4ffa-84f4-a00a56b531fb",
+      "toNodeID": "eeaf821a-bbdb-4103-b854-a6622d1d8959",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "02ca94e7-1f7a-41c1-add9-5f4817fd1a55",
+      "fromNodeID": "eeaf821a-bbdb-4103-b854-a6622d1d8959",
+      "toNodeID": "d59e9fa3-3ce0-4865-bd2f-b80bcaf80488",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "497ea9aa-9cdd-433a-ba9d-d76f00fd9dcd",
+      "fromNodeID": "d59e9fa3-3ce0-4865-bd2f-b80bcaf80488",
+      "toNodeID": "7704732f-642d-42e0-8a41-d439bea8f793",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "03747817-c77e-4058-8ca7-acbfa796ce77",
+      "fromNodeID": "7704732f-642d-42e0-8a41-d439bea8f793",
+      "toNodeID": "640c64d8-4d61-4d16-aacf-30f0582ac067",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4f731785-5fb8-420a-84e6-19a9425cf869",
+      "fromNodeID": "d59e9fa3-3ce0-4865-bd2f-b80bcaf80488",
+      "toNodeID": "9a9f5a0c-beaa-4b09-b978-99d5f05c9458",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ff730156-0e51-4046-9fd3-cc5c87274401",
+      "fromNodeID": "d59e9fa3-3ce0-4865-bd2f-b80bcaf80488",
+      "toNodeID": "9a9f5a0c-beaa-4b09-b978-99d5f05c9458",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "1af1ea03-7242-4730-b5b7-01ee3a3aa003",
+      "fromNodeID": "d59e9fa3-3ce0-4865-bd2f-b80bcaf80488",
+      "toNodeID": "9a9f5a0c-beaa-4b09-b978-99d5f05c9458",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "335fc6d9-18f9-43ef-b734-c3c2e5142132",
+      "fromNodeID": "eeaf821a-bbdb-4103-b854-a6622d1d8959",
+      "toNodeID": "c1ec00c6-c9e3-4948-bf45-58d350e9303d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f00ac624-a78c-4243-84d5-e0666dfe7d7d",
+      "fromNodeID": "eeaf821a-bbdb-4103-b854-a6622d1d8959",
+      "toNodeID": "c1ec00c6-c9e3-4948-bf45-58d350e9303d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a1714fbe-147f-4f3e-bbe4-1e20ce09d079",
+      "fromNodeID": "eeaf821a-bbdb-4103-b854-a6622d1d8959",
+      "toNodeID": "c1ec00c6-c9e3-4948-bf45-58d350e9303d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "75708dd7-6805-48b3-8a28-aff7addb85c9",
+      "fromNodeID": "dd98742d-b5f6-4db9-b3eb-de5259f0553c",
+      "toNodeID": "432a234a-253a-4424-986b-7dbf04b519a1",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f02630e0-a39b-4527-a02a-7ab5e0091ff4",
+      "fromNodeID": "432a234a-253a-4424-986b-7dbf04b519a1",
+      "toNodeID": "91c61300-4270-47b5-8e74-5cbc1d9fefcb",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0658373e-706b-4a27-8deb-e2d40c6dd660",
+      "fromNodeID": "432a234a-253a-4424-986b-7dbf04b519a1",
+      "toNodeID": "67be9e3c-9a67-494b-80f2-65db8df3ea01",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b6e6396c-4b01-4a96-ac76-e912eba74c5c",
+      "fromNodeID": "67be9e3c-9a67-494b-80f2-65db8df3ea01",
+      "toNodeID": "874a0dbe-3b8c-4686-9cff-81e430760dab",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2e85eb66-b226-4739-8f5e-3760441986a8",
+      "fromNodeID": "91586283-3b7a-490b-b0c3-4a8cc684f0ea",
+      "toNodeID": "668b1d93-8aae-401b-8d04-b64bb8b162f2",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "41ffbfb1-cedd-4c67-8ba5-4d64650bd35d",
+      "fromNodeID": "668b1d93-8aae-401b-8d04-b64bb8b162f2",
+      "toNodeID": "ce810cb8-9f16-4563-82d3-244483fde5ff",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b2a3bd9f-bfa6-44ee-a629-c040bab74011",
+      "fromNodeID": "ce810cb8-9f16-4563-82d3-244483fde5ff",
+      "toNodeID": "6dbdc631-67b3-409b-8992-81f68f612c28",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "5996c8d6-9ba4-4265-b188-dfea7baa61b3",
+      "fromNodeID": "6dbdc631-67b3-409b-8992-81f68f612c28",
+      "toNodeID": "f5b46479-b9e8-456c-80cc-a0f08b3b1753",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f8eb6e17-3b24-44ee-a3c7-7d46ff9efb43",
+      "fromNodeID": "f5b46479-b9e8-456c-80cc-a0f08b3b1753",
+      "toNodeID": "15da4b05-0ef2-4146-8600-fa6671dd1248",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "14647784-41ad-46ac-90bd-391140ee39b3",
+      "fromNodeID": "15da4b05-0ef2-4146-8600-fa6671dd1248",
+      "toNodeID": "095b1a95-5003-4ebc-b4cf-2a4206496a05",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6087cc4d-4f43-41b3-9967-81e7b8e1c3ec",
+      "fromNodeID": "095b1a95-5003-4ebc-b4cf-2a4206496a05",
+      "toNodeID": "0e7ce1d8-7dd6-4962-834a-10c6b63892f5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "91c4df9d-0064-46eb-94a3-8ce28d412bb5",
+      "fromNodeID": "0e7ce1d8-7dd6-4962-834a-10c6b63892f5",
+      "toNodeID": "caef6e01-80a8-4539-af13-3bd30be8a300",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "71b6af1b-1ae0-4d3e-868d-5622825c75d8",
+      "fromNodeID": "caef6e01-80a8-4539-af13-3bd30be8a300",
+      "toNodeID": "741635b5-0dae-4d0e-98be-e8339d259e7a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "29dafe0b-6544-431d-bc34-fb2023c217b6",
+      "fromNodeID": "741635b5-0dae-4d0e-98be-e8339d259e7a",
+      "toNodeID": "baa1dce1-211e-4f34-827e-5babec2f8078",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6a8c9078-c395-4ce5-a91b-e6d6a7f1bc49",
+      "fromNodeID": "baa1dce1-211e-4f34-827e-5babec2f8078",
+      "toNodeID": "4ec6a8fb-2b8a-4702-a4eb-24b5defcd104",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ad0ac95e-99d3-42cd-a892-cc0533061ff1",
+      "fromNodeID": "4ec6a8fb-2b8a-4702-a4eb-24b5defcd104",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d6f5667f-74fc-4c1a-b3ba-dd6bf13dd740",
+      "fromNodeID": "4ec6a8fb-2b8a-4702-a4eb-24b5defcd104",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "85a7b079-76db-419b-9922-00aa2859bb10",
+      "fromNodeID": "4ec6a8fb-2b8a-4702-a4eb-24b5defcd104",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "286c74f0-4b7c-46a3-a67d-0e6ee2f80493",
+      "fromNodeID": "4ec6a8fb-2b8a-4702-a4eb-24b5defcd104",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5eba039e-5496-4454-a6d5-2b5de0c44200",
+      "fromNodeID": "4ec6a8fb-2b8a-4702-a4eb-24b5defcd104",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "170b5f1c-b78f-4d1b-8c5b-79929ba43717",
+      "fromNodeID": "0e7ce1d8-7dd6-4962-834a-10c6b63892f5",
+      "toNodeID": "75286eea-f815-4f32-9bd8-44405668a08e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b47348fa-dc5e-4d1d-9ded-da9df4bdc9a8",
+      "fromNodeID": "75286eea-f815-4f32-9bd8-44405668a08e",
+      "toNodeID": "fe5a7a25-cbfb-4954-ac42-992134b9f7ce",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "655126bf-98f5-41fd-b2ab-f2ad6ba356cd",
+      "fromNodeID": "fe5a7a25-cbfb-4954-ac42-992134b9f7ce",
+      "toNodeID": "0ae1c180-8d88-4b0e-bb56-b3f0b20c5235",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "381475ba-3c32-44de-9419-046dc88eae67",
+      "fromNodeID": "0ae1c180-8d88-4b0e-bb56-b3f0b20c5235",
+      "toNodeID": "ad91f218-d5f6-4ec4-a69f-87ac4d247b59",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "35e6d4f9-5214-44e4-8dc4-ce1db82067a5",
+      "fromNodeID": "ad91f218-d5f6-4ec4-a69f-87ac4d247b59",
+      "toNodeID": "698335e1-6429-4145-85c4-9a5ba6d2ea99",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "908a550b-c337-4885-afcb-07104733244b",
+      "fromNodeID": "698335e1-6429-4145-85c4-9a5ba6d2ea99",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "57197d88-ae7f-42b0-9428-d676a7f9363d",
+      "fromNodeID": "698335e1-6429-4145-85c4-9a5ba6d2ea99",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f3526613-c533-46fa-8b6d-105dfe10ab72",
+      "fromNodeID": "698335e1-6429-4145-85c4-9a5ba6d2ea99",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ab8fcd12-f244-4e07-9773-c30dd6ad4fa9",
+      "fromNodeID": "698335e1-6429-4145-85c4-9a5ba6d2ea99",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "15a9345e-952f-4053-9de4-2a8d2b964f76",
+      "fromNodeID": "698335e1-6429-4145-85c4-9a5ba6d2ea99",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8816da06-9459-453e-a6b3-e7ba55849243",
+      "fromNodeID": "095b1a95-5003-4ebc-b4cf-2a4206496a05",
+      "toNodeID": "c1c161ab-c632-40ff-9aa6-3fc0f7a8b386",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "dacf211a-f273-46ec-bda9-932cf3eb4d4c",
+      "fromNodeID": "c1c161ab-c632-40ff-9aa6-3fc0f7a8b386",
+      "toNodeID": "2e668a84-a3d8-4cfc-a1e3-6e96556be910",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d65afe04-a97c-40ef-82db-136806933804",
+      "fromNodeID": "2e668a84-a3d8-4cfc-a1e3-6e96556be910",
+      "toNodeID": "c6af8dc2-5791-44a1-807f-e3e0bb6795e3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "917885f0-46a0-4333-9834-fe6fb09fc1a0",
+      "fromNodeID": "c6af8dc2-5791-44a1-807f-e3e0bb6795e3",
+      "toNodeID": "277088d0-bf38-4ae8-a70e-7900da94338c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "3db96e6e-5a9a-41af-8b07-1a6aad0eb5fd",
+      "fromNodeID": "277088d0-bf38-4ae8-a70e-7900da94338c",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5a7a3637-e34a-4da2-9b7d-c2c9564d2ce4",
+      "fromNodeID": "277088d0-bf38-4ae8-a70e-7900da94338c",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "51fb6f4b-d58b-4b5d-b38f-0aa8fb8deb7b",
+      "fromNodeID": "277088d0-bf38-4ae8-a70e-7900da94338c",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b1ab71e7-348c-431a-b542-4fd59a93fd8a",
+      "fromNodeID": "277088d0-bf38-4ae8-a70e-7900da94338c",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5ce83100-bae2-4853-bebb-f58e4dc4ed77",
+      "fromNodeID": "277088d0-bf38-4ae8-a70e-7900da94338c",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "0320aa23-7ebc-45aa-9b43-762394b9bdb4",
+      "fromNodeID": "668b1d93-8aae-401b-8d04-b64bb8b162f2",
+      "toNodeID": "be16191f-9448-4724-a7d2-1930ca5e552b",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "93eb59d9-11f2-4261-bd44-3158433eca78",
+      "fromNodeID": "9c392faa-7349-4f7a-8b28-7745b3da1137",
+      "toNodeID": "f9e9c683-5c38-4dbf-bbf2-01d1f8a60ce7",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "22df082c-9c6e-4498-9551-c9817cef3545",
+      "fromNodeID": "f9e9c683-5c38-4dbf-bbf2-01d1f8a60ce7",
+      "toNodeID": "fcaf2627-533a-4786-a040-989f9ca2e196",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "dd4757ad-cf8a-4371-bb7f-349398c41378",
+      "fromNodeID": "fcaf2627-533a-4786-a040-989f9ca2e196",
+      "toNodeID": "febc46d3-426b-4ba8-87b3-d8bab5bcca4f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "39b78a09-f81e-4e44-b6f9-8cffb7a30d4f",
+      "fromNodeID": "febc46d3-426b-4ba8-87b3-d8bab5bcca4f",
+      "toNodeID": "748fd8f7-39b1-4d24-af65-474df8797861",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "27b504dc-03be-434c-9d87-1a8e67e1eccc",
+      "fromNodeID": "febc46d3-426b-4ba8-87b3-d8bab5bcca4f",
+      "toNodeID": "b3da7de5-18cc-441c-95cb-dc677057ab84",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0f87599a-bf7e-4621-a6d8-35613ecfeac7",
+      "fromNodeID": "febc46d3-426b-4ba8-87b3-d8bab5bcca4f",
+      "toNodeID": "6c043082-c33c-4743-8aa1-b4d0a818d01b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c4d1c0a3-f74c-4405-8f8a-5591856eab4e",
+      "fromNodeID": "b3da7de5-18cc-441c-95cb-dc677057ab84",
+      "toNodeID": "d2bbc004-60d0-4720-b6e4-e52925d82758",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0434e870-0f54-4dda-b456-fc6cb84bfe94",
+      "fromNodeID": "d2bbc004-60d0-4720-b6e4-e52925d82758",
+      "toNodeID": "fa375d46-c5d7-4891-827a-f8c1433b5284",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8f10c2b2-9ccd-40f6-8b1e-4fdd040e42aa",
+      "fromNodeID": "fa375d46-c5d7-4891-827a-f8c1433b5284",
+      "toNodeID": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8ad2d68c-bc5b-4318-a282-4d9d42df7ae9",
+      "fromNodeID": "fa375d46-c5d7-4891-827a-f8c1433b5284",
+      "toNodeID": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "917662b1-8fcd-4c17-bd01-0837a26ffb6e",
+      "fromNodeID": "fa375d46-c5d7-4891-827a-f8c1433b5284",
+      "toNodeID": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8f541762-ae0f-4120-8c09-b9c0812058e1",
+      "fromNodeID": "fa375d46-c5d7-4891-827a-f8c1433b5284",
+      "toNodeID": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a0c79b03-cf7b-475f-951f-691d2cc01b3e",
+      "fromNodeID": "fa375d46-c5d7-4891-827a-f8c1433b5284",
+      "toNodeID": "e880acb4-a0a0-435d-9318-2cf3b549a336",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "cf5863ff-6a8b-4f49-aa77-6c9f3457ce64",
+      "fromNodeID": "6c043082-c33c-4743-8aa1-b4d0a818d01b",
+      "toNodeID": "caeb38b0-c7e7-4291-8d67-84aed2a41b17",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "25dc96f5-9af3-4175-a05d-723e57b51996",
+      "fromNodeID": "caeb38b0-c7e7-4291-8d67-84aed2a41b17",
+      "toNodeID": "f87fd052-c7e0-48ab-9d4b-2d1db4e69311",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "876ee2e7-4f3d-4e84-8afc-b727751afc87",
+      "fromNodeID": "f87fd052-c7e0-48ab-9d4b-2d1db4e69311",
+      "toNodeID": "62a0140e-8852-4705-817b-7a6a88bc9d8f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "dec8b63f-1883-4a7f-85c9-ef0375c38546",
+      "fromNodeID": "62a0140e-8852-4705-817b-7a6a88bc9d8f",
+      "toNodeID": "fe2b2363-9f36-4d27-bcbc-62a12a1eaec1",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "7aa7f740-73ab-4854-a14d-903d9d3314c2",
+      "fromNodeID": "62a0140e-8852-4705-817b-7a6a88bc9d8f",
+      "toNodeID": "90c510c1-4aa6-402a-93ba-8d586a4635b0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "4527ea9e-6ad4-4af1-9c24-b408ea5014af",
+      "fromNodeID": "fe2b2363-9f36-4d27-bcbc-62a12a1eaec1",
+      "toNodeID": "8842b250-df8c-4556-bc32-162ce4ef0eeb",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "383c214f-85ee-4d58-882e-cd1e242c60fb",
+      "fromNodeID": "8842b250-df8c-4556-bc32-162ce4ef0eeb",
+      "toNodeID": "91d824d4-1f8b-4dda-b3f2-34d325250406",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "fa924b6c-9dc7-45c3-895c-c0d6e6c9ec2f",
+      "fromNodeID": "91d824d4-1f8b-4dda-b3f2-34d325250406",
+      "toNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ff20d5fb-0551-49c8-9f97-2518961a411b",
+      "fromNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f76f78b3-200b-4c24-9870-6d7f850570e2",
+      "fromNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a496b372-a7be-4eb6-9cd8-d992def97620",
+      "fromNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f7ded5cb-cdbe-46d0-b5db-b50a00266aa4",
+      "fromNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b5c70791-70d9-4439-ad5d-08a3873f39b6",
+      "fromNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c0e8580e-9fdd-415e-9787-03d181436bcf",
+      "fromNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "369e2e24-33b7-4318-afff-e2ca1d41f234",
+      "fromNodeID": "c83fafd2-f118-4f90-b770-8863a1f446c7",
+      "toNodeID": "89935c36-f8ce-4f4b-86f0-66b2964f60f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "330a6af1-dfe3-4a73-a6a8-24aaaf8177ac",
+      "fromNodeID": "90c510c1-4aa6-402a-93ba-8d586a4635b0",
+      "toNodeID": "7967b768-4758-40c0-b8dc-667b893c03db",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1e4cc4ab-1578-41ba-b9ad-134f837b56a2",
+      "fromNodeID": "7967b768-4758-40c0-b8dc-667b893c03db",
+      "toNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "61d10e4b-8d18-45a5-ab5c-dc67ad51b2d4",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "2773eca8-63c1-413f-83f5-121ec1fa8bfe",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7ea7b791-03b0-4232-ba1e-947098e1f31e",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "0d2aa47c-8926-47bf-983d-bb1dbcae6b66",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "df746f2d-4cb4-4867-aee9-2deee5981a46",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ed04f32b-ac88-4754-980e-574201633e21",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a3cdcd01-b501-4d3d-903a-61a72593a014",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "fecd127f-5230-461f-9718-4c55e5193ce0",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7188bd8f-e484-46b5-9878-9906cccb3fb0",
+      "fromNodeID": "a46f60ab-374c-4ba4-a28a-6b430dc7a513",
+      "toNodeID": "821653f5-d293-40d2-b5e8-32fc80bf5bc5",
+      "edgeType": "JUMPS_TO"
+    }
+  ],
+  "idProvider": {}
+}

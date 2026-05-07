@@ -1,0 +1,2170 @@
+{
+  "nodes": [
+    {
+      "id": "135a81b1-bc02-454d-b430-e50baecf27f4",
+      "label": "ProcedureDivisionBodyContext/135a81b1-bc02-454d-b430-e50baecf27f4",
+      "name": "ProcedureDivisionBodyContext/135a81b1-bc02-454d-b430-e50baecf27f4",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT02C\u0027.\n           PERFORM 0000-CARDFILE-OPEN.\n       \n           PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CARDFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.\n       \n           PERFORM 9000-CARDFILE-CLOSE.\n       \n           DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT02C\u0027.\n       \n           GOBACK.\n       \n       \n       \n       \n       1000-CARDFILE-GET-NEXT.\n           READ CARDFILE-FILE INTO CARD-RECORD.\n           IF  CARDFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n       \n           ELSE\n               IF  CARDFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CARDFILE\u0027\n                   MOVE CARDFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.\n       \n       0000-CARDFILE-OPEN.\n           MOVE 8 TO APPL-RESULT.\n           OPEN INPUT CARDFILE-FILE\n           IF  CARDFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9000-CARDFILE-CLOSE.\n           ADD 8 TO ZERO GIVING APPL-RESULT.\n           CLOSE CARDFILE-FILE\n           IF  CARDFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9999-ABEND-PROGRAM.\n           DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING.\n       \n       \n       9910-DISPLAY-IO-STATUS.\n           IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+      "type": "PROCEDURE_DIVISION_BODY",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d605c44c-9a6f-4898-b462-e70bd21d034c",
+      "label": "DISPLAY\u0027START O",
+      "name": "DISPLAY\u0027START O",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT02C\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fa56c48a-dd10-4f61-aa66-c4e3bd486ecb",
+      "label": "PERFORM0000-CAR",
+      "name": "PERFORM0000-CAR",
+      "originalText": "PERFORM 0000-CARDFILE-OPEN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e5683a3b-ccda-4f48-ba64-c1830460ccc3",
+      "label": "PERFORMUNTILEND",
+      "name": "PERFORMUNTILEND",
+      "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CARDFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "70680290-a288-410b-8f3e-26add8331ab6",
+      "label": "PERFORM9000-CAR",
+      "name": "PERFORM9000-CAR",
+      "originalText": "PERFORM 9000-CARDFILE-CLOSE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e9a61407-10a7-4c4a-929c-378bc819d630",
+      "label": "DISPLAY\u0027END OF ",
+      "name": "DISPLAY\u0027END OF ",
+      "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT02C\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0317190c-abb1-4456-926d-a945ac303628",
+      "label": "GOBACK.",
+      "name": "GOBACK.",
+      "originalText": "GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9de56434-b2e6-4321-bd92-fb1690193448",
+      "label": "1000-CARDFILE-GET-NEXT",
+      "name": "1000-CARDFILE-GET-NEXT",
+      "originalText": "1000-CARDFILE-GET-NEXT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "96bbeacd-0eb3-48e9-9940-caf19b650e65",
+      "label": "READCARDFILE-FI",
+      "name": "READCARDFILE-FI",
+      "originalText": "READ CARDFILE-FILE INTO CARD-RECORD.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e4ccc93f-e37e-4399-81b8-809c31f10aab",
+      "label": "IFCARDFILE-STAT",
+      "name": "IFCARDFILE-STAT",
+      "originalText": "IF  CARDFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n       \n           ELSE\n               IF  CARDFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CARDFILE\u0027\n                   MOVE CARDFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "182410ed-26a2-4740-9925-6d1529a744f9",
+      "label": "0000-CARDFILE-OPEN",
+      "name": "0000-CARDFILE-OPEN",
+      "originalText": "0000-CARDFILE-OPEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ff16b0cc-89e3-49fc-8002-ac5f6c54f0b0",
+      "label": "MOVE8TOAPPL-RES",
+      "name": "MOVE8TOAPPL-RES",
+      "originalText": "MOVE 8 TO APPL-RESULT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4ac9a46a-fd44-48ce-895b-2207c3ab8789",
+      "label": "OPENINPUTCARDFI",
+      "name": "OPENINPUTCARDFI",
+      "originalText": "OPEN INPUT CARDFILE-FILE\n           IF  CARDFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7d340fad-8721-4fcd-9707-f4e6bd03e05c",
+      "label": "9000-CARDFILE-CLOSE",
+      "name": "9000-CARDFILE-CLOSE",
+      "originalText": "9000-CARDFILE-CLOSE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "30132561-9f11-411d-9c43-06c7f2a1a34d",
+      "label": "ADD8TOZEROGIVIN",
+      "name": "ADD8TOZEROGIVIN",
+      "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "39f49e23-a952-4975-a441-df61d303c5ef",
+      "label": "CLOSECARDFILE-F",
+      "name": "CLOSECARDFILE-F",
+      "originalText": "CLOSE CARDFILE-FILE\n           IF  CARDFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "label": "9999-ABEND-PROGRAM",
+      "name": "9999-ABEND-PROGRAM",
+      "originalText": "9999-ABEND-PROGRAM.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e0c26050-ec5c-4aad-9510-f387e1076c19",
+      "label": "DISPLAY\u0027ABENDIN",
+      "name": "DISPLAY\u0027ABENDIN",
+      "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "label": "9910-DISPLAY-IO-STATUS",
+      "name": "9910-DISPLAY-IO-STATUS",
+      "originalText": "9910-DISPLAY-IO-STATUS.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b51b2760-ce83-4008-96bf-54072d2cc552",
+      "label": "IFIO-STATUSNOTN",
+      "name": "IFIO-STATUSNOTN",
+      "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d18e9922-3158-4a92-baa3-0704955e853a",
+      "label": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+      "name": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+      "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e8af1278-411a-4886-9607-eb3fa4e57c3f",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ed35dc62-06f6-488b-8abf-0a2f41df81a0",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8609dd93-faf6-48c3-a52d-692a06f8390d",
+      "label": "MOVEIO-STAT1TOI",
+      "name": "MOVEIO-STAT1TOI",
+      "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fb50831f-9c98-4d53-834a-f9e3dbc825ff",
+      "label": "MOVE0TOTWO-BYTE",
+      "name": "MOVE0TOTWO-BYTE",
+      "originalText": "MOVE 0        TO TWO-BYTES-BINARY",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ce8933fc-35a8-4ce2-9265-395b542b1dbe",
+      "label": "MOVEIO-STAT2TOT",
+      "name": "MOVEIO-STAT2TOT",
+      "originalText": "MOVE IO-STAT2 TO TWO-BYTES-RIGHT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b5201295-766f-46c0-9920-598541532cd7",
+      "label": "MOVETWO-BYTES-B",
+      "name": "MOVETWO-BYTES-B",
+      "originalText": "MOVE TWO-BYTES-BINARY TO IO-STATUS-0403",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a74a7cbc-9875-4140-a31e-8ce5f01045ab",
+      "label": "DISPLAY\u0027FILE ST",
+      "name": "DISPLAY\u0027FILE ST",
+      "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2c5e7256-d9ab-408a-8e7d-87270c8ec9a3",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "93973308-331c-4ae4-bd99-ceb0c29bd650",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "193bc68f-981a-4f9c-a70d-2db4ec14b95d",
+      "label": "MOVE\u00270000\u0027TOIO-",
+      "name": "MOVE\u00270000\u0027TOIO-",
+      "originalText": "MOVE \u00270000\u0027 TO IO-STATUS-04",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a7afdd45-4aa0-4f5c-b3ba-4e4f77f3d746",
+      "label": "MOVEIO-STATUSTO",
+      "name": "MOVEIO-STATUSTO",
+      "originalText": "MOVE IO-STATUS TO IO-STATUS-04(3:2)",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fdb62734-c224-4a14-85ee-99306bae934e",
+      "label": "DISPLAY\u0027FILE ST",
+      "name": "DISPLAY\u0027FILE ST",
+      "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d0e24cd1-d8a4-4bb4-aa32-5d68898b2727",
+      "label": "DISPLAY\u0027ABENDIN",
+      "name": "DISPLAY\u0027ABENDIN",
+      "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d35d1be3-eafa-497f-a20a-6afa5cb4eff0",
+      "label": "MOVE0TOTIMING",
+      "name": "MOVE0TOTIMING",
+      "originalText": "MOVE 0 TO TIMING",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4aa8f05f-7d5e-4355-8658-aa8a31ee73ce",
+      "label": "MOVE999TOABCODE",
+      "name": "MOVE999TOABCODE",
+      "originalText": "MOVE 999 TO ABCODE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9e1b35e0-0934-44f4-8d7a-5a26c4b2bc5c",
+      "label": "CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING",
+      "name": "CALL\u0027CEE3ABD\u0027US",
+      "originalText": "CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING",
+      "type": "CALL",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8179e90f-a75f-489d-912a-bacf2df29546",
+      "label": "CLOSECARDFILE-F",
+      "name": "CLOSECARDFILE-F",
+      "originalText": "CLOSE CARDFILE-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c6586855-65ee-4223-a725-841a8a1151ce",
+      "label": "IS \nCARDFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nCARDFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  CARDFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "81df48ab-c0dc-474c-bbd7-a7b6767ddc19",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0a4bcb72-3753-4e30-89aa-2bc574327994",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fb76b6dd-ff1c-45fa-9227-56c6aeeca7c9",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "712716d3-6cfb-4e7c-b241-be3823ce871f",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "72af7bcc-45cb-4554-980c-1d6b49898a75",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               DISPLAY \u0027ERROR CLOSING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d793401e-ec84-4227-8972-8fc351612e9e",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f7ba5c63-bc46-4bf5-b459-a0047b158c45",
+      "label": "DISPLAY\u0027ERROR C",
+      "name": "DISPLAY\u0027ERROR C",
+      "originalText": "DISPLAY \u0027ERROR CLOSING CARDFILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "61dc2e93-64d4-4421-b01b-26c5a1e33971",
+      "label": "MOVECARDFILE-ST",
+      "name": "MOVECARDFILE-ST",
+      "originalText": "MOVE CARDFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "name": "PERFORM9910-DIS",
+      "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3a518097-e9e5-4274-a1ff-f22918293d4e",
+      "label": "PERFORM 9999-ABEND-PROGRAM",
+      "name": "PERFORM9999-ABE",
+      "originalText": "PERFORM 9999-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "594fe6e6-98b1-423a-bd6a-f94093dd173b",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f0ff1eb8-299e-4e3e-8048-6fda2b7471f3",
+      "label": "SUBTRACTAPPL-RE",
+      "name": "SUBTRACTAPPL-RE",
+      "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+      "type": "SUBTRACT",
+      "categories": [
+        "COMPUTATIONAL",
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b38f2351-7894-42b1-96b1-273c2775c0a9",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f846bc7a-85ce-4bda-b22a-de46cf2d14d4",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "aa2e0f91-e425-4826-bbfd-595b9d182ba9",
+      "label": "ADD12TOZEROGIVI",
+      "name": "ADD12TOZEROGIVI",
+      "originalText": "ADD 12 TO ZERO GIVING APPL-RESULT",
+      "type": "ADD",
+      "categories": [
+        "COMPUTATIONAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6bdf52d5-85fe-42eb-9fc6-13493041599d",
+      "label": "ADD8TOZEROGIVIN",
+      "name": "ADD8TOZEROGIVIN",
+      "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT",
+      "type": "ADD",
+      "categories": [
+        "COMPUTATIONAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e212707c-c1f8-497d-a350-82f467e8fd0b",
+      "label": "OPENINPUTCARDFI",
+      "name": "OPENINPUTCARDFI",
+      "originalText": "OPEN INPUT CARDFILE-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "747b7b04-f20a-4376-8a1c-f21bdf37b83b",
+      "label": "IS \nCARDFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nCARDFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  CARDFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5f477095-57aa-4c0f-96d5-31cc2ca5a237",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "857dc278-f2cf-4d8c-873c-e08cc2b06c30",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a8e665ac-0679-4d9b-9c0e-c075393e7360",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6e7a401b-4602-48d3-929b-a907d678464f",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e44b88fc-5077-4d92-b2a7-e95260a13d1e",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               DISPLAY \u0027ERROR OPENING CARDFILE\u0027\n               MOVE CARDFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "800a65f3-244f-4375-a100-cfcd692f9767",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "334f100e-1fe3-49ff-803e-4f627c66a762",
+      "label": "DISPLAY\u0027ERROR O",
+      "name": "DISPLAY\u0027ERROR O",
+      "originalText": "DISPLAY \u0027ERROR OPENING CARDFILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9786905d-cf10-4bd6-8243-5a55c40d1cd4",
+      "label": "MOVECARDFILE-ST",
+      "name": "MOVECARDFILE-ST",
+      "originalText": "MOVE CARDFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "name": "PERFORM9910-DIS",
+      "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d4941298-0118-4ce5-b2d8-88bc878ab2be",
+      "label": "PERFORM 9999-ABEND-PROGRAM",
+      "name": "PERFORM9999-ABE",
+      "originalText": "PERFORM 9999-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "77fb4789-0880-4fdf-9d32-0d728c736eaa",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fb9f0d2e-5116-4e7b-ac44-083935b4f9f4",
+      "label": "MOVE0TOAPPL-RES",
+      "name": "MOVE0TOAPPL-RES",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fe94aaab-9f1e-4dfa-878a-7fc14f6d3a08",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE 12 TO APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "615ae61d-afe6-4ef4-aee6-f7e6b7400030",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "353b976d-4a84-40f6-ba9e-71d1c6d40150",
+      "label": "MOVE12TOAPPL-RE",
+      "name": "MOVE12TOAPPL-RE",
+      "originalText": "MOVE 12 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1f3f00fd-9a65-4113-babe-ab8eb7143be3",
+      "label": "MOVE8TOAPPL-RES",
+      "name": "MOVE8TOAPPL-RES",
+      "originalText": "MOVE 8 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a0da9329-15ac-47cd-9c39-a79daa350d41",
+      "label": "IS \nCARDFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nCARDFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  CARDFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n       \n           ELSE\n               IF  CARDFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f97f4168-4ab1-4fbd-9a5d-35a3d1c0eea7",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CARDFILE\u0027\n                   MOVE CARDFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5f9d0f07-174e-4811-81b6-de99b0d4ee6f",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a2cacc98-fa63-4fc6-ab98-2e174e267900",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b3357e40-9e55-4503-991d-da4ba4a3e867",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3758236c-7914-41c3-ba15-43b48d9a4dd5",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CARDFILE\u0027\n                   MOVE CARDFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0a62ca35-7747-4da1-aa5e-d4a3e445f6a6",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "40f32c57-b564-488b-af52-a6e0f7873d2a",
+      "label": "IS \nAPPL-EOF?\n",
+      "name": "IS \nAPPL-EOF?\n",
+      "originalText": "IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING CARDFILE\u0027\n                   MOVE CARDFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "37a9af9d-3c09-46e5-80ab-42185d74d42f",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7aac85b4-7e7b-40c0-9f14-51630f55ac72",
+      "label": "MOVE\u0027Y\u0027TOEND-OF",
+      "name": "MOVE\u0027Y\u0027TOEND-OF",
+      "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7d113124-40ea-46da-8c91-fd3c244ed514",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   DISPLAY \u0027ERROR READING CARDFILE\u0027\n                   MOVE CARDFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8a7e1b91-e4b6-4cb3-953e-d156a581c8a1",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f21b20dc-f117-477c-bb87-6d22790bec37",
+      "label": "DISPLAY\u0027ERROR R",
+      "name": "DISPLAY\u0027ERROR R",
+      "originalText": "DISPLAY \u0027ERROR READING CARDFILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ce984903-e4f2-4751-8bb1-fe5d0babed56",
+      "label": "MOVECARDFILE-ST",
+      "name": "MOVECARDFILE-ST",
+      "originalText": "MOVE CARDFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "name": "PERFORM9910-DIS",
+      "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "label": "PERFORM 9999-ABEND-PROGRAM",
+      "name": "PERFORM9999-ABE",
+      "originalText": "PERFORM 9999-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4053a9e0-cc2a-40a0-b1e5-dbb21628eae0",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0159a5cb-bebf-4909-9172-b361d5899156",
+      "label": "MOVE0TOAPPL-RES",
+      "name": "MOVE0TOAPPL-RES",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "419a6fa4-73b4-4d53-bfe9-2092e4ca7c20",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               IF  CARDFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "263deb1a-43c1-44f5-a18c-c6bb8293ac6f",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9e8a1bd9-af71-4a03-b8bf-3f6997a78ebe",
+      "label": "IS \nCARDFILE-STATUS \u003d \u002710\u0027?\n",
+      "name": "IS \nCARDFILE-STATUS \u003d \u002710\u0027?\n",
+      "originalText": "IF  CARDFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4e1bb86d-7ccc-4cf9-bb7c-c74f3841739d",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 16 TO APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b1ca4938-1970-41be-92a4-b02dc1ef1056",
+      "label": "MOVE16TOAPPL-RE",
+      "name": "MOVE16TOAPPL-RE",
+      "originalText": "MOVE 16 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "44706c97-6200-4a55-bcdd-7843779ba141",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   MOVE 12 TO APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f19364cf-3465-48d1-8fd6-930e84cee431",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "07567e3e-5021-451a-9aec-d233bc549b3c",
+      "label": "MOVE12TOAPPL-RE",
+      "name": "MOVE12TOAPPL-RE",
+      "originalText": "MOVE 12 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "09152c20-d834-4074-8b43-58cc9bb28be8",
+      "label": "READCARDFILE-FI",
+      "name": "READCARDFILE-FI",
+      "originalText": "READ CARDFILE-FILE INTO CARD-RECORD",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ff7d4cc1-fde3-47de-b194-bfe1facfaedb",
+      "label": "GOBACK",
+      "name": "GOBACK",
+      "originalText": "GOBACK",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b2bcd5a7-1ceb-4cde-b951-96416c88c6c3",
+      "label": "DISPLAY\u0027END OF ",
+      "name": "DISPLAY\u0027END OF ",
+      "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT02C\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2f98b182-0ba0-49f9-a4f6-efde46969c4b",
+      "label": "PERFORM 9000-CARDFILE-CLOSE",
+      "name": "PERFORM9000-CAR",
+      "originalText": "PERFORM 9000-CARDFILE-CLOSE",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "66226317-ebb9-4ad7-a82e-2f17fdaa12e9",
+      "label": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y",
+      "name": "PERFORMUNTILEND",
+      "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CARDFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM",
+      "type": "PERFORM",
+      "categories": [
+        "LOOP"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "43124df3-d9ee-44f2-9d4d-c26475311260",
+      "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-CARDFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-RECORD\n                   END-IF\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f2c988dc-6d28-4c03-8f24-4c71216b8fe4",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "PERFORM 1000-CARDFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-RECORD\n                   END-IF",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3e75d16d-ea6f-4c94-9cd4-4cf4468dfc8b",
+      "label": "PERFORM 1000-CARDFILE-GET-NEXT",
+      "name": "PERFORM1000-CAR",
+      "originalText": "PERFORM 1000-CARDFILE-GET-NEXT",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c9fab078-d8aa-42b4-805a-cddb8584d1fc",
+      "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-RECORD\n                   END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0111fa9d-59b8-4d03-abbf-a4a5480894d0",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "DISPLAY CARD-RECORD",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b9ed3d15-2f70-4016-9411-8091a3bd79ac",
+      "label": "DISPLAYCARD-REC",
+      "name": "DISPLAYCARD-REC",
+      "originalText": "DISPLAY CARD-RECORD",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3572d454-76cc-4d38-8b8b-8f82ae51dad8",
+      "label": "PERFORM 0000-CARDFILE-OPEN",
+      "name": "PERFORM0000-CAR",
+      "originalText": "PERFORM 0000-CARDFILE-OPEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ef2f48a5-153e-49bd-9d0a-9e22d2892a8c",
+      "label": "DISPLAY\u0027START O",
+      "name": "DISPLAY\u0027START O",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT02C\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "edges": [
+    {
+      "id": "aca5a7d5-7ea6-45bd-91a5-9d93b2b0d877",
+      "fromNodeID": "135a81b1-bc02-454d-b430-e50baecf27f4",
+      "toNodeID": "d605c44c-9a6f-4898-b462-e70bd21d034c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "685fbaa2-b0e7-405c-84b6-26f3bc472ffb",
+      "fromNodeID": "d605c44c-9a6f-4898-b462-e70bd21d034c",
+      "toNodeID": "fa56c48a-dd10-4f61-aa66-c4e3bd486ecb",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1d8e1035-8c77-4923-971b-93cd10205a81",
+      "fromNodeID": "fa56c48a-dd10-4f61-aa66-c4e3bd486ecb",
+      "toNodeID": "e5683a3b-ccda-4f48-ba64-c1830460ccc3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "de166332-33d3-4e86-8cab-2da92f88da28",
+      "fromNodeID": "e5683a3b-ccda-4f48-ba64-c1830460ccc3",
+      "toNodeID": "70680290-a288-410b-8f3e-26add8331ab6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f0f51400-2c7f-4545-9067-771258f9c1e6",
+      "fromNodeID": "70680290-a288-410b-8f3e-26add8331ab6",
+      "toNodeID": "e9a61407-10a7-4c4a-929c-378bc819d630",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "402ea9b0-e04d-4e4c-9ea6-0a5589469272",
+      "fromNodeID": "e9a61407-10a7-4c4a-929c-378bc819d630",
+      "toNodeID": "0317190c-abb1-4456-926d-a945ac303628",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4ea07481-c3ac-4c8a-a7aa-4e2e20f6f42c",
+      "fromNodeID": "0317190c-abb1-4456-926d-a945ac303628",
+      "toNodeID": "9de56434-b2e6-4321-bd92-fb1690193448",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "48ac8fcc-4214-498e-83d0-6becefb16057",
+      "fromNodeID": "9de56434-b2e6-4321-bd92-fb1690193448",
+      "toNodeID": "96bbeacd-0eb3-48e9-9940-caf19b650e65",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "3c2b22c3-73fc-40c3-84bc-76fc79fb625f",
+      "fromNodeID": "96bbeacd-0eb3-48e9-9940-caf19b650e65",
+      "toNodeID": "e4ccc93f-e37e-4399-81b8-809c31f10aab",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "764db4d0-9e1d-46e7-94ad-f2d860896cbc",
+      "fromNodeID": "e4ccc93f-e37e-4399-81b8-809c31f10aab",
+      "toNodeID": "182410ed-26a2-4740-9925-6d1529a744f9",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "32938a35-7ee6-4cfc-9b2a-b36895ee78d4",
+      "fromNodeID": "182410ed-26a2-4740-9925-6d1529a744f9",
+      "toNodeID": "ff16b0cc-89e3-49fc-8002-ac5f6c54f0b0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "057167a6-d3cf-4c50-99a5-c0fcbe491fc3",
+      "fromNodeID": "ff16b0cc-89e3-49fc-8002-ac5f6c54f0b0",
+      "toNodeID": "4ac9a46a-fd44-48ce-895b-2207c3ab8789",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4a56aae7-9a8b-4dd7-a12b-550ec0df2832",
+      "fromNodeID": "4ac9a46a-fd44-48ce-895b-2207c3ab8789",
+      "toNodeID": "7d340fad-8721-4fcd-9707-f4e6bd03e05c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "73ddee4b-2ad7-4b6a-bb56-441075a32a51",
+      "fromNodeID": "7d340fad-8721-4fcd-9707-f4e6bd03e05c",
+      "toNodeID": "30132561-9f11-411d-9c43-06c7f2a1a34d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "5095d7ef-f921-4b9b-a98c-c7195ef60481",
+      "fromNodeID": "30132561-9f11-411d-9c43-06c7f2a1a34d",
+      "toNodeID": "39f49e23-a952-4975-a441-df61d303c5ef",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0d3e9c43-edd4-4533-97d2-0a15972527ae",
+      "fromNodeID": "39f49e23-a952-4975-a441-df61d303c5ef",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "deecf0cc-5985-4d83-bc7d-6bdaef79fbaa",
+      "fromNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "toNodeID": "e0c26050-ec5c-4aad-9510-f387e1076c19",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "55eb53e8-8ae7-48fb-955d-033b4c5abd23",
+      "fromNodeID": "e0c26050-ec5c-4aad-9510-f387e1076c19",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1ac29f40-6295-4f99-a8f7-872f2e5159df",
+      "fromNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "toNodeID": "b51b2760-ce83-4008-96bf-54072d2cc552",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "72ff3b7a-e13c-46fc-8d1d-28dc7914e9b6",
+      "fromNodeID": "b51b2760-ce83-4008-96bf-54072d2cc552",
+      "toNodeID": "d18e9922-3158-4a92-baa3-0704955e853a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8bea918c-d467-4528-a7f8-670ee174c241",
+      "fromNodeID": "d18e9922-3158-4a92-baa3-0704955e853a",
+      "toNodeID": "e8af1278-411a-4886-9607-eb3fa4e57c3f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8fe9273e-bfa0-439a-9444-9e0c4a8d3df3",
+      "fromNodeID": "d18e9922-3158-4a92-baa3-0704955e853a",
+      "toNodeID": "ed35dc62-06f6-488b-8abf-0a2f41df81a0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b4502cba-42bf-4ed2-a2eb-c7e08bd8bb89",
+      "fromNodeID": "d18e9922-3158-4a92-baa3-0704955e853a",
+      "toNodeID": "2c5e7256-d9ab-408a-8e7d-87270c8ec9a3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1193090e-584d-4844-ac28-43e03bce04ea",
+      "fromNodeID": "ed35dc62-06f6-488b-8abf-0a2f41df81a0",
+      "toNodeID": "8609dd93-faf6-48c3-a52d-692a06f8390d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8ee1c8f0-10bf-44b6-bbf1-92c361efe37c",
+      "fromNodeID": "8609dd93-faf6-48c3-a52d-692a06f8390d",
+      "toNodeID": "fb50831f-9c98-4d53-834a-f9e3dbc825ff",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9b8c2a4a-e3c9-4bdc-94cb-66f894002a7c",
+      "fromNodeID": "fb50831f-9c98-4d53-834a-f9e3dbc825ff",
+      "toNodeID": "ce8933fc-35a8-4ce2-9265-395b542b1dbe",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "17ab8f5c-dcca-41b1-9cdd-57e7a9dab53e",
+      "fromNodeID": "ce8933fc-35a8-4ce2-9265-395b542b1dbe",
+      "toNodeID": "b5201295-766f-46c0-9920-598541532cd7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "05d4f522-3ed3-42d5-877e-35f61741676c",
+      "fromNodeID": "b5201295-766f-46c0-9920-598541532cd7",
+      "toNodeID": "a74a7cbc-9875-4140-a31e-8ce5f01045ab",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2c4f0e15-e4e2-453a-80b4-a10d1ca0c83e",
+      "fromNodeID": "2c5e7256-d9ab-408a-8e7d-87270c8ec9a3",
+      "toNodeID": "93973308-331c-4ae4-bd99-ceb0c29bd650",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "12672803-fcd6-4a2f-9b4d-be3730f0593b",
+      "fromNodeID": "93973308-331c-4ae4-bd99-ceb0c29bd650",
+      "toNodeID": "193bc68f-981a-4f9c-a70d-2db4ec14b95d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1e7f510b-b705-4d32-b8f2-dcd633e6d1e8",
+      "fromNodeID": "193bc68f-981a-4f9c-a70d-2db4ec14b95d",
+      "toNodeID": "a7afdd45-4aa0-4f5c-b3ba-4e4f77f3d746",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c20b471c-ad62-4487-ba0e-e7cb596bde47",
+      "fromNodeID": "a7afdd45-4aa0-4f5c-b3ba-4e4f77f3d746",
+      "toNodeID": "fdb62734-c224-4a14-85ee-99306bae934e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "39a076f9-f214-4c72-8b60-f9d57093bf24",
+      "fromNodeID": "e0c26050-ec5c-4aad-9510-f387e1076c19",
+      "toNodeID": "d0e24cd1-d8a4-4bb4-aa32-5d68898b2727",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6997e5b7-e8bb-4ec7-9719-a7c2a31c16fa",
+      "fromNodeID": "d0e24cd1-d8a4-4bb4-aa32-5d68898b2727",
+      "toNodeID": "d35d1be3-eafa-497f-a20a-6afa5cb4eff0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6bbdca22-8295-4e9b-9936-6e07cdd0a04a",
+      "fromNodeID": "d35d1be3-eafa-497f-a20a-6afa5cb4eff0",
+      "toNodeID": "4aa8f05f-7d5e-4355-8658-aa8a31ee73ce",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e67cd23f-7959-43f1-b16c-78adec3327a8",
+      "fromNodeID": "4aa8f05f-7d5e-4355-8658-aa8a31ee73ce",
+      "toNodeID": "9e1b35e0-0934-44f4-8d7a-5a26c4b2bc5c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "891637ef-1193-4582-bd33-d9ba69b10ce1",
+      "fromNodeID": "39f49e23-a952-4975-a441-df61d303c5ef",
+      "toNodeID": "8179e90f-a75f-489d-912a-bacf2df29546",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "fc8b438b-fb40-4e97-9adf-3f17077c84d4",
+      "fromNodeID": "8179e90f-a75f-489d-912a-bacf2df29546",
+      "toNodeID": "c6586855-65ee-4223-a725-841a8a1151ce",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "520ae521-cc6d-43a7-b734-1c92f1a1699d",
+      "fromNodeID": "c6586855-65ee-4223-a725-841a8a1151ce",
+      "toNodeID": "81df48ab-c0dc-474c-bbd7-a7b6767ddc19",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ab72c934-9ae2-49dd-8660-141853651d38",
+      "fromNodeID": "81df48ab-c0dc-474c-bbd7-a7b6767ddc19",
+      "toNodeID": "0a4bcb72-3753-4e30-89aa-2bc574327994",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6280ee00-062b-4880-81c9-d85d5b772e11",
+      "fromNodeID": "81df48ab-c0dc-474c-bbd7-a7b6767ddc19",
+      "toNodeID": "fb76b6dd-ff1c-45fa-9227-56c6aeeca7c9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c8a75ca6-9e15-42fb-80f6-f35a8744e88a",
+      "fromNodeID": "81df48ab-c0dc-474c-bbd7-a7b6767ddc19",
+      "toNodeID": "72af7bcc-45cb-4554-980c-1d6b49898a75",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "347d4f22-2251-46f3-9a3a-c689f815a65c",
+      "fromNodeID": "fb76b6dd-ff1c-45fa-9227-56c6aeeca7c9",
+      "toNodeID": "712716d3-6cfb-4e7c-b241-be3823ce871f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d841013f-f888-4cc6-b2b9-9e1c06e14bad",
+      "fromNodeID": "72af7bcc-45cb-4554-980c-1d6b49898a75",
+      "toNodeID": "d793401e-ec84-4227-8972-8fc351612e9e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "faf7a21c-a145-4d3a-a9fb-31e319979716",
+      "fromNodeID": "d793401e-ec84-4227-8972-8fc351612e9e",
+      "toNodeID": "f7ba5c63-bc46-4bf5-b459-a0047b158c45",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "49f0f1e5-7e68-470f-b42c-b69caa2e5b65",
+      "fromNodeID": "f7ba5c63-bc46-4bf5-b459-a0047b158c45",
+      "toNodeID": "61dc2e93-64d4-4421-b01b-26c5a1e33971",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "31b99108-9605-420e-9157-f9ca3aea98f9",
+      "fromNodeID": "61dc2e93-64d4-4421-b01b-26c5a1e33971",
+      "toNodeID": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a5bf06e7-3641-411d-86ae-07965dd824d8",
+      "fromNodeID": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "toNodeID": "3a518097-e9e5-4274-a1ff-f22918293d4e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8c221e37-e9de-4bb6-a0ef-5ef770fe1b7c",
+      "fromNodeID": "3a518097-e9e5-4274-a1ff-f22918293d4e",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "74a10b67-ae59-46eb-a646-5f1a916a64c1",
+      "fromNodeID": "3a518097-e9e5-4274-a1ff-f22918293d4e",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "65121997-d2c0-45c8-91b2-9cea1633b463",
+      "fromNodeID": "3a518097-e9e5-4274-a1ff-f22918293d4e",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "60f4fa06-0042-41ef-ac37-ada61dd0612f",
+      "fromNodeID": "3a518097-e9e5-4274-a1ff-f22918293d4e",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "80d884d4-b6d5-46a6-8388-c45e061cf400",
+      "fromNodeID": "3a518097-e9e5-4274-a1ff-f22918293d4e",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8ca9f794-e9f1-4e54-8c79-6fdc95753690",
+      "fromNodeID": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "cc18de30-a370-476d-9792-aeb33d8de285",
+      "fromNodeID": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "af4d0498-7911-4871-8ab8-3294e13fd40b",
+      "fromNodeID": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b3df3340-0a92-4a61-835d-1ca5f276c1a8",
+      "fromNodeID": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8e041e0e-794f-442c-aca1-9a96b5cf8cb1",
+      "fromNodeID": "e9ebda33-32b2-4a91-898d-be5586b1f886",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "4067e800-6dba-49db-ac5d-53a9898069c7",
+      "fromNodeID": "c6586855-65ee-4223-a725-841a8a1151ce",
+      "toNodeID": "594fe6e6-98b1-423a-bd6a-f94093dd173b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e7845d92-eec2-4403-82e2-573fa94e6bd1",
+      "fromNodeID": "c6586855-65ee-4223-a725-841a8a1151ce",
+      "toNodeID": "b38f2351-7894-42b1-96b1-273c2775c0a9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "277eae97-3f0d-4d3d-b759-538be7553cd0",
+      "fromNodeID": "594fe6e6-98b1-423a-bd6a-f94093dd173b",
+      "toNodeID": "f0ff1eb8-299e-4e3e-8048-6fda2b7471f3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d44aa130-3c94-4f5b-b6a6-8c0545fef436",
+      "fromNodeID": "b38f2351-7894-42b1-96b1-273c2775c0a9",
+      "toNodeID": "f846bc7a-85ce-4bda-b22a-de46cf2d14d4",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e9f05474-b9aa-43d8-ad08-1f84cab4d611",
+      "fromNodeID": "f846bc7a-85ce-4bda-b22a-de46cf2d14d4",
+      "toNodeID": "aa2e0f91-e425-4826-bbfd-595b9d182ba9",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2ee687fc-8675-4a36-b70f-114067a53a92",
+      "fromNodeID": "30132561-9f11-411d-9c43-06c7f2a1a34d",
+      "toNodeID": "6bdf52d5-85fe-42eb-9fc6-13493041599d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "aeaecdf3-5d5d-4ae9-9939-31e483262e67",
+      "fromNodeID": "4ac9a46a-fd44-48ce-895b-2207c3ab8789",
+      "toNodeID": "e212707c-c1f8-497d-a350-82f467e8fd0b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3fc4b5ff-2c7c-4acf-98da-bf5eedf68e75",
+      "fromNodeID": "e212707c-c1f8-497d-a350-82f467e8fd0b",
+      "toNodeID": "747b7b04-f20a-4376-8a1c-f21bdf37b83b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "63425db8-34fb-41c6-8a7b-762bb420c837",
+      "fromNodeID": "747b7b04-f20a-4376-8a1c-f21bdf37b83b",
+      "toNodeID": "5f477095-57aa-4c0f-96d5-31cc2ca5a237",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "5cc4a686-76e8-4f32-a72d-f19f8261944d",
+      "fromNodeID": "5f477095-57aa-4c0f-96d5-31cc2ca5a237",
+      "toNodeID": "857dc278-f2cf-4d8c-873c-e08cc2b06c30",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e64d8691-6d5d-4d2c-99bf-ffd599829f19",
+      "fromNodeID": "5f477095-57aa-4c0f-96d5-31cc2ca5a237",
+      "toNodeID": "a8e665ac-0679-4d9b-9c0e-c075393e7360",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "07768c71-36ea-47b4-b7e4-adae193aba76",
+      "fromNodeID": "5f477095-57aa-4c0f-96d5-31cc2ca5a237",
+      "toNodeID": "e44b88fc-5077-4d92-b2a7-e95260a13d1e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3930ffd7-5b1c-4c8c-af6d-9199af1be1ed",
+      "fromNodeID": "a8e665ac-0679-4d9b-9c0e-c075393e7360",
+      "toNodeID": "6e7a401b-4602-48d3-929b-a907d678464f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e7347528-1923-4bdc-b96f-7a4db166cebe",
+      "fromNodeID": "e44b88fc-5077-4d92-b2a7-e95260a13d1e",
+      "toNodeID": "800a65f3-244f-4375-a100-cfcd692f9767",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "33d88087-e464-41fa-8a26-0993d451fb3d",
+      "fromNodeID": "800a65f3-244f-4375-a100-cfcd692f9767",
+      "toNodeID": "334f100e-1fe3-49ff-803e-4f627c66a762",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d0e32890-2d6d-41bd-9fcf-39568bcd0fc3",
+      "fromNodeID": "334f100e-1fe3-49ff-803e-4f627c66a762",
+      "toNodeID": "9786905d-cf10-4bd6-8243-5a55c40d1cd4",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4fa48004-fd47-4769-9ff9-448e3b11f56c",
+      "fromNodeID": "9786905d-cf10-4bd6-8243-5a55c40d1cd4",
+      "toNodeID": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "bc10ae17-3f6a-4960-bee2-59adc5ac59f9",
+      "fromNodeID": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "toNodeID": "d4941298-0118-4ce5-b2d8-88bc878ab2be",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "842313a3-6d30-4856-98ab-fa15eb4355e9",
+      "fromNodeID": "d4941298-0118-4ce5-b2d8-88bc878ab2be",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a3ab627a-d011-4b1a-afd7-8845b1ce1c40",
+      "fromNodeID": "d4941298-0118-4ce5-b2d8-88bc878ab2be",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f5968adf-d223-4605-8e2f-ac051a8dac29",
+      "fromNodeID": "d4941298-0118-4ce5-b2d8-88bc878ab2be",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e15e01e3-b96e-4517-8dd9-7c19d244bc9f",
+      "fromNodeID": "d4941298-0118-4ce5-b2d8-88bc878ab2be",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b2b2ddb6-948f-4c8a-bc85-e0b2aa30c770",
+      "fromNodeID": "d4941298-0118-4ce5-b2d8-88bc878ab2be",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5cf75148-5b95-48c4-b15f-f346db16f3c5",
+      "fromNodeID": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b9409822-3612-43ca-9b5b-d0a5a249fc73",
+      "fromNodeID": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b3690424-6ae0-4b40-aff9-f5344d8b04bb",
+      "fromNodeID": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "87d9be40-0b7c-4ebe-b2db-7b100f8065e5",
+      "fromNodeID": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "4de75b8a-27ed-4b36-b29e-a2c4ae15050e",
+      "fromNodeID": "ce356cd3-f97a-48ac-bea9-d61d95dbf565",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f85ddb91-406c-47ea-925d-ce50998adb0d",
+      "fromNodeID": "747b7b04-f20a-4376-8a1c-f21bdf37b83b",
+      "toNodeID": "77fb4789-0880-4fdf-9d32-0d728c736eaa",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "dc92e465-1f58-4bb0-96f6-bac33e1bc3bb",
+      "fromNodeID": "747b7b04-f20a-4376-8a1c-f21bdf37b83b",
+      "toNodeID": "fe94aaab-9f1e-4dfa-878a-7fc14f6d3a08",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "25c562f5-3a36-4f49-9ea1-9202cd81fd1f",
+      "fromNodeID": "77fb4789-0880-4fdf-9d32-0d728c736eaa",
+      "toNodeID": "fb9f0d2e-5116-4e7b-ac44-083935b4f9f4",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "50b9a6ef-683b-4119-87c8-461ae77ca955",
+      "fromNodeID": "fe94aaab-9f1e-4dfa-878a-7fc14f6d3a08",
+      "toNodeID": "615ae61d-afe6-4ef4-aee6-f7e6b7400030",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "83311c38-2484-4c4e-bd63-c69ea7742cf3",
+      "fromNodeID": "615ae61d-afe6-4ef4-aee6-f7e6b7400030",
+      "toNodeID": "353b976d-4a84-40f6-ba9e-71d1c6d40150",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d58684d5-bd53-4663-a07b-f6e313882a02",
+      "fromNodeID": "ff16b0cc-89e3-49fc-8002-ac5f6c54f0b0",
+      "toNodeID": "1f3f00fd-9a65-4113-babe-ab8eb7143be3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2f39e824-083b-49f3-9b9b-78b395d69b7f",
+      "fromNodeID": "e4ccc93f-e37e-4399-81b8-809c31f10aab",
+      "toNodeID": "a0da9329-15ac-47cd-9c39-a79daa350d41",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3316a36e-7aa8-4264-8dda-cda8f0f739e6",
+      "fromNodeID": "a0da9329-15ac-47cd-9c39-a79daa350d41",
+      "toNodeID": "f97f4168-4ab1-4fbd-9a5d-35a3d1c0eea7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "75f20bd6-9944-417c-aae8-27b95d41ac48",
+      "fromNodeID": "f97f4168-4ab1-4fbd-9a5d-35a3d1c0eea7",
+      "toNodeID": "5f9d0f07-174e-4811-81b6-de99b0d4ee6f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "49aeb990-3b40-4d0e-b529-119c03732f14",
+      "fromNodeID": "f97f4168-4ab1-4fbd-9a5d-35a3d1c0eea7",
+      "toNodeID": "a2cacc98-fa63-4fc6-ab98-2e174e267900",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "a96f30b7-f3dd-4bd5-93a2-9ae7f35aff0c",
+      "fromNodeID": "f97f4168-4ab1-4fbd-9a5d-35a3d1c0eea7",
+      "toNodeID": "3758236c-7914-41c3-ba15-43b48d9a4dd5",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f270f633-e210-46e7-9f3c-6b3a5ceeb4b0",
+      "fromNodeID": "a2cacc98-fa63-4fc6-ab98-2e174e267900",
+      "toNodeID": "b3357e40-9e55-4503-991d-da4ba4a3e867",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "4860b0dd-fa05-47ef-8cde-3930af2b5d1e",
+      "fromNodeID": "3758236c-7914-41c3-ba15-43b48d9a4dd5",
+      "toNodeID": "0a62ca35-7747-4da1-aa5e-d4a3e445f6a6",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e570d0ca-1d53-4526-84a1-270a9a9412b1",
+      "fromNodeID": "0a62ca35-7747-4da1-aa5e-d4a3e445f6a6",
+      "toNodeID": "40f32c57-b564-488b-af52-a6e0f7873d2a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "123e60b3-1358-4468-9d0f-352e28a1456d",
+      "fromNodeID": "40f32c57-b564-488b-af52-a6e0f7873d2a",
+      "toNodeID": "37a9af9d-3c09-46e5-80ab-42185d74d42f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3fb259e0-23c6-46b6-b201-5ab1b2edbfa4",
+      "fromNodeID": "40f32c57-b564-488b-af52-a6e0f7873d2a",
+      "toNodeID": "7d113124-40ea-46da-8c91-fd3c244ed514",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "5d894d47-63ab-4dc3-bff7-d18a1be62b89",
+      "fromNodeID": "37a9af9d-3c09-46e5-80ab-42185d74d42f",
+      "toNodeID": "7aac85b4-7e7b-40c0-9f14-51630f55ac72",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2ed655b6-abb2-47ff-a3fd-d7d87b0319e7",
+      "fromNodeID": "7d113124-40ea-46da-8c91-fd3c244ed514",
+      "toNodeID": "8a7e1b91-e4b6-4cb3-953e-d156a581c8a1",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f353211d-467d-42d2-9ddc-8ecd8abd715e",
+      "fromNodeID": "8a7e1b91-e4b6-4cb3-953e-d156a581c8a1",
+      "toNodeID": "f21b20dc-f117-477c-bb87-6d22790bec37",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c18bbb92-e9c7-45de-a969-ad744ce2d683",
+      "fromNodeID": "f21b20dc-f117-477c-bb87-6d22790bec37",
+      "toNodeID": "ce984903-e4f2-4751-8bb1-fe5d0babed56",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a8245522-efcd-4727-b925-eda0d5ed39fd",
+      "fromNodeID": "ce984903-e4f2-4751-8bb1-fe5d0babed56",
+      "toNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "02f4e84d-4e97-4802-aa49-b9b086e5abec",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ef607357-87b2-4a61-875f-f8aeb0a1d0e9",
+      "fromNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7077151e-abdb-47d7-851e-11766f1e06dd",
+      "fromNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a0c03187-d06f-4064-8c54-c601ec5844aa",
+      "fromNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "41f2bfbd-f821-41f5-983e-fb4715a46f4f",
+      "fromNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d56d11da-b262-49c1-9c46-216f096e028f",
+      "fromNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f0ede056-b62b-4c8e-b56c-9a7aa579df49",
+      "fromNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "6a8a12c6-8261-4980-9369-7e6909a1d247",
+      "fromNodeID": "b5e1a3e1-d3ed-4757-b779-f93ec3346bd6",
+      "toNodeID": "eea7eaa7-6da5-4cf8-9762-5071c9a4ee05",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7f325ac0-9b30-4617-b808-f63da471a610",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "3fd860f9-9a2c-4565-a4c4-b4d6597c5146",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "fdba1f2b-c90c-47c0-9749-a9db25889ab3",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8543ab8c-1e3b-403b-82e9-75b9bc080101",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "97128810-66db-4882-8076-61872211f14b",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d1be33ab-807b-4253-a8fe-87270ad7d7a3",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "48b5f0e4-1e15-4a9e-9af3-98918d7dac6a",
+      "fromNodeID": "0dd2a80a-5d39-4d94-abed-4c3843b31ac6",
+      "toNodeID": "25aaf093-6812-4943-b89d-a543dbfb593d",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5272052e-71b0-4721-a002-7f42b4d456a6",
+      "fromNodeID": "a0da9329-15ac-47cd-9c39-a79daa350d41",
+      "toNodeID": "4053a9e0-cc2a-40a0-b1e5-dbb21628eae0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8af0d53f-36c6-4404-a7c9-0e0c708ae9e4",
+      "fromNodeID": "a0da9329-15ac-47cd-9c39-a79daa350d41",
+      "toNodeID": "419a6fa4-73b4-4d53-bfe9-2092e4ca7c20",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "ff4a0d9b-a946-4e64-9afe-f4559a33a9e8",
+      "fromNodeID": "4053a9e0-cc2a-40a0-b1e5-dbb21628eae0",
+      "toNodeID": "0159a5cb-bebf-4909-9172-b361d5899156",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8452630c-2be6-4083-ab05-8477c1087040",
+      "fromNodeID": "419a6fa4-73b4-4d53-bfe9-2092e4ca7c20",
+      "toNodeID": "263deb1a-43c1-44f5-a18c-c6bb8293ac6f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "821f01a2-9f9f-4b74-a93e-ec7df20e951d",
+      "fromNodeID": "263deb1a-43c1-44f5-a18c-c6bb8293ac6f",
+      "toNodeID": "9e8a1bd9-af71-4a03-b8bf-3f6997a78ebe",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f2e38ba4-989f-46db-a927-63d809c563ea",
+      "fromNodeID": "9e8a1bd9-af71-4a03-b8bf-3f6997a78ebe",
+      "toNodeID": "4e1bb86d-7ccc-4cf9-bb7c-c74f3841739d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2e0b9743-98a6-4b85-8ae5-73bca8ae117e",
+      "fromNodeID": "9e8a1bd9-af71-4a03-b8bf-3f6997a78ebe",
+      "toNodeID": "44706c97-6200-4a55-bcdd-7843779ba141",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "ce7bbdd7-4bcc-42ba-aeea-66dfcaac8b1f",
+      "fromNodeID": "4e1bb86d-7ccc-4cf9-bb7c-c74f3841739d",
+      "toNodeID": "b1ca4938-1970-41be-92a4-b02dc1ef1056",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e554d7d1-841c-4682-94f3-684ee5d95b6a",
+      "fromNodeID": "44706c97-6200-4a55-bcdd-7843779ba141",
+      "toNodeID": "f19364cf-3465-48d1-8fd6-930e84cee431",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "31b917f1-19ba-422c-80d2-882f39b89567",
+      "fromNodeID": "f19364cf-3465-48d1-8fd6-930e84cee431",
+      "toNodeID": "07567e3e-5021-451a-9aec-d233bc549b3c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2286b29f-0b06-456b-b6c4-f77e61820d75",
+      "fromNodeID": "96bbeacd-0eb3-48e9-9940-caf19b650e65",
+      "toNodeID": "09152c20-d834-4074-8b43-58cc9bb28be8",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "dd3bafb2-4bea-4534-99a5-26b816c92233",
+      "fromNodeID": "0317190c-abb1-4456-926d-a945ac303628",
+      "toNodeID": "ff7d4cc1-fde3-47de-b194-bfe1facfaedb",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "ea77dd33-dd2b-4401-9a2b-09d12fd67e8f",
+      "fromNodeID": "e9a61407-10a7-4c4a-929c-378bc819d630",
+      "toNodeID": "b2bcd5a7-1ceb-4cde-b951-96416c88c6c3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f15ee18d-641f-4f1f-acff-5210edee8c8c",
+      "fromNodeID": "70680290-a288-410b-8f3e-26add8331ab6",
+      "toNodeID": "2f98b182-0ba0-49f9-a4f6-efde46969c4b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1629bc10-efaf-4dc0-b1c8-2df94095f57f",
+      "fromNodeID": "2f98b182-0ba0-49f9-a4f6-efde46969c4b",
+      "toNodeID": "7d340fad-8721-4fcd-9707-f4e6bd03e05c",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "eb78ab19-7371-4b94-b6df-3ba7cbe4da6f",
+      "fromNodeID": "2f98b182-0ba0-49f9-a4f6-efde46969c4b",
+      "toNodeID": "7d340fad-8721-4fcd-9707-f4e6bd03e05c",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8fb9093c-6c69-4143-8445-d8e8d7641190",
+      "fromNodeID": "2f98b182-0ba0-49f9-a4f6-efde46969c4b",
+      "toNodeID": "7d340fad-8721-4fcd-9707-f4e6bd03e05c",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "84734191-4724-4ad0-a603-a065b6d5d1a7",
+      "fromNodeID": "e5683a3b-ccda-4f48-ba64-c1830460ccc3",
+      "toNodeID": "66226317-ebb9-4ad7-a82e-2f17fdaa12e9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "37170128-cc66-4271-94ff-d48280fb4c16",
+      "fromNodeID": "66226317-ebb9-4ad7-a82e-2f17fdaa12e9",
+      "toNodeID": "43124df3-d9ee-44f2-9d4d-c26475311260",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "92bc75fb-6b54-4a4e-900b-302bd35420ed",
+      "fromNodeID": "43124df3-d9ee-44f2-9d4d-c26475311260",
+      "toNodeID": "f2c988dc-6d28-4c03-8f24-4c71216b8fe4",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f6203836-00ef-4a02-bb33-8aeab2894e8d",
+      "fromNodeID": "f2c988dc-6d28-4c03-8f24-4c71216b8fe4",
+      "toNodeID": "3e75d16d-ea6f-4c94-9cd4-4cf4468dfc8b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "73557e75-a0d4-4b94-98eb-0f44ae64a4c5",
+      "fromNodeID": "3e75d16d-ea6f-4c94-9cd4-4cf4468dfc8b",
+      "toNodeID": "c9fab078-d8aa-42b4-805a-cddb8584d1fc",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a0b353a1-0145-47b1-bb57-46db8fd480a8",
+      "fromNodeID": "c9fab078-d8aa-42b4-805a-cddb8584d1fc",
+      "toNodeID": "0111fa9d-59b8-4d03-abbf-a4a5480894d0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "a67f7acc-b695-41f8-99fc-19e12e330b8e",
+      "fromNodeID": "0111fa9d-59b8-4d03-abbf-a4a5480894d0",
+      "toNodeID": "b9ed3d15-2f70-4016-9411-8091a3bd79ac",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c92cc40a-0980-41f5-9b02-d177df8dbbd5",
+      "fromNodeID": "3e75d16d-ea6f-4c94-9cd4-4cf4468dfc8b",
+      "toNodeID": "9de56434-b2e6-4321-bd92-fb1690193448",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b7f119bb-09b0-45d2-b6bb-9d868ba1d12c",
+      "fromNodeID": "3e75d16d-ea6f-4c94-9cd4-4cf4468dfc8b",
+      "toNodeID": "9de56434-b2e6-4321-bd92-fb1690193448",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "1251a473-2363-433b-b5e6-9c6d0fccfcaf",
+      "fromNodeID": "3e75d16d-ea6f-4c94-9cd4-4cf4468dfc8b",
+      "toNodeID": "9de56434-b2e6-4321-bd92-fb1690193448",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "69352bd6-3c6e-4d96-9a07-4ed75f34efcf",
+      "fromNodeID": "66226317-ebb9-4ad7-a82e-2f17fdaa12e9",
+      "toNodeID": "fedfd388-e40f-47a5-ae90-f25992990df1",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a8abf038-f811-41a2-846d-34935c4b49bc",
+      "fromNodeID": "fa56c48a-dd10-4f61-aa66-c4e3bd486ecb",
+      "toNodeID": "3572d454-76cc-4d38-8b8b-8f82ae51dad8",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e50cbb36-98fa-4a92-b9d6-4ed4f5fd6839",
+      "fromNodeID": "3572d454-76cc-4d38-8b8b-8f82ae51dad8",
+      "toNodeID": "182410ed-26a2-4740-9925-6d1529a744f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f569a616-f92f-4b69-84e2-ed5ae12cee5f",
+      "fromNodeID": "3572d454-76cc-4d38-8b8b-8f82ae51dad8",
+      "toNodeID": "182410ed-26a2-4740-9925-6d1529a744f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "555c31fa-73ba-49ea-81b2-0840c3daa151",
+      "fromNodeID": "3572d454-76cc-4d38-8b8b-8f82ae51dad8",
+      "toNodeID": "182410ed-26a2-4740-9925-6d1529a744f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "34cb17bf-f917-4e56-8725-e718be56d337",
+      "fromNodeID": "d605c44c-9a6f-4898-b462-e70bd21d034c",
+      "toNodeID": "ef2f48a5-153e-49bd-9d0a-9e22d2892a8c",
+      "edgeType": "STARTS_WITH"
+    }
+  ],
+  "idProvider": {}
+}

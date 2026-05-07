@@ -1,0 +1,2986 @@
+{
+  "id": "e0f57cde-ec15-490e-afe9-d4d65011e0f0",
+  "name": "[ROOT]",
+  "content": "[ROOT]",
+  "levelNumber": 0,
+  "rawText": "[ROOT]",
+  "children": [
+    {
+      "id": "c05a6246-e98e-4c9e-ae53-f9afcf069fbc",
+      "name": "TRNX-RECORD",
+      "content": "01TRNX-RECORD.",
+      "levelNumber": 1,
+      "rawText": "01  TRNX-RECORD.",
+      "children": [
+        {
+          "id": "989cf4a4-8625-4a63-b83a-04e2993212b5",
+          "name": "TRNX-KEY",
+          "content": "05TRNX-KEY.",
+          "levelNumber": 5,
+          "rawText": "05  TRNX-KEY.",
+          "children": [
+            {
+              "id": "c1f9f648-1801-4619-af72-203e50c3de9b",
+              "name": "TRNX-CARD-NUM",
+              "content": "10TRNX-CARD-NUMPICX(16).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-CARD-NUM                       PIC X(16).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "c4869806-f0df-4d69-aae8-106e23f1c72b",
+              "name": "TRNX-ID",
+              "content": "10TRNX-IDPICX(16).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-ID                             PIC X(16).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "63663c3d-3038-43fc-85da-71a6f7eb51e8",
+          "name": "TRNX-REST",
+          "content": "05TRNX-REST.",
+          "levelNumber": 5,
+          "rawText": "05  TRNX-REST.",
+          "children": [
+            {
+              "id": "e5f446ac-ff20-46cb-8b92-d4dcebae0cc9",
+              "name": "TRNX-TYPE-CD",
+              "content": "10TRNX-TYPE-CDPICX(02).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-TYPE-CD                        PIC X(02).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "85dfccee-38d2-4c38-945b-9d1c2c7b367a",
+              "name": "TRNX-CAT-CD",
+              "content": "10TRNX-CAT-CDPIC9(04).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-CAT-CD                         PIC 9(04).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "NUMBER",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "672013a3-bde7-4e64-bd58-e6ed1b6da242",
+              "name": "TRNX-SOURCE",
+              "content": "10TRNX-SOURCEPICX(10).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-SOURCE                         PIC X(10).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "f3e2e6f8-c575-400e-9a47-c171bc18e0af",
+              "name": "TRNX-DESC",
+              "content": "10TRNX-DESCPICX(100).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-DESC                           PIC X(100).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "afe4b732-0b55-45c0-92c0-5f326ad8d354",
+              "name": "TRNX-AMT",
+              "content": "10TRNX-AMTPICS9(09)V99.",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-AMT                            PIC S9(09)V99.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "NUMBER",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "99e89c2e-480e-43e8-af61-7175bc31e6e8",
+              "name": "TRNX-MERCHANT-ID",
+              "content": "10TRNX-MERCHANT-IDPIC9(09).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-MERCHANT-ID                    PIC 9(09).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "NUMBER",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "740593b5-d1cd-4ee9-9afb-e3940aaf11ce",
+              "name": "TRNX-MERCHANT-NAME",
+              "content": "10TRNX-MERCHANT-NAMEPICX(50).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-MERCHANT-NAME                  PIC X(50).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "c192b1d6-0be6-411f-be94-3deba898c53e",
+              "name": "TRNX-MERCHANT-CITY",
+              "content": "10TRNX-MERCHANT-CITYPICX(50).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-MERCHANT-CITY                  PIC X(50).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "2bf2933d-5d35-4367-aeee-fd40221d6518",
+              "name": "TRNX-MERCHANT-ZIP",
+              "content": "10TRNX-MERCHANT-ZIPPICX(10).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-MERCHANT-ZIP                   PIC X(10).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "0a2e34fd-3af0-4908-beaa-01b8dd3ec355",
+              "name": "TRNX-ORIG-TS",
+              "content": "10TRNX-ORIG-TSPICX(26).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-ORIG-TS                        PIC X(26).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "88ba520a-e757-4278-a10b-d6c77527237c",
+              "name": "TRNX-PROC-TS",
+              "content": "10TRNX-PROC-TSPICX(26).",
+              "levelNumber": 10,
+              "rawText": "10  TRNX-PROC-TS                        PIC X(26).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "7450c5a9-84db-430c-9911-cfd1da510835",
+              "name": "FILLER",
+              "content": "10FILLERPICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER                              PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "8f48fb4f-0bdb-497e-abbc-95e82a72f6c6",
+      "name": "CARD-XREF-RECORD",
+      "content": "01CARD-XREF-RECORD.",
+      "levelNumber": 1,
+      "rawText": "01 CARD-XREF-RECORD.",
+      "children": [
+        {
+          "id": "4fad21e4-45cd-4c67-9350-42fa2bcf04e8",
+          "name": "XREF-CARD-NUM",
+          "content": "05XREF-CARD-NUMPICX(16).",
+          "levelNumber": 5,
+          "rawText": "05  XREF-CARD-NUM                     PIC X(16).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "d22ad41f-9692-45e8-931f-fb94dd3b0a75",
+          "name": "XREF-CUST-ID",
+          "content": "05XREF-CUST-IDPIC9(09).",
+          "levelNumber": 5,
+          "rawText": "05  XREF-CUST-ID                      PIC 9(09).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "d112f210-24bb-479d-9496-c1a7a75f4c65",
+          "name": "XREF-ACCT-ID",
+          "content": "05XREF-ACCT-IDPIC9(11).",
+          "levelNumber": 5,
+          "rawText": "05  XREF-ACCT-ID                      PIC 9(11).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "9906b8b3-84f0-4149-b319-b1b6c1fefe11",
+          "name": "FILLER",
+          "content": "05FILLERPICX(14).",
+          "levelNumber": 5,
+          "rawText": "05  FILLER                            PIC X(14).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "d4c0f085-5c92-47e8-84b3-df3824942473",
+      "name": "CUSTOMER-RECORD",
+      "content": "01CUSTOMER-RECORD.",
+      "levelNumber": 1,
+      "rawText": "01  CUSTOMER-RECORD.",
+      "children": [
+        {
+          "id": "71b957d2-8e10-4b6a-a5c3-045f92d64313",
+          "name": "CUST-ID",
+          "content": "05CUST-IDPIC9(09).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-ID                                 PIC 9(09).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "ddbdf4df-e246-4fb0-89bc-f9bf70968f9b",
+          "name": "CUST-FIRST-NAME",
+          "content": "05CUST-FIRST-NAMEPICX(25).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-FIRST-NAME                         PIC X(25).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "964b23b0-636d-40fe-99f5-0194c143b389",
+          "name": "CUST-MIDDLE-NAME",
+          "content": "05CUST-MIDDLE-NAMEPICX(25).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-MIDDLE-NAME                        PIC X(25).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "2f3dc228-a7f8-4584-bd5b-bdc0d36193c7",
+          "name": "CUST-LAST-NAME",
+          "content": "05CUST-LAST-NAMEPICX(25).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-LAST-NAME                          PIC X(25).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "b27f084c-65d0-4da2-9df9-8cabd35a43de",
+          "name": "CUST-ADDR-LINE-1",
+          "content": "05CUST-ADDR-LINE-1PICX(50).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-ADDR-LINE-1                        PIC X(50).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "4d0073e9-e208-49f4-b8ab-77c20d85c92c",
+          "name": "CUST-ADDR-LINE-2",
+          "content": "05CUST-ADDR-LINE-2PICX(50).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-ADDR-LINE-2                        PIC X(50).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "bc7b4191-d6da-451b-a374-3448d84c2309",
+          "name": "CUST-ADDR-LINE-3",
+          "content": "05CUST-ADDR-LINE-3PICX(50).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-ADDR-LINE-3                        PIC X(50).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "72fa23f5-a6bc-4881-8a42-1bbbaa91b0f9",
+          "name": "CUST-ADDR-STATE-CD",
+          "content": "05CUST-ADDR-STATE-CDPICX(02).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-ADDR-STATE-CD                      PIC X(02).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "b5efe25a-f1fb-4fb4-975b-6937afa29a4f",
+          "name": "CUST-ADDR-COUNTRY-CD",
+          "content": "05CUST-ADDR-COUNTRY-CDPICX(03).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-ADDR-COUNTRY-CD                    PIC X(03).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "424887d5-964d-4b73-8650-280bf97ff8ac",
+          "name": "CUST-ADDR-ZIP",
+          "content": "05CUST-ADDR-ZIPPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-ADDR-ZIP                           PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "5bec982b-2d1b-4a49-975a-f38887e34d60",
+          "name": "CUST-PHONE-NUM-1",
+          "content": "05CUST-PHONE-NUM-1PICX(15).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-PHONE-NUM-1                        PIC X(15).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "b8300535-1e13-4c24-8188-d6df4131cb13",
+          "name": "CUST-PHONE-NUM-2",
+          "content": "05CUST-PHONE-NUM-2PICX(15).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-PHONE-NUM-2                        PIC X(15).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "ff4fef2e-6916-49a7-8962-4e4c1ad7f330",
+          "name": "CUST-SSN",
+          "content": "05CUST-SSNPIC9(09).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-SSN                                PIC 9(09).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "b0fae753-98a1-4cc6-80d9-f712c9e4e015",
+          "name": "CUST-GOVT-ISSUED-ID",
+          "content": "05CUST-GOVT-ISSUED-IDPICX(20).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-GOVT-ISSUED-ID                     PIC X(20).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "be7a3039-3ee6-4fb8-9556-bbc66ca141b5",
+          "name": "CUST-DOB-YYYYMMDD",
+          "content": "05CUST-DOB-YYYYMMDDPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-DOB-YYYYMMDD                       PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "de4dd616-dc84-4a54-9ff7-33211158a3a8",
+          "name": "CUST-EFT-ACCOUNT-ID",
+          "content": "05CUST-EFT-ACCOUNT-IDPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-EFT-ACCOUNT-ID                     PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "0398c31c-ff8d-42ba-bde9-49067d724033",
+          "name": "CUST-PRI-CARD-HOLDER-IND",
+          "content": "05CUST-PRI-CARD-HOLDER-INDPICX(01).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-PRI-CARD-HOLDER-IND                PIC X(01).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "f432e7cb-8184-4ba6-b49d-971416b28967",
+          "name": "CUST-FICO-CREDIT-SCORE",
+          "content": "05CUST-FICO-CREDIT-SCOREPIC9(03).",
+          "levelNumber": 5,
+          "rawText": "05  CUST-FICO-CREDIT-SCORE                  PIC 9(03).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "10916747-550a-4591-b7b4-6ba0273c1057",
+          "name": "FILLER",
+          "content": "05FILLERPICX(168).",
+          "levelNumber": 5,
+          "rawText": "05  FILLER                                  PIC X(168).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "c8be0ef1-4c96-4ed7-afa0-d8c09af31698",
+      "name": "ACCOUNT-RECORD",
+      "content": "01ACCOUNT-RECORD.",
+      "levelNumber": 1,
+      "rawText": "01  ACCOUNT-RECORD.",
+      "children": [
+        {
+          "id": "6b5cdf34-fd0b-4aa8-ac58-3b787caadda8",
+          "name": "ACCT-ID",
+          "content": "05ACCT-IDPIC9(11).",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-ID                           PIC 9(11).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "84d19ff1-e4f5-40d4-99d6-3acc3b3bb1b7",
+          "name": "ACCT-ACTIVE-STATUS",
+          "content": "05ACCT-ACTIVE-STATUSPICX(01).",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-ACTIVE-STATUS                PIC X(01).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "e7c058dc-01da-419a-8155-0d7afd27736c",
+          "name": "ACCT-CURR-BAL",
+          "content": "05ACCT-CURR-BALPICS9(10)V99.",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-CURR-BAL                     PIC S9(10)V99.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "2998b0c5-babb-495e-a4a2-2be309bf28e9",
+          "name": "ACCT-CREDIT-LIMIT",
+          "content": "05ACCT-CREDIT-LIMITPICS9(10)V99.",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-CREDIT-LIMIT                 PIC S9(10)V99.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "edb01ee5-1005-440f-8237-fe0796d3d25c",
+          "name": "ACCT-CASH-CREDIT-LIMIT",
+          "content": "05ACCT-CASH-CREDIT-LIMITPICS9(10)V99.",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-CASH-CREDIT-LIMIT            PIC S9(10)V99.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "ba47d11c-b10a-46fc-b8d7-37356c34723b",
+          "name": "ACCT-OPEN-DATE",
+          "content": "05ACCT-OPEN-DATEPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-OPEN-DATE                    PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "8dd65907-f917-43d6-afa8-57ef00c72ea9",
+          "name": "ACCT-EXPIRAION-DATE",
+          "content": "05ACCT-EXPIRAION-DATEPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-EXPIRAION-DATE               PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "115241d4-d5aa-4032-97f0-bcb690652359",
+          "name": "ACCT-REISSUE-DATE",
+          "content": "05ACCT-REISSUE-DATEPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-REISSUE-DATE                 PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "06a594b7-76be-49dd-9e8a-8f7c0d96fb26",
+          "name": "ACCT-CURR-CYC-CREDIT",
+          "content": "05ACCT-CURR-CYC-CREDITPICS9(10)V99.",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-CURR-CYC-CREDIT              PIC S9(10)V99.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "b5f71ba1-bb45-448f-b5eb-a711120b84f2",
+          "name": "ACCT-CURR-CYC-DEBIT",
+          "content": "05ACCT-CURR-CYC-DEBITPICS9(10)V99.",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-CURR-CYC-DEBIT               PIC S9(10)V99.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "3d1c0ad7-4824-4740-ab8d-073c04f9cf25",
+          "name": "ACCT-ADDR-ZIP",
+          "content": "05ACCT-ADDR-ZIPPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-ADDR-ZIP                     PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "a30d7603-b017-4f1e-845e-1a6c6c32639c",
+          "name": "ACCT-GROUP-ID",
+          "content": "05ACCT-GROUP-IDPICX(10).",
+          "levelNumber": 5,
+          "rawText": "05  ACCT-GROUP-ID                     PIC X(10).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "c0b7f933-f5e4-4c3a-bc69-f97430f12081",
+          "name": "FILLER",
+          "content": "05FILLERPICX(178).",
+          "levelNumber": 5,
+          "rawText": "05  FILLER                            PIC X(178).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "d812dc40-3f8f-41a7-8dc9-c79e8bb05507",
+      "name": "COMP-VARIABLES",
+      "content": "01COMP-VARIABLESCOMP.",
+      "levelNumber": 1,
+      "rawText": "01  COMP-VARIABLES          COMP.",
+      "children": [
+        {
+          "id": "a6a3f705-ceaf-46f5-8980-b0b4d71f3642",
+          "name": "CR-CNT",
+          "content": "05CR-CNTPICS9(4)VALUE0.",
+          "levelNumber": 5,
+          "rawText": "05  CR-CNT              PIC S9(4) VALUE 0.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "0985ee48-11b8-435c-9be5-076e9739fcdc",
+          "name": "TR-CNT",
+          "content": "05TR-CNTPICS9(4)VALUE0.",
+          "levelNumber": 5,
+          "rawText": "05  TR-CNT              PIC S9(4) VALUE 0.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "8833520d-d8b1-4f71-8a92-3b8d4fe187eb",
+          "name": "CR-JMP",
+          "content": "05CR-JMPPICS9(4)VALUE0.",
+          "levelNumber": 5,
+          "rawText": "05  CR-JMP              PIC S9(4) VALUE 0.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "092a7aba-e306-4292-9d50-4898a83995cc",
+          "name": "TR-JMP",
+          "content": "05TR-JMPPICS9(4)VALUE0.",
+          "levelNumber": 5,
+          "rawText": "05  TR-JMP              PIC S9(4) VALUE 0.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "ccfb88ea-5c5e-4504-8187-039fcc0010a9",
+      "name": "COMP3-VARIABLES",
+      "content": "01COMP3-VARIABLESCOMP-3.",
+      "levelNumber": 1,
+      "rawText": "01  COMP3-VARIABLES         COMP-3.",
+      "children": [
+        {
+          "id": "7835dc5e-503a-4bec-83c5-07c7bbc08083",
+          "name": "WS-TOTAL-AMT",
+          "content": "05WS-TOTAL-AMTPICS9(9)V99VALUE0.",
+          "levelNumber": 5,
+          "rawText": "05  WS-TOTAL-AMT        PIC S9(9)V99 VALUE 0.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "6af4b62c-722f-4e9f-b704-011510042bb4",
+      "name": "MISC-VARIABLES",
+      "content": "01MISC-VARIABLES.",
+      "levelNumber": 1,
+      "rawText": "01  MISC-VARIABLES.",
+      "children": [
+        {
+          "id": "880c0eea-10b3-4534-a11a-c610423e71bf",
+          "name": "WS-FL-DD",
+          "content": "05WS-FL-DDPICX(8)VALUE\u0027TRNXFILE\u0027.",
+          "levelNumber": 5,
+          "rawText": "05  WS-FL-DD            PIC X(8) VALUE \u0027TRNXFILE\u0027.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "b6f60904-4fc1-4a78-bcbe-f144e8aa1fb2",
+          "name": "WS-TRN-AMT",
+          "content": "05WS-TRN-AMTPICS9(9)V99VALUE0.",
+          "levelNumber": 5,
+          "rawText": "05  WS-TRN-AMT          PIC S9(9)V99 VALUE 0.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "0d1ab7a8-0d46-40aa-9404-345eb3394a46",
+          "name": "WS-SAVE-CARD",
+          "content": "05WS-SAVE-CARDVALUESPACESPICX(16).",
+          "levelNumber": 5,
+          "rawText": "05  WS-SAVE-CARD VALUE SPACES PIC X(16).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "eeed5083-4b1e-44c0-8e35-bef099bcae15",
+          "name": "END-OF-FILE",
+          "content": "05END-OF-FILEPICX(01)VALUE\u0027N\u0027.",
+          "levelNumber": 5,
+          "rawText": "05  END-OF-FILE         PIC X(01) VALUE \u0027N\u0027.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "dc2d6006-cada-432c-86f4-cd3b92b6ffcd",
+      "name": "WS-M03B-AREA",
+      "content": "01WS-M03B-AREA.",
+      "levelNumber": 1,
+      "rawText": "01  WS-M03B-AREA.",
+      "children": [
+        {
+          "id": "ed028491-7d54-4087-8ef0-ae1b0feacaed",
+          "name": "WS-M03B-DD",
+          "content": "05WS-M03B-DDPICX(08).",
+          "levelNumber": 5,
+          "rawText": "05  WS-M03B-DD          PIC X(08).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "20a74995-78f8-45eb-b010-d77e0d6c75ed",
+          "name": "WS-M03B-OPER",
+          "content": "05WS-M03B-OPERPICX(01).",
+          "levelNumber": 5,
+          "rawText": "05  WS-M03B-OPER        PIC X(01).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "a1e59228-e709-4580-9941-6720343f2f64",
+          "name": "WS-M03B-RC",
+          "content": "05WS-M03B-RCPICX(02).",
+          "levelNumber": 5,
+          "rawText": "05  WS-M03B-RC          PIC X(02).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "45b21670-2126-4118-97ff-b8dc94c56fea",
+          "name": "WS-M03B-KEY",
+          "content": "05WS-M03B-KEYPICX(25).",
+          "levelNumber": 5,
+          "rawText": "05  WS-M03B-KEY         PIC X(25).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "04e823ec-7c7f-49d3-bb0e-0f48addd89ab",
+          "name": "WS-M03B-KEY-LN",
+          "content": "05WS-M03B-KEY-LNPICS9(4).",
+          "levelNumber": 5,
+          "rawText": "05  WS-M03B-KEY-LN      PIC S9(4).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "NUMBER",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "cad5edcb-9bd3-4550-bf05-ba94e831fd52",
+          "name": "WS-M03B-FLDT",
+          "content": "05WS-M03B-FLDTPICX(1000).",
+          "levelNumber": 5,
+          "rawText": "05  WS-M03B-FLDT        PIC X(1000).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "c49341e1-4321-4d87-aad7-6fefb74d293c",
+      "name": "STATEMENT-LINES",
+      "content": "01STATEMENT-LINES.",
+      "levelNumber": 1,
+      "rawText": "01  STATEMENT-LINES.",
+      "children": [
+        {
+          "id": "b161e478-e372-4364-be67-e424e9d3af6c",
+          "name": "ST-LINE0",
+          "content": "05ST-LINE0.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE0.",
+          "children": [
+            {
+              "id": "339a1792-39fb-4d03-b97f-4373560ac7f3",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027*\u0027PICX(31).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027*\u0027                PIC X(31).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "99cb6047-5b4a-4797-9b3c-3eadaa1dd576",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027START OF STATEMENT\u0027PICX(18).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027START OF STATEMENT\u0027 PIC X(18).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "1f1c53c2-5388-47f7-865c-a4296cd477d3",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027*\u0027PICX(31).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027*\u0027                PIC X(31).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "5bbe3c65-748e-4096-968d-14960714264d",
+          "name": "ST-LINE1",
+          "content": "05ST-LINE1.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE1.",
+          "children": [
+            {
+              "id": "fc754845-1dfa-4238-83e3-b5874a1eabca",
+              "name": "ST-NAME",
+              "content": "10ST-NAMEPICX(75).",
+              "levelNumber": 10,
+              "rawText": "10  ST-NAME                              PIC X(75).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "44456a46-3d89-499d-8db9-0a5609c48fdd",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(05).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(05).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "27f822b7-d76d-4671-9fdc-b08a30448c5d",
+          "name": "ST-LINE2",
+          "content": "05ST-LINE2.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE2.",
+          "children": [
+            {
+              "id": "e0ed3909-bee7-4f72-93e3-d2b7c240af1e",
+              "name": "ST-ADD1",
+              "content": "10ST-ADD1PICX(50).",
+              "levelNumber": 10,
+              "rawText": "10  ST-ADD1                              PIC X(50).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "177ea206-5689-46ec-bc1a-7448ed85757e",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(30).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(30).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "cdb08db5-7b85-4d14-a18a-e605254ecf07",
+          "name": "ST-LINE3",
+          "content": "05ST-LINE3.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE3.",
+          "children": [
+            {
+              "id": "83fd12c6-7ed6-47f5-83c4-6b17b633c959",
+              "name": "ST-ADD2",
+              "content": "10ST-ADD2PICX(50).",
+              "levelNumber": 10,
+              "rawText": "10  ST-ADD2                              PIC X(50).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "a83e8beb-756b-4180-a6a2-a0e51bffcbc3",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(30).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(30).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "5a41a094-c739-42fb-a840-834f984843ad",
+          "name": "ST-LINE4",
+          "content": "05ST-LINE4.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE4.",
+          "children": [
+            {
+              "id": "95e2772d-0e53-4e8b-ae05-327b498dd7c6",
+              "name": "ST-ADD3",
+              "content": "10ST-ADD3PICX(80).",
+              "levelNumber": 10,
+              "rawText": "10  ST-ADD3                              PIC X(80).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "a380c3ee-f1ca-44f2-9a9f-e0e7b2fe9168",
+          "name": "ST-LINE5",
+          "content": "05ST-LINE5.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE5.",
+          "children": [
+            {
+              "id": "75ae7e17-f5bb-45c4-b4e1-201e85417d03",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027-\u0027PICX(80).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027-\u0027                PIC X(80).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "6b6caa6e-7cd2-4e32-8c37-7e7a883bb627",
+          "name": "ST-LINE6",
+          "content": "05ST-LINE6.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE6.",
+          "children": [
+            {
+              "id": "892476a5-81f5-4b27-955e-177692554258",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(33).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(33).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "f653ffe8-ff00-49ac-a737-983f9108f84f",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027Basic Details\u0027PICX(14).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027Basic Details\u0027        PIC X(14).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "f70ae57a-c2f6-4a2f-8913-87e4ef107fed",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(33).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(33).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "94c6397d-6194-4908-bc2d-a0cc9b5cb322",
+          "name": "ST-LINE7",
+          "content": "05ST-LINE7.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE7.",
+          "children": [
+            {
+              "id": "058f278b-1479-48cc-bc1e-a0c5a25b3b39",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027Account ID         :\u0027PICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027Account ID         :\u0027 PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "5404c14e-f4f8-4dec-a1a7-c3394c2f8ce3",
+              "name": "ST-ACCT-ID",
+              "content": "10ST-ACCT-IDPICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  ST-ACCT-ID                           PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "c492efce-9382-4b2e-a04d-e4da235962fd",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(40).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(40).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "9f08b1f1-97d5-44a7-bd4b-2d823a8c38bf",
+          "name": "ST-LINE8",
+          "content": "05ST-LINE8.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE8.",
+          "children": [
+            {
+              "id": "cab8003c-cc53-4eec-9f9c-6531999bc42f",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027Current Balance    :\u0027PICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027Current Balance    :\u0027 PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "f050970a-4440-43ed-9501-b363013b77e9",
+              "name": "ST-CURR-BAL",
+              "content": "10ST-CURR-BALPIC9(9).99-.",
+              "levelNumber": 10,
+              "rawText": "10  ST-CURR-BAL                          PIC 9(9).99-.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "NUMBER",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "d1600bb8-f309-4de8-8de6-36fe3d0bc4be",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(07).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(07).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "a9ae2777-1fc6-4364-bb56-c15ae7590921",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(40).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(40).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "3c03733d-6f4f-4310-b99a-5fd87bd7a84f",
+          "name": "ST-LINE9",
+          "content": "05ST-LINE9.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE9.",
+          "children": [
+            {
+              "id": "97f4395b-215a-4036-81aa-e17c38828d03",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027FICO Score         :\u0027PICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027FICO Score         :\u0027 PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "8f6362fa-4e6d-4a61-9bec-efc03180b7c4",
+              "name": "ST-FICO-SCORE",
+              "content": "10ST-FICO-SCOREPICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  ST-FICO-SCORE                        PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "6ae4093a-72e8-4421-898e-64f1e8aafd82",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(40).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(40).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "bdcd77ac-b379-4547-8087-3040d3b9186c",
+          "name": "ST-LINE10",
+          "content": "05ST-LINE10.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE10.",
+          "children": [
+            {
+              "id": "eb027d29-5358-499f-bf36-0ae260b32371",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027-\u0027PICX(80).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027-\u0027                PIC X(80).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "f4115d41-43d2-43dd-944c-5046666c9b3b",
+          "name": "ST-LINE11",
+          "content": "05ST-LINE11.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE11.",
+          "children": [
+            {
+              "id": "758751ed-d4ff-401e-9382-628740b09753",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(30).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(30).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "f40f268f-1be9-42b8-a904-15ace6120254",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027TRANSACTION SUMMARY \u0027PICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027TRANSACTION SUMMARY \u0027 PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "83f0c89b-1d5a-4c85-90fb-7de796c00c50",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(30).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE SPACES                 PIC X(30).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "76a51ead-04ad-420d-b6d4-adf0ee639ba2",
+          "name": "ST-LINE12",
+          "content": "05ST-LINE12.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE12.",
+          "children": [
+            {
+              "id": "85a9e691-4eb9-4806-b2cc-75799cb814f1",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027-\u0027PICX(80).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027-\u0027                PIC X(80).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "49451a6c-b44a-4415-b98c-56f41263628f",
+          "name": "ST-LINE13",
+          "content": "05ST-LINE13.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE13.",
+          "children": [
+            {
+              "id": "950fa802-dc5c-484c-a787-baf8045b8cef",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027Tran ID         \u0027PICX(16).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027Tran ID         \u0027     PIC X(16).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "b08d89a2-fe78-4c36-b2fe-0a4d29b39f5b",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027Tran Details    \u0027PICX(51).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027Tran Details    \u0027     PIC X(51).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "35739905-d47e-4320-aec2-85c8363e78b6",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027  Tran Amount\u0027PICX(13).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE \u0027  Tran Amount\u0027        PIC X(13).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "6eb9a63b-2ef9-4c4e-90a8-28893bab502e",
+          "name": "ST-LINE14",
+          "content": "05ST-LINE14.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE14.",
+          "children": [
+            {
+              "id": "dc17087f-1928-4669-9864-3c2762be2059",
+              "name": "ST-TRANID",
+              "content": "10ST-TRANIDPICX(16).",
+              "levelNumber": 10,
+              "rawText": "10  ST-TRANID                            PIC X(16).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "6bdbc9a5-3e09-42ed-ba96-affa1c4a070a",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027 \u0027PICX(01).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER            VALUE \u0027 \u0027          PIC X(01).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "24fbfcdf-df42-44a4-b1c6-b37bee61db06",
+              "name": "ST-TRANDT",
+              "content": "10ST-TRANDTPICX(49).",
+              "levelNumber": 10,
+              "rawText": "10  ST-TRANDT                            PIC X(49).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "62ca5bce-dd08-4389-b640-be40243a1e11",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027$\u0027PICX(01).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER            VALUE \u0027$\u0027          PIC X(01).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "cff75e6b-8617-4d27-8395-73065a66cf2e",
+              "name": "ST-TRANAMT",
+              "content": "10ST-TRANAMTPICZ(9).99-.",
+              "levelNumber": 10,
+              "rawText": "10  ST-TRANAMT                           PIC Z(9).99-.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "NUMBER",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "9af68cb4-43a7-4622-8103-ac4994cdb6e4",
+          "name": "ST-LINE14A",
+          "content": "05ST-LINE14A.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE14A.",
+          "children": [
+            {
+              "id": "af4d73e7-c714-43ab-86df-25d58917042f",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027Total EXP:\u0027PICX(10).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER            VALUE \u0027Total EXP:\u0027 PIC X(10).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "60525140-958d-4585-ad88-7400f8ac5b54",
+              "name": "FILLER",
+              "content": "10FILLERVALUESPACESPICX(56).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER            VALUE SPACES       PIC X(56).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "ba9dba78-abe3-4fd0-9cfe-66fbe3af5736",
+              "name": "FILLER",
+              "content": "10FILLERVALUE\u0027$\u0027PICX(01).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER            VALUE \u0027$\u0027          PIC X(01).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "978ffd60-01cb-4a8f-bf19-1b06df0164a8",
+              "name": "ST-TOTAL-TRAMT",
+              "content": "10ST-TOTAL-TRAMTPICZ(9).99-.",
+              "levelNumber": 10,
+              "rawText": "10  ST-TOTAL-TRAMT                       PIC Z(9).99-.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "NUMBER",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "472649ea-b8b4-4e5c-919e-7e92aec2d62f",
+          "name": "ST-LINE15",
+          "content": "05ST-LINE15.",
+          "levelNumber": 5,
+          "rawText": "05  ST-LINE15.",
+          "children": [
+            {
+              "id": "dba7ec21-9308-4275-9e7a-be1b829266b8",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027*\u0027PICX(32).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027*\u0027                PIC X(32).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "58646ac5-5082-447b-aff5-b81d3edf3fe3",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027END OF STATEMENT\u0027PICX(16).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027END OF STATEMENT\u0027 PIC X(16).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "18f11933-ca37-488a-a89f-cac4749f04e9",
+              "name": "FILLER",
+              "content": "10FILLERVALUEALL\u0027*\u0027PICX(32).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER  VALUE ALL \u0027*\u0027                PIC X(32).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "56de8818-11ae-4997-ac22-c8f7888e7762",
+      "name": "HTML-LINES",
+      "content": "01HTML-LINES.",
+      "levelNumber": 1,
+      "rawText": "01  HTML-LINES.",
+      "children": [
+        {
+          "id": "225ebb8e-509a-4bf6-9d75-79e7b8d743e9",
+          "name": "HTML-FIXED-LN",
+          "content": "05HTML-FIXED-LNPICX(100).",
+          "levelNumber": 5,
+          "rawText": "05  HTML-FIXED-LN        PIC X(100).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "f2e57ac5-14e9-4722-8649-6ec7bbeac59c",
+          "name": "HTML-L11",
+          "content": "05HTML-L11.",
+          "levelNumber": 5,
+          "rawText": "05  HTML-L11.",
+          "children": [
+            {
+              "id": "c95c26aa-eb69-4149-95c0-20c51b52ddcc",
+              "name": "FILLER",
+              "content": "10FILLERPICX(34)VALUE\u0027\u003ch3\u003eStatement for Account Number: \u0027.",
+              "levelNumber": 10,
+              "rawText": "10  FILLER   PIC X(34)\n                          VALUE \u0027\u003ch3\u003eStatement for Account Number: \u0027.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "fa25bb6f-87e4-4d6a-b6b6-54ac3dc01c45",
+              "name": "L11-ACCT",
+              "content": "10L11-ACCTPICX(20).",
+              "levelNumber": 10,
+              "rawText": "10  L11-ACCT PIC X(20).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "06591178-4ab2-4778-acc5-a3cb60dd2997",
+              "name": "FILLER",
+              "content": "10FILLERPICX(05)VALUE\u0027\u003c/h3\u003e\u0027.",
+              "levelNumber": 10,
+              "rawText": "10  FILLER   PIC X(05) VALUE \u0027\u003c/h3\u003e\u0027.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "8f150fd4-97fd-4834-a077-84799d967326",
+          "name": "HTML-L23",
+          "content": "05HTML-L23.",
+          "levelNumber": 5,
+          "rawText": "05  HTML-L23.",
+          "children": [
+            {
+              "id": "a413eadc-a1c7-4711-80fa-485a85701061",
+              "name": "FILLER",
+              "content": "10FILLERPICX(26)VALUE\u0027\u003cp style\u003d\"font-size:16px\"\u003e\u0027.",
+              "levelNumber": 10,
+              "rawText": "10  FILLER   PIC X(26)\n                          VALUE \u0027\u003cp style\u003d\"font-size:16px\"\u003e\u0027.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "d5390639-da0b-4706-a7d7-36d578a983be",
+              "name": "L23-NAME",
+              "content": "10L23-NAMEPICX(50).",
+              "levelNumber": 10,
+              "rawText": "10  L23-NAME PIC X(50).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "1d9b5545-2b11-4ec9-b491-7bb9608bb8ef",
+          "name": "HTML-ADDR-LN",
+          "content": "05HTML-ADDR-LNPICX(100).",
+          "levelNumber": 5,
+          "rawText": "05  HTML-ADDR-LN PIC X(100).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "2118f7e2-42e7-46b5-a3d5-9599d371d495",
+          "name": "HTML-BSIC-LN",
+          "content": "05HTML-BSIC-LNPICX(100).",
+          "levelNumber": 5,
+          "rawText": "05  HTML-BSIC-LN PIC X(100).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        },
+        {
+          "id": "516ece88-77df-4a85-a007-291c4962c8d3",
+          "name": "HTML-TRAN-LN",
+          "content": "05HTML-TRAN-LNPICX(100).",
+          "levelNumber": 5,
+          "rawText": "05  HTML-TRAN-LN PIC X(100).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "d44d6ae0-4671-4041-93f7-39c2edf0f8b6",
+      "name": "WS-TRNX-TABLE",
+      "content": "01WS-TRNX-TABLE.",
+      "levelNumber": 1,
+      "rawText": "01  WS-TRNX-TABLE.",
+      "children": [
+        {
+          "id": "125f8a5a-a272-4a5d-a19a-60c89dbff1f9",
+          "name": "WS-CARD-TBL",
+          "content": "05WS-CARD-TBLOCCURS51TIMES.",
+          "levelNumber": 5,
+          "rawText": "05  WS-CARD-TBL OCCURS 51 TIMES.",
+          "children": [
+            {
+              "id": "46fbae68-7032-4bd7-9e50-8f7a0d91a4ee",
+              "name": "WS-CARD-NUM",
+              "content": "10WS-CARD-NUMPICX(16).",
+              "levelNumber": 10,
+              "rawText": "10  WS-CARD-NUM                          PIC X(16).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            },
+            {
+              "id": "0aab8ccc-bc7c-48fd-ac04-bfa50e149478",
+              "name": "WS-TRAN-TBL",
+              "content": "10WS-TRAN-TBLOCCURS10TIMES.",
+              "levelNumber": 10,
+              "rawText": "10  WS-TRAN-TBL OCCURS 10 TIMES.",
+              "children": [
+                {
+                  "id": "7cebd11b-560a-46cc-9694-13420f7dacd1",
+                  "name": "WS-TRAN-NUM",
+                  "content": "15WS-TRAN-NUMPICX(16).",
+                  "levelNumber": 15,
+                  "rawText": "15  WS-TRAN-NUM                      PIC X(16).",
+                  "children": [],
+                  "isRedefinition": false,
+                  "redefines": "",
+                  "nodeType": "DATA_VERTEX",
+                  "dataType": "STRING",
+                  "categories": [
+                    "GLOBAL"
+                  ],
+                  "sourceSection": "WORKING_STORAGE"
+                },
+                {
+                  "id": "14503a8e-fbe5-4255-be0a-33cfc922c9dd",
+                  "name": "WS-TRAN-REST",
+                  "content": "15WS-TRAN-RESTPICX(318).",
+                  "levelNumber": 15,
+                  "rawText": "15  WS-TRAN-REST                     PIC X(318).",
+                  "children": [],
+                  "isRedefinition": false,
+                  "redefines": "",
+                  "nodeType": "DATA_VERTEX",
+                  "dataType": "STRING",
+                  "categories": [
+                    "GLOBAL"
+                  ],
+                  "sourceSection": "WORKING_STORAGE"
+                }
+              ],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "OBJECT",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "d8b3ef5c-e544-4949-8125-40876013ffc6",
+      "name": "WS-TRN-TBL-CNTR",
+      "content": "01WS-TRN-TBL-CNTR.",
+      "levelNumber": 1,
+      "rawText": "01  WS-TRN-TBL-CNTR.",
+      "children": [
+        {
+          "id": "7d89d800-55f7-4441-a387-530036f90912",
+          "name": "WS-TRN-TBL-CTR",
+          "content": "05WS-TRN-TBL-CTROCCURS51TIMES.",
+          "levelNumber": 5,
+          "rawText": "05  WS-TRN-TBL-CTR OCCURS 51 TIMES.",
+          "children": [
+            {
+              "id": "ac40def5-d920-458d-bbf8-7e2dcde8f88a",
+              "name": "WS-TRCT",
+              "content": "10WS-TRCTPICS9(4)COMP.",
+              "levelNumber": 10,
+              "rawText": "10  WS-TRCT               PIC S9(4) COMP.",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "NUMBER",
+              "categories": [
+                "GLOBAL"
+              ],
+              "sourceSection": "WORKING_STORAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "GLOBAL"
+          ],
+          "sourceSection": "WORKING_STORAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "dcb69933-d6b8-4fc2-b76c-5033b13cec61",
+      "name": "PSAPTR",
+      "content": "01PSAPTRPOINTER.",
+      "levelNumber": 1,
+      "rawText": "01  PSAPTR                  POINTER.",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "POINTER",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "9eb5de7f-32dc-48f6-a676-37fdb58d9d73",
+      "name": "BUMP-TIOT",
+      "content": "01BUMP-TIOTPICS9(08)BINARYVALUEZERO.",
+      "levelNumber": 1,
+      "rawText": "01  BUMP-TIOT               PIC S9(08) BINARY VALUE ZERO.",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "NUMBER",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "9e82c48d-425c-488c-9476-00be58f321a7",
+      "name": "TIOT-INDEX",
+      "content": "01TIOT-INDEXREDEFINESBUMP-TIOTPOINTER.",
+      "levelNumber": 1,
+      "rawText": "01  TIOT-INDEX              REDEFINES BUMP-TIOT POINTER.",
+      "children": [],
+      "isRedefinition": true,
+      "redefines": "BUMP-TIOT",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "POINTER",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "e85feed2-2e81-4c98-a182-55d6bbe11d50",
+      "name": "ALIGN-PSA",
+      "content": "01ALIGN-PSAPIC9(16)BINARY.",
+      "levelNumber": 1,
+      "rawText": "01  ALIGN-PSA        PIC 9(16) BINARY.",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "NUMBER",
+      "categories": [
+        "PARAMETER"
+      ],
+      "sourceSection": "LINKAGE"
+    },
+    {
+      "id": "fab46459-ba94-438e-86b6-7ee99f7348bf",
+      "name": "PSA-BLOCK",
+      "content": "01PSA-BLOCK.",
+      "levelNumber": 1,
+      "rawText": "01  PSA-BLOCK.",
+      "children": [
+        {
+          "id": "1a857225-ea92-45ac-ad80-6ad16c574535",
+          "name": "FILLER",
+          "content": "05FILLERPICX(536).",
+          "levelNumber": 5,
+          "rawText": "05  FILLER       PIC X(536).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        },
+        {
+          "id": "c2537ecb-3b3d-437d-ad3c-61543801106c",
+          "name": "TCB-POINT",
+          "content": "05TCB-POINTPOINTER.",
+          "levelNumber": 5,
+          "rawText": "05  TCB-POINT    POINTER.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "POINTER",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "PARAMETER"
+      ],
+      "sourceSection": "LINKAGE"
+    },
+    {
+      "id": "dd1339e2-c5d6-4d21-b3b2-5d724b63ca25",
+      "name": "TCB-BLOCK",
+      "content": "01TCB-BLOCK.",
+      "levelNumber": 1,
+      "rawText": "01  TCB-BLOCK.",
+      "children": [
+        {
+          "id": "231d7700-3791-42bf-97e4-dff91a796e0a",
+          "name": "FILLER",
+          "content": "05FILLERPICX(12).",
+          "levelNumber": 5,
+          "rawText": "05  FILLER       PIC X(12).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        },
+        {
+          "id": "011dbaf7-6a86-4451-94a9-a48802964d37",
+          "name": "TIOT-POINT",
+          "content": "05TIOT-POINTPOINTER.",
+          "levelNumber": 5,
+          "rawText": "05  TIOT-POINT   POINTER.",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "POINTER",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "PARAMETER"
+      ],
+      "sourceSection": "LINKAGE"
+    },
+    {
+      "id": "4274615b-9107-4272-89f3-09af465e961c",
+      "name": "TIOT-BLOCK",
+      "content": "01TIOT-BLOCK.",
+      "levelNumber": 1,
+      "rawText": "01  TIOT-BLOCK.",
+      "children": [
+        {
+          "id": "6ceb1ecb-924b-4370-9d37-fa1ca5a610db",
+          "name": "TIOTNJOB",
+          "content": "05TIOTNJOBPICX(08).",
+          "levelNumber": 5,
+          "rawText": "05  TIOTNJOB     PIC X(08).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        },
+        {
+          "id": "60ab083f-c538-4074-9401-85f9fc2df75b",
+          "name": "TIOTJSTP",
+          "content": "05TIOTJSTPPICX(08).",
+          "levelNumber": 5,
+          "rawText": "05  TIOTJSTP     PIC X(08).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        },
+        {
+          "id": "33d66479-fe87-4fcb-9b3a-0632e029ded4",
+          "name": "TIOTPSTP",
+          "content": "05TIOTPSTPPICX(08).",
+          "levelNumber": 5,
+          "rawText": "05  TIOTPSTP     PIC X(08).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "PARAMETER"
+      ],
+      "sourceSection": "LINKAGE"
+    },
+    {
+      "id": "fb4d8dc3-3693-49fd-b422-7068015cf363",
+      "name": "TIOT-ENTRY",
+      "content": "01TIOT-ENTRY.",
+      "levelNumber": 1,
+      "rawText": "01  TIOT-ENTRY.",
+      "children": [
+        {
+          "id": "645b4ad9-82c3-407b-91d8-71fbc90d792e",
+          "name": "TIOT-SEG",
+          "content": "05TIOT-SEG.",
+          "levelNumber": 5,
+          "rawText": "05  TIOT-SEG.",
+          "children": [
+            {
+              "id": "3d8fbd87-a703-47ca-8edd-5449938ec03f",
+              "name": "TIO-LEN",
+              "content": "10TIO-LENPICX(01).",
+              "levelNumber": 10,
+              "rawText": "10  TIO-LEN  PIC X(01).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "PARAMETER"
+              ],
+              "sourceSection": "LINKAGE"
+            },
+            {
+              "id": "769cdb6f-4703-44ce-b181-e96986062ba6",
+              "name": "FILLER",
+              "content": "10FILLERPICX(03).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER   PIC X(03).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "PARAMETER"
+              ],
+              "sourceSection": "LINKAGE"
+            },
+            {
+              "id": "e6b0294b-5838-4758-8c04-a25af55245e6",
+              "name": "TIOCDDNM",
+              "content": "10TIOCDDNMPICX(08).",
+              "levelNumber": 10,
+              "rawText": "10  TIOCDDNM PIC X(08).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "PARAMETER"
+              ],
+              "sourceSection": "LINKAGE"
+            },
+            {
+              "id": "7e60cf89-1c51-440d-a6fe-0a0ed34e9948",
+              "name": "FILLER",
+              "content": "10FILLERPICX(05).",
+              "levelNumber": 10,
+              "rawText": "10  FILLER   PIC X(05).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "PARAMETER"
+              ],
+              "sourceSection": "LINKAGE"
+            },
+            {
+              "id": "4a9961d8-3a60-43d6-956e-73021b14e0f7",
+              "name": "UCB-ADDR",
+              "content": "10UCB-ADDRPICX(03).",
+              "levelNumber": 10,
+              "rawText": "10  UCB-ADDR PIC X(03).",
+              "children": [],
+              "isRedefinition": false,
+              "redefines": "",
+              "nodeType": "DATA_VERTEX",
+              "dataType": "STRING",
+              "categories": [
+                "PARAMETER"
+              ],
+              "sourceSection": "LINKAGE"
+            }
+          ],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "OBJECT",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        },
+        {
+          "id": "2ed9c445-e37a-432b-b492-e00029e282c4",
+          "name": "FILLER",
+          "content": "05FILLERPICX(04).",
+          "levelNumber": 5,
+          "rawText": "05  FILLER       PIC X(04).",
+          "children": [],
+          "isRedefinition": false,
+          "redefines": "",
+          "nodeType": "DATA_VERTEX",
+          "dataType": "STRING",
+          "categories": [
+            "PARAMETER"
+          ],
+          "sourceSection": "LINKAGE"
+        }
+      ],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "OBJECT",
+      "categories": [
+        "PARAMETER"
+      ],
+      "sourceSection": "LINKAGE"
+    },
+    {
+      "id": "99c6f404-8e92-475b-89d2-ac0a0b82b461",
+      "name": "FD-STMTFILE-REC",
+      "content": "01FD-STMTFILE-RECPICX(80).",
+      "levelNumber": 1,
+      "rawText": "01  FD-STMTFILE-REC         PIC X(80).",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "STRING",
+      "categories": [
+        "IO"
+      ],
+      "sourceSection": "FILE_DESCRIPTOR"
+    },
+    {
+      "id": "bf463dbf-5987-4fad-b34c-999a2973f78b",
+      "name": "FD-HTMLFILE-REC",
+      "content": "01FD-HTMLFILE-RECPICX(100).",
+      "levelNumber": 1,
+      "rawText": "01  FD-HTMLFILE-REC         PIC X(100).",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "STRING",
+      "categories": [
+        "IO"
+      ],
+      "sourceSection": "FILE_DESCRIPTOR"
+    },
+    {
+      "id": "f9530f03-5929-4307-976e-868bf5e487c5",
+      "name": "WHEN-COMPILED",
+      "content": "WHEN-COMPILED",
+      "levelNumber": 1,
+      "rawText": "[STATIC]",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "STRING",
+      "categories": [
+        "LOCAL"
+      ],
+      "sourceSection": "PROCEDURE_DIVISION"
+    }
+  ],
+  "isRedefinition": false,
+  "redefines": "",
+  "nodeType": "DATA_VERTEX",
+  "dataType": "OBJECT",
+  "categories": [
+    "ROOT"
+  ],
+  "sourceSection": "ROOT"
+}

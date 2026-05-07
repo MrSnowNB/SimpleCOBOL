@@ -1,0 +1,1722 @@
+{
+  "nodes": [
+    {
+      "id": "c7360221-2343-4bbe-a1dd-89b67d4d93f0",
+      "label": "ProcedureDivisionBodyContext/c7360221-2343-4bbe-a1dd-89b67d4d93f0",
+      "name": "ProcedureDivisionBodyContext/c7360221-2343-4bbe-a1dd-89b67d4d93f0",
+      "originalText": "0000-START.\n       \n           EVALUATE LK-M03B-DD\n             WHEN \u0027TRNXFILE\u0027\n               PERFORM 1000-TRNXFILE-PROC THRU 1999-EXIT\n             WHEN \u0027XREFFILE\u0027\n               PERFORM 2000-XREFFILE-PROC THRU 2999-EXIT\n             WHEN \u0027CUSTFILE\u0027\n               PERFORM 3000-CUSTFILE-PROC THRU 3999-EXIT\n             WHEN \u0027ACCTFILE\u0027\n               PERFORM 4000-ACCTFILE-PROC THRU 4999-EXIT\n             WHEN OTHER\n               GO TO 9999-GOBACK.\n       \n       9999-GOBACK.\n           GOBACK.\n       \n       1000-TRNXFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.\n       \n           IF M03B-READ\n               READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.\n       \n       1900-EXIT.\n           MOVE TRNXFILE-STATUS TO LK-M03B-RC.\n       \n       1999-EXIT.\n           EXIT.\n       \n       2000-XREFFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.\n       \n           IF M03B-READ\n               READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.\n       \n       2900-EXIT.\n           MOVE XREFFILE-STATUS TO LK-M03B-RC.\n       \n       2999-EXIT.\n           EXIT.\n       \n       3000-CUSTFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.\n       \n           IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.\n       \n       3900-EXIT.\n           MOVE CUSTFILE-STATUS TO LK-M03B-RC.\n       \n       3999-EXIT.\n           EXIT.\n       \n       4000-ACCTFILE-PROC.\n       \n           IF M03B-OPEN\n               OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.\n       \n           IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT\n           END-IF.\n       \n           IF M03B-CLOSE\n               CLOSE ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.\n       \n       4900-EXIT.\n           MOVE ACCTFILE-STATUS TO LK-M03B-RC.\n       \n       4999-EXIT.\n           EXIT.",
+      "type": "PROCEDURE_DIVISION_BODY",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "12260e04-2912-41e7-b62e-f34d3315aead",
+      "label": "0000-START",
+      "name": "0000-START",
+      "originalText": "0000-START.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "62677bb5-24da-42dd-b24f-9bdf1bbee81d",
+      "label": "EVALUATELK-M03B",
+      "name": "EVALUATELK-M03B",
+      "originalText": "EVALUATE LK-M03B-DD\n             WHEN \u0027TRNXFILE\u0027\n               PERFORM 1000-TRNXFILE-PROC THRU 1999-EXIT\n             WHEN \u0027XREFFILE\u0027\n               PERFORM 2000-XREFFILE-PROC THRU 2999-EXIT\n             WHEN \u0027CUSTFILE\u0027\n               PERFORM 3000-CUSTFILE-PROC THRU 3999-EXIT\n             WHEN \u0027ACCTFILE\u0027\n               PERFORM 4000-ACCTFILE-PROC THRU 4999-EXIT\n             WHEN OTHER\n               GO TO 9999-GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bec018fd-a47b-484a-a502-c289c6a97408",
+      "label": "9999-GOBACK",
+      "name": "9999-GOBACK",
+      "originalText": "9999-GOBACK.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2e9be52f-ece4-4d48-a941-115796b92f20",
+      "label": "GOBACK.",
+      "name": "GOBACK.",
+      "originalText": "GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "dd796b77-58ad-4d3b-a103-899af9dc5bfa",
+      "label": "1000-TRNXFILE-PROC",
+      "name": "1000-TRNXFILE-PROC",
+      "originalText": "1000-TRNXFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "507b0c13-4cee-4322-ab3a-61dbe4fcb9d6",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0b32c731-cbdd-475c-a786-02dba4d6ee7f",
+      "label": "IFM03B-READREAD",
+      "name": "IFM03B-READREAD",
+      "originalText": "IF M03B-READ\n               READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "782c7288-780b-43f7-b2be-deda5998aac0",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e74e2e1d-ca10-4f0e-9ab2-d6c1a60d3b53",
+      "label": "1900-EXIT",
+      "name": "1900-EXIT",
+      "originalText": "1900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7b6d8384-fe27-4dd5-9263-59fd8b55b2e4",
+      "label": "MOVETRNXFILE-ST",
+      "name": "MOVETRNXFILE-ST",
+      "originalText": "MOVE TRNXFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "620019ac-418d-482e-846a-1272457c5d59",
+      "label": "1999-EXIT",
+      "name": "1999-EXIT",
+      "originalText": "1999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b992d624-57e6-4849-a5ce-7f0c0ea98d1e",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "527a27f5-78ab-4023-ba33-5fc908fbda44",
+      "label": "2000-XREFFILE-PROC",
+      "name": "2000-XREFFILE-PROC",
+      "originalText": "2000-XREFFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b88bdfa5-cc07-4c29-ac48-e44f987414e7",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b5c1b537-35a1-4bc9-9acb-fcb4290c46ee",
+      "label": "IFM03B-READREAD",
+      "name": "IFM03B-READREAD",
+      "originalText": "IF M03B-READ\n               READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "39da1e1c-89e9-45d7-9e08-d820b7bba36f",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE XREF-FILE\n               GO TO 2900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d6381736-ed59-4fb9-a08a-c69d4c560962",
+      "label": "2900-EXIT",
+      "name": "2900-EXIT",
+      "originalText": "2900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5a197567-782f-485d-b98c-1e55e1cc80e0",
+      "label": "MOVEXREFFILE-ST",
+      "name": "MOVEXREFFILE-ST",
+      "originalText": "MOVE XREFFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "24c9dce0-cf2a-476f-9b1f-3139e56943d3",
+      "label": "2999-EXIT",
+      "name": "2999-EXIT",
+      "originalText": "2999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "04e4340e-29d4-4844-b837-0aad67a2ecdc",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "507c3490-1be6-4b1e-ac71-3a382bd5d64a",
+      "label": "3000-CUSTFILE-PROC",
+      "name": "3000-CUSTFILE-PROC",
+      "originalText": "3000-CUSTFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "aa13e439-bece-4250-bef6-481b1f3e856e",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bece76df-32f7-4ae9-9073-19b437437cf2",
+      "label": "IFM03B-READ-KMO",
+      "name": "IFM03B-READ-KMO",
+      "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0036a7da-2dd0-458d-9d11-b73845baf97e",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE CUST-FILE\n               GO TO 3900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1c5f256f-e986-44fd-9226-be65ed2e2dd8",
+      "label": "3900-EXIT",
+      "name": "3900-EXIT",
+      "originalText": "3900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "51a7d790-ae81-4ac5-a8f6-93687e8a20e9",
+      "label": "MOVECUSTFILE-ST",
+      "name": "MOVECUSTFILE-ST",
+      "originalText": "MOVE CUSTFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f62a9813-4e1a-4df7-98ed-d4f42bbe7b5e",
+      "label": "3999-EXIT",
+      "name": "3999-EXIT",
+      "originalText": "3999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "eab461e1-dde5-4fc8-bd05-3e515727ee57",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "956703a2-91a5-4b05-8d0f-d26dfa354171",
+      "label": "4000-ACCTFILE-PROC",
+      "name": "4000-ACCTFILE-PROC",
+      "originalText": "4000-ACCTFILE-PROC.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "375fa9af-e10a-42e8-8ba6-af700dce2130",
+      "label": "IFM03B-OPENOPEN",
+      "name": "IFM03B-OPENOPEN",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a058526c-fe7d-4506-a82b-a26709be13f0",
+      "label": "IFM03B-READ-KMO",
+      "name": "IFM03B-READ-KMO",
+      "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "dc733656-fa96-48a7-9bcf-5e673aa29d33",
+      "label": "IFM03B-CLOSECLO",
+      "name": "IFM03B-CLOSECLO",
+      "originalText": "IF M03B-CLOSE\n               CLOSE ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "70f347a4-b582-40bc-9925-0837b69826cf",
+      "label": "4900-EXIT",
+      "name": "4900-EXIT",
+      "originalText": "4900-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5dc6501b-a5dc-487d-af6b-33c6298f1ac0",
+      "label": "MOVEACCTFILE-ST",
+      "name": "MOVEACCTFILE-ST",
+      "originalText": "MOVE ACCTFILE-STATUS TO LK-M03B-RC.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7aa1f3d5-3428-4d70-a50e-e8a147556a7e",
+      "label": "4999-EXIT",
+      "name": "4999-EXIT",
+      "originalText": "4999-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "367879a8-649b-45ea-90e8-2dfea85715c6",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "43689a6d-dcbe-4dfb-b9fd-da813c0c8f85",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "361cfcaa-2819-4bf6-821e-e1ecc3e966c5",
+      "label": "MOVEACCTFILE-ST",
+      "name": "MOVEACCTFILE-ST",
+      "originalText": "MOVE ACCTFILE-STATUS TO LK-M03B-RC",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "932276be-501c-4e32-8455-28ae43e1ca06",
+      "label": "IS \nM03B-CLOSE?\n",
+      "name": "IS \nM03B-CLOSE?\n",
+      "originalText": "IF M03B-CLOSE\n               CLOSE ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0936b352-429b-450c-82bb-51a42d14903f",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CLOSE ACCT-FILE\n               GO TO 4900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8d6eee85-7d12-497e-910a-2c637e7c00de",
+      "label": "CLOSEACCT-FILE",
+      "name": "CLOSEACCT-FILE",
+      "originalText": "CLOSE ACCT-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0ee4272f-f317-4726-ad77-efe882cb60c2",
+      "label": "GO TO 4900-EXIT",
+      "name": "GOTO4900-EXIT",
+      "originalText": "GO TO 4900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7ca0b8bf-69bf-4ddc-97eb-f5efcc885c16",
+      "label": "IS \nM03B-READ-K?\n",
+      "name": "IS \nM03B-READ-K?\n",
+      "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a9ee862c-0db2-4131-835c-0673cd4722a3",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID\n               READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 4900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f39d69e6-489e-45e0-a589-c2f8f8b3a69a",
+      "label": "MOVELK-M03B-KEY",
+      "name": "MOVELK-M03B-KEY",
+      "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-ACCT-ID",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d3c14242-fe18-47e1-8f34-f5882d55a1b4",
+      "label": "READACCT-FILEIN",
+      "name": "READACCT-FILEIN",
+      "originalText": "READ ACCT-FILE INTO LK-M03B-FLDT\n               END-READ",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "48358e7d-873f-45f8-be30-bd8581ed51b6",
+      "label": "GO TO 4900-EXIT",
+      "name": "GOTO4900-EXIT",
+      "originalText": "GO TO 4900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5e78de38-d97e-4092-9647-0bcb9f1c5af7",
+      "label": "IS \nM03B-OPEN?\n",
+      "name": "IS \nM03B-OPEN?\n",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e42c9b1a-facc-49a8-8752-97b20857203c",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "OPEN INPUT ACCT-FILE\n               GO TO 4900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "78bcc81f-dd87-4cf1-b67d-4b6e5318118e",
+      "label": "OPENINPUTACCT-F",
+      "name": "OPENINPUTACCT-F",
+      "originalText": "OPEN INPUT ACCT-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "944f1734-3dc8-4c55-8c33-2864b87c35eb",
+      "label": "GO TO 4900-EXIT",
+      "name": "GOTO4900-EXIT",
+      "originalText": "GO TO 4900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "57306446-1368-4556-9214-48449b71de33",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "926d8faf-986b-457d-acbc-844828d6a7b3",
+      "label": "MOVECUSTFILE-ST",
+      "name": "MOVECUSTFILE-ST",
+      "originalText": "MOVE CUSTFILE-STATUS TO LK-M03B-RC",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2b99af36-f04e-4f8a-88a7-3ef9cd2efa35",
+      "label": "IS \nM03B-CLOSE?\n",
+      "name": "IS \nM03B-CLOSE?\n",
+      "originalText": "IF M03B-CLOSE\n               CLOSE CUST-FILE\n               GO TO 3900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3fe61d8c-3d92-4a28-99fa-5cc0edfa3846",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CLOSE CUST-FILE\n               GO TO 3900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2c77a0dd-5e81-41ba-ab01-f4514e75b57f",
+      "label": "CLOSECUST-FILE",
+      "name": "CLOSECUST-FILE",
+      "originalText": "CLOSE CUST-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "aea48cdd-b19f-482b-93c5-bc554f6eb42d",
+      "label": "GO TO 3900-EXIT",
+      "name": "GOTO3900-EXIT",
+      "originalText": "GO TO 3900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "847184cf-fa9b-41c2-a92f-eee5304d53f0",
+      "label": "IS \nM03B-READ-K?\n",
+      "name": "IS \nM03B-READ-K?\n",
+      "originalText": "IF M03B-READ-K\n               MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2f9b1c37-9ed8-4404-9790-a63e8ed6551f",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID\n               READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 3900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1b4dd710-c478-4849-b6ce-2efcd1d0ddbc",
+      "label": "MOVELK-M03B-KEY",
+      "name": "MOVELK-M03B-KEY",
+      "originalText": "MOVE LK-M03B-KEY (1:LK-M03B-KEY-LN) TO FD-CUST-ID",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3f52b9da-bc9c-41d0-b1cf-6e7565fd5951",
+      "label": "READCUST-FILEIN",
+      "name": "READCUST-FILEIN",
+      "originalText": "READ CUST-FILE INTO LK-M03B-FLDT\n               END-READ",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ae14549a-febc-4996-9f06-ae8d55a2f81b",
+      "label": "GO TO 3900-EXIT",
+      "name": "GOTO3900-EXIT",
+      "originalText": "GO TO 3900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "499e3c18-cb45-4a02-90d4-8358685295d4",
+      "label": "IS \nM03B-OPEN?\n",
+      "name": "IS \nM03B-OPEN?\n",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f63b22f3-380b-479d-943e-4668e372c517",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "OPEN INPUT CUST-FILE\n               GO TO 3900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8129f8b1-8e24-4b5f-aabc-53b79f802a46",
+      "label": "OPENINPUTCUST-F",
+      "name": "OPENINPUTCUST-F",
+      "originalText": "OPEN INPUT CUST-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ecadda0d-f6a4-40ea-8e02-9f40c66f9194",
+      "label": "GO TO 3900-EXIT",
+      "name": "GOTO3900-EXIT",
+      "originalText": "GO TO 3900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9f41a6a1-ff8a-4918-bd9b-0724f2e7f6b9",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8372cfeb-2903-4f02-9ed8-ff9b3a02789a",
+      "label": "MOVEXREFFILE-ST",
+      "name": "MOVEXREFFILE-ST",
+      "originalText": "MOVE XREFFILE-STATUS TO LK-M03B-RC",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b4d96f2f-c6be-4c91-a9d6-f11e33223471",
+      "label": "IS \nM03B-CLOSE?\n",
+      "name": "IS \nM03B-CLOSE?\n",
+      "originalText": "IF M03B-CLOSE\n               CLOSE XREF-FILE\n               GO TO 2900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e8067056-9549-4972-94fe-3ff7979c2906",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CLOSE XREF-FILE\n               GO TO 2900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "202abd70-5666-40b4-b84c-48c8ba13fedf",
+      "label": "CLOSEXREF-FILE",
+      "name": "CLOSEXREF-FILE",
+      "originalText": "CLOSE XREF-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5e54dceb-b89f-4351-8b85-170399199807",
+      "label": "GO TO 2900-EXIT",
+      "name": "GOTO2900-EXIT",
+      "originalText": "GO TO 2900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "94c757b4-4aaa-474f-8b7e-c13f2d1f58ef",
+      "label": "IS \nM03B-READ?\n",
+      "name": "IS \nM03B-READ?\n",
+      "originalText": "IF M03B-READ\n               READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ee71334c-e61d-4398-b353-30359d07a40f",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 2900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "51a85d39-78ff-4559-bcae-a0284e1df055",
+      "label": "READXREF-FILEIN",
+      "name": "READXREF-FILEIN",
+      "originalText": "READ XREF-FILE INTO LK-M03B-FLDT\n               END-READ",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "deca71c6-cdae-48e9-b46e-0fe7e64196e5",
+      "label": "GO TO 2900-EXIT",
+      "name": "GOTO2900-EXIT",
+      "originalText": "GO TO 2900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "747f94da-2bc6-4fe1-8b36-9f6dca326a86",
+      "label": "IS \nM03B-OPEN?\n",
+      "name": "IS \nM03B-OPEN?\n",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0c5a1b9b-0974-486d-80a4-ac09d6ccbbf6",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "OPEN INPUT XREF-FILE\n               GO TO 2900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "30b9e7ac-fe39-4519-b8a2-ca9d13f0f19c",
+      "label": "OPENINPUTXREF-F",
+      "name": "OPENINPUTXREF-F",
+      "originalText": "OPEN INPUT XREF-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3769fcde-5696-45f1-afb0-9a300af3610a",
+      "label": "GO TO 2900-EXIT",
+      "name": "GOTO2900-EXIT",
+      "originalText": "GO TO 2900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a56ac24d-565e-4eb0-be6a-7ea63f44c6ad",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "da66947b-6d34-47a1-bec9-7972239172ea",
+      "label": "MOVETRNXFILE-ST",
+      "name": "MOVETRNXFILE-ST",
+      "originalText": "MOVE TRNXFILE-STATUS TO LK-M03B-RC",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "243a2b7a-75c8-4c03-b737-739546420d39",
+      "label": "IS \nM03B-CLOSE?\n",
+      "name": "IS \nM03B-CLOSE?\n",
+      "originalText": "IF M03B-CLOSE\n               CLOSE TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2787b642-a38e-446e-9976-945b7b43ffbd",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CLOSE TRNX-FILE\n               GO TO 1900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f7d16265-c9a1-4254-9f78-db6176e45837",
+      "label": "CLOSETRNX-FILE",
+      "name": "CLOSETRNX-FILE",
+      "originalText": "CLOSE TRNX-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b5659e74-544c-4fc2-a9b7-df4ba971458c",
+      "label": "GO TO 1900-EXIT",
+      "name": "GOTO1900-EXIT",
+      "originalText": "GO TO 1900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "dc3780c0-dd72-4b56-8b3e-4d7f4f110273",
+      "label": "IS \nM03B-READ?\n",
+      "name": "IS \nM03B-READ?\n",
+      "originalText": "IF M03B-READ\n               READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7f668e9e-c612-4706-8082-3dc520d3d91d",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ\n               GO TO 1900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "36893c40-0449-44df-8570-2cd05a81f6be",
+      "label": "READTRNX-FILEIN",
+      "name": "READTRNX-FILEIN",
+      "originalText": "READ TRNX-FILE INTO LK-M03B-FLDT\n               END-READ",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "db6693f8-5eb9-4359-be23-30843aa64dff",
+      "label": "GO TO 1900-EXIT",
+      "name": "GOTO1900-EXIT",
+      "originalText": "GO TO 1900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d44cfc5a-aa8d-4c03-81c7-8a167772498a",
+      "label": "IS \nM03B-OPEN?\n",
+      "name": "IS \nM03B-OPEN?\n",
+      "originalText": "IF M03B-OPEN\n               OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3b8b46b4-e6b9-4a54-b94b-04933a98c600",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "OPEN INPUT TRNX-FILE\n               GO TO 1900-EXIT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c0ef8277-55f6-468c-8d26-8c5c5bd832c8",
+      "label": "OPENINPUTTRNX-F",
+      "name": "OPENINPUTTRNX-F",
+      "originalText": "OPEN INPUT TRNX-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "adda5da9-1422-4597-843e-8f6a576c7722",
+      "label": "GO TO 1900-EXIT",
+      "name": "GOTO1900-EXIT",
+      "originalText": "GO TO 1900-EXIT",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "12b7000b-2183-439c-b285-35c7a5eb81b1",
+      "label": "GOBACK",
+      "name": "GOBACK",
+      "originalText": "GOBACK",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bc5a5d97-7d55-4d96-9849-2097aaad1474",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE LK-M03B-DD\n             WHEN \u0027TRNXFILE\u0027\n               PERFORM 1000-TRNXFILE-PROC THRU 1999-EXIT\n             WHEN \u0027XREFFILE\u0027\n               PERFORM 2000-XREFFILE-PROC THRU 2999-EXIT\n             WHEN \u0027CUSTFILE\u0027\n               PERFORM 3000-CUSTFILE-PROC THRU 3999-EXIT\n             WHEN \u0027ACCTFILE\u0027\n               PERFORM 4000-ACCTFILE-PROC THRU 4999-EXIT\n             WHEN OTHER\n               GO TO 9999-GOBACK",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "edges": [
+    {
+      "id": "69480f01-84f2-4e92-bc5f-9e3274807c8e",
+      "fromNodeID": "c7360221-2343-4bbe-a1dd-89b67d4d93f0",
+      "toNodeID": "12260e04-2912-41e7-b62e-f34d3315aead",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "af9cc165-3496-4834-a375-90a27b598c4c",
+      "fromNodeID": "12260e04-2912-41e7-b62e-f34d3315aead",
+      "toNodeID": "62677bb5-24da-42dd-b24f-9bdf1bbee81d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "74fb4665-5d6f-4380-b786-70934a9ae580",
+      "fromNodeID": "62677bb5-24da-42dd-b24f-9bdf1bbee81d",
+      "toNodeID": "bec018fd-a47b-484a-a502-c289c6a97408",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "185997ea-58ff-461b-ad88-2c62789167db",
+      "fromNodeID": "bec018fd-a47b-484a-a502-c289c6a97408",
+      "toNodeID": "2e9be52f-ece4-4d48-a941-115796b92f20",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9f12420c-29ac-481a-9d25-983678256c75",
+      "fromNodeID": "2e9be52f-ece4-4d48-a941-115796b92f20",
+      "toNodeID": "dd796b77-58ad-4d3b-a103-899af9dc5bfa",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "27bdc2d9-16d9-4b64-8f76-ad5ee0cd3813",
+      "fromNodeID": "dd796b77-58ad-4d3b-a103-899af9dc5bfa",
+      "toNodeID": "507b0c13-4cee-4322-ab3a-61dbe4fcb9d6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ac6a56cf-0c55-4c32-90f1-ac6bcbf74dcd",
+      "fromNodeID": "507b0c13-4cee-4322-ab3a-61dbe4fcb9d6",
+      "toNodeID": "0b32c731-cbdd-475c-a786-02dba4d6ee7f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "3fd2373d-a68d-4ad0-bf58-b292cea2388b",
+      "fromNodeID": "0b32c731-cbdd-475c-a786-02dba4d6ee7f",
+      "toNodeID": "782c7288-780b-43f7-b2be-deda5998aac0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "83afd3ac-9a42-4216-8b82-5c8495f01b02",
+      "fromNodeID": "782c7288-780b-43f7-b2be-deda5998aac0",
+      "toNodeID": "e74e2e1d-ca10-4f0e-9ab2-d6c1a60d3b53",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "83d157ec-d494-4280-aaa2-bf3e1feac313",
+      "fromNodeID": "e74e2e1d-ca10-4f0e-9ab2-d6c1a60d3b53",
+      "toNodeID": "7b6d8384-fe27-4dd5-9263-59fd8b55b2e4",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7b97f10f-0820-45b5-aa7d-97538951a346",
+      "fromNodeID": "7b6d8384-fe27-4dd5-9263-59fd8b55b2e4",
+      "toNodeID": "620019ac-418d-482e-846a-1272457c5d59",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2bbfb60f-8d3c-4171-869e-0b0107de9008",
+      "fromNodeID": "620019ac-418d-482e-846a-1272457c5d59",
+      "toNodeID": "b992d624-57e6-4849-a5ce-7f0c0ea98d1e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "03a1eeb8-3025-4b75-b217-64e339e34302",
+      "fromNodeID": "b992d624-57e6-4849-a5ce-7f0c0ea98d1e",
+      "toNodeID": "527a27f5-78ab-4023-ba33-5fc908fbda44",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a937c05e-1f2a-4132-bfa7-3e2af23df76d",
+      "fromNodeID": "527a27f5-78ab-4023-ba33-5fc908fbda44",
+      "toNodeID": "b88bdfa5-cc07-4c29-ac48-e44f987414e7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "144c8442-6dd2-46b2-8e0f-1779f04c326f",
+      "fromNodeID": "b88bdfa5-cc07-4c29-ac48-e44f987414e7",
+      "toNodeID": "b5c1b537-35a1-4bc9-9acb-fcb4290c46ee",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0efa7544-eada-4eb1-9c05-3014ced6546b",
+      "fromNodeID": "b5c1b537-35a1-4bc9-9acb-fcb4290c46ee",
+      "toNodeID": "39da1e1c-89e9-45d7-9e08-d820b7bba36f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "73c06cb1-cf7d-403c-979e-bc581ae7ec36",
+      "fromNodeID": "39da1e1c-89e9-45d7-9e08-d820b7bba36f",
+      "toNodeID": "d6381736-ed59-4fb9-a08a-c69d4c560962",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b4705aed-4632-4274-9f71-d429367d0e8b",
+      "fromNodeID": "d6381736-ed59-4fb9-a08a-c69d4c560962",
+      "toNodeID": "5a197567-782f-485d-b98c-1e55e1cc80e0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a80e1f8c-9ac0-4be0-854d-1d79667fe81c",
+      "fromNodeID": "5a197567-782f-485d-b98c-1e55e1cc80e0",
+      "toNodeID": "24c9dce0-cf2a-476f-9b1f-3139e56943d3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a19f4c43-40f5-4b8e-8dc1-869e97b8b7f9",
+      "fromNodeID": "24c9dce0-cf2a-476f-9b1f-3139e56943d3",
+      "toNodeID": "04e4340e-29d4-4844-b837-0aad67a2ecdc",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "364a2652-498a-4ae7-9735-050e08167567",
+      "fromNodeID": "04e4340e-29d4-4844-b837-0aad67a2ecdc",
+      "toNodeID": "507c3490-1be6-4b1e-ac71-3a382bd5d64a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "74e12de1-1a7b-4fd9-99fe-fea07e6ae80b",
+      "fromNodeID": "507c3490-1be6-4b1e-ac71-3a382bd5d64a",
+      "toNodeID": "aa13e439-bece-4250-bef6-481b1f3e856e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "614a6959-ceee-419b-8434-7e76f8d63bdb",
+      "fromNodeID": "aa13e439-bece-4250-bef6-481b1f3e856e",
+      "toNodeID": "bece76df-32f7-4ae9-9073-19b437437cf2",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "90cfb0b8-6207-49f9-a4c6-3ccbb0b172b7",
+      "fromNodeID": "bece76df-32f7-4ae9-9073-19b437437cf2",
+      "toNodeID": "0036a7da-2dd0-458d-9d11-b73845baf97e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a5247788-ec37-4358-bd77-8f5de85a29ab",
+      "fromNodeID": "0036a7da-2dd0-458d-9d11-b73845baf97e",
+      "toNodeID": "1c5f256f-e986-44fd-9226-be65ed2e2dd8",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9d19f9b5-3141-46e4-ad63-b7283e000782",
+      "fromNodeID": "1c5f256f-e986-44fd-9226-be65ed2e2dd8",
+      "toNodeID": "51a7d790-ae81-4ac5-a8f6-93687e8a20e9",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "13bcd4a5-c83d-47a3-b59c-17cecf124cc2",
+      "fromNodeID": "51a7d790-ae81-4ac5-a8f6-93687e8a20e9",
+      "toNodeID": "f62a9813-4e1a-4df7-98ed-d4f42bbe7b5e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "03cbcc26-5526-4a91-8e54-3ccf49411ca3",
+      "fromNodeID": "f62a9813-4e1a-4df7-98ed-d4f42bbe7b5e",
+      "toNodeID": "eab461e1-dde5-4fc8-bd05-3e515727ee57",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "fcba47d2-37d7-44f3-9b0b-5ddb1d0bf74f",
+      "fromNodeID": "eab461e1-dde5-4fc8-bd05-3e515727ee57",
+      "toNodeID": "956703a2-91a5-4b05-8d0f-d26dfa354171",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d1523cbd-ea7f-4f97-888d-461a4baa1c05",
+      "fromNodeID": "956703a2-91a5-4b05-8d0f-d26dfa354171",
+      "toNodeID": "375fa9af-e10a-42e8-8ba6-af700dce2130",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d7ec8778-caa7-408b-a0d8-9605ce8891e1",
+      "fromNodeID": "375fa9af-e10a-42e8-8ba6-af700dce2130",
+      "toNodeID": "a058526c-fe7d-4506-a82b-a26709be13f0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e10593a0-5fc7-439d-a93c-1593c947830b",
+      "fromNodeID": "a058526c-fe7d-4506-a82b-a26709be13f0",
+      "toNodeID": "dc733656-fa96-48a7-9bcf-5e673aa29d33",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ce9896a4-9262-4913-9980-b7868021166e",
+      "fromNodeID": "dc733656-fa96-48a7-9bcf-5e673aa29d33",
+      "toNodeID": "70f347a4-b582-40bc-9925-0837b69826cf",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "74b08fe5-d9c2-454e-b1b9-31bdd612e05b",
+      "fromNodeID": "70f347a4-b582-40bc-9925-0837b69826cf",
+      "toNodeID": "5dc6501b-a5dc-487d-af6b-33c6298f1ac0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "079ddbd6-57a6-432e-b839-5adf6dd41270",
+      "fromNodeID": "5dc6501b-a5dc-487d-af6b-33c6298f1ac0",
+      "toNodeID": "7aa1f3d5-3428-4d70-a50e-e8a147556a7e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "bfca68b0-ecb5-4eb2-a34c-40a9423fe0a9",
+      "fromNodeID": "7aa1f3d5-3428-4d70-a50e-e8a147556a7e",
+      "toNodeID": "367879a8-649b-45ea-90e8-2dfea85715c6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9b370682-94f0-4089-8db5-f59436ad68bf",
+      "fromNodeID": "367879a8-649b-45ea-90e8-2dfea85715c6",
+      "toNodeID": "43689a6d-dcbe-4dfb-b9fd-da813c0c8f85",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c9251c86-185e-4b60-8a1d-c04e33e5bdb2",
+      "fromNodeID": "5dc6501b-a5dc-487d-af6b-33c6298f1ac0",
+      "toNodeID": "361cfcaa-2819-4bf6-821e-e1ecc3e966c5",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d562e9a4-78eb-4fcf-87a4-0a89195534a7",
+      "fromNodeID": "dc733656-fa96-48a7-9bcf-5e673aa29d33",
+      "toNodeID": "932276be-501c-4e32-8455-28ae43e1ca06",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0f38d113-222e-4317-8554-0ac2b1224622",
+      "fromNodeID": "932276be-501c-4e32-8455-28ae43e1ca06",
+      "toNodeID": "0936b352-429b-450c-82bb-51a42d14903f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "fe885454-f004-4680-8a6e-ebdf611e8200",
+      "fromNodeID": "0936b352-429b-450c-82bb-51a42d14903f",
+      "toNodeID": "8d6eee85-7d12-497e-910a-2c637e7c00de",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "66383534-14f6-4086-a578-34a6c7d12262",
+      "fromNodeID": "8d6eee85-7d12-497e-910a-2c637e7c00de",
+      "toNodeID": "0ee4272f-f317-4726-ad77-efe882cb60c2",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "46569b1e-2069-4b4c-99b3-a8cecd8cf839",
+      "fromNodeID": "0ee4272f-f317-4726-ad77-efe882cb60c2",
+      "toNodeID": "70f347a4-b582-40bc-9925-0837b69826cf",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "68d025ab-9545-40be-9705-3de1a61c5686",
+      "fromNodeID": "a058526c-fe7d-4506-a82b-a26709be13f0",
+      "toNodeID": "7ca0b8bf-69bf-4ddc-97eb-f5efcc885c16",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2e7e46d0-9770-415b-b91d-de02bd648e5c",
+      "fromNodeID": "7ca0b8bf-69bf-4ddc-97eb-f5efcc885c16",
+      "toNodeID": "a9ee862c-0db2-4131-835c-0673cd4722a3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "22b270dd-6db6-4ccb-888b-87756e8721e8",
+      "fromNodeID": "a9ee862c-0db2-4131-835c-0673cd4722a3",
+      "toNodeID": "f39d69e6-489e-45e0-a589-c2f8f8b3a69a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "65b00e88-c97f-4982-af21-4e9a66ebbe09",
+      "fromNodeID": "f39d69e6-489e-45e0-a589-c2f8f8b3a69a",
+      "toNodeID": "d3c14242-fe18-47e1-8f34-f5882d55a1b4",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c698a9e5-b229-4453-936e-0638f0e89220",
+      "fromNodeID": "d3c14242-fe18-47e1-8f34-f5882d55a1b4",
+      "toNodeID": "48358e7d-873f-45f8-be30-bd8581ed51b6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6be8830f-95b9-48d1-866f-c3e19b9d6ebf",
+      "fromNodeID": "48358e7d-873f-45f8-be30-bd8581ed51b6",
+      "toNodeID": "70f347a4-b582-40bc-9925-0837b69826cf",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f455cfa4-ca2c-4515-8fbf-ad45a32b55e2",
+      "fromNodeID": "375fa9af-e10a-42e8-8ba6-af700dce2130",
+      "toNodeID": "5e78de38-d97e-4092-9647-0bcb9f1c5af7",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2cb0fd97-2cae-4255-add7-103c2915fda7",
+      "fromNodeID": "5e78de38-d97e-4092-9647-0bcb9f1c5af7",
+      "toNodeID": "e42c9b1a-facc-49a8-8752-97b20857203c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "26a3b03d-f8c4-4430-8718-14f94a9ad97b",
+      "fromNodeID": "e42c9b1a-facc-49a8-8752-97b20857203c",
+      "toNodeID": "78bcc81f-dd87-4cf1-b67d-4b6e5318118e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3eee1166-ff80-47bd-b0cc-cfa151707869",
+      "fromNodeID": "78bcc81f-dd87-4cf1-b67d-4b6e5318118e",
+      "toNodeID": "944f1734-3dc8-4c55-8c33-2864b87c35eb",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a2a9870f-c9fd-4eb8-978a-7405d71d9e62",
+      "fromNodeID": "944f1734-3dc8-4c55-8c33-2864b87c35eb",
+      "toNodeID": "70f347a4-b582-40bc-9925-0837b69826cf",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c99816c0-2b7e-4a39-8753-87cb3e01f7db",
+      "fromNodeID": "eab461e1-dde5-4fc8-bd05-3e515727ee57",
+      "toNodeID": "57306446-1368-4556-9214-48449b71de33",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "97160139-701e-43f7-994a-4859b4c146f7",
+      "fromNodeID": "51a7d790-ae81-4ac5-a8f6-93687e8a20e9",
+      "toNodeID": "926d8faf-986b-457d-acbc-844828d6a7b3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "5a00094b-c7e1-41c6-9210-423557169d79",
+      "fromNodeID": "0036a7da-2dd0-458d-9d11-b73845baf97e",
+      "toNodeID": "2b99af36-f04e-4f8a-88a7-3ef9cd2efa35",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1192013c-69f9-4b19-b3f7-6e005323f527",
+      "fromNodeID": "2b99af36-f04e-4f8a-88a7-3ef9cd2efa35",
+      "toNodeID": "3fe61d8c-3d92-4a28-99fa-5cc0edfa3846",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8ad24136-dc4c-40c2-87ff-46da9d6621ac",
+      "fromNodeID": "3fe61d8c-3d92-4a28-99fa-5cc0edfa3846",
+      "toNodeID": "2c77a0dd-5e81-41ba-ab01-f4514e75b57f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1a9a05e3-e161-4057-b7a9-ad11ae5fb4c4",
+      "fromNodeID": "2c77a0dd-5e81-41ba-ab01-f4514e75b57f",
+      "toNodeID": "aea48cdd-b19f-482b-93c5-bc554f6eb42d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6908566a-d6db-4242-8a56-6c86a6eb737e",
+      "fromNodeID": "aea48cdd-b19f-482b-93c5-bc554f6eb42d",
+      "toNodeID": "1c5f256f-e986-44fd-9226-be65ed2e2dd8",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "785f46c2-aa1c-446d-ba62-fe9b4c8afe33",
+      "fromNodeID": "bece76df-32f7-4ae9-9073-19b437437cf2",
+      "toNodeID": "847184cf-fa9b-41c2-a92f-eee5304d53f0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d62f03c9-fdfb-4757-854b-40d93cda785b",
+      "fromNodeID": "847184cf-fa9b-41c2-a92f-eee5304d53f0",
+      "toNodeID": "2f9b1c37-9ed8-4404-9790-a63e8ed6551f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "901f722f-132a-4ff8-b355-2d7df2e09118",
+      "fromNodeID": "2f9b1c37-9ed8-4404-9790-a63e8ed6551f",
+      "toNodeID": "1b4dd710-c478-4849-b6ce-2efcd1d0ddbc",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0ed56f8b-5c6f-488d-97d2-959060eab9ae",
+      "fromNodeID": "1b4dd710-c478-4849-b6ce-2efcd1d0ddbc",
+      "toNodeID": "3f52b9da-bc9c-41d0-b1cf-6e7565fd5951",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2f8caf03-e054-41cb-94f5-82b0451bab7a",
+      "fromNodeID": "3f52b9da-bc9c-41d0-b1cf-6e7565fd5951",
+      "toNodeID": "ae14549a-febc-4996-9f06-ae8d55a2f81b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ffee2db3-5d1c-4273-a678-aac2c4620e35",
+      "fromNodeID": "ae14549a-febc-4996-9f06-ae8d55a2f81b",
+      "toNodeID": "1c5f256f-e986-44fd-9226-be65ed2e2dd8",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "2dbb93c5-dcf3-4903-8a0d-77032232f5b3",
+      "fromNodeID": "aa13e439-bece-4250-bef6-481b1f3e856e",
+      "toNodeID": "499e3c18-cb45-4a02-90d4-8358685295d4",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f018d024-da6d-460a-bf40-955c0384b73e",
+      "fromNodeID": "499e3c18-cb45-4a02-90d4-8358685295d4",
+      "toNodeID": "f63b22f3-380b-479d-943e-4668e372c517",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "28905518-65e7-4794-911b-f74867815f5f",
+      "fromNodeID": "f63b22f3-380b-479d-943e-4668e372c517",
+      "toNodeID": "8129f8b1-8e24-4b5f-aabc-53b79f802a46",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6c22c6d5-0540-491f-b56a-1e6cc0e7e913",
+      "fromNodeID": "8129f8b1-8e24-4b5f-aabc-53b79f802a46",
+      "toNodeID": "ecadda0d-f6a4-40ea-8e02-9f40c66f9194",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "12abe12b-f81b-411d-ae72-38ffe461c214",
+      "fromNodeID": "ecadda0d-f6a4-40ea-8e02-9f40c66f9194",
+      "toNodeID": "1c5f256f-e986-44fd-9226-be65ed2e2dd8",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b254cb9c-337a-4558-9690-5fd199623f61",
+      "fromNodeID": "04e4340e-29d4-4844-b837-0aad67a2ecdc",
+      "toNodeID": "9f41a6a1-ff8a-4918-bd9b-0724f2e7f6b9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "688e2fba-1a74-4478-9035-776e35daffdf",
+      "fromNodeID": "5a197567-782f-485d-b98c-1e55e1cc80e0",
+      "toNodeID": "8372cfeb-2903-4f02-9ed8-ff9b3a02789a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "af96d0a7-d8de-4d54-a7f4-e23c3f7139fd",
+      "fromNodeID": "39da1e1c-89e9-45d7-9e08-d820b7bba36f",
+      "toNodeID": "b4d96f2f-c6be-4c91-a9d6-f11e33223471",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "9de1f81b-deb1-4bf4-9ee6-1a574c295392",
+      "fromNodeID": "b4d96f2f-c6be-4c91-a9d6-f11e33223471",
+      "toNodeID": "e8067056-9549-4972-94fe-3ff7979c2906",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "76048026-ce8d-4aae-adcb-81fc0150a184",
+      "fromNodeID": "e8067056-9549-4972-94fe-3ff7979c2906",
+      "toNodeID": "202abd70-5666-40b4-b84c-48c8ba13fedf",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "4d24ecde-451c-4954-9cd8-535b889d49ae",
+      "fromNodeID": "202abd70-5666-40b4-b84c-48c8ba13fedf",
+      "toNodeID": "5e54dceb-b89f-4351-8b85-170399199807",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7c1ed134-2f60-4bad-8859-d54d08f23e9e",
+      "fromNodeID": "5e54dceb-b89f-4351-8b85-170399199807",
+      "toNodeID": "d6381736-ed59-4fb9-a08a-c69d4c560962",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "803672e9-bbf5-4489-abdb-b14b026e2109",
+      "fromNodeID": "b5c1b537-35a1-4bc9-9acb-fcb4290c46ee",
+      "toNodeID": "94c757b4-4aaa-474f-8b7e-c13f2d1f58ef",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d1bea0d1-0fc5-4329-9bab-4ec3c7e7f861",
+      "fromNodeID": "94c757b4-4aaa-474f-8b7e-c13f2d1f58ef",
+      "toNodeID": "ee71334c-e61d-4398-b353-30359d07a40f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "5f4f7a2f-2ff9-451e-862f-29f3bf4d94b4",
+      "fromNodeID": "ee71334c-e61d-4398-b353-30359d07a40f",
+      "toNodeID": "51a85d39-78ff-4559-bcae-a0284e1df055",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b0a8bf54-a74d-4546-a98a-492e31538379",
+      "fromNodeID": "51a85d39-78ff-4559-bcae-a0284e1df055",
+      "toNodeID": "deca71c6-cdae-48e9-b46e-0fe7e64196e5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "43c0b466-8e43-46a2-bb4b-4f688320299f",
+      "fromNodeID": "deca71c6-cdae-48e9-b46e-0fe7e64196e5",
+      "toNodeID": "d6381736-ed59-4fb9-a08a-c69d4c560962",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "844c83ab-af48-47f5-a191-f3fccced7e9c",
+      "fromNodeID": "b88bdfa5-cc07-4c29-ac48-e44f987414e7",
+      "toNodeID": "747f94da-2bc6-4fe1-8b36-9f6dca326a86",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "a51c9552-dce2-44c5-920b-4cab0a019b49",
+      "fromNodeID": "747f94da-2bc6-4fe1-8b36-9f6dca326a86",
+      "toNodeID": "0c5a1b9b-0974-486d-80a4-ac09d6ccbbf6",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1890b0af-0fe8-4190-b06f-bec525079c58",
+      "fromNodeID": "0c5a1b9b-0974-486d-80a4-ac09d6ccbbf6",
+      "toNodeID": "30b9e7ac-fe39-4519-b8a2-ca9d13f0f19c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "efd2dff0-c907-48d4-8bf6-8fd2644291b4",
+      "fromNodeID": "30b9e7ac-fe39-4519-b8a2-ca9d13f0f19c",
+      "toNodeID": "3769fcde-5696-45f1-afb0-9a300af3610a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7796f36b-69c6-42b2-9834-680199860e37",
+      "fromNodeID": "3769fcde-5696-45f1-afb0-9a300af3610a",
+      "toNodeID": "d6381736-ed59-4fb9-a08a-c69d4c560962",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "1bae06b3-d67b-4295-bf31-4c2702a573be",
+      "fromNodeID": "b992d624-57e6-4849-a5ce-7f0c0ea98d1e",
+      "toNodeID": "a56ac24d-565e-4eb0-be6a-7ea63f44c6ad",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3e6117d9-817f-4661-b052-df60524e0cca",
+      "fromNodeID": "7b6d8384-fe27-4dd5-9263-59fd8b55b2e4",
+      "toNodeID": "da66947b-6d34-47a1-bec9-7972239172ea",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0f3a6a46-6693-49d1-a703-e47de4890ce0",
+      "fromNodeID": "782c7288-780b-43f7-b2be-deda5998aac0",
+      "toNodeID": "243a2b7a-75c8-4c03-b737-739546420d39",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "ccfff177-93ff-4678-a6f4-b058c8d7c01f",
+      "fromNodeID": "243a2b7a-75c8-4c03-b737-739546420d39",
+      "toNodeID": "2787b642-a38e-446e-9976-945b7b43ffbd",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "68463589-9f3b-4ada-a33e-6df96dedd0fa",
+      "fromNodeID": "2787b642-a38e-446e-9976-945b7b43ffbd",
+      "toNodeID": "f7d16265-c9a1-4254-9f78-db6176e45837",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f3d3e544-1be7-4e28-9a29-baa64571f325",
+      "fromNodeID": "f7d16265-c9a1-4254-9f78-db6176e45837",
+      "toNodeID": "b5659e74-544c-4fc2-a9b7-df4ba971458c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9289fbc5-1385-47de-b3d0-23de79862582",
+      "fromNodeID": "b5659e74-544c-4fc2-a9b7-df4ba971458c",
+      "toNodeID": "e74e2e1d-ca10-4f0e-9ab2-d6c1a60d3b53",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "fca89698-5fc6-417d-8ee4-8d57a56e543a",
+      "fromNodeID": "0b32c731-cbdd-475c-a786-02dba4d6ee7f",
+      "toNodeID": "dc3780c0-dd72-4b56-8b3e-4d7f4f110273",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "9581eaad-a44b-45a0-b9aa-b350d329b86d",
+      "fromNodeID": "dc3780c0-dd72-4b56-8b3e-4d7f4f110273",
+      "toNodeID": "7f668e9e-c612-4706-8082-3dc520d3d91d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "5171ec6a-7eb7-49ce-ab87-f46186fa624f",
+      "fromNodeID": "7f668e9e-c612-4706-8082-3dc520d3d91d",
+      "toNodeID": "36893c40-0449-44df-8570-2cd05a81f6be",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "11875d01-559b-4997-a2a4-d4ac706e5860",
+      "fromNodeID": "36893c40-0449-44df-8570-2cd05a81f6be",
+      "toNodeID": "db6693f8-5eb9-4359-be23-30843aa64dff",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d10c2cd9-69d2-4861-871d-05c466fd3a86",
+      "fromNodeID": "db6693f8-5eb9-4359-be23-30843aa64dff",
+      "toNodeID": "e74e2e1d-ca10-4f0e-9ab2-d6c1a60d3b53",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "65fa74bb-17ad-42dc-88a1-79da4dc4774d",
+      "fromNodeID": "507b0c13-4cee-4322-ab3a-61dbe4fcb9d6",
+      "toNodeID": "d44cfc5a-aa8d-4c03-81c7-8a167772498a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "66b6162f-476b-4b6b-984b-87b8cf07130c",
+      "fromNodeID": "d44cfc5a-aa8d-4c03-81c7-8a167772498a",
+      "toNodeID": "3b8b46b4-e6b9-4a54-b94b-04933a98c600",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f412e840-308b-4c1d-8b5b-c3af60991223",
+      "fromNodeID": "3b8b46b4-e6b9-4a54-b94b-04933a98c600",
+      "toNodeID": "c0ef8277-55f6-468c-8d26-8c5c5bd832c8",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "37045814-90c7-4796-a606-7f262b7dcd09",
+      "fromNodeID": "c0ef8277-55f6-468c-8d26-8c5c5bd832c8",
+      "toNodeID": "adda5da9-1422-4597-843e-8f6a576c7722",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1195598b-727f-45ce-886d-9222a25f93bd",
+      "fromNodeID": "adda5da9-1422-4597-843e-8f6a576c7722",
+      "toNodeID": "e74e2e1d-ca10-4f0e-9ab2-d6c1a60d3b53",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "2b7a7eee-8b31-4486-bc71-382c2bf6b04f",
+      "fromNodeID": "2e9be52f-ece4-4d48-a941-115796b92f20",
+      "toNodeID": "12b7000b-2183-439c-b285-35c7a5eb81b1",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d130edeb-5899-4fba-ad3f-b26d67c55453",
+      "fromNodeID": "62677bb5-24da-42dd-b24f-9bdf1bbee81d",
+      "toNodeID": "bc5a5d97-7d55-4d96-9849-2097aaad1474",
+      "edgeType": "STARTS_WITH"
+    }
+  ],
+  "idProvider": {}
+}

@@ -1,0 +1,969 @@
+{
+  "children": [
+    {
+      "children": [],
+      "id": "3ea62519-b28b-4dab-b403-d01879512efd",
+      "label": "MAIN-PARA",
+      "name": "MAIN-PARA",
+      "originalText": "MAIN-PARA.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "421d98c0-6f1c-42a2-ab6e-49c8330555a4",
+          "label": "SETERR-FLG-OFFT",
+          "name": "SETERR-FLG-OFFT",
+          "originalText": "SET ERR-FLG-OFF TO TRUE",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "477f5ad5-ecae-47b7-8162-e92495fe4631",
+          "label": "MOVESPACESTOWS-",
+          "name": "MOVESPACESTOWS-",
+          "originalText": "MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "f169485f-3e7b-4aec-8160-3f6b6ae1dcaa",
+                  "label": "MOVE\u0027COSGN00C\u0027T",
+                  "name": "MOVE\u0027COSGN00C\u0027T",
+                  "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "e38477a0-a702-4246-960d-bfc50bd5549f",
+                  "label": "PERFORM RETURN-TO-PREV-SCREEN",
+                  "name": "PERFORMRETURN-T",
+                  "originalText": "PERFORM RETURN-TO-PREV-SCREEN",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "cb8b4859-d1fb-4958-b73a-27a6b7de96a2",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "4182952d-fdf8-4d31-a852-cd5c418726ac",
+                  "label": "ELSE",
+                  "name": "ELSE",
+                  "originalText": "ELSE",
+                  "type": "SYMBOL",
+                  "categories": [
+                    "SYMBOL"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "e77b4371-0cb1-4b9a-ad78-c3d7d338db21",
+                  "label": "MOVEDFHCOMMAREA",
+                  "name": "MOVEDFHCOMMAREA",
+                  "originalText": "MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "d154af3a-3c79-4d13-9d8b-b80ddee579ea",
+                          "label": "SETCDEMO-PGM-RE",
+                          "name": "SETCDEMO-PGM-RE",
+                          "originalText": "SET CDEMO-PGM-REENTER    TO TRUE",
+                          "type": "GENERIC_STATEMENT",
+                          "categories": [
+                            "GENERIC_CODE"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "1c0d50d6-bfa5-4bcc-aeaa-c6488405eca5",
+                          "label": "MOVELOW-VALUEST",
+                          "name": "MOVELOW-VALUEST",
+                          "originalText": "MOVE LOW-VALUES          TO COUSR1AO",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "0b705b16-0c31-40ab-9c5a-def5f022bda2",
+                          "label": "MOVE-1TOFNAMELO",
+                          "name": "MOVE-1TOFNAMELO",
+                          "originalText": "MOVE -1       TO FNAMEL OF COUSR1AI",
+                          "type": "MOVE",
+                          "categories": [
+                            "DATA_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "7f669062-b6b3-43e8-a73b-6f6afe56f6f8",
+                          "label": "PERFORM SEND-USRADD-SCREEN",
+                          "name": "PERFORMSEND-USR",
+                          "originalText": "PERFORM SEND-USRADD-SCREEN",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "057a5be9-dab6-46d7-a841-408fb07384bd",
+                      "label": "Yes",
+                      "name": "Yes",
+                      "originalText": "SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COUSR1AO\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN",
+                      "type": "IF_YES",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "id": "3fc6edf7-8e3b-4a88-8b45-661c350d2f31",
+                          "label": "ELSE",
+                          "name": "ELSE",
+                          "originalText": "ELSE",
+                          "type": "SYMBOL",
+                          "categories": [
+                            "SYMBOL"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "36b2c4e1-2f52-4a63-9628-5dd719ef1f18",
+                          "label": "PERFORM RECEIVE-USRADD-SCREEN",
+                          "name": "PERFORMRECEIVE-",
+                          "originalText": "PERFORM RECEIVE-USRADD-SCREEN",
+                          "type": "PERFORM",
+                          "categories": [
+                            "CONTROL_FLOW"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        },
+                        {
+                          "children": [],
+                          "id": "11614cee-65b2-45af-b212-38c5398a408f",
+                          "label": "EVALUATE",
+                          "name": "EVALUATE",
+                          "originalText": "EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COADM01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN DFHPF4\n                           PERFORM CLEAR-CURRENT-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO FNAMEL OF COUSR1AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-USRADD-SCREEN\n                   END-EVALUATE",
+                          "type": "EVALUATE",
+                          "categories": [
+                            "DECISION"
+                          ],
+                          "nodeType": "CODE_VERTEX"
+                        }
+                      ],
+                      "id": "ffe9b823-5d6f-4c36-a1cf-5c0133f6db17",
+                      "label": "No",
+                      "name": "No",
+                      "originalText": "ELSE\n                   PERFORM RECEIVE-USRADD-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COADM01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN DFHPF4\n                           PERFORM CLEAR-CURRENT-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO FNAMEL OF COUSR1AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-USRADD-SCREEN\n                   END-EVALUATE",
+                      "type": "IF_NO",
+                      "categories": [
+                        "DECISION_BRANCH"
+                      ],
+                      "nodeType": "CODE_VERTEX"
+                    }
+                  ],
+                  "id": "ec3322ec-90d2-4642-820f-f9aa671fe8dd",
+                  "label": "IS \nNOT CDEMO-PGM-REENTER?\n",
+                  "name": "IS \nNOT CDEMO-PGM-REENTER?\n",
+                  "originalText": "IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COUSR1AO\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               ELSE\n                   PERFORM RECEIVE-USRADD-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COADM01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN DFHPF4\n                           PERFORM CLEAR-CURRENT-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO FNAMEL OF COUSR1AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-USRADD-SCREEN\n                   END-EVALUATE\n               END-IF",
+                  "type": "IF_BRANCH",
+                  "categories": [
+                    "DECISION"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "01866e6e-7c63-48d2-ba31-b76f8b5862c5",
+              "label": "No",
+              "name": "No",
+              "originalText": "ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COUSR1AO\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               ELSE\n                   PERFORM RECEIVE-USRADD-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COADM01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN DFHPF4\n                           PERFORM CLEAR-CURRENT-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO FNAMEL OF COUSR1AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-USRADD-SCREEN\n                   END-EVALUATE\n               END-IF",
+              "type": "IF_NO",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "5a52bb7a-b392-4664-8311-8f2a8379801c",
+          "label": "IS \nEIBCALEN \u003d 0?\n",
+          "name": "IS \nEIBCALEN \u003d 0?\n",
+          "originalText": "IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COUSR1AO\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               ELSE\n                   PERFORM RECEIVE-USRADD-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COADM01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN DFHPF4\n                           PERFORM CLEAR-CURRENT-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO FNAMEL OF COUSR1AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-USRADD-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "95390f5f-5378-444c-a9f8-0701aedefb48",
+          "label": "_DIALECT_1​​​​ ",
+          "name": "_DIALECT_1​​​​ ",
+          "originalText": "_DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "067e769c-e8ea-4a9e-8635-a8ef76ca1f0f",
+      "label": "SETERR-FLG-OFFT",
+      "name": "SETERR-FLG-OFFT",
+      "originalText": "SET ERR-FLG-OFF TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COUSR1AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COUSR1AO\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               ELSE\n                   PERFORM RECEIVE-USRADD-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COADM01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN DFHPF4\n                           PERFORM CLEAR-CURRENT-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO FNAMEL OF COUSR1AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-USRADD-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF\n       \n           _DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "a11ee6da-789a-4837-9865-069ce36cb26e",
+      "label": "PROCESS-ENTER-KEY",
+      "name": "PROCESS-ENTER-KEY",
+      "originalText": "PROCESS-ENTER-KEY.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "8fa75529-5859-4aff-82b9-dd7db33a0bdf",
+          "label": "EVALUATE",
+          "name": "EVALUATE",
+          "originalText": "EVALUATE TRUE\n               WHEN FNAMEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027First Name can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN LNAMEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Last Name can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO LNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN USERIDI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User ID can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN PASSWDI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Password can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO PASSWDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN USRTYPEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User Type can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USRTYPEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN OTHER\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   CONTINUE\n           END-EVALUATE",
+          "type": "EVALUATE",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "707dde38-c184-424b-8a70-54ea8dedc513",
+                  "label": "MOVEUSERIDIOFCO",
+                  "name": "MOVEUSERIDIOFCO",
+                  "originalText": "MOVE USERIDI  OF COUSR1AI TO SEC-USR-ID",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "662fd96c-fd35-421d-953e-29aa08a4fdab",
+                  "label": "MOVEFNAMEIOFCOU",
+                  "name": "MOVEFNAMEIOFCOU",
+                  "originalText": "MOVE FNAMEI   OF COUSR1AI TO SEC-USR-FNAME",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "89ac181e-5e67-46d3-9644-1ed21d75ea40",
+                  "label": "MOVELNAMEIOFCOU",
+                  "name": "MOVELNAMEIOFCOU",
+                  "originalText": "MOVE LNAMEI   OF COUSR1AI TO SEC-USR-LNAME",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "8f2f5727-d986-4051-992e-39620ffcd100",
+                  "label": "MOVEPASSWDIOFCO",
+                  "name": "MOVEPASSWDIOFCO",
+                  "originalText": "MOVE PASSWDI  OF COUSR1AI TO SEC-USR-PWD",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "1ef3cfad-e280-4e20-bc4f-331cbbbb2510",
+                  "label": "MOVEUSRTYPEIOFC",
+                  "name": "MOVEUSRTYPEIOFC",
+                  "originalText": "MOVE USRTYPEI OF COUSR1AI TO SEC-USR-TYPE",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                },
+                {
+                  "children": [],
+                  "id": "c4a49126-b108-497c-ad9f-0718eb3753c5",
+                  "label": "PERFORM WRITE-USER-SEC-FILE",
+                  "name": "PERFORMWRITE-US",
+                  "originalText": "PERFORM WRITE-USER-SEC-FILE",
+                  "type": "PERFORM",
+                  "categories": [
+                    "CONTROL_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "dbe96b4f-b194-4e0d-bb24-a2ce1605a9ab",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "MOVE USERIDI  OF COUSR1AI TO SEC-USR-ID\n               MOVE FNAMEI   OF COUSR1AI TO SEC-USR-FNAME\n               MOVE LNAMEI   OF COUSR1AI TO SEC-USR-LNAME\n               MOVE PASSWDI  OF COUSR1AI TO SEC-USR-PWD\n               MOVE USRTYPEI OF COUSR1AI TO SEC-USR-TYPE\n               PERFORM WRITE-USER-SEC-FILE",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "adb08812-a937-4317-a28a-09e82cf7153b",
+          "label": "IS \nNOT ERR-FLG-ON?\n",
+          "name": "IS \nNOT ERR-FLG-ON?\n",
+          "originalText": "IF NOT ERR-FLG-ON\n               MOVE USERIDI  OF COUSR1AI TO SEC-USR-ID\n               MOVE FNAMEI   OF COUSR1AI TO SEC-USR-FNAME\n               MOVE LNAMEI   OF COUSR1AI TO SEC-USR-LNAME\n               MOVE PASSWDI  OF COUSR1AI TO SEC-USR-PWD\n               MOVE USRTYPEI OF COUSR1AI TO SEC-USR-TYPE\n               PERFORM WRITE-USER-SEC-FILE\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "ebe487cf-b506-46ee-b814-6366eec9d82a",
+      "label": "EVALUATETRUEWHE",
+      "name": "EVALUATETRUEWHE",
+      "originalText": "EVALUATE TRUE\n               WHEN FNAMEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027First Name can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN LNAMEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Last Name can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO LNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN USERIDI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User ID can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN PASSWDI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Password can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO PASSWDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN USRTYPEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User Type can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USRTYPEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN OTHER\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   CONTINUE\n           END-EVALUATE\n       \n           IF NOT ERR-FLG-ON\n               MOVE USERIDI  OF COUSR1AI TO SEC-USR-ID\n               MOVE FNAMEI   OF COUSR1AI TO SEC-USR-FNAME\n               MOVE LNAMEI   OF COUSR1AI TO SEC-USR-LNAME\n               MOVE PASSWDI  OF COUSR1AI TO SEC-USR-PWD\n               MOVE USRTYPEI OF COUSR1AI TO SEC-USR-TYPE\n               PERFORM WRITE-USER-SEC-FILE\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "74901969-7445-4fa5-86a8-8336cc404005",
+      "label": "RETURN-TO-PREV-SCREEN",
+      "name": "RETURN-TO-PREV-SCREEN",
+      "originalText": "RETURN-TO-PREV-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "id": "39a4b24c-af90-4a6c-affd-6b9a9231819b",
+                  "label": "MOVE\u0027COSGN00C\u0027T",
+                  "name": "MOVE\u0027COSGN00C\u0027T",
+                  "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+                  "type": "MOVE",
+                  "categories": [
+                    "DATA_FLOW"
+                  ],
+                  "nodeType": "CODE_VERTEX"
+                }
+              ],
+              "id": "4b247ae4-035d-4503-b747-b261eacbc1ad",
+              "label": "Yes",
+              "name": "Yes",
+              "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+              "type": "IF_YES",
+              "categories": [
+                "DECISION_BRANCH"
+              ],
+              "nodeType": "CODE_VERTEX"
+            }
+          ],
+          "id": "2e81cb59-60fe-4613-a6dd-db5705810380",
+          "label": "IS \nCDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES?\n",
+          "name": "IS \nCDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES?\n",
+          "originalText": "IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF",
+          "type": "IF_BRANCH",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "381b8142-af8c-49d8-b9ef-f03331d96902",
+          "label": "MOVEWS-TRANIDTO",
+          "name": "MOVEWS-TRANIDTO",
+          "originalText": "MOVE WS-TRANID    TO CDEMO-FROM-TRANID",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "0c97b0ed-2550-4ba2-8419-fabb4f5468fe",
+          "label": "MOVEWS-PGMNAMET",
+          "name": "MOVEWS-PGMNAMET",
+          "originalText": "MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5de754fb-4932-4af5-8400-f94de90648a1",
+          "label": "MOVEZEROSTOCDEM",
+          "name": "MOVEZEROSTOCDEM",
+          "originalText": "MOVE ZEROS        TO CDEMO-PGM-CONTEXT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "3908fb35-5392-4168-8ec8-1b12991d1b6e",
+          "label": "_DIALECT_2​​​​ ",
+          "name": "_DIALECT_2​​​​ ",
+          "originalText": "_DIALECT_ 2 ​​​​ ​​​​\n               ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "4f70efbc-2a21-4056-a94d-04c406b67825",
+      "label": "IFCDEMO-TO-PROG",
+      "name": "IFCDEMO-TO-PROG",
+      "originalText": "IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF\n           MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n           MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n       \n       \n           MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n           _DIALECT_ 2 ​​​​ ​​​​\n               ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "1b832944-ed24-429e-ab1e-b2f55c18ac05",
+      "label": "SEND-USRADD-SCREEN",
+      "name": "SEND-USRADD-SCREEN",
+      "originalText": "SEND-USRADD-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "6ffdad8a-dab1-4f32-b2ef-36865639d246",
+          "label": "PERFORM POPULATE-HEADER-INFO",
+          "name": "PERFORMPOPULATE",
+          "originalText": "PERFORM POPULATE-HEADER-INFO",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c126a884-0304-43e6-a553-aab9d3b8ffb8",
+          "label": "MOVEWS-MESSAGET",
+          "name": "MOVEWS-MESSAGET",
+          "originalText": "MOVE WS-MESSAGE TO ERRMSGO OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "0e66799c-4bd4-48b2-b5fe-ebcacbdb9ffb",
+          "label": "_DIALECT_3​​​​ ",
+          "name": "_DIALECT_3​​​​ ",
+          "originalText": "_DIALECT_ 3 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "95beac80-4079-42d2-be81-d0398f5d6a0d",
+      "label": "PERFORMPOPULATE",
+      "name": "PERFORMPOPULATE",
+      "originalText": "PERFORM POPULATE-HEADER-INFO\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF COUSR1AO\n       \n           _DIALECT_ 3 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "804b123e-42a8-4bc8-9349-a8bd4bc03368",
+      "label": "RECEIVE-USRADD-SCREEN",
+      "name": "RECEIVE-USRADD-SCREEN",
+      "originalText": "RECEIVE-USRADD-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "81e5832c-00e8-4a3c-ad80-36ab09dfef48",
+          "label": "_DIALECT_4​​​​ ",
+          "name": "_DIALECT_4​​​​ ",
+          "originalText": "_DIALECT_ 4 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "4f0d0ee1-dd5b-4c2d-82a2-2c6363386569",
+      "label": "_DIALECT_4​​​​ ",
+      "name": "_DIALECT_4​​​​ ",
+      "originalText": "_DIALECT_ 4 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "26ac5289-3986-4dad-9e6f-2b8ab19d9149",
+      "label": "POPULATE-HEADER-INFO",
+      "name": "POPULATE-HEADER-INFO",
+      "originalText": "POPULATE-HEADER-INFO.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "e9eceaa0-9d30-4892-b3b0-201e14195a62",
+          "label": "MOVEFUNCTIONCUR",
+          "name": "MOVEFUNCTIONCUR",
+          "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "6a98abda-e5ac-4d0d-b6d0-4d7e8b4a8802",
+          "label": "MOVECCDA-TITLE0",
+          "name": "MOVECCDA-TITLE0",
+          "originalText": "MOVE CCDA-TITLE01           TO TITLE01O OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "46db1ad2-ec11-4386-b043-50c8b6c21883",
+          "label": "MOVECCDA-TITLE0",
+          "name": "MOVECCDA-TITLE0",
+          "originalText": "MOVE CCDA-TITLE02           TO TITLE02O OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "19db53fa-e7ca-4422-ac2e-ab37d5962ab3",
+          "label": "MOVEWS-TRANIDTO",
+          "name": "MOVEWS-TRANIDTO",
+          "originalText": "MOVE WS-TRANID              TO TRNNAMEO OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "0371ffad-53de-41d4-99f3-71e05933e198",
+          "label": "MOVEWS-PGMNAMET",
+          "name": "MOVEWS-PGMNAMET",
+          "originalText": "MOVE WS-PGMNAME             TO PGMNAMEO OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "e3af3b24-a582-40da-a5db-185c4ed4537f",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "7a8be2c9-0def-47c8-b295-524eb431b981",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b483d096-805c-4948-be0f-97383062b1e8",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "928b8ad0-75a6-4871-b28b-c893b2c01541",
+          "label": "MOVEWS-CURDATE-",
+          "name": "MOVEWS-CURDATE-",
+          "originalText": "MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "3011e6ea-fc3e-4b95-9672-702bfcdf7c2c",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "61bfb063-fe55-470c-9ca5-59be169df765",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c9f779f1-21f5-477a-bc1a-ca72e28e7d99",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "1163fe03-c7e1-415e-b0fd-0d54957d5dbe",
+          "label": "MOVEWS-CURTIME-",
+          "name": "MOVEWS-CURTIME-",
+          "originalText": "MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COUSR1AO",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "c315cc5b-976e-4f5d-a160-b5d74e430faa",
+      "label": "MOVEFUNCTIONCUR",
+      "name": "MOVEFUNCTIONCUR",
+      "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF COUSR1AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF COUSR1AO\n           MOVE WS-TRANID              TO TRNNAMEO OF COUSR1AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF COUSR1AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COUSR1AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COUSR1AO.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "c8cec9cf-aa4b-4a16-ab48-07c5a65e89f8",
+      "label": "WRITE-USER-SEC-FILE",
+      "name": "WRITE-USER-SEC-FILE",
+      "originalText": "WRITE-USER-SEC-FILE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "43bb8753-17e9-475f-84cd-513f561b4e46",
+          "label": "_DIALECT_5​​​​ ",
+          "name": "_DIALECT_5​​​​ ",
+          "originalText": "_DIALECT_ 5 ​​​​ ​​​​ ​​​​​\n                ​​​​​​​   ​​​​​​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​ ​​ ​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​​​​​​\n                ​​​​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​\n           ​​​​​​​​.",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "a4b9deaa-12aa-48f7-9f96-378da4bc3a77",
+          "label": "EVALUATE",
+          "name": "EVALUATE",
+          "originalText": "EVALUATE WS-RESP-CD\n               WHEN _DIALECT_ 6 ​​​​​​​​​​​​​​​\n                   PERFORM INITIALIZE-ALL-FIELDS\n                   MOVE SPACES             TO WS-MESSAGE\n                   MOVE DFHGREEN           TO ERRMSGC  OF COUSR1AO\n                   STRING \u0027User \u0027     DELIMITED BY SIZE\n                          SEC-USR-ID  DELIMITED BY SPACE\n                          \u0027 has been added ...\u0027 DELIMITED BY SIZE\n                     INTO WS-MESSAGE\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN _DIALECT_ 7 ​​​​​​​​​​​​​​​\n               WHEN _DIALECT_ 8 ​​​​​​​​​​​​​​​\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User ID already exist...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN OTHER\n       \n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Unable to Add User...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n           END-EVALUATE",
+          "type": "EVALUATE",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "b0bbb4e0-8196-4d61-adf8-1aacbcd8bda3",
+      "label": "_DIALECT_5​​​​ ",
+      "name": "_DIALECT_5​​​​ ",
+      "originalText": "_DIALECT_ 5 ​​​​ ​​​​ ​​​​​\n                ​​​​​​​   ​​​​​​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​ ​​ ​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​​​​​​\n                ​​​​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE WS-RESP-CD\n               WHEN _DIALECT_ 6 ​​​​​​​​​​​​​​​\n                   PERFORM INITIALIZE-ALL-FIELDS\n                   MOVE SPACES             TO WS-MESSAGE\n                   MOVE DFHGREEN           TO ERRMSGC  OF COUSR1AO\n                   STRING \u0027User \u0027     DELIMITED BY SIZE\n                          SEC-USR-ID  DELIMITED BY SPACE\n                          \u0027 has been added ...\u0027 DELIMITED BY SIZE\n                     INTO WS-MESSAGE\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN _DIALECT_ 7 ​​​​​​​​​​​​​​​\n               WHEN _DIALECT_ 8 ​​​​​​​​​​​​​​​\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User ID already exist...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN OTHER\n       \n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Unable to Add User...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n           END-EVALUATE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "92235440-0d76-4da1-b018-52acbcb23c19",
+      "label": "CLEAR-CURRENT-SCREEN",
+      "name": "CLEAR-CURRENT-SCREEN",
+      "originalText": "CLEAR-CURRENT-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "84e2b872-9769-4118-9636-6d035187b010",
+          "label": "PERFORM INITIALIZE-ALL-FIELDS",
+          "name": "PERFORMINITIALI",
+          "originalText": "PERFORM INITIALIZE-ALL-FIELDS",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "dc2b5f39-aa9b-4d40-a555-fe23bccb58a7",
+      "label": "PERFORMINITIALI",
+      "name": "PERFORMINITIALI",
+      "originalText": "PERFORM INITIALIZE-ALL-FIELDS.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "0768bd40-ca93-4504-9efc-033cb51397cc",
+          "label": "PERFORM SEND-USRADD-SCREEN",
+          "name": "PERFORMSEND-USR",
+          "originalText": "PERFORM SEND-USRADD-SCREEN",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "cf63825e-b12c-4e75-81ba-e1a93d39cc30",
+      "label": "PERFORMSEND-USR",
+      "name": "PERFORMSEND-USR",
+      "originalText": "PERFORM SEND-USRADD-SCREEN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "40b20a53-cd4f-46d2-a156-d30c7e0eecf7",
+      "label": "INITIALIZE-ALL-FIELDS",
+      "name": "INITIALIZE-ALL-FIELDS",
+      "originalText": "INITIALIZE-ALL-FIELDS.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "58398d5d-a16c-49ce-8977-28d1e033fc18",
+          "label": "MOVE-1TOFNAMELO",
+          "name": "MOVE-1TOFNAMELO",
+          "originalText": "MOVE -1              TO FNAMEL OF COUSR1AI",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "a6852f84-e5a5-4fc0-a9e1-3509f26dfe85",
+          "label": "MOVESPACESTOUSE",
+          "name": "MOVESPACESTOUSE",
+          "originalText": "MOVE SPACES          TO USERIDI  OF COUSR1AI\n                                   FNAMEI   OF COUSR1AI\n                                   LNAMEI   OF COUSR1AI\n                                   PASSWDI  OF COUSR1AI\n                                   USRTYPEI OF COUSR1AI\n                                   WS-MESSAGE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "7560aacf-ab4e-4772-8618-0afa47b39219",
+      "label": "MOVE-1TOFNAMELO",
+      "name": "MOVE-1TOFNAMELO",
+      "originalText": "MOVE -1              TO FNAMEL OF COUSR1AI\n           MOVE SPACES          TO USERIDI  OF COUSR1AI\n                                   FNAMEI   OF COUSR1AI\n                                   LNAMEI   OF COUSR1AI\n                                   PASSWDI  OF COUSR1AI\n                                   USRTYPEI OF COUSR1AI\n                                   WS-MESSAGE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "id": "f97064aa-7c96-4701-94a8-f9d30e92178f",
+  "label": "ProcedureDivisionBodyContext/f97064aa-7c96-4701-94a8-f9d30e92178f",
+  "name": "ProcedureDivisionBodyContext/f97064aa-7c96-4701-94a8-f9d30e92178f",
+  "originalText": "MAIN-PARA.\n       \n           SET ERR-FLG-OFF TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF COUSR1AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO COUSR1AO\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               ELSE\n                   PERFORM RECEIVE-USRADD-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COADM01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN DFHPF4\n                           PERFORM CLEAR-CURRENT-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO FNAMEL OF COUSR1AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-USRADD-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF\n       \n           _DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       PROCESS-ENTER-KEY.\n       \n           EVALUATE TRUE\n               WHEN FNAMEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027First Name can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN LNAMEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Last Name can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO LNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN USERIDI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User ID can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN PASSWDI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Password can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO PASSWDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN USRTYPEI OF COUSR1AI \u003d SPACES OR LOW-VALUES\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User Type can NOT be empty...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USRTYPEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN OTHER\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   CONTINUE\n           END-EVALUATE\n       \n           IF NOT ERR-FLG-ON\n               MOVE USERIDI  OF COUSR1AI TO SEC-USR-ID\n               MOVE FNAMEI   OF COUSR1AI TO SEC-USR-FNAME\n               MOVE LNAMEI   OF COUSR1AI TO SEC-USR-LNAME\n               MOVE PASSWDI  OF COUSR1AI TO SEC-USR-PWD\n               MOVE USRTYPEI OF COUSR1AI TO SEC-USR-TYPE\n               PERFORM WRITE-USER-SEC-FILE\n           END-IF.\n       \n       \n       \n       \n       RETURN-TO-PREV-SCREEN.\n       \n           IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF\n           MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n           MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n       \n       \n           MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n           _DIALECT_ 2 ​​​​ ​​​​\n               ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       \n       SEND-USRADD-SCREEN.\n       \n           PERFORM POPULATE-HEADER-INFO\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF COUSR1AO\n       \n           _DIALECT_ 3 ​​​​ ​​​​ ​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       RECEIVE-USRADD-SCREEN.\n       \n           _DIALECT_ 4 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       POPULATE-HEADER-INFO.\n       \n           MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF COUSR1AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF COUSR1AO\n           MOVE WS-TRANID              TO TRNNAMEO OF COUSR1AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF COUSR1AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF COUSR1AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF COUSR1AO.\n       \n       \n       \n       \n       WRITE-USER-SEC-FILE.\n       \n           _DIALECT_ 5 ​​​​ ​​​​ ​​​​​\n                ​​​​​​​   ​​​​​​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​ ​​ ​​​​​​​​​​​​​​\n                ​​​​​​    ​​​​​​​​​​​​\n                ​​​​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n                ​​​​      ​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE WS-RESP-CD\n               WHEN _DIALECT_ 6 ​​​​​​​​​​​​​​​\n                   PERFORM INITIALIZE-ALL-FIELDS\n                   MOVE SPACES             TO WS-MESSAGE\n                   MOVE DFHGREEN           TO ERRMSGC  OF COUSR1AO\n                   STRING \u0027User \u0027     DELIMITED BY SIZE\n                          SEC-USR-ID  DELIMITED BY SPACE\n                          \u0027 has been added ...\u0027 DELIMITED BY SIZE\n                     INTO WS-MESSAGE\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN _DIALECT_ 7 ​​​​​​​​​​​​​​​\n               WHEN _DIALECT_ 8 ​​​​​​​​​​​​​​​\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027User ID already exist...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO USERIDL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n               WHEN OTHER\n       \n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Unable to Add User...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO FNAMEL OF COUSR1AI\n                   PERFORM SEND-USRADD-SCREEN\n           END-EVALUATE.\n       \n       \n       \n       \n       CLEAR-CURRENT-SCREEN.\n       \n           PERFORM INITIALIZE-ALL-FIELDS.\n           PERFORM SEND-USRADD-SCREEN.\n       \n       \n       \n       \n       INITIALIZE-ALL-FIELDS.\n       \n           MOVE -1              TO FNAMEL OF COUSR1AI\n           MOVE SPACES          TO USERIDI  OF COUSR1AI\n                                   FNAMEI   OF COUSR1AI\n                                   LNAMEI   OF COUSR1AI\n                                   PASSWDI  OF COUSR1AI\n                                   USRTYPEI OF COUSR1AI\n                                   WS-MESSAGE.",
+  "type": "PROCEDURE_DIVISION_BODY",
+  "categories": [
+    "CODE_BLOCK"
+  ],
+  "nodeType": "CODE_VERTEX"
+}

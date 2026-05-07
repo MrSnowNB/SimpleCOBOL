@@ -1,0 +1,154 @@
+{
+  "nodes": [
+    {
+      "id": "6f07b1ed-e255-4e10-9f4a-1e3cf5d79ba0",
+      "label": "ProcedureDivisionBodyContext/6f07b1ed-e255-4e10-9f4a-1e3cf5d79ba0",
+      "name": "ProcedureDivisionBodyContext/6f07b1ed-e255-4e10-9f4a-1e3cf5d79ba0",
+      "originalText": "ACCEPT PARM-VALUE      FROM SYSIN.\n           MOVE  PARM-VALUE       TO MVSWAIT-TIME.\n           CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME.\n       \n           STOP RUN.",
+      "type": "PROCEDURE_DIVISION_BODY",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3e8d8536-77b0-419b-b6dd-84a1033afab0",
+      "label": "ACCEPTPARM-VALU",
+      "name": "ACCEPTPARM-VALU",
+      "originalText": "ACCEPT PARM-VALUE      FROM SYSIN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3c679580-27dd-4516-aff0-f99f91739957",
+      "label": "MOVEPARM-VALUET",
+      "name": "MOVEPARM-VALUET",
+      "originalText": "MOVE  PARM-VALUE       TO MVSWAIT-TIME.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b438458d-cc4d-41d2-844a-7432c28b076b",
+      "label": "CALL\u0027MVSWAIT\u0027US",
+      "name": "CALL\u0027MVSWAIT\u0027US",
+      "originalText": "CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b4f97426-df06-4aa7-954c-54255477fd9c",
+      "label": "STOPRUN.",
+      "name": "STOPRUN.",
+      "originalText": "STOP RUN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7c9c4119-002f-4474-a52e-859630e002bc",
+      "label": "STOPRUN",
+      "name": "STOPRUN",
+      "originalText": "STOP RUN",
+      "type": "STOP",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3d2fd389-85cd-4963-8c37-19e4ffc3cea2",
+      "label": "CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME",
+      "name": "CALL\u0027MVSWAIT\u0027US",
+      "originalText": "CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME",
+      "type": "CALL",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "786ced83-b9db-4473-b5e9-c01b6a21397f",
+      "label": "MOVEPARM-VALUET",
+      "name": "MOVEPARM-VALUET",
+      "originalText": "MOVE  PARM-VALUE       TO MVSWAIT-TIME",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5479a9f2-f083-43dd-b443-7f6313571da9",
+      "label": "ACCEPTPARM-VALU",
+      "name": "ACCEPTPARM-VALU",
+      "originalText": "ACCEPT PARM-VALUE      FROM SYSIN",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "edges": [
+    {
+      "id": "1ae36116-ebeb-4458-9b2d-5d3a7739a35e",
+      "fromNodeID": "6f07b1ed-e255-4e10-9f4a-1e3cf5d79ba0",
+      "toNodeID": "3e8d8536-77b0-419b-b6dd-84a1033afab0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f267f1e6-4a50-44a6-a4d9-44b9617252e0",
+      "fromNodeID": "3e8d8536-77b0-419b-b6dd-84a1033afab0",
+      "toNodeID": "3c679580-27dd-4516-aff0-f99f91739957",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4650c10c-dde9-407f-a183-94f68bb69974",
+      "fromNodeID": "3c679580-27dd-4516-aff0-f99f91739957",
+      "toNodeID": "b438458d-cc4d-41d2-844a-7432c28b076b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "63418440-277c-491b-a395-efaa1f77795f",
+      "fromNodeID": "b438458d-cc4d-41d2-844a-7432c28b076b",
+      "toNodeID": "b4f97426-df06-4aa7-954c-54255477fd9c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "29605bf1-683a-4532-97e5-aaacfde8bc25",
+      "fromNodeID": "b4f97426-df06-4aa7-954c-54255477fd9c",
+      "toNodeID": "7c9c4119-002f-4474-a52e-859630e002bc",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6d064267-8524-4705-99cf-e1d24bd1f86b",
+      "fromNodeID": "b438458d-cc4d-41d2-844a-7432c28b076b",
+      "toNodeID": "3d2fd389-85cd-4963-8c37-19e4ffc3cea2",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "502ef981-35a3-4639-884a-8755fbb86787",
+      "fromNodeID": "3c679580-27dd-4516-aff0-f99f91739957",
+      "toNodeID": "786ced83-b9db-4473-b5e9-c01b6a21397f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "4632aa1c-fbc7-4720-9a5d-3791ec439a44",
+      "fromNodeID": "3e8d8536-77b0-419b-b6dd-84a1033afab0",
+      "toNodeID": "5479a9f2-f083-43dd-b443-7f6313571da9",
+      "edgeType": "STARTS_WITH"
+    }
+  ],
+  "idProvider": {}
+}

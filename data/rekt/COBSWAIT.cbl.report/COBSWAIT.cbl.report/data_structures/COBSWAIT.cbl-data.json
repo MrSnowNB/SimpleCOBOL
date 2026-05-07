@@ -1,0 +1,65 @@
+{
+  "id": "6f3de2a8-4cb2-4fb6-a734-827d1fd43550",
+  "name": "[ROOT]",
+  "content": "[ROOT]",
+  "levelNumber": 0,
+  "rawText": "[ROOT]",
+  "children": [
+    {
+      "id": "32fdb9b6-b19b-41e4-b2a7-a40c9195ea59",
+      "name": "MVSWAIT-TIME",
+      "content": "01MVSWAIT-TIMEPIC9(8)COMP.",
+      "levelNumber": 1,
+      "rawText": "01 MVSWAIT-TIME                    PIC 9(8) COMP.",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "NUMBER",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "158d035a-cabc-46d3-96ea-37877e36d67a",
+      "name": "PARM-VALUE",
+      "content": "01PARM-VALUEPICX(8).",
+      "levelNumber": 1,
+      "rawText": "01 PARM-VALUE                      PIC X(8).",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "STRING",
+      "categories": [
+        "GLOBAL"
+      ],
+      "sourceSection": "WORKING_STORAGE"
+    },
+    {
+      "id": "31f2b0eb-0580-4810-ab1b-d47d8e599987",
+      "name": "WHEN-COMPILED",
+      "content": "WHEN-COMPILED",
+      "levelNumber": 1,
+      "rawText": "[STATIC]",
+      "children": [],
+      "isRedefinition": false,
+      "redefines": "",
+      "nodeType": "DATA_VERTEX",
+      "dataType": "STRING",
+      "categories": [
+        "LOCAL"
+      ],
+      "sourceSection": "PROCEDURE_DIVISION"
+    }
+  ],
+  "isRedefinition": false,
+  "redefines": "",
+  "nodeType": "DATA_VERTEX",
+  "dataType": "OBJECT",
+  "categories": [
+    "ROOT"
+  ],
+  "sourceSection": "ROOT"
+}

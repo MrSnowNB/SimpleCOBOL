@@ -1,0 +1,2009 @@
+{
+  "nodes": [
+    {
+      "id": "1153a9df-2c5e-4383-9637-15f2aa5416c1",
+      "label": "ProcedureDivisionBodyContext/1153a9df-2c5e-4383-9637-15f2aa5416c1",
+      "name": "ProcedureDivisionBodyContext/1153a9df-2c5e-4383-9637-15f2aa5416c1",
+      "originalText": "MAIN-PARA.\n       \n           SET ERR-FLG-OFF TO TRUE\n           SET TRANSACT-NOT-EOF TO TRUE\n           SET SEND-ERASE-YES TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF CORPT0AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO CORPT0AO\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n               ELSE\n                   PERFORM RECEIVE-TRNRPT-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COMEN01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO MONTHLYL OF CORPT0AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-TRNRPT-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF\n       \n           _DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       \n       PROCESS-ENTER-KEY.\n       \n           DISPLAY \u0027PROCESS ENTER KEY\u0027\n       \n           EVALUATE TRUE\n               WHEN MONTHLYI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n                   MOVE \u0027Monthly\u0027   TO WS-REPORT-NAME\n                   MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-START-DATE-YYYY\n                   MOVE WS-CURDATE-MONTH    TO WS-START-DATE-MM\n                   MOVE \u002701\u0027                TO WS-START-DATE-DD\n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n       \n                   MOVE 1              TO WS-CURDATE-DAY\n                   ADD 1               TO WS-CURDATE-MONTH\n                   IF WS-CURDATE-MONTH \u003e 12\n                       ADD 1           TO WS-CURDATE-YEAR\n                       MOVE 1          TO WS-CURDATE-MONTH\n                   END-IF\n                   COMPUTE WS-CURDATE-N \u003d FUNCTION DATE-OF-INTEGER(\n                           FUNCTION INTEGER-OF-DATE(WS-CURDATE-N) - 1)\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-END-DATE-YYYY\n                   MOVE WS-CURDATE-MONTH    TO WS-END-DATE-MM\n                   MOVE WS-CURDATE-DAY      TO WS-END-DATE-DD\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n       \n                   PERFORM SUBMIT-JOB-TO-INTRDR\n               WHEN YEARLYI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n                   MOVE \u0027Yearly\u0027   TO WS-REPORT-NAME\n                   MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-START-DATE-YYYY\n                                               WS-END-DATE-YYYY\n                   MOVE \u002701\u0027                TO WS-START-DATE-MM\n                                               WS-START-DATE-DD\n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n       \n                   MOVE \u002712\u0027                TO WS-END-DATE-MM\n                   MOVE \u002731\u0027                TO WS-END-DATE-DD\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n       \n                   PERFORM SUBMIT-JOB-TO-INTRDR\n               WHEN CUSTOMI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n       \n                   EVALUATE TRUE\n                       WHEN SDTMMI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Month can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN SDTDDI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Day can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTDDL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN SDTYYYYI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Year can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTYYYYL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTMMI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Month can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTDDI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Day can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTDDL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTYYYYI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Year can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTYYYYL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN OTHER\n                           CONTINUE\n                   END-EVALUATE\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (SDTMMI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO SDTMMI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (SDTDDI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO SDTDDI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-9999 \u003d FUNCTION NUMVAL-C\n                                           (SDTYYYYI OF CORPT0AI)\n                   MOVE WS-NUM-9999      TO SDTYYYYI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (EDTMMI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO EDTMMI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (EDTDDI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO EDTDDI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-9999 \u003d FUNCTION NUMVAL-C\n                                           (EDTYYYYI OF CORPT0AI)\n                   MOVE WS-NUM-9999      TO EDTYYYYI OF CORPT0AI\n       \n                   IF SDTMMI OF CORPT0AI IS NOT NUMERIC OR\n                      SDTMMI OF CORPT0AI \u003e \u002712\u0027\n                       MOVE \u0027Start Date - Not a valid Month...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTMML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF SDTDDI OF CORPT0AI IS NOT NUMERIC OR\n                      SDTDDI OF CORPT0AI \u003e \u002731\u0027\n                       MOVE \u0027Start Date - Not a valid Day...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTDDL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF SDTYYYYI OF CORPT0AI IS NOT NUMERIC\n                       MOVE \u0027Start Date - Not a valid Year...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTYYYYL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTMMI OF CORPT0AI IS NOT NUMERIC OR\n                      EDTMMI OF CORPT0AI \u003e \u002712\u0027\n                       MOVE \u0027End Date - Not a valid Month...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTMML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTDDI OF CORPT0AI IS NOT NUMERIC OR\n                      EDTDDI OF CORPT0AI \u003e \u002731\u0027\n                       MOVE \u0027End Date - Not a valid Day...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTDDL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTYYYYI OF CORPT0AI IS NOT NUMERIC\n                       MOVE \u0027End Date - Not a valid Year...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTYYYYL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   MOVE SDTYYYYI OF CORPT0AI TO WS-START-DATE-YYYY\n                   MOVE SDTMMI   OF CORPT0AI TO WS-START-DATE-MM\n                   MOVE SDTDDI   OF CORPT0AI TO WS-START-DATE-DD\n                   MOVE EDTYYYYI OF CORPT0AI TO WS-END-DATE-YYYY\n                   MOVE EDTMMI   OF CORPT0AI TO WS-END-DATE-MM\n                   MOVE EDTDDI   OF CORPT0AI TO WS-END-DATE-DD\n       \n                   MOVE WS-START-DATE        TO CSUTLDTC-DATE\n                   MOVE WS-DATE-FORMAT       TO CSUTLDTC-DATE-FORMAT\n                   MOVE SPACES               TO CSUTLDTC-RESULT\n       \n                   CALL \u0027CSUTLDTC\u0027 USING   CSUTLDTC-DATE\n                                           CSUTLDTC-DATE-FORMAT\n                                           CSUTLDTC-RESULT\n       \n                   IF CSUTLDTC-RESULT-SEV-CD \u003d \u00270000\u0027\n                       CONTINUE\n                   ELSE\n                       IF CSUTLDTC-RESULT-MSG-NUM NOT \u003d \u00272513\u0027\n                           MOVE \u0027Start Date - Not a valid date...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       END-IF\n                   END-IF\n       \n                   MOVE WS-END-DATE          TO CSUTLDTC-DATE\n                   MOVE WS-DATE-FORMAT       TO CSUTLDTC-DATE-FORMAT\n                   MOVE SPACES               TO CSUTLDTC-RESULT\n       \n                   CALL \u0027CSUTLDTC\u0027 USING   CSUTLDTC-DATE\n                                           CSUTLDTC-DATE-FORMAT\n                                           CSUTLDTC-RESULT\n       \n                   IF CSUTLDTC-RESULT-SEV-CD \u003d \u00270000\u0027\n                       CONTINUE\n                   ELSE\n                       IF CSUTLDTC-RESULT-MSG-NUM NOT \u003d \u00272513\u0027\n                           MOVE \u0027End Date - Not a valid date...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       END-IF\n                   END-IF\n       \n       \n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n                   MOVE \u0027Custom\u0027   TO WS-REPORT-NAME\n                   IF NOT ERR-FLG-ON\n                       PERFORM SUBMIT-JOB-TO-INTRDR\n                   END-IF\n               WHEN OTHER\n                   MOVE \u0027Select a report type to print report...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n           END-EVALUATE\n       \n           IF NOT ERR-FLG-ON\n       \n               PERFORM INITIALIZE-ALL-FIELDS\n               MOVE DFHGREEN           TO ERRMSGC  OF CORPT0AO\n               STRING WS-REPORT-NAME   DELIMITED BY SPACE\n                 \u0027 report submitted for printing ...\u0027\n                                       DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE -1       TO MONTHLYL OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN\n       \n           END-IF.\n       \n       \n       \n       \n       \n       SUBMIT-JOB-TO-INTRDR.\n       \n           IF CONFIRMI OF CORPT0AI \u003d SPACES OR LOW-VALUES\n               STRING\n                 \u0027Please confirm to print the \u0027\n                                   DELIMITED BY SIZE\n                 WS-REPORT-NAME    DELIMITED BY SPACE\n                 \u0027 report...\u0027      DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE -1       TO CONFIRML OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN\n           END-IF\n       \n           IF NOT ERR-FLG-ON\n               EVALUATE TRUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027Y\u0027 OR \u0027y\u0027\n                       CONTINUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027N\u0027 OR \u0027n\u0027\n                       PERFORM INITIALIZE-ALL-FIELDS\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       PERFORM SEND-TRNRPT-SCREEN\n                   WHEN OTHER\n                       STRING\n                         \u0027\"\u0027               DELIMITED BY SIZE\n                         CONFIRMI OF CORPT0AI    DELIMITED BY SPACE\n                         \u0027\" is not a valid value to confirm...\u0027\n                                           DELIMITED BY SIZE\n                         INTO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO CONFIRML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n               END-EVALUATE\n       \n               SET END-LOOP-NO TO TRUE\n       \n               PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX \u003e 1000 OR\n                                      END-LOOP-YES  OR ERR-FLG-ON\n       \n                   MOVE JOB-LINES(WS-IDX) TO JCL-RECORD\n                   IF JCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                      JCL-RECORD \u003d SPACES OR LOW-VALUES\n                       SET END-LOOP-YES TO TRUE\n                   END-IF\n       \n                   PERFORM WIRTE-JOBSUB-TDQ\n               END-PERFORM\n       \n           END-IF.\n       \n       \n       \n       \n       WIRTE-JOBSUB-TDQ.\n       \n           _DIALECT_ 2 ​​​​ ​​​​ ​​​​​​ ​​\n             ​​​​​ ​​​​​​​​\n             ​​​​ ​​​​​​​​​​​​\n             ​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n             ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE WS-RESP-CD\n               WHEN _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                   CONTINUE\n               WHEN OTHER\n                   DISPLAY \u0027RESP:\u0027 WS-RESP-CD \u0027REAS:\u0027 WS-REAS-CD\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Unable to Write TDQ (JOBS)...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n           END-EVALUATE.\n       \n       \n       \n       \n       RETURN-TO-PREV-SCREEN.\n       \n           IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF\n           MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n           MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n           MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n           _DIALECT_ 4 ​​​​ ​​​​\n               ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       SEND-TRNRPT-SCREEN.\n       \n           PERFORM POPULATE-HEADER-INFO\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF CORPT0AO\n       \n           IF SEND-ERASE-YES\n               _DIALECT_ 5 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​\n               ​​​​​​​​\n           ELSE\n               _DIALECT_ 6 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n       \n               ​​​​​​​​\n           END-IF.\n       \n           GO TO RETURN-TO-CICS.\n       \n       \n       \n       \n       RETURN-TO-CICS.\n       \n           _DIALECT_ 7 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n                     ​​​​​​​​ ​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       RECEIVE-TRNRPT-SCREEN.\n       \n           _DIALECT_ 8 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n       \n       \n       \n       POPULATE-HEADER-INFO.\n       \n           MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF CORPT0AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF CORPT0AO\n           MOVE WS-TRANID              TO TRNNAMEO OF CORPT0AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF CORPT0AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF CORPT0AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF CORPT0AO.\n       \n       \n       \n       \n       INITIALIZE-ALL-FIELDS.\n       \n           MOVE -1              TO MONTHLYL OF CORPT0AI\n           INITIALIZE              MONTHLYI OF CORPT0AI\n                                   YEARLYI  OF CORPT0AI\n                                   CUSTOMI  OF CORPT0AI\n                                   SDTMMI   OF CORPT0AI\n                                   SDTDDI   OF CORPT0AI\n                                   SDTYYYYI OF CORPT0AI\n                                   EDTMMI   OF CORPT0AI\n                                   EDTDDI   OF CORPT0AI\n                                   EDTYYYYI OF CORPT0AI\n                                   CONFIRMI OF CORPT0AI\n                                   WS-MESSAGE.",
+      "type": "PROCEDURE_DIVISION_BODY",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "86d25f40-0278-48c6-bc76-b9d0b1268d34",
+      "label": "MAIN-PARA",
+      "name": "MAIN-PARA",
+      "originalText": "MAIN-PARA.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "21fb034a-cfd0-4ecf-ad80-a4bf3ed4d138",
+      "label": "SETERR-FLG-OFFT",
+      "name": "SETERR-FLG-OFFT",
+      "originalText": "SET ERR-FLG-OFF TO TRUE\n           SET TRANSACT-NOT-EOF TO TRUE\n           SET SEND-ERASE-YES TO TRUE\n       \n           MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF CORPT0AO\n       \n           IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO CORPT0AO\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n               ELSE\n                   PERFORM RECEIVE-TRNRPT-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COMEN01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO MONTHLYL OF CORPT0AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-TRNRPT-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF\n       \n           _DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8d3bed73-1b45-4f1a-89e2-740325b26b4a",
+      "label": "PROCESS-ENTER-KEY",
+      "name": "PROCESS-ENTER-KEY",
+      "originalText": "PROCESS-ENTER-KEY.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0a73d734-72c0-4752-b5fc-56a661c10858",
+      "label": "DISPLAY\u0027PROCESS",
+      "name": "DISPLAY\u0027PROCESS",
+      "originalText": "DISPLAY \u0027PROCESS ENTER KEY\u0027\n       \n           EVALUATE TRUE\n               WHEN MONTHLYI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n                   MOVE \u0027Monthly\u0027   TO WS-REPORT-NAME\n                   MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-START-DATE-YYYY\n                   MOVE WS-CURDATE-MONTH    TO WS-START-DATE-MM\n                   MOVE \u002701\u0027                TO WS-START-DATE-DD\n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n       \n                   MOVE 1              TO WS-CURDATE-DAY\n                   ADD 1               TO WS-CURDATE-MONTH\n                   IF WS-CURDATE-MONTH \u003e 12\n                       ADD 1           TO WS-CURDATE-YEAR\n                       MOVE 1          TO WS-CURDATE-MONTH\n                   END-IF\n                   COMPUTE WS-CURDATE-N \u003d FUNCTION DATE-OF-INTEGER(\n                           FUNCTION INTEGER-OF-DATE(WS-CURDATE-N) - 1)\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-END-DATE-YYYY\n                   MOVE WS-CURDATE-MONTH    TO WS-END-DATE-MM\n                   MOVE WS-CURDATE-DAY      TO WS-END-DATE-DD\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n       \n                   PERFORM SUBMIT-JOB-TO-INTRDR\n               WHEN YEARLYI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n                   MOVE \u0027Yearly\u0027   TO WS-REPORT-NAME\n                   MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-START-DATE-YYYY\n                                               WS-END-DATE-YYYY\n                   MOVE \u002701\u0027                TO WS-START-DATE-MM\n                                               WS-START-DATE-DD\n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n       \n                   MOVE \u002712\u0027                TO WS-END-DATE-MM\n                   MOVE \u002731\u0027                TO WS-END-DATE-DD\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n       \n                   PERFORM SUBMIT-JOB-TO-INTRDR\n               WHEN CUSTOMI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n       \n                   EVALUATE TRUE\n                       WHEN SDTMMI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Month can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN SDTDDI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Day can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTDDL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN SDTYYYYI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Year can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTYYYYL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTMMI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Month can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTDDI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Day can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTDDL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTYYYYI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Year can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTYYYYL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN OTHER\n                           CONTINUE\n                   END-EVALUATE\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (SDTMMI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO SDTMMI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (SDTDDI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO SDTDDI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-9999 \u003d FUNCTION NUMVAL-C\n                                           (SDTYYYYI OF CORPT0AI)\n                   MOVE WS-NUM-9999      TO SDTYYYYI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (EDTMMI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO EDTMMI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (EDTDDI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO EDTDDI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-9999 \u003d FUNCTION NUMVAL-C\n                                           (EDTYYYYI OF CORPT0AI)\n                   MOVE WS-NUM-9999      TO EDTYYYYI OF CORPT0AI\n       \n                   IF SDTMMI OF CORPT0AI IS NOT NUMERIC OR\n                      SDTMMI OF CORPT0AI \u003e \u002712\u0027\n                       MOVE \u0027Start Date - Not a valid Month...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTMML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF SDTDDI OF CORPT0AI IS NOT NUMERIC OR\n                      SDTDDI OF CORPT0AI \u003e \u002731\u0027\n                       MOVE \u0027Start Date - Not a valid Day...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTDDL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF SDTYYYYI OF CORPT0AI IS NOT NUMERIC\n                       MOVE \u0027Start Date - Not a valid Year...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTYYYYL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTMMI OF CORPT0AI IS NOT NUMERIC OR\n                      EDTMMI OF CORPT0AI \u003e \u002712\u0027\n                       MOVE \u0027End Date - Not a valid Month...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTMML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTDDI OF CORPT0AI IS NOT NUMERIC OR\n                      EDTDDI OF CORPT0AI \u003e \u002731\u0027\n                       MOVE \u0027End Date - Not a valid Day...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTDDL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTYYYYI OF CORPT0AI IS NOT NUMERIC\n                       MOVE \u0027End Date - Not a valid Year...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTYYYYL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   MOVE SDTYYYYI OF CORPT0AI TO WS-START-DATE-YYYY\n                   MOVE SDTMMI   OF CORPT0AI TO WS-START-DATE-MM\n                   MOVE SDTDDI   OF CORPT0AI TO WS-START-DATE-DD\n                   MOVE EDTYYYYI OF CORPT0AI TO WS-END-DATE-YYYY\n                   MOVE EDTMMI   OF CORPT0AI TO WS-END-DATE-MM\n                   MOVE EDTDDI   OF CORPT0AI TO WS-END-DATE-DD\n       \n                   MOVE WS-START-DATE        TO CSUTLDTC-DATE\n                   MOVE WS-DATE-FORMAT       TO CSUTLDTC-DATE-FORMAT\n                   MOVE SPACES               TO CSUTLDTC-RESULT\n       \n                   CALL \u0027CSUTLDTC\u0027 USING   CSUTLDTC-DATE\n                                           CSUTLDTC-DATE-FORMAT\n                                           CSUTLDTC-RESULT\n       \n                   IF CSUTLDTC-RESULT-SEV-CD \u003d \u00270000\u0027\n                       CONTINUE\n                   ELSE\n                       IF CSUTLDTC-RESULT-MSG-NUM NOT \u003d \u00272513\u0027\n                           MOVE \u0027Start Date - Not a valid date...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       END-IF\n                   END-IF\n       \n                   MOVE WS-END-DATE          TO CSUTLDTC-DATE\n                   MOVE WS-DATE-FORMAT       TO CSUTLDTC-DATE-FORMAT\n                   MOVE SPACES               TO CSUTLDTC-RESULT\n       \n                   CALL \u0027CSUTLDTC\u0027 USING   CSUTLDTC-DATE\n                                           CSUTLDTC-DATE-FORMAT\n                                           CSUTLDTC-RESULT\n       \n                   IF CSUTLDTC-RESULT-SEV-CD \u003d \u00270000\u0027\n                       CONTINUE\n                   ELSE\n                       IF CSUTLDTC-RESULT-MSG-NUM NOT \u003d \u00272513\u0027\n                           MOVE \u0027End Date - Not a valid date...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       END-IF\n                   END-IF\n       \n       \n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n                   MOVE \u0027Custom\u0027   TO WS-REPORT-NAME\n                   IF NOT ERR-FLG-ON\n                       PERFORM SUBMIT-JOB-TO-INTRDR\n                   END-IF\n               WHEN OTHER\n                   MOVE \u0027Select a report type to print report...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n           END-EVALUATE\n       \n           IF NOT ERR-FLG-ON\n       \n               PERFORM INITIALIZE-ALL-FIELDS\n               MOVE DFHGREEN           TO ERRMSGC  OF CORPT0AO\n               STRING WS-REPORT-NAME   DELIMITED BY SPACE\n                 \u0027 report submitted for printing ...\u0027\n                                       DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE -1       TO MONTHLYL OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN\n       \n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7315f9f2-d216-4c39-8b7e-8c0558bca1f6",
+      "label": "SUBMIT-JOB-TO-INTRDR",
+      "name": "SUBMIT-JOB-TO-INTRDR",
+      "originalText": "SUBMIT-JOB-TO-INTRDR.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c93017e3-c22e-4a8b-8a8d-2c967c317c25",
+      "label": "IFCONFIRMIOFCOR",
+      "name": "IFCONFIRMIOFCOR",
+      "originalText": "IF CONFIRMI OF CORPT0AI \u003d SPACES OR LOW-VALUES\n               STRING\n                 \u0027Please confirm to print the \u0027\n                                   DELIMITED BY SIZE\n                 WS-REPORT-NAME    DELIMITED BY SPACE\n                 \u0027 report...\u0027      DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE -1       TO CONFIRML OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN\n           END-IF\n       \n           IF NOT ERR-FLG-ON\n               EVALUATE TRUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027Y\u0027 OR \u0027y\u0027\n                       CONTINUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027N\u0027 OR \u0027n\u0027\n                       PERFORM INITIALIZE-ALL-FIELDS\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       PERFORM SEND-TRNRPT-SCREEN\n                   WHEN OTHER\n                       STRING\n                         \u0027\"\u0027               DELIMITED BY SIZE\n                         CONFIRMI OF CORPT0AI    DELIMITED BY SPACE\n                         \u0027\" is not a valid value to confirm...\u0027\n                                           DELIMITED BY SIZE\n                         INTO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO CONFIRML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n               END-EVALUATE\n       \n               SET END-LOOP-NO TO TRUE\n       \n               PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX \u003e 1000 OR\n                                      END-LOOP-YES  OR ERR-FLG-ON\n       \n                   MOVE JOB-LINES(WS-IDX) TO JCL-RECORD\n                   IF JCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                      JCL-RECORD \u003d SPACES OR LOW-VALUES\n                       SET END-LOOP-YES TO TRUE\n                   END-IF\n       \n                   PERFORM WIRTE-JOBSUB-TDQ\n               END-PERFORM\n       \n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7d2d0d4b-9fc0-42f5-a56b-6db44377b374",
+      "label": "WIRTE-JOBSUB-TDQ",
+      "name": "WIRTE-JOBSUB-TDQ",
+      "originalText": "WIRTE-JOBSUB-TDQ.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3a8650a5-03d6-4627-8f35-c86c7f2adba5",
+      "label": "_DIALECT_2​​​​ ",
+      "name": "_DIALECT_2​​​​ ",
+      "originalText": "_DIALECT_ 2 ​​​​ ​​​​ ​​​​​​ ​​\n             ​​​​​ ​​​​​​​​\n             ​​​​ ​​​​​​​​​​​​\n             ​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n             ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.\n       \n           EVALUATE WS-RESP-CD\n               WHEN _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                   CONTINUE\n               WHEN OTHER\n                   DISPLAY \u0027RESP:\u0027 WS-RESP-CD \u0027REAS:\u0027 WS-REAS-CD\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Unable to Write TDQ (JOBS)...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n           END-EVALUATE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "label": "RETURN-TO-PREV-SCREEN",
+      "name": "RETURN-TO-PREV-SCREEN",
+      "originalText": "RETURN-TO-PREV-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4e211471-f567-4043-b57a-29ef3b83c3cf",
+      "label": "IFCDEMO-TO-PROG",
+      "name": "IFCDEMO-TO-PROG",
+      "originalText": "IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF\n           MOVE WS-TRANID    TO CDEMO-FROM-TRANID\n           MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM\n           MOVE ZEROS        TO CDEMO-PGM-CONTEXT\n           _DIALECT_ 4 ​​​​ ​​​​\n               ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "label": "SEND-TRNRPT-SCREEN",
+      "name": "SEND-TRNRPT-SCREEN",
+      "originalText": "SEND-TRNRPT-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "56aa1a37-dd89-4a66-b6ed-325f8038da8c",
+      "label": "PERFORMPOPULATE",
+      "name": "PERFORMPOPULATE",
+      "originalText": "PERFORM POPULATE-HEADER-INFO\n       \n           MOVE WS-MESSAGE TO ERRMSGO OF CORPT0AO\n       \n           IF SEND-ERASE-YES\n               _DIALECT_ 5 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​\n               ​​​​​​​​\n           ELSE\n               _DIALECT_ 6 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n       \n               ​​​​​​​​\n           END-IF.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "848ac767-84c0-4c8d-9680-d9d46a6143e5",
+      "label": "GOTORETURN-TO-C",
+      "name": "GOTORETURN-TO-C",
+      "originalText": "GO TO RETURN-TO-CICS.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "81659e3a-bec7-4059-a409-9f1205e856d8",
+      "label": "RETURN-TO-CICS",
+      "name": "RETURN-TO-CICS",
+      "originalText": "RETURN-TO-CICS.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "163ba412-b262-4923-a73e-2198a113bf81",
+      "label": "_DIALECT_7​​​​ ",
+      "name": "_DIALECT_7​​​​ ",
+      "originalText": "_DIALECT_ 7 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n                     ​​​​​​​​ ​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "label": "RECEIVE-TRNRPT-SCREEN",
+      "name": "RECEIVE-TRNRPT-SCREEN",
+      "originalText": "RECEIVE-TRNRPT-SCREEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "037e6d78-9392-40d9-9d1f-d717d4736a9f",
+      "label": "_DIALECT_8​​​​ ",
+      "name": "_DIALECT_8​​​​ ",
+      "originalText": "_DIALECT_ 8 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a49d6d03-d7f7-4166-b381-d04383f5267e",
+      "label": "POPULATE-HEADER-INFO",
+      "name": "POPULATE-HEADER-INFO",
+      "originalText": "POPULATE-HEADER-INFO.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2509731f-b88d-45bc-aa87-a361680d2a52",
+      "label": "MOVEFUNCTIONCUR",
+      "name": "MOVEFUNCTIONCUR",
+      "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n           MOVE CCDA-TITLE01           TO TITLE01O OF CORPT0AO\n           MOVE CCDA-TITLE02           TO TITLE02O OF CORPT0AO\n           MOVE WS-TRANID              TO TRNNAMEO OF CORPT0AO\n           MOVE WS-PGMNAME             TO PGMNAMEO OF CORPT0AO\n       \n           MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM\n           MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD\n           MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY\n       \n           MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF CORPT0AO\n       \n           MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH\n           MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM\n           MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS\n       \n           MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF CORPT0AO.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "label": "INITIALIZE-ALL-FIELDS",
+      "name": "INITIALIZE-ALL-FIELDS",
+      "originalText": "INITIALIZE-ALL-FIELDS.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4834755d-5e17-4d99-802c-0c6563bc6ac2",
+      "label": "MOVE-1TOMONTHLY",
+      "name": "MOVE-1TOMONTHLY",
+      "originalText": "MOVE -1              TO MONTHLYL OF CORPT0AI\n           INITIALIZE              MONTHLYI OF CORPT0AI\n                                   YEARLYI  OF CORPT0AI\n                                   CUSTOMI  OF CORPT0AI\n                                   SDTMMI   OF CORPT0AI\n                                   SDTDDI   OF CORPT0AI\n                                   SDTYYYYI OF CORPT0AI\n                                   EDTMMI   OF CORPT0AI\n                                   EDTDDI   OF CORPT0AI\n                                   EDTYYYYI OF CORPT0AI\n                                   CONFIRMI OF CORPT0AI\n                                   WS-MESSAGE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d953fa24-1bb4-479e-b060-e0a0cbd1eb54",
+      "label": "MOVE-1TOMONTHLY",
+      "name": "MOVE-1TOMONTHLY",
+      "originalText": "MOVE -1              TO MONTHLYL OF CORPT0AI",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3f2bf6b8-90c9-4eba-adf6-b89650b9901a",
+      "label": "INITIALIZEMONTH",
+      "name": "INITIALIZEMONTH",
+      "originalText": "INITIALIZE              MONTHLYI OF CORPT0AI\n                                   YEARLYI  OF CORPT0AI\n                                   CUSTOMI  OF CORPT0AI\n                                   SDTMMI   OF CORPT0AI\n                                   SDTDDI   OF CORPT0AI\n                                   SDTYYYYI OF CORPT0AI\n                                   EDTMMI   OF CORPT0AI\n                                   EDTDDI   OF CORPT0AI\n                                   EDTYYYYI OF CORPT0AI\n                                   CONFIRMI OF CORPT0AI\n                                   WS-MESSAGE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bee2c32a-faa9-42b0-8a2a-573804ceb018",
+      "label": "MOVEFUNCTIONCUR",
+      "name": "MOVEFUNCTIONCUR",
+      "originalText": "MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b159b945-25ee-4067-92da-9f3540553213",
+      "label": "MOVECCDA-TITLE0",
+      "name": "MOVECCDA-TITLE0",
+      "originalText": "MOVE CCDA-TITLE01           TO TITLE01O OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1e38864a-db3f-42db-9f78-4be4b88157a0",
+      "label": "MOVECCDA-TITLE0",
+      "name": "MOVECCDA-TITLE0",
+      "originalText": "MOVE CCDA-TITLE02           TO TITLE02O OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "134167cc-4981-4c08-a14b-639f5c4fe933",
+      "label": "MOVEWS-TRANIDTO",
+      "name": "MOVEWS-TRANIDTO",
+      "originalText": "MOVE WS-TRANID              TO TRNNAMEO OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "31ee7246-b6e3-4220-b57f-817e4f53336b",
+      "label": "MOVEWS-PGMNAMET",
+      "name": "MOVEWS-PGMNAMET",
+      "originalText": "MOVE WS-PGMNAME             TO PGMNAMEO OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5e2bb7fc-5be1-4ec1-906b-0de92bae4e1b",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-MONTH       TO WS-CURDATE-MM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ac6340ce-227a-48c9-999a-8664461a7d27",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-DAY         TO WS-CURDATE-DD",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d7894df1-93f9-40d8-842c-4a647f4f3781",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-YEAR(3:2)   TO WS-CURDATE-YY",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7ee3e221-03b7-460b-9156-7e173d1b42ee",
+      "label": "MOVEWS-CURDATE-",
+      "name": "MOVEWS-CURDATE-",
+      "originalText": "MOVE WS-CURDATE-MM-DD-YY    TO CURDATEO OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "33d95cbe-d03c-4a4d-9ef4-66df7bfa7fad",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-HOURS       TO WS-CURTIME-HH",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2987a865-394a-4752-82a8-08c935a1f68f",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-MINUTE      TO WS-CURTIME-MM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ed1633d2-9d01-4281-bae2-0f7e9cb818bd",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-SECOND      TO WS-CURTIME-SS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "053eacbf-db4f-4394-94c4-1ad340f217c1",
+      "label": "MOVEWS-CURTIME-",
+      "name": "MOVEWS-CURTIME-",
+      "originalText": "MOVE WS-CURTIME-HH-MM-SS    TO CURTIMEO OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2f6763d8-de8d-4418-a03f-318b641f2fd5",
+      "label": "_DIALECT_8​​​​ ",
+      "name": "_DIALECT_8​​​​ ",
+      "originalText": "_DIALECT_ 8 ​​​​ ​​​​ ​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​\n                     ​​​​​​​​​​​​​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fd1edb03-6fd8-486e-9594-688158466a83",
+      "label": "_DIALECT_7​​​​ ",
+      "name": "_DIALECT_7​​​​ ",
+      "originalText": "_DIALECT_ 7 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n                     ​​​​​​​​ ​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "58807341-0be9-4c0c-9de3-592a0a3eab6b",
+      "label": "GO TO RETURN-TO-CICS",
+      "name": "GOTORETURN-TO-C",
+      "originalText": "GO TO RETURN-TO-CICS",
+      "type": "GOTO",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c3c0c155-a47b-4742-85fd-07109edae03c",
+      "label": "PERFORM POPULATE-HEADER-INFO",
+      "name": "PERFORMPOPULATE",
+      "originalText": "PERFORM POPULATE-HEADER-INFO",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3b118711-9a8c-4c15-b79b-520546163019",
+      "label": "MOVEWS-MESSAGET",
+      "name": "MOVEWS-MESSAGET",
+      "originalText": "MOVE WS-MESSAGE TO ERRMSGO OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1bfb57f6-25bf-4a53-9285-94c4dbab8f70",
+      "label": "IS \nSEND-ERASE-YES?\n",
+      "name": "IS \nSEND-ERASE-YES?\n",
+      "originalText": "IF SEND-ERASE-YES\n               _DIALECT_ 5 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​\n               ​​​​​​​​\n           ELSE\n               _DIALECT_ 6 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n       \n               ​​​​​​​​\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f9f2da68-0fb2-42c9-97ac-41174673de94",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "_DIALECT_ 5 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​\n               ​​​​​​​​",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c298f805-5755-4378-9154-a67f169004b9",
+      "label": "_DIALECT_5​​​​ ",
+      "name": "_DIALECT_5​​​​ ",
+      "originalText": "_DIALECT_ 5 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​\n               ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8b6dfd86-c0d1-4d80-91d8-1ec00cef91f4",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               _DIALECT_ 6 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n       \n               ​​​​​​​​",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "24fc403d-43fc-4bbd-921f-4edf882f9d03",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9e739ac1-7f25-4ea4-bb62-fca1820b85e4",
+      "label": "_DIALECT_6​​​​ ",
+      "name": "_DIALECT_6​​​​ ",
+      "originalText": "_DIALECT_ 6 ​​​​ ​​​​ ​​​​\n                         ​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​​​​\n                         ​​​​​​​​​​​​​​\n       \n               ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8447de10-c676-45cd-b143-43a5f4ef4aa0",
+      "label": "IS \nCDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES?\n",
+      "name": "IS \nCDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES?\n",
+      "originalText": "IF CDEMO-TO-PROGRAM \u003d LOW-VALUES OR SPACES\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8bc868e9-218a-475b-8cf7-0afc23b5ce7f",
+      "label": "MOVEWS-TRANIDTO",
+      "name": "MOVEWS-TRANIDTO",
+      "originalText": "MOVE WS-TRANID    TO CDEMO-FROM-TRANID",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5716a0bf-9b8d-4a20-9429-7eca431c5958",
+      "label": "MOVEWS-PGMNAMET",
+      "name": "MOVEWS-PGMNAMET",
+      "originalText": "MOVE WS-PGMNAME   TO CDEMO-FROM-PROGRAM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b20b7112-2a43-412b-85f9-9ddebe5061ea",
+      "label": "MOVEZEROSTOCDEM",
+      "name": "MOVEZEROSTOCDEM",
+      "originalText": "MOVE ZEROS        TO CDEMO-PGM-CONTEXT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "cdca4ea3-1d56-4efd-a9fa-06d5b1e8899e",
+      "label": "_DIALECT_4​​​​ ",
+      "name": "_DIALECT_4​​​​ ",
+      "originalText": "_DIALECT_ 4 ​​​​ ​​​​\n               ​​​​ ​​​​​​​​​​​​​​​​​​​​​​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8ac8a714-5c3c-4dce-af8e-c06b76b21942",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6a24713a-99ab-4a23-a234-b1f82b80ad49",
+      "label": "MOVE\u0027COSGN00C\u0027T",
+      "name": "MOVE\u0027COSGN00C\u0027T",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "71cb3806-2ac6-48e0-a2db-32bb9152d605",
+      "label": "_DIALECT_2​​​​ ",
+      "name": "_DIALECT_2​​​​ ",
+      "originalText": "_DIALECT_ 2 ​​​​ ​​​​ ​​​​​​ ​​\n             ​​​​​ ​​​​​​​​\n             ​​​​ ​​​​​​​​​​​​\n             ​​​​​​ ​​​​​​​ ​​ ​​​​​​​​​​​\n             ​​​​​​​​​​​​​​​​\n           ​​​​​​​​.",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9cfa05de-8273-43fd-89ce-4442d93cc613",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE WS-RESP-CD\n               WHEN _DIALECT_ 3 ​​​​​​​​​​​​​​​\n                   CONTINUE\n               WHEN OTHER\n                   DISPLAY \u0027RESP:\u0027 WS-RESP-CD \u0027REAS:\u0027 WS-REAS-CD\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE \u0027Unable to Write TDQ (JOBS)...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n           END-EVALUATE",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c02301df-3007-445b-b33a-40460330f4be",
+      "label": "IS \nCONFIRMI OF CORPT0AI \u003d SPACES OR LOW-VAL?\n",
+      "name": "IS \nCONFIRMI OF CORPT0AI \u003d SPACES OR LOW-VAL?\n",
+      "originalText": "IF CONFIRMI OF CORPT0AI \u003d SPACES OR LOW-VALUES\n               STRING\n                 \u0027Please confirm to print the \u0027\n                                   DELIMITED BY SIZE\n                 WS-REPORT-NAME    DELIMITED BY SPACE\n                 \u0027 report...\u0027      DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE -1       TO CONFIRML OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f4e664d0-06a7-44c0-91a0-9c5ca5ebfe4a",
+      "label": "IS \nNOT ERR-FLG-ON?\n",
+      "name": "IS \nNOT ERR-FLG-ON?\n",
+      "originalText": "IF NOT ERR-FLG-ON\n               EVALUATE TRUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027Y\u0027 OR \u0027y\u0027\n                       CONTINUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027N\u0027 OR \u0027n\u0027\n                       PERFORM INITIALIZE-ALL-FIELDS\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       PERFORM SEND-TRNRPT-SCREEN\n                   WHEN OTHER\n                       STRING\n                         \u0027\"\u0027               DELIMITED BY SIZE\n                         CONFIRMI OF CORPT0AI    DELIMITED BY SPACE\n                         \u0027\" is not a valid value to confirm...\u0027\n                                           DELIMITED BY SIZE\n                         INTO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO CONFIRML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n               END-EVALUATE\n       \n               SET END-LOOP-NO TO TRUE\n       \n               PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX \u003e 1000 OR\n                                      END-LOOP-YES  OR ERR-FLG-ON\n       \n                   MOVE JOB-LINES(WS-IDX) TO JCL-RECORD\n                   IF JCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                      JCL-RECORD \u003d SPACES OR LOW-VALUES\n                       SET END-LOOP-YES TO TRUE\n                   END-IF\n       \n                   PERFORM WIRTE-JOBSUB-TDQ\n               END-PERFORM\n       \n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e9d31c2c-a922-41b0-99e3-cfd213a1b473",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "EVALUATE TRUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027Y\u0027 OR \u0027y\u0027\n                       CONTINUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027N\u0027 OR \u0027n\u0027\n                       PERFORM INITIALIZE-ALL-FIELDS\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       PERFORM SEND-TRNRPT-SCREEN\n                   WHEN OTHER\n                       STRING\n                         \u0027\"\u0027               DELIMITED BY SIZE\n                         CONFIRMI OF CORPT0AI    DELIMITED BY SPACE\n                         \u0027\" is not a valid value to confirm...\u0027\n                                           DELIMITED BY SIZE\n                         INTO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO CONFIRML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n               END-EVALUATE\n       \n               SET END-LOOP-NO TO TRUE\n       \n               PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX \u003e 1000 OR\n                                      END-LOOP-YES  OR ERR-FLG-ON\n       \n                   MOVE JOB-LINES(WS-IDX) TO JCL-RECORD\n                   IF JCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                      JCL-RECORD \u003d SPACES OR LOW-VALUES\n                       SET END-LOOP-YES TO TRUE\n                   END-IF\n       \n                   PERFORM WIRTE-JOBSUB-TDQ\n               END-PERFORM",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "38959a36-38eb-4252-9c82-3d493830e32c",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE TRUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027Y\u0027 OR \u0027y\u0027\n                       CONTINUE\n                   WHEN CONFIRMI OF CORPT0AI \u003d \u0027N\u0027 OR \u0027n\u0027\n                       PERFORM INITIALIZE-ALL-FIELDS\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       PERFORM SEND-TRNRPT-SCREEN\n                   WHEN OTHER\n                       STRING\n                         \u0027\"\u0027               DELIMITED BY SIZE\n                         CONFIRMI OF CORPT0AI    DELIMITED BY SPACE\n                         \u0027\" is not a valid value to confirm...\u0027\n                                           DELIMITED BY SIZE\n                         INTO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO CONFIRML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n               END-EVALUATE",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f329769e-a320-486e-aff8-4317827f7e07",
+      "label": "SETEND-LOOP-NOT",
+      "name": "SETEND-LOOP-NOT",
+      "originalText": "SET END-LOOP-NO TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f9d301d6-d914-46b5-bda7-2931018b2089",
+      "label": "PERFORM VARYING WS-IDX FROM 1 ",
+      "name": "PERFORMVARYINGW",
+      "originalText": "PERFORM VARYING WS-IDX FROM 1 BY 1 UNTIL WS-IDX \u003e 1000 OR\n                                      END-LOOP-YES  OR ERR-FLG-ON\n       \n                   MOVE JOB-LINES(WS-IDX) TO JCL-RECORD\n                   IF JCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                      JCL-RECORD \u003d SPACES OR LOW-VALUES\n                       SET END-LOOP-YES TO TRUE\n                   END-IF\n       \n                   PERFORM WIRTE-JOBSUB-TDQ\n               END-PERFORM",
+      "type": "PERFORM",
+      "categories": [
+        "LOOP"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8ace18b3-9dc9-44db-8a19-0a830d7da39e",
+      "label": "MOVEJOB-LINES(W",
+      "name": "MOVEJOB-LINES(W",
+      "originalText": "MOVE JOB-LINES(WS-IDX) TO JCL-RECORD",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3689eea3-0cf9-427b-bb53-97b3978ce66f",
+      "label": "IS \nJCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                ?\n",
+      "name": "IS \nJCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                ?\n",
+      "originalText": "IF JCL-RECORD \u003d \u0027/*EOF\u0027 OR\n                      JCL-RECORD \u003d SPACES OR LOW-VALUES\n                       SET END-LOOP-YES TO TRUE\n                   END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7353c0e2-466a-42e3-acf8-6c06b0c18d0c",
+      "label": "PERFORM WIRTE-JOBSUB-TDQ",
+      "name": "PERFORMWIRTE-JO",
+      "originalText": "PERFORM WIRTE-JOBSUB-TDQ",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "060ded3a-6b10-49af-a965-7e5031ebf94b",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "SET END-LOOP-YES TO TRUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fec93b1b-b2d6-4f60-ada5-2abfd88f2ce9",
+      "label": "SETEND-LOOP-YES",
+      "name": "SETEND-LOOP-YES",
+      "originalText": "SET END-LOOP-YES TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "baca5431-da65-4a21-a733-153332af0c20",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "STRING\n                 \u0027Please confirm to print the \u0027\n                                   DELIMITED BY SIZE\n                 WS-REPORT-NAME    DELIMITED BY SPACE\n                 \u0027 report...\u0027      DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE \u0027Y\u0027     TO WS-ERR-FLG\n               MOVE -1       TO CONFIRML OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4a9ea4d4-55fd-4e28-af7e-cd17a7b77239",
+      "label": "STRING\u0027Please c",
+      "name": "STRING\u0027Please c",
+      "originalText": "STRING\n                 \u0027Please confirm to print the \u0027\n                                   DELIMITED BY SIZE\n                 WS-REPORT-NAME    DELIMITED BY SPACE\n                 \u0027 report...\u0027      DELIMITED BY SIZE\n                 INTO WS-MESSAGE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1946fecb-bc31-4690-a5e9-df353713f908",
+      "label": "MOVE\u0027Y\u0027TOWS-ERR",
+      "name": "MOVE\u0027Y\u0027TOWS-ERR",
+      "originalText": "MOVE \u0027Y\u0027     TO WS-ERR-FLG",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "47d28dec-9240-441d-9f00-d7aa68c3d698",
+      "label": "MOVE-1TOCONFIRM",
+      "name": "MOVE-1TOCONFIRM",
+      "originalText": "MOVE -1       TO CONFIRML OF CORPT0AI",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0fc4acaa-5c5a-4f51-80c2-38833a91677e",
+      "label": "PERFORM SEND-TRNRPT-SCREEN",
+      "name": "PERFORMSEND-TRN",
+      "originalText": "PERFORM SEND-TRNRPT-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b84a34b4-8cc9-404f-a9c4-1df359db546d",
+      "label": "DISPLAY\u0027PROCESS",
+      "name": "DISPLAY\u0027PROCESS",
+      "originalText": "DISPLAY \u0027PROCESS ENTER KEY\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b9855b44-e0a6-4340-9dbb-ba5b507e227a",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE TRUE\n               WHEN MONTHLYI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n                   MOVE \u0027Monthly\u0027   TO WS-REPORT-NAME\n                   MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-START-DATE-YYYY\n                   MOVE WS-CURDATE-MONTH    TO WS-START-DATE-MM\n                   MOVE \u002701\u0027                TO WS-START-DATE-DD\n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n       \n                   MOVE 1              TO WS-CURDATE-DAY\n                   ADD 1               TO WS-CURDATE-MONTH\n                   IF WS-CURDATE-MONTH \u003e 12\n                       ADD 1           TO WS-CURDATE-YEAR\n                       MOVE 1          TO WS-CURDATE-MONTH\n                   END-IF\n                   COMPUTE WS-CURDATE-N \u003d FUNCTION DATE-OF-INTEGER(\n                           FUNCTION INTEGER-OF-DATE(WS-CURDATE-N) - 1)\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-END-DATE-YYYY\n                   MOVE WS-CURDATE-MONTH    TO WS-END-DATE-MM\n                   MOVE WS-CURDATE-DAY      TO WS-END-DATE-DD\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n       \n                   PERFORM SUBMIT-JOB-TO-INTRDR\n               WHEN YEARLYI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n                   MOVE \u0027Yearly\u0027   TO WS-REPORT-NAME\n                   MOVE FUNCTION CURRENT-DATE  TO WS-CURDATE-DATA\n       \n                   MOVE WS-CURDATE-YEAR     TO WS-START-DATE-YYYY\n                                               WS-END-DATE-YYYY\n                   MOVE \u002701\u0027                TO WS-START-DATE-MM\n                                               WS-START-DATE-DD\n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n       \n                   MOVE \u002712\u0027                TO WS-END-DATE-MM\n                   MOVE \u002731\u0027                TO WS-END-DATE-DD\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n       \n                   PERFORM SUBMIT-JOB-TO-INTRDR\n               WHEN CUSTOMI OF CORPT0AI NOT \u003d SPACES AND LOW-VALUES\n       \n                   EVALUATE TRUE\n                       WHEN SDTMMI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Month can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN SDTDDI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Day can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTDDL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN SDTYYYYI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027Start Date - Year can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTYYYYL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTMMI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Month can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTDDI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Day can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTDDL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN EDTYYYYI OF CORPT0AI \u003d SPACES OR\n                                                   LOW-VALUES\n                           MOVE \u0027End Date - Year can NOT be empty...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTYYYYL OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       WHEN OTHER\n                           CONTINUE\n                   END-EVALUATE\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (SDTMMI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO SDTMMI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (SDTDDI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO SDTDDI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-9999 \u003d FUNCTION NUMVAL-C\n                                           (SDTYYYYI OF CORPT0AI)\n                   MOVE WS-NUM-9999      TO SDTYYYYI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (EDTMMI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO EDTMMI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-99 \u003d FUNCTION NUMVAL-C\n                                         (EDTDDI OF CORPT0AI)\n                   MOVE WS-NUM-99      TO EDTDDI OF CORPT0AI\n       \n                   COMPUTE WS-NUM-9999 \u003d FUNCTION NUMVAL-C\n                                           (EDTYYYYI OF CORPT0AI)\n                   MOVE WS-NUM-9999      TO EDTYYYYI OF CORPT0AI\n       \n                   IF SDTMMI OF CORPT0AI IS NOT NUMERIC OR\n                      SDTMMI OF CORPT0AI \u003e \u002712\u0027\n                       MOVE \u0027Start Date - Not a valid Month...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTMML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF SDTDDI OF CORPT0AI IS NOT NUMERIC OR\n                      SDTDDI OF CORPT0AI \u003e \u002731\u0027\n                       MOVE \u0027Start Date - Not a valid Day...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTDDL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF SDTYYYYI OF CORPT0AI IS NOT NUMERIC\n                       MOVE \u0027Start Date - Not a valid Year...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO SDTYYYYL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTMMI OF CORPT0AI IS NOT NUMERIC OR\n                      EDTMMI OF CORPT0AI \u003e \u002712\u0027\n                       MOVE \u0027End Date - Not a valid Month...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTMML OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTDDI OF CORPT0AI IS NOT NUMERIC OR\n                      EDTDDI OF CORPT0AI \u003e \u002731\u0027\n                       MOVE \u0027End Date - Not a valid Day...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTDDL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   IF EDTYYYYI OF CORPT0AI IS NOT NUMERIC\n                       MOVE \u0027End Date - Not a valid Year...\u0027\n                         TO WS-MESSAGE\n                       MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                       MOVE -1       TO EDTYYYYL OF CORPT0AI\n                       PERFORM SEND-TRNRPT-SCREEN\n                   END-IF\n       \n                   MOVE SDTYYYYI OF CORPT0AI TO WS-START-DATE-YYYY\n                   MOVE SDTMMI   OF CORPT0AI TO WS-START-DATE-MM\n                   MOVE SDTDDI   OF CORPT0AI TO WS-START-DATE-DD\n                   MOVE EDTYYYYI OF CORPT0AI TO WS-END-DATE-YYYY\n                   MOVE EDTMMI   OF CORPT0AI TO WS-END-DATE-MM\n                   MOVE EDTDDI   OF CORPT0AI TO WS-END-DATE-DD\n       \n                   MOVE WS-START-DATE        TO CSUTLDTC-DATE\n                   MOVE WS-DATE-FORMAT       TO CSUTLDTC-DATE-FORMAT\n                   MOVE SPACES               TO CSUTLDTC-RESULT\n       \n                   CALL \u0027CSUTLDTC\u0027 USING   CSUTLDTC-DATE\n                                           CSUTLDTC-DATE-FORMAT\n                                           CSUTLDTC-RESULT\n       \n                   IF CSUTLDTC-RESULT-SEV-CD \u003d \u00270000\u0027\n                       CONTINUE\n                   ELSE\n                       IF CSUTLDTC-RESULT-MSG-NUM NOT \u003d \u00272513\u0027\n                           MOVE \u0027Start Date - Not a valid date...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO SDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       END-IF\n                   END-IF\n       \n                   MOVE WS-END-DATE          TO CSUTLDTC-DATE\n                   MOVE WS-DATE-FORMAT       TO CSUTLDTC-DATE-FORMAT\n                   MOVE SPACES               TO CSUTLDTC-RESULT\n       \n                   CALL \u0027CSUTLDTC\u0027 USING   CSUTLDTC-DATE\n                                           CSUTLDTC-DATE-FORMAT\n                                           CSUTLDTC-RESULT\n       \n                   IF CSUTLDTC-RESULT-SEV-CD \u003d \u00270000\u0027\n                       CONTINUE\n                   ELSE\n                       IF CSUTLDTC-RESULT-MSG-NUM NOT \u003d \u00272513\u0027\n                           MOVE \u0027End Date - Not a valid date...\u0027\n                             TO WS-MESSAGE\n                           MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                           MOVE -1       TO EDTMML OF CORPT0AI\n                           PERFORM SEND-TRNRPT-SCREEN\n                       END-IF\n                   END-IF\n       \n       \n                   MOVE WS-START-DATE       TO PARM-START-DATE-1\n                                               PARM-START-DATE-2\n                   MOVE WS-END-DATE         TO PARM-END-DATE-1\n                                               PARM-END-DATE-2\n                   MOVE \u0027Custom\u0027   TO WS-REPORT-NAME\n                   IF NOT ERR-FLG-ON\n                       PERFORM SUBMIT-JOB-TO-INTRDR\n                   END-IF\n               WHEN OTHER\n                   MOVE \u0027Select a report type to print report...\u0027 TO\n                                   WS-MESSAGE\n                   MOVE \u0027Y\u0027     TO WS-ERR-FLG\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n           END-EVALUATE",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "3cb1f815-1fd8-4fac-9812-5f0c5ed70d71",
+      "label": "IS \nNOT ERR-FLG-ON?\n",
+      "name": "IS \nNOT ERR-FLG-ON?\n",
+      "originalText": "IF NOT ERR-FLG-ON\n       \n               PERFORM INITIALIZE-ALL-FIELDS\n               MOVE DFHGREEN           TO ERRMSGC  OF CORPT0AO\n               STRING WS-REPORT-NAME   DELIMITED BY SPACE\n                 \u0027 report submitted for printing ...\u0027\n                                       DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE -1       TO MONTHLYL OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN\n       \n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fda27c41-7c49-4a07-8ff9-08578a816d24",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "PERFORM INITIALIZE-ALL-FIELDS\n               MOVE DFHGREEN           TO ERRMSGC  OF CORPT0AO\n               STRING WS-REPORT-NAME   DELIMITED BY SPACE\n                 \u0027 report submitted for printing ...\u0027\n                                       DELIMITED BY SIZE\n                 INTO WS-MESSAGE\n               MOVE -1       TO MONTHLYL OF CORPT0AI\n               PERFORM SEND-TRNRPT-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "label": "PERFORM INITIALIZE-ALL-FIELDS",
+      "name": "PERFORMINITIALI",
+      "originalText": "PERFORM INITIALIZE-ALL-FIELDS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "060de568-bfe1-4df8-804c-71b0140bae9c",
+      "label": "MOVEDFHGREENTOE",
+      "name": "MOVEDFHGREENTOE",
+      "originalText": "MOVE DFHGREEN           TO ERRMSGC  OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "06cda0d9-9b1f-4038-8f6a-8e018b488d94",
+      "label": "STRINGWS-REPORT",
+      "name": "STRINGWS-REPORT",
+      "originalText": "STRING WS-REPORT-NAME   DELIMITED BY SPACE\n                 \u0027 report submitted for printing ...\u0027\n                                       DELIMITED BY SIZE\n                 INTO WS-MESSAGE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b11b6d5e-274d-4fbf-97fa-7cdefe8bc84c",
+      "label": "MOVE-1TOMONTHLY",
+      "name": "MOVE-1TOMONTHLY",
+      "originalText": "MOVE -1       TO MONTHLYL OF CORPT0AI",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0991041b-06d3-4a9c-be67-befd0f135a64",
+      "label": "PERFORM SEND-TRNRPT-SCREEN",
+      "name": "PERFORMSEND-TRN",
+      "originalText": "PERFORM SEND-TRNRPT-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8132d2b8-0cda-481e-97c1-803d2576460c",
+      "label": "SETERR-FLG-OFFT",
+      "name": "SETERR-FLG-OFFT",
+      "originalText": "SET ERR-FLG-OFF TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "59a317b4-aa01-4296-82d6-7fe0f1b603a8",
+      "label": "SETTRANSACT-NOT",
+      "name": "SETTRANSACT-NOT",
+      "originalText": "SET TRANSACT-NOT-EOF TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2687829b-4237-4eb4-8b83-32e530a5de0b",
+      "label": "SETSEND-ERASE-Y",
+      "name": "SETSEND-ERASE-Y",
+      "originalText": "SET SEND-ERASE-YES TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a6f51f40-d3ad-4c92-acae-ca45f049225b",
+      "label": "MOVESPACESTOWS-",
+      "name": "MOVESPACESTOWS-",
+      "originalText": "MOVE SPACES TO WS-MESSAGE\n                          ERRMSGO OF CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a192f0fd-c8aa-4fd3-8c0a-616f016cf77b",
+      "label": "IS \nEIBCALEN \u003d 0?\n",
+      "name": "IS \nEIBCALEN \u003d 0?\n",
+      "originalText": "IF EIBCALEN \u003d 0\n               MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN\n           ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO CORPT0AO\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n               ELSE\n                   PERFORM RECEIVE-TRNRPT-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COMEN01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO MONTHLYL OF CORPT0AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-TRNRPT-SCREEN\n                   END-EVALUATE\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "dec04ba6-5412-40c4-9675-e7c492f666a3",
+      "label": "_DIALECT_1​​​​ ",
+      "name": "_DIALECT_1​​​​ ",
+      "originalText": "_DIALECT_ 1 ​​​​ ​​​​ ​​​​​​\n                     ​​​​​​​ ​​​​​​​​​​​\n           ​​​​​​​​",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a691218b-7cc3-48f0-9b52-ec0181055adc",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM\n               PERFORM RETURN-TO-PREV-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2d65e5a6-64d3-49e7-8a28-fb2e6f4d958a",
+      "label": "MOVE\u0027COSGN00C\u0027T",
+      "name": "MOVE\u0027COSGN00C\u0027T",
+      "originalText": "MOVE \u0027COSGN00C\u0027 TO CDEMO-TO-PROGRAM",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "63aed15e-0a0f-42d5-8cfe-9b87fd35f60b",
+      "label": "PERFORM RETURN-TO-PREV-SCREEN",
+      "name": "PERFORMRETURN-T",
+      "originalText": "PERFORM RETURN-TO-PREV-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a852203a-3059-4b3b-b984-8fcc1cf35dcb",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA\n               IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO CORPT0AO\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n               ELSE\n                   PERFORM RECEIVE-TRNRPT-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COMEN01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO MONTHLYL OF CORPT0AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-TRNRPT-SCREEN\n                   END-EVALUATE\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e4b722b4-d208-412e-8e5b-2aedf8714094",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ec079a1e-fb75-4f5e-826d-a0d2464a2c66",
+      "label": "MOVEDFHCOMMAREA",
+      "name": "MOVEDFHCOMMAREA",
+      "originalText": "MOVE DFHCOMMAREA(1:EIBCALEN) TO CARDDEMO-COMMAREA",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "186cf404-4deb-4952-ab55-184ba8d19d19",
+      "label": "IS \nNOT CDEMO-PGM-REENTER?\n",
+      "name": "IS \nNOT CDEMO-PGM-REENTER?\n",
+      "originalText": "IF NOT CDEMO-PGM-REENTER\n                   SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO CORPT0AO\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN\n               ELSE\n                   PERFORM RECEIVE-TRNRPT-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COMEN01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO MONTHLYL OF CORPT0AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-TRNRPT-SCREEN\n                   END-EVALUATE\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ba32a1c3-6526-41f1-b8ef-d4df61e38d76",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "SET CDEMO-PGM-REENTER    TO TRUE\n                   MOVE LOW-VALUES          TO CORPT0AO\n                   MOVE -1       TO MONTHLYL OF CORPT0AI\n                   PERFORM SEND-TRNRPT-SCREEN",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "cac8bfe6-051e-4c81-ab1f-8d90ca99f7a8",
+      "label": "SETCDEMO-PGM-RE",
+      "name": "SETCDEMO-PGM-RE",
+      "originalText": "SET CDEMO-PGM-REENTER    TO TRUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "98de7766-4954-4333-8c53-31bad912fa39",
+      "label": "MOVELOW-VALUEST",
+      "name": "MOVELOW-VALUEST",
+      "originalText": "MOVE LOW-VALUES          TO CORPT0AO",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "593b48d5-a544-4210-96aa-87370acc436f",
+      "label": "MOVE-1TOMONTHLY",
+      "name": "MOVE-1TOMONTHLY",
+      "originalText": "MOVE -1       TO MONTHLYL OF CORPT0AI",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "label": "PERFORM SEND-TRNRPT-SCREEN",
+      "name": "PERFORMSEND-TRN",
+      "originalText": "PERFORM SEND-TRNRPT-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "360a151c-eadb-4539-a76a-3f0b04527e91",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   PERFORM RECEIVE-TRNRPT-SCREEN\n                   EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COMEN01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO MONTHLYL OF CORPT0AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-TRNRPT-SCREEN\n                   END-EVALUATE",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "62753cf8-17bb-493d-be36-8f936e01314e",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "label": "PERFORM RECEIVE-TRNRPT-SCREEN",
+      "name": "PERFORMRECEIVE-",
+      "originalText": "PERFORM RECEIVE-TRNRPT-SCREEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fa5da4e9-0287-448f-a1c7-72fb6f1e5742",
+      "label": "EVALUATE",
+      "name": "EVALUATE",
+      "originalText": "EVALUATE EIBAID\n                       WHEN DFHENTER\n                           PERFORM PROCESS-ENTER-KEY\n                       WHEN DFHPF3\n                           MOVE \u0027COMEN01C\u0027 TO CDEMO-TO-PROGRAM\n                           PERFORM RETURN-TO-PREV-SCREEN\n                       WHEN OTHER\n                           MOVE \u0027Y\u0027                       TO WS-ERR-FLG\n                           MOVE -1       TO MONTHLYL OF CORPT0AI\n                           MOVE CCDA-MSG-INVALID-KEY      TO WS-MESSAGE\n                           PERFORM SEND-TRNRPT-SCREEN\n                   END-EVALUATE",
+      "type": "EVALUATE",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "edges": [
+    {
+      "id": "07026e33-7e05-4545-8185-306c328bc078",
+      "fromNodeID": "1153a9df-2c5e-4383-9637-15f2aa5416c1",
+      "toNodeID": "86d25f40-0278-48c6-bc76-b9d0b1268d34",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e89d0664-19a3-4507-8f90-fd0aa7760dce",
+      "fromNodeID": "86d25f40-0278-48c6-bc76-b9d0b1268d34",
+      "toNodeID": "21fb034a-cfd0-4ecf-ad80-a4bf3ed4d138",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "5ef9554f-231e-4a1e-8fad-b15d91b07764",
+      "fromNodeID": "21fb034a-cfd0-4ecf-ad80-a4bf3ed4d138",
+      "toNodeID": "8d3bed73-1b45-4f1a-89e2-740325b26b4a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e935aefd-1052-4ac4-8922-94a015627157",
+      "fromNodeID": "8d3bed73-1b45-4f1a-89e2-740325b26b4a",
+      "toNodeID": "0a73d734-72c0-4752-b5fc-56a661c10858",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f97a1d8e-5d5b-470c-87cc-d66328ab8e77",
+      "fromNodeID": "0a73d734-72c0-4752-b5fc-56a661c10858",
+      "toNodeID": "7315f9f2-d216-4c39-8b7e-8c0558bca1f6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "06c05afc-fb91-4b9d-a72b-2d2a3ed18fe6",
+      "fromNodeID": "7315f9f2-d216-4c39-8b7e-8c0558bca1f6",
+      "toNodeID": "c93017e3-c22e-4a8b-8a8d-2c967c317c25",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "883eb498-ad80-4cd2-8ffb-19cca05e24d7",
+      "fromNodeID": "c93017e3-c22e-4a8b-8a8d-2c967c317c25",
+      "toNodeID": "7d2d0d4b-9fc0-42f5-a56b-6db44377b374",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2cdb76cc-f84f-429a-a443-9b4b6c0a8b71",
+      "fromNodeID": "7d2d0d4b-9fc0-42f5-a56b-6db44377b374",
+      "toNodeID": "3a8650a5-03d6-4627-8f35-c86c7f2adba5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e3d100ae-546f-4e5d-8826-965860788675",
+      "fromNodeID": "3a8650a5-03d6-4627-8f35-c86c7f2adba5",
+      "toNodeID": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b5ac2919-e8a3-4d19-a970-b1c397efbcaf",
+      "fromNodeID": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "toNodeID": "4e211471-f567-4043-b57a-29ef3b83c3cf",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1fa6f45e-7db7-438e-a433-036e867b2411",
+      "fromNodeID": "4e211471-f567-4043-b57a-29ef3b83c3cf",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9436c513-d82e-45d0-952c-7d1ba2fd7657",
+      "fromNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "toNodeID": "56aa1a37-dd89-4a66-b6ed-325f8038da8c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "44bbab8c-9303-47d6-a8eb-c88e6bc552d3",
+      "fromNodeID": "56aa1a37-dd89-4a66-b6ed-325f8038da8c",
+      "toNodeID": "848ac767-84c0-4c8d-9680-d9d46a6143e5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "db329e89-7ddb-4a38-840c-d6a15f1112ab",
+      "fromNodeID": "848ac767-84c0-4c8d-9680-d9d46a6143e5",
+      "toNodeID": "81659e3a-bec7-4059-a409-9f1205e856d8",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "dec82a2e-3302-4e92-a205-3876e4b4cf74",
+      "fromNodeID": "81659e3a-bec7-4059-a409-9f1205e856d8",
+      "toNodeID": "163ba412-b262-4923-a73e-2198a113bf81",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d6256f77-a749-4f5e-a8a4-9695d2f030f5",
+      "fromNodeID": "163ba412-b262-4923-a73e-2198a113bf81",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d398b1f8-59d2-4a9e-9f98-7f29fdb3d00b",
+      "fromNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "toNodeID": "037e6d78-9392-40d9-9d1f-d717d4736a9f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4488d032-d5ae-4390-800f-12bd2a1a49a1",
+      "fromNodeID": "037e6d78-9392-40d9-9d1f-d717d4736a9f",
+      "toNodeID": "a49d6d03-d7f7-4166-b381-d04383f5267e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "af203fb8-f002-4d70-8250-d7905f322823",
+      "fromNodeID": "a49d6d03-d7f7-4166-b381-d04383f5267e",
+      "toNodeID": "2509731f-b88d-45bc-aa87-a361680d2a52",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "dbeda397-6410-4c4d-8611-8674a6bd01a6",
+      "fromNodeID": "2509731f-b88d-45bc-aa87-a361680d2a52",
+      "toNodeID": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "5b05b200-b0c4-46a4-9f84-d7f96c2f79c0",
+      "fromNodeID": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "toNodeID": "4834755d-5e17-4d99-802c-0c6563bc6ac2",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c99d3526-38d2-40c8-a497-561dfb38b6b6",
+      "fromNodeID": "4834755d-5e17-4d99-802c-0c6563bc6ac2",
+      "toNodeID": "d953fa24-1bb4-479e-b060-e0a0cbd1eb54",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "409f0a8e-aba9-42c6-bc10-8c2e8e3dd9c4",
+      "fromNodeID": "d953fa24-1bb4-479e-b060-e0a0cbd1eb54",
+      "toNodeID": "3f2bf6b8-90c9-4eba-adf6-b89650b9901a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "112450cf-cd85-4ab0-a819-16f98c2980ed",
+      "fromNodeID": "2509731f-b88d-45bc-aa87-a361680d2a52",
+      "toNodeID": "bee2c32a-faa9-42b0-8a2a-573804ceb018",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e3c3bc96-420b-499c-a19d-a697928771bb",
+      "fromNodeID": "bee2c32a-faa9-42b0-8a2a-573804ceb018",
+      "toNodeID": "b159b945-25ee-4067-92da-9f3540553213",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "368b96bb-651e-459a-8694-ff4e7d767f61",
+      "fromNodeID": "b159b945-25ee-4067-92da-9f3540553213",
+      "toNodeID": "1e38864a-db3f-42db-9f78-4be4b88157a0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "39745ded-9eca-4739-8b7a-df81fbc2458a",
+      "fromNodeID": "1e38864a-db3f-42db-9f78-4be4b88157a0",
+      "toNodeID": "134167cc-4981-4c08-a14b-639f5c4fe933",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8740acf5-6fe4-4b8c-a9a4-c78899953d39",
+      "fromNodeID": "134167cc-4981-4c08-a14b-639f5c4fe933",
+      "toNodeID": "31ee7246-b6e3-4220-b57f-817e4f53336b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d4de0d82-0109-460d-b96e-78de22408cca",
+      "fromNodeID": "31ee7246-b6e3-4220-b57f-817e4f53336b",
+      "toNodeID": "5e2bb7fc-5be1-4ec1-906b-0de92bae4e1b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "32977cfd-add9-47eb-87ca-75f3cf4c109f",
+      "fromNodeID": "5e2bb7fc-5be1-4ec1-906b-0de92bae4e1b",
+      "toNodeID": "ac6340ce-227a-48c9-999a-8664461a7d27",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0a39be04-1b9d-4b47-910f-de3d9dfa1199",
+      "fromNodeID": "ac6340ce-227a-48c9-999a-8664461a7d27",
+      "toNodeID": "d7894df1-93f9-40d8-842c-4a647f4f3781",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "43a38978-4e6c-4cfa-8b4c-fbe081e00f86",
+      "fromNodeID": "d7894df1-93f9-40d8-842c-4a647f4f3781",
+      "toNodeID": "7ee3e221-03b7-460b-9156-7e173d1b42ee",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e9a52c27-5185-478d-979e-ca7553831588",
+      "fromNodeID": "7ee3e221-03b7-460b-9156-7e173d1b42ee",
+      "toNodeID": "33d95cbe-d03c-4a4d-9ef4-66df7bfa7fad",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "80c7d6e5-b740-4f90-83ec-a757a24f2f03",
+      "fromNodeID": "33d95cbe-d03c-4a4d-9ef4-66df7bfa7fad",
+      "toNodeID": "2987a865-394a-4752-82a8-08c935a1f68f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8f7c91ee-bbb0-4c68-83ff-f4941a804a41",
+      "fromNodeID": "2987a865-394a-4752-82a8-08c935a1f68f",
+      "toNodeID": "ed1633d2-9d01-4281-bae2-0f7e9cb818bd",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f9ebe4f8-e8b5-42b5-bade-7dc43a7c94b9",
+      "fromNodeID": "ed1633d2-9d01-4281-bae2-0f7e9cb818bd",
+      "toNodeID": "053eacbf-db4f-4394-94c4-1ad340f217c1",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b45eb375-d23b-4b77-a584-1443e35b509f",
+      "fromNodeID": "037e6d78-9392-40d9-9d1f-d717d4736a9f",
+      "toNodeID": "2f6763d8-de8d-4418-a03f-318b641f2fd5",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "cd044964-dcb9-48d8-a511-7d82ccc5a65a",
+      "fromNodeID": "163ba412-b262-4923-a73e-2198a113bf81",
+      "toNodeID": "fd1edb03-6fd8-486e-9594-688158466a83",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6166b79f-ab47-4dd8-982f-668f910cfc6b",
+      "fromNodeID": "848ac767-84c0-4c8d-9680-d9d46a6143e5",
+      "toNodeID": "58807341-0be9-4c0c-9de3-592a0a3eab6b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8d281739-5d4c-4fe9-be2a-982bd8c7e1a2",
+      "fromNodeID": "58807341-0be9-4c0c-9de3-592a0a3eab6b",
+      "toNodeID": "81659e3a-bec7-4059-a409-9f1205e856d8",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b65ec296-bb8c-4ed3-ab9c-4ce369818966",
+      "fromNodeID": "56aa1a37-dd89-4a66-b6ed-325f8038da8c",
+      "toNodeID": "c3c0c155-a47b-4742-85fd-07109edae03c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6ac430ce-9b87-4cc6-9772-9936ce68ea9b",
+      "fromNodeID": "c3c0c155-a47b-4742-85fd-07109edae03c",
+      "toNodeID": "3b118711-9a8c-4c15-b79b-520546163019",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "419c5ace-02ca-4db5-80d3-875dc6c38b01",
+      "fromNodeID": "3b118711-9a8c-4c15-b79b-520546163019",
+      "toNodeID": "1bfb57f6-25bf-4a53-9285-94c4dbab8f70",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "bb56a98b-12be-4827-93db-2258dfed58e0",
+      "fromNodeID": "1bfb57f6-25bf-4a53-9285-94c4dbab8f70",
+      "toNodeID": "f9f2da68-0fb2-42c9-97ac-41174673de94",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1ad1f76f-ef24-4152-b25f-64060982ef65",
+      "fromNodeID": "1bfb57f6-25bf-4a53-9285-94c4dbab8f70",
+      "toNodeID": "8b6dfd86-c0d1-4d80-91d8-1ec00cef91f4",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "5c2e067e-057c-4af0-973a-a24c7f7db961",
+      "fromNodeID": "f9f2da68-0fb2-42c9-97ac-41174673de94",
+      "toNodeID": "c298f805-5755-4378-9154-a67f169004b9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c4deec66-e891-4b5d-9cc0-0ccd395ecee1",
+      "fromNodeID": "8b6dfd86-c0d1-4d80-91d8-1ec00cef91f4",
+      "toNodeID": "24fc403d-43fc-4bbd-921f-4edf882f9d03",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6169aa80-33bb-4d02-b1dd-09c013f84fc4",
+      "fromNodeID": "24fc403d-43fc-4bbd-921f-4edf882f9d03",
+      "toNodeID": "9e739ac1-7f25-4ea4-bb62-fca1820b85e4",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4b83daee-311c-4697-9f74-1d5bdc24849d",
+      "fromNodeID": "c3c0c155-a47b-4742-85fd-07109edae03c",
+      "toNodeID": "a49d6d03-d7f7-4166-b381-d04383f5267e",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "197e7c66-9388-41eb-9add-42c92eac2249",
+      "fromNodeID": "c3c0c155-a47b-4742-85fd-07109edae03c",
+      "toNodeID": "a49d6d03-d7f7-4166-b381-d04383f5267e",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "48cabbc5-0392-48c5-bf40-3c37c4d8441f",
+      "fromNodeID": "c3c0c155-a47b-4742-85fd-07109edae03c",
+      "toNodeID": "a49d6d03-d7f7-4166-b381-d04383f5267e",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "8037b9b5-0176-4ca7-a1a4-80255d712623",
+      "fromNodeID": "4e211471-f567-4043-b57a-29ef3b83c3cf",
+      "toNodeID": "8447de10-c676-45cd-b143-43a5f4ef4aa0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8e054aaa-f885-4a9c-ba7d-2e6cbf29040c",
+      "fromNodeID": "8447de10-c676-45cd-b143-43a5f4ef4aa0",
+      "toNodeID": "8bc868e9-218a-475b-8cf7-0afc23b5ce7f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "502e2482-1313-4733-9f4a-ae7f4b5b8501",
+      "fromNodeID": "8bc868e9-218a-475b-8cf7-0afc23b5ce7f",
+      "toNodeID": "5716a0bf-9b8d-4a20-9429-7eca431c5958",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "19435758-6964-4b95-96b8-5312d89abe43",
+      "fromNodeID": "5716a0bf-9b8d-4a20-9429-7eca431c5958",
+      "toNodeID": "b20b7112-2a43-412b-85f9-9ddebe5061ea",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0b79ea93-0286-4fa4-b77c-4e3e93c3263e",
+      "fromNodeID": "b20b7112-2a43-412b-85f9-9ddebe5061ea",
+      "toNodeID": "cdca4ea3-1d56-4efd-a9fa-06d5b1e8899e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0ee06cba-98b6-40bb-b38d-d25be04064f3",
+      "fromNodeID": "8447de10-c676-45cd-b143-43a5f4ef4aa0",
+      "toNodeID": "8ac8a714-5c3c-4dce-af8e-c06b76b21942",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b6d282bb-226c-412c-9741-fba26ef419a4",
+      "fromNodeID": "8ac8a714-5c3c-4dce-af8e-c06b76b21942",
+      "toNodeID": "6a24713a-99ab-4a23-a234-b1f82b80ad49",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "7e09af83-bcff-4b32-91fc-75a0df3f9e7b",
+      "fromNodeID": "3a8650a5-03d6-4627-8f35-c86c7f2adba5",
+      "toNodeID": "71cb3806-2ac6-48e0-a2db-32bb9152d605",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "330b86a0-0830-46f8-8007-9a4e0bd315f2",
+      "fromNodeID": "71cb3806-2ac6-48e0-a2db-32bb9152d605",
+      "toNodeID": "9cfa05de-8273-43fd-89ce-4442d93cc613",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9f3fdbab-0cb1-47fb-b412-d9028f8fc8e0",
+      "fromNodeID": "c93017e3-c22e-4a8b-8a8d-2c967c317c25",
+      "toNodeID": "c02301df-3007-445b-b33a-40460330f4be",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "73d75bec-3312-4eb5-902f-7b19d2c80620",
+      "fromNodeID": "c02301df-3007-445b-b33a-40460330f4be",
+      "toNodeID": "f4e664d0-06a7-44c0-91a0-9c5ca5ebfe4a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6af29b88-701c-4e9a-bb36-cca702bafcd3",
+      "fromNodeID": "f4e664d0-06a7-44c0-91a0-9c5ca5ebfe4a",
+      "toNodeID": "e9d31c2c-a922-41b0-99e3-cfd213a1b473",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "187e78cd-21c2-4cd8-aac2-5e1797b720db",
+      "fromNodeID": "e9d31c2c-a922-41b0-99e3-cfd213a1b473",
+      "toNodeID": "38959a36-38eb-4252-9c82-3d493830e32c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "7d3c95ff-02d7-458a-ba48-3acfb64159f3",
+      "fromNodeID": "38959a36-38eb-4252-9c82-3d493830e32c",
+      "toNodeID": "f329769e-a320-486e-aff8-4317827f7e07",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "fc1b6130-48af-4ca1-928f-1d303167cdcb",
+      "fromNodeID": "f329769e-a320-486e-aff8-4317827f7e07",
+      "toNodeID": "f9d301d6-d914-46b5-bda7-2931018b2089",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "451c9c5d-abac-40d7-9f42-2d5945ebf247",
+      "fromNodeID": "f9d301d6-d914-46b5-bda7-2931018b2089",
+      "toNodeID": "8ace18b3-9dc9-44db-8a19-0a830d7da39e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "aa8b8fdb-df58-4c7b-9e03-c6ff8b05004a",
+      "fromNodeID": "8ace18b3-9dc9-44db-8a19-0a830d7da39e",
+      "toNodeID": "3689eea3-0cf9-427b-bb53-97b3978ce66f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0dc6a2f4-4c9d-4e01-ad69-4b0e0c6d15a1",
+      "fromNodeID": "3689eea3-0cf9-427b-bb53-97b3978ce66f",
+      "toNodeID": "7353c0e2-466a-42e3-acf8-6c06b0c18d0c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "01afb3d1-b543-431c-8efa-c26adef02804",
+      "fromNodeID": "7353c0e2-466a-42e3-acf8-6c06b0c18d0c",
+      "toNodeID": "7d2d0d4b-9fc0-42f5-a56b-6db44377b374",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "14f7898f-26f2-40ec-96b2-70e8d88960bc",
+      "fromNodeID": "3689eea3-0cf9-427b-bb53-97b3978ce66f",
+      "toNodeID": "060ded3a-6b10-49af-a965-7e5031ebf94b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6ad5ae8a-7126-4c15-ae3e-7e7aecdceda3",
+      "fromNodeID": "060ded3a-6b10-49af-a965-7e5031ebf94b",
+      "toNodeID": "fec93b1b-b2d6-4f60-ada5-2abfd88f2ce9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "7ef8f973-5994-4386-9bbb-96b121e41ccc",
+      "fromNodeID": "f9d301d6-d914-46b5-bda7-2931018b2089",
+      "toNodeID": "d7fab9e2-e37d-472b-9e50-d99842dc36f9",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "551275ea-53dd-4ff9-b85e-23d4fb6050e3",
+      "fromNodeID": "c02301df-3007-445b-b33a-40460330f4be",
+      "toNodeID": "baca5431-da65-4a21-a733-153332af0c20",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "97a19bb2-b5c5-4ee5-9401-f074c345471b",
+      "fromNodeID": "baca5431-da65-4a21-a733-153332af0c20",
+      "toNodeID": "4a9ea4d4-55fd-4e28-af7e-cd17a7b77239",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "94805038-54c0-4a04-bc4b-690726e543eb",
+      "fromNodeID": "4a9ea4d4-55fd-4e28-af7e-cd17a7b77239",
+      "toNodeID": "1946fecb-bc31-4690-a5e9-df353713f908",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "56a1a378-1b22-48d7-b7d0-ecd787edc6d7",
+      "fromNodeID": "1946fecb-bc31-4690-a5e9-df353713f908",
+      "toNodeID": "47d28dec-9240-441d-9f00-d7aa68c3d698",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a0cf7839-30c7-4529-8661-bb49225bb2da",
+      "fromNodeID": "47d28dec-9240-441d-9f00-d7aa68c3d698",
+      "toNodeID": "0fc4acaa-5c5a-4f51-80c2-38833a91677e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "318ff76a-f941-406b-937a-6dfb1c6300cf",
+      "fromNodeID": "0fc4acaa-5c5a-4f51-80c2-38833a91677e",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b6601f9f-f5f6-496a-8305-7a59ec5e918e",
+      "fromNodeID": "0fc4acaa-5c5a-4f51-80c2-38833a91677e",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b89fda1b-4d59-427a-8946-8effdd67681c",
+      "fromNodeID": "0fc4acaa-5c5a-4f51-80c2-38833a91677e",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c5f7b131-b27d-4914-bd28-5e7d3e316c68",
+      "fromNodeID": "0fc4acaa-5c5a-4f51-80c2-38833a91677e",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "82f44c1a-eaf0-49b9-8ed3-dd7d2e0ec2ce",
+      "fromNodeID": "0fc4acaa-5c5a-4f51-80c2-38833a91677e",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "762ffa9c-fbb7-4116-96e1-8383e72c9fa8",
+      "fromNodeID": "0a73d734-72c0-4752-b5fc-56a661c10858",
+      "toNodeID": "b84a34b4-8cc9-404f-a9c4-1df359db546d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "33fdb8d7-40bc-4dec-a0e5-7274144142b8",
+      "fromNodeID": "b84a34b4-8cc9-404f-a9c4-1df359db546d",
+      "toNodeID": "b9855b44-e0a6-4340-9dbb-ba5b507e227a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "795aea4b-5142-49f2-b73a-40cad645c5d1",
+      "fromNodeID": "b9855b44-e0a6-4340-9dbb-ba5b507e227a",
+      "toNodeID": "3cb1f815-1fd8-4fac-9812-5f0c5ed70d71",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b9699d3e-3b4b-4eae-9811-0681f86d579e",
+      "fromNodeID": "3cb1f815-1fd8-4fac-9812-5f0c5ed70d71",
+      "toNodeID": "fda27c41-7c49-4a07-8ff9-08578a816d24",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3184b27f-c21d-4758-91f5-e2a451474db4",
+      "fromNodeID": "fda27c41-7c49-4a07-8ff9-08578a816d24",
+      "toNodeID": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "be6afd68-03c7-4eb1-a87a-cffe2dfbb851",
+      "fromNodeID": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "toNodeID": "060de568-bfe1-4df8-804c-71b0140bae9c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6c999718-dd90-49fd-a1dc-61410e87154b",
+      "fromNodeID": "060de568-bfe1-4df8-804c-71b0140bae9c",
+      "toNodeID": "06cda0d9-9b1f-4038-8f6a-8e018b488d94",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9ed45b17-fcef-4246-ac79-fdb702c52f1d",
+      "fromNodeID": "06cda0d9-9b1f-4038-8f6a-8e018b488d94",
+      "toNodeID": "b11b6d5e-274d-4fbf-97fa-7cdefe8bc84c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1e458bd8-6705-4df4-9eec-49905846ef14",
+      "fromNodeID": "b11b6d5e-274d-4fbf-97fa-7cdefe8bc84c",
+      "toNodeID": "0991041b-06d3-4a9c-be67-befd0f135a64",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "81352ba1-e22f-4a7a-ba63-91afb3d1ec2d",
+      "fromNodeID": "0991041b-06d3-4a9c-be67-befd0f135a64",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5d49a9ef-34ba-48a0-a24c-83b0543a6bbd",
+      "fromNodeID": "0991041b-06d3-4a9c-be67-befd0f135a64",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "55df6287-74d0-4b63-9925-2a219c910fee",
+      "fromNodeID": "0991041b-06d3-4a9c-be67-befd0f135a64",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "6000b6b0-6459-4711-a8d8-8c571d6f4891",
+      "fromNodeID": "0991041b-06d3-4a9c-be67-befd0f135a64",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "baf42395-a50d-4ddd-8dc1-f3f963cd556f",
+      "fromNodeID": "0991041b-06d3-4a9c-be67-befd0f135a64",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ac7e17d7-a9f2-436a-9ca9-0ed9cbbfb731",
+      "fromNodeID": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "toNodeID": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "491948f1-9cef-4f5b-be17-7822daf0a348",
+      "fromNodeID": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "toNodeID": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "fb1e2578-f64b-44cf-9bd3-89ba796fd891",
+      "fromNodeID": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "toNodeID": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ceea93f0-721b-4240-bea0-fb85e7330206",
+      "fromNodeID": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "toNodeID": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "9577c82b-3a78-40a4-8dac-3a5f004a9386",
+      "fromNodeID": "d4156077-cf4e-4aa3-981b-29c839a88202",
+      "toNodeID": "23df0dd8-6591-4860-aeba-c035ad0a6a4f",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5b4040c8-a968-4128-9d55-51a63c52d446",
+      "fromNodeID": "21fb034a-cfd0-4ecf-ad80-a4bf3ed4d138",
+      "toNodeID": "8132d2b8-0cda-481e-97c1-803d2576460c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "add55268-a52e-4f07-ab97-3a3ed5bac444",
+      "fromNodeID": "8132d2b8-0cda-481e-97c1-803d2576460c",
+      "toNodeID": "59a317b4-aa01-4296-82d6-7fe0f1b603a8",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "fc65bef1-eb7b-46da-bb71-f457f856ff06",
+      "fromNodeID": "59a317b4-aa01-4296-82d6-7fe0f1b603a8",
+      "toNodeID": "2687829b-4237-4eb4-8b83-32e530a5de0b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "469cca12-ec48-4c31-920b-60f98a6f9be9",
+      "fromNodeID": "2687829b-4237-4eb4-8b83-32e530a5de0b",
+      "toNodeID": "a6f51f40-d3ad-4c92-acae-ca45f049225b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9249711d-bf51-4696-a4a0-3424dca42c4f",
+      "fromNodeID": "a6f51f40-d3ad-4c92-acae-ca45f049225b",
+      "toNodeID": "a192f0fd-c8aa-4fd3-8c0a-616f016cf77b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "41aadc64-4fd4-42dc-93b1-ea6930f958a4",
+      "fromNodeID": "a192f0fd-c8aa-4fd3-8c0a-616f016cf77b",
+      "toNodeID": "dec04ba6-5412-40c4-9675-e7c492f666a3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "165c6877-4e59-4f95-9532-06c9c4104efd",
+      "fromNodeID": "a192f0fd-c8aa-4fd3-8c0a-616f016cf77b",
+      "toNodeID": "a691218b-7cc3-48f0-9b52-ec0181055adc",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f0e158a0-a2bd-4a52-b6ad-010e9f71d46a",
+      "fromNodeID": "a192f0fd-c8aa-4fd3-8c0a-616f016cf77b",
+      "toNodeID": "a852203a-3059-4b3b-b984-8fcc1cf35dcb",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "7d239b85-280d-4420-9d94-f43db3411a15",
+      "fromNodeID": "a691218b-7cc3-48f0-9b52-ec0181055adc",
+      "toNodeID": "2d65e5a6-64d3-49e7-8a28-fb2e6f4d958a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "91ad0177-b9d4-486f-bfef-13036a602a84",
+      "fromNodeID": "2d65e5a6-64d3-49e7-8a28-fb2e6f4d958a",
+      "toNodeID": "63aed15e-0a0f-42d5-8cfe-9b87fd35f60b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d22eeeef-f8be-4933-9f26-bfecd254e903",
+      "fromNodeID": "63aed15e-0a0f-42d5-8cfe-9b87fd35f60b",
+      "toNodeID": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a51a444c-0491-44c6-961a-f99537678fdf",
+      "fromNodeID": "63aed15e-0a0f-42d5-8cfe-9b87fd35f60b",
+      "toNodeID": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5bda9ddc-8bf2-4fdb-9f51-a399a94ad0bf",
+      "fromNodeID": "63aed15e-0a0f-42d5-8cfe-9b87fd35f60b",
+      "toNodeID": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "9b8d625f-2123-4d38-b437-ed18a3580157",
+      "fromNodeID": "63aed15e-0a0f-42d5-8cfe-9b87fd35f60b",
+      "toNodeID": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "449f58dc-ccad-4cc6-a3af-5e3b8e3cce23",
+      "fromNodeID": "63aed15e-0a0f-42d5-8cfe-9b87fd35f60b",
+      "toNodeID": "7f258f1d-b30a-4cac-8179-c14b8eca9506",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "1f306434-2d26-41c2-a3f6-0482f534fc05",
+      "fromNodeID": "a852203a-3059-4b3b-b984-8fcc1cf35dcb",
+      "toNodeID": "e4b722b4-d208-412e-8e5b-2aedf8714094",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "84ac46fa-adbe-44ce-981d-6fc223202820",
+      "fromNodeID": "e4b722b4-d208-412e-8e5b-2aedf8714094",
+      "toNodeID": "ec079a1e-fb75-4f5e-826d-a0d2464a2c66",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "57311100-466f-4b30-8af8-524c68bb6e13",
+      "fromNodeID": "ec079a1e-fb75-4f5e-826d-a0d2464a2c66",
+      "toNodeID": "186cf404-4deb-4952-ab55-184ba8d19d19",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0d3d0601-7bb7-46dc-a49c-83732168d2b6",
+      "fromNodeID": "186cf404-4deb-4952-ab55-184ba8d19d19",
+      "toNodeID": "ba32a1c3-6526-41f1-b8ef-d4df61e38d76",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e55c224b-9955-44ed-b6d9-ff1ea413c6bb",
+      "fromNodeID": "186cf404-4deb-4952-ab55-184ba8d19d19",
+      "toNodeID": "360a151c-eadb-4539-a76a-3f0b04527e91",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c381237f-1410-45c4-97da-1abc57447f64",
+      "fromNodeID": "ba32a1c3-6526-41f1-b8ef-d4df61e38d76",
+      "toNodeID": "cac8bfe6-051e-4c81-ab1f-8d90ca99f7a8",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c1a526e5-51f8-4e7a-aeab-a809767f1778",
+      "fromNodeID": "cac8bfe6-051e-4c81-ab1f-8d90ca99f7a8",
+      "toNodeID": "98de7766-4954-4333-8c53-31bad912fa39",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6c34ec34-d64f-4fb8-ba02-50435edf3fbd",
+      "fromNodeID": "98de7766-4954-4333-8c53-31bad912fa39",
+      "toNodeID": "593b48d5-a544-4210-96aa-87370acc436f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "5c3b7c72-dfd0-4323-bdba-4de7196ad489",
+      "fromNodeID": "593b48d5-a544-4210-96aa-87370acc436f",
+      "toNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f6b7d686-fed1-4c11-b992-25658bebec67",
+      "fromNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "9f3a4192-ffe6-4cb0-9d6e-e168fd866926",
+      "fromNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "9306c0e7-71cb-4cbf-b549-37292acc992b",
+      "fromNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "66df3044-027f-42c5-a753-6fde7d30c925",
+      "fromNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c941ccf4-c7a6-44e8-be00-d4fd54d5307d",
+      "fromNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "43e74ad8-4574-4097-8eac-e36e6947e242",
+      "fromNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e02c5632-b8d2-441a-96f5-d498b5f4914d",
+      "fromNodeID": "66b194f5-fc6c-47fd-bc43-3e1a49139210",
+      "toNodeID": "645dcb19-500c-4f1a-ba5d-ec81bfe21272",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ccafdeab-dace-4f84-8732-aa4521c88bc6",
+      "fromNodeID": "360a151c-eadb-4539-a76a-3f0b04527e91",
+      "toNodeID": "62753cf8-17bb-493d-be36-8f936e01314e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b9aecf75-1051-41b5-a5de-eded99abc734",
+      "fromNodeID": "62753cf8-17bb-493d-be36-8f936e01314e",
+      "toNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "cde1120b-e83e-4964-aff7-faaa08dca85f",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "fa5da4e9-0287-448f-a1c7-72fb6f1e5742",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "386335d5-5d6e-467f-bd48-6142d82df3a8",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "1e2d4811-5055-4dc2-aee1-fc0b41c83cd3",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "4fca5124-0938-48d7-8f59-64b2dfe4338f",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "90e7de25-6fb3-4f02-aadc-ef716d7120f3",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7adc302c-4832-41eb-9c9c-1c6b03c169d5",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "bbe4851f-9178-449f-b9eb-0e0306c3e368",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e62ac555-0255-463e-86ec-0d75ca181318",
+      "fromNodeID": "4d1bbecf-dc28-4056-8ea6-ce3b08b7af54",
+      "toNodeID": "b07f567b-7b41-41e6-bc57-503a168a711a",
+      "edgeType": "JUMPS_TO"
+    }
+  ],
+  "idProvider": {}
+}

@@ -1,0 +1,2187 @@
+{
+  "nodes": [
+    {
+      "id": "06519b53-625c-449f-b57c-92f197df28d4",
+      "label": "ProcedureDivisionBodyContext/06519b53-625c-449f-b57c-92f197df28d4",
+      "name": "ProcedureDivisionBodyContext/06519b53-625c-449f-b57c-92f197df28d4",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT03C\u0027.\n           PERFORM 0000-XREFFILE-OPEN.\n       \n           PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-XREFFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-XREF-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.\n       \n           PERFORM 9000-XREFFILE-CLOSE.\n       \n           DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT03C\u0027.\n       \n           GOBACK.\n       \n       \n       \n       \n       1000-XREFFILE-GET-NEXT.\n           READ XREFFILE-FILE INTO CARD-XREF-RECORD.\n           IF  XREFFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               DISPLAY CARD-XREF-RECORD\n           ELSE\n               IF  XREFFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING XREFFILE\u0027\n                   MOVE XREFFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.\n       \n       0000-XREFFILE-OPEN.\n           MOVE 8 TO APPL-RESULT.\n           OPEN INPUT XREFFILE-FILE\n           IF  XREFFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9000-XREFFILE-CLOSE.\n           ADD 8 TO ZERO GIVING APPL-RESULT.\n           CLOSE XREFFILE-FILE\n           IF  XREFFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.\n       \n       9999-ABEND-PROGRAM.\n           DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING.\n       \n       \n       9910-DISPLAY-IO-STATUS.\n           IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+      "type": "PROCEDURE_DIVISION_BODY",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "07a01ce6-f8c1-4d3f-9156-f2ee791cd468",
+      "label": "DISPLAY\u0027START O",
+      "name": "DISPLAY\u0027START O",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT03C\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4842d97c-8ca5-4a37-a0e8-a380308fc3aa",
+      "label": "PERFORM0000-XRE",
+      "name": "PERFORM0000-XRE",
+      "originalText": "PERFORM 0000-XREFFILE-OPEN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f2fd043a-6ce9-45ba-b2a7-0a1778128c37",
+      "label": "PERFORMUNTILEND",
+      "name": "PERFORMUNTILEND",
+      "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-XREFFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-XREF-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "084bc8c0-1a38-4d9d-800f-18f63cc4b884",
+      "label": "PERFORM9000-XRE",
+      "name": "PERFORM9000-XRE",
+      "originalText": "PERFORM 9000-XREFFILE-CLOSE.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c0423b07-fa3e-4f83-a70b-c95497569f2b",
+      "label": "DISPLAY\u0027END OF ",
+      "name": "DISPLAY\u0027END OF ",
+      "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT03C\u0027.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d100cd18-0534-44f4-9cdb-fd34afbe44fc",
+      "label": "GOBACK.",
+      "name": "GOBACK.",
+      "originalText": "GOBACK.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "42bd54ef-63cf-4b7e-9927-2b5058fc4a99",
+      "label": "1000-XREFFILE-GET-NEXT",
+      "name": "1000-XREFFILE-GET-NEXT",
+      "originalText": "1000-XREFFILE-GET-NEXT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c319356c-75e5-4796-ae88-26f780942a58",
+      "label": "READXREFFILE-FI",
+      "name": "READXREFFILE-FI",
+      "originalText": "READ XREFFILE-FILE INTO CARD-XREF-RECORD.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "cace617e-3f6b-48b0-9288-3803e7a14ae5",
+      "label": "IFXREFFILE-STAT",
+      "name": "IFXREFFILE-STAT",
+      "originalText": "IF  XREFFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               DISPLAY CARD-XREF-RECORD\n           ELSE\n               IF  XREFFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING XREFFILE\u0027\n                   MOVE XREFFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8947bfcb-2032-49d6-b1c7-fced48d93d59",
+      "label": "0000-XREFFILE-OPEN",
+      "name": "0000-XREFFILE-OPEN",
+      "originalText": "0000-XREFFILE-OPEN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "10f38304-9505-4906-9d65-acd9facc6136",
+      "label": "MOVE8TOAPPL-RES",
+      "name": "MOVE8TOAPPL-RES",
+      "originalText": "MOVE 8 TO APPL-RESULT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f8e911da-9fed-485d-8819-8d06305baf81",
+      "label": "OPENINPUTXREFFI",
+      "name": "OPENINPUTXREFFI",
+      "originalText": "OPEN INPUT XREFFILE-FILE\n           IF  XREFFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "47b4e6ac-5f17-4ab1-a701-17b0f7bc717a",
+      "label": "9000-XREFFILE-CLOSE",
+      "name": "9000-XREFFILE-CLOSE",
+      "originalText": "9000-XREFFILE-CLOSE.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "7bf047b0-3f6b-41ef-af28-6dcc09b16438",
+      "label": "ADD8TOZEROGIVIN",
+      "name": "ADD8TOZEROGIVIN",
+      "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "efcb269c-d3e6-4268-ba15-1ffe86d859cd",
+      "label": "CLOSEXREFFILE-F",
+      "name": "CLOSEXREFFILE-F",
+      "originalText": "CLOSE XREFFILE-FILE\n           IF  XREFFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF\n           IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "label": "9999-ABEND-PROGRAM",
+      "name": "9999-ABEND-PROGRAM",
+      "originalText": "9999-ABEND-PROGRAM.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "123a024d-9a0d-426e-87d0-b7094cbe3a80",
+      "label": "DISPLAY\u0027ABENDIN",
+      "name": "DISPLAY\u0027ABENDIN",
+      "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027\n           MOVE 0 TO TIMING\n           MOVE 999 TO ABCODE\n           CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "label": "9910-DISPLAY-IO-STATUS",
+      "name": "9910-DISPLAY-IO-STATUS",
+      "originalText": "9910-DISPLAY-IO-STATUS.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "db0b8cdf-53cb-405d-9168-dcb4b1e244cb",
+      "label": "IFIO-STATUSNOTN",
+      "name": "IFIO-STATUSNOTN",
+      "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF\n           EXIT.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "77dba335-5a7b-4b90-b488-a2111c107891",
+      "label": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+      "name": "IS \nIO-STATUS NOT NUMERIC\n           OR  IO-?\n",
+      "originalText": "IF  IO-STATUS NOT NUMERIC\n           OR  IO-STAT1 \u003d \u00279\u0027\n               MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5cf0fd5c-a553-4a98-aeb0-ead120d1da89",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "54555c40-c0d3-4dbd-a965-9ee57c8130d0",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)\n               MOVE 0        TO TWO-BYTES-BINARY\n               MOVE IO-STAT2 TO TWO-BYTES-RIGHT\n               MOVE TWO-BYTES-BINARY TO IO-STATUS-0403\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "634f5675-8373-41fb-8a43-999fd9701f0e",
+      "label": "MOVEIO-STAT1TOI",
+      "name": "MOVEIO-STAT1TOI",
+      "originalText": "MOVE IO-STAT1 TO IO-STATUS-04(1:1)",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0446f950-f55e-4bc4-9ebf-e64936030ab8",
+      "label": "MOVE0TOTWO-BYTE",
+      "name": "MOVE0TOTWO-BYTE",
+      "originalText": "MOVE 0        TO TWO-BYTES-BINARY",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c5f7cbcb-1651-4ffc-b431-cfde79e5f26f",
+      "label": "MOVEIO-STAT2TOT",
+      "name": "MOVEIO-STAT2TOT",
+      "originalText": "MOVE IO-STAT2 TO TWO-BYTES-RIGHT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a0a264cf-b171-4a74-9f7c-8bd415c06ccf",
+      "label": "MOVETWO-BYTES-B",
+      "name": "MOVETWO-BYTES-B",
+      "originalText": "MOVE TWO-BYTES-BINARY TO IO-STATUS-0403",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9a90bc76-e42d-449f-987f-7a1d859c9195",
+      "label": "DISPLAY\u0027FILE ST",
+      "name": "DISPLAY\u0027FILE ST",
+      "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e8f25e26-0802-4dd4-97fd-7d7297b98ab3",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE \u00270000\u0027 TO IO-STATUS-04\n               MOVE IO-STATUS TO IO-STATUS-04(3:2)\n               DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "335fa263-b4fa-4bcb-b1e8-fee8f78bfb26",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "88fdccae-0b36-459b-84f7-9df023325858",
+      "label": "MOVE\u00270000\u0027TOIO-",
+      "name": "MOVE\u00270000\u0027TOIO-",
+      "originalText": "MOVE \u00270000\u0027 TO IO-STATUS-04",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "673cb449-450f-4b43-baf0-71b96915f4c5",
+      "label": "MOVEIO-STATUSTO",
+      "name": "MOVEIO-STATUSTO",
+      "originalText": "MOVE IO-STATUS TO IO-STATUS-04(3:2)",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "17257bee-7743-40f7-84a4-b489be24c93d",
+      "label": "DISPLAY\u0027FILE ST",
+      "name": "DISPLAY\u0027FILE ST",
+      "originalText": "DISPLAY \u0027FILE STATUS IS: NNNN\u0027 IO-STATUS-04",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b68d6a48-4f80-4db8-bc09-f908684748c9",
+      "label": "DISPLAY\u0027ABENDIN",
+      "name": "DISPLAY\u0027ABENDIN",
+      "originalText": "DISPLAY \u0027ABENDING PROGRAM\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "235194c2-3510-4e63-b504-b029d15be507",
+      "label": "MOVE0TOTIMING",
+      "name": "MOVE0TOTIMING",
+      "originalText": "MOVE 0 TO TIMING",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f321792d-a949-433e-af72-dec42797ac8e",
+      "label": "MOVE999TOABCODE",
+      "name": "MOVE999TOABCODE",
+      "originalText": "MOVE 999 TO ABCODE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "dd17e3f9-e93c-4e64-841b-ea259a90d5ce",
+      "label": "CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING",
+      "name": "CALL\u0027CEE3ABD\u0027US",
+      "originalText": "CALL \u0027CEE3ABD\u0027 USING ABCODE, TIMING",
+      "type": "CALL",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "35d00c13-68db-4602-970c-9830b98a3014",
+      "label": "CLOSEXREFFILE-F",
+      "name": "CLOSEXREFFILE-F",
+      "originalText": "CLOSE XREFFILE-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4823ed52-e3fa-4e65-8776-8dc3f5600f54",
+      "label": "IS \nXREFFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nXREFFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  XREFFILE-STATUS \u003d \u002700\u0027\n               SUBTRACT APPL-RESULT FROM APPL-RESULT\n           ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5c3d3153-954a-46d4-91ea-98efe6815cf5",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR CLOSING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8dcb678e-f7eb-464e-9f42-8d7f3edb6ad0",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5c07798e-99ea-4e0f-aec9-5b9972c0b75b",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "403ea1c9-e7e4-4489-8ff0-cf359e8ffc48",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b0233e05-7253-4e6e-8f9c-528a91f80898",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               DISPLAY \u0027ERROR CLOSING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "195f2411-2690-400d-b0d8-b8f6e735d456",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8dcc965b-8027-406d-af39-476543d8d153",
+      "label": "DISPLAY\u0027ERROR C",
+      "name": "DISPLAY\u0027ERROR C",
+      "originalText": "DISPLAY \u0027ERROR CLOSING XREFFILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9a9620f8-7e4c-4149-86bf-724f14e4b733",
+      "label": "MOVEXREFFILE-ST",
+      "name": "MOVEXREFFILE-ST",
+      "originalText": "MOVE XREFFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "name": "PERFORM9910-DIS",
+      "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fadfe103-5368-4e2a-96b3-1e9f9ffc4c8f",
+      "label": "PERFORM 9999-ABEND-PROGRAM",
+      "name": "PERFORM9999-ABE",
+      "originalText": "PERFORM 9999-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ccb11b5c-2083-4c0e-a9e4-de004b053349",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f030ccde-37ef-4b45-8f53-26cc5d032931",
+      "label": "SUBTRACTAPPL-RE",
+      "name": "SUBTRACTAPPL-RE",
+      "originalText": "SUBTRACT APPL-RESULT FROM APPL-RESULT",
+      "type": "SUBTRACT",
+      "categories": [
+        "COMPUTATIONAL",
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f8947696-ecc6-47bc-8813-5a709745992d",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               ADD 12 TO ZERO GIVING APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d1e47e1f-2085-454e-a592-00efedee954a",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "97e6a270-abd8-4021-95a8-cfa502e86058",
+      "label": "ADD12TOZEROGIVI",
+      "name": "ADD12TOZEROGIVI",
+      "originalText": "ADD 12 TO ZERO GIVING APPL-RESULT",
+      "type": "ADD",
+      "categories": [
+        "COMPUTATIONAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "44235e02-bd3b-4ca3-8895-cb30fafff5cf",
+      "label": "ADD8TOZEROGIVIN",
+      "name": "ADD8TOZEROGIVIN",
+      "originalText": "ADD 8 TO ZERO GIVING APPL-RESULT",
+      "type": "ADD",
+      "categories": [
+        "COMPUTATIONAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e18b2614-f1ee-42a7-9bd4-f0cac6d78730",
+      "label": "OPENINPUTXREFFI",
+      "name": "OPENINPUTXREFFI",
+      "originalText": "OPEN INPUT XREFFILE-FILE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ae2e8556-338a-4917-9555-e1f2b909067c",
+      "label": "IS \nXREFFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nXREFFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  XREFFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n           ELSE\n               MOVE 12 TO APPL-RESULT\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "209bbd3c-75b3-4166-9964-a699782ad284",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               DISPLAY \u0027ERROR OPENING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "33fb813e-ada2-473f-a16b-361e8584ccfa",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5541a7dc-252f-4f47-80c6-1ff2e4555dac",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f1526df3-5d95-43f1-b00d-e9da295a5c73",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "fea3d51f-2605-4126-b8c8-1581419a469a",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               DISPLAY \u0027ERROR OPENING XREFFILE\u0027\n               MOVE XREFFILE-STATUS TO IO-STATUS\n               PERFORM 9910-DISPLAY-IO-STATUS\n               PERFORM 9999-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "161182ff-43a5-4cea-a92b-bec8e9ad844e",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c40519a4-4c01-4fbc-b185-70db57427bac",
+      "label": "DISPLAY\u0027ERROR O",
+      "name": "DISPLAY\u0027ERROR O",
+      "originalText": "DISPLAY \u0027ERROR OPENING XREFFILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "850e0a4e-2ad5-422a-8ec2-df38bc0774e6",
+      "label": "MOVEXREFFILE-ST",
+      "name": "MOVEXREFFILE-ST",
+      "originalText": "MOVE XREFFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "name": "PERFORM9910-DIS",
+      "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "378df039-28da-4eb7-baf6-b9a588b2825b",
+      "label": "PERFORM 9999-ABEND-PROGRAM",
+      "name": "PERFORM9999-ABE",
+      "originalText": "PERFORM 9999-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "30297bea-5ce1-4d4f-a739-ee4ef37658e8",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4bfa3a6d-ded6-499c-8b6f-cf8517f39867",
+      "label": "MOVE0TOAPPL-RES",
+      "name": "MOVE0TOAPPL-RES",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f27c1da8-81be-49e5-9bd6-f05ce31ad58f",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               MOVE 12 TO APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "72287707-897b-4e72-a4f6-906b835e42f1",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9b41c47d-6e48-4bb0-beee-6b7dda02e7cb",
+      "label": "MOVE12TOAPPL-RE",
+      "name": "MOVE12TOAPPL-RE",
+      "originalText": "MOVE 12 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ad8b345b-7cc2-4f94-93f5-03891cc80ca5",
+      "label": "MOVE8TOAPPL-RES",
+      "name": "MOVE8TOAPPL-RES",
+      "originalText": "MOVE 8 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bfbd13ee-fea8-471e-9317-8844d7f16a63",
+      "label": "IS \nXREFFILE-STATUS \u003d \u002700\u0027?\n",
+      "name": "IS \nXREFFILE-STATUS \u003d \u002700\u0027?\n",
+      "originalText": "IF  XREFFILE-STATUS \u003d \u002700\u0027\n               MOVE 0 TO APPL-RESULT\n               DISPLAY CARD-XREF-RECORD\n           ELSE\n               IF  XREFFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "399ad2f8-b563-4da9-abe1-ed7cdcdd858a",
+      "label": "IS \nAPPL-AOK?\n",
+      "name": "IS \nAPPL-AOK?\n",
+      "originalText": "IF  APPL-AOK\n               CONTINUE\n           ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING XREFFILE\u0027\n                   MOVE XREFFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF\n           END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "476833a6-6078-4ab4-be65-1033ed5654c7",
+      "label": "EXIT",
+      "name": "EXIT",
+      "originalText": "EXIT",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "88881048-355f-451c-b323-6483d629bbeb",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "CONTINUE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "ad1c2cd6-7a70-44f2-9c05-275e9865e2c1",
+      "label": "CONTINUE",
+      "name": "CONTINUE",
+      "originalText": "CONTINUE",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "598060c1-5c97-49f6-9eea-0b83cb1b5ec2",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING XREFFILE\u0027\n                   MOVE XREFFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "9a70545e-3f57-4090-a85f-9d242108be53",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "87014628-68ef-4e78-abdb-eedac3cdcce2",
+      "label": "IS \nAPPL-EOF?\n",
+      "name": "IS \nAPPL-EOF?\n",
+      "originalText": "IF  APPL-EOF\n                   MOVE \u0027Y\u0027 TO END-OF-FILE\n               ELSE\n                   DISPLAY \u0027ERROR READING XREFFILE\u0027\n                   MOVE XREFFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "90a4b588-5331-4907-95b8-111b280ef59f",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "bba4a6fd-ef05-41de-81cc-3cf8ef8ed0da",
+      "label": "MOVE\u0027Y\u0027TOEND-OF",
+      "name": "MOVE\u0027Y\u0027TOEND-OF",
+      "originalText": "MOVE \u0027Y\u0027 TO END-OF-FILE",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "af5b4f3c-a4f8-4b9f-b358-a8c65247dcbf",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   DISPLAY \u0027ERROR READING XREFFILE\u0027\n                   MOVE XREFFILE-STATUS TO IO-STATUS\n                   PERFORM 9910-DISPLAY-IO-STATUS\n                   PERFORM 9999-ABEND-PROGRAM",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2d423ee4-15c6-46be-8d3f-c40ad9b944af",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f574989f-2c4f-4c99-8e8e-32a61ebad8ec",
+      "label": "DISPLAY\u0027ERROR R",
+      "name": "DISPLAY\u0027ERROR R",
+      "originalText": "DISPLAY \u0027ERROR READING XREFFILE\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "24f0e633-8375-4ab9-bb61-68432d96424b",
+      "label": "MOVEXREFFILE-ST",
+      "name": "MOVEXREFFILE-ST",
+      "originalText": "MOVE XREFFILE-STATUS TO IO-STATUS",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "label": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "name": "PERFORM9910-DIS",
+      "originalText": "PERFORM 9910-DISPLAY-IO-STATUS",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "label": "PERFORM 9999-ABEND-PROGRAM",
+      "name": "PERFORM9999-ABE",
+      "originalText": "PERFORM 9999-ABEND-PROGRAM",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5bf716c0-c94b-4aaf-9081-c4c95341b744",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 0 TO APPL-RESULT\n               DISPLAY CARD-XREF-RECORD",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "46c2a3e4-f6ba-4922-94ce-eb29098d9baa",
+      "label": "MOVE0TOAPPL-RES",
+      "name": "MOVE0TOAPPL-RES",
+      "originalText": "MOVE 0 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "c1820d78-6c44-4c85-80b0-e279b01d8f0e",
+      "label": "DISPLAYCARD-XRE",
+      "name": "DISPLAYCARD-XRE",
+      "originalText": "DISPLAY CARD-XREF-RECORD",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "b7f2a72c-c533-4c13-8de7-2abacb8b4022",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n               IF  XREFFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "69b3c91e-0b7e-40ea-8378-01d26b8b1424",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "d7becc04-104b-443b-9157-700d685b31b7",
+      "label": "IS \nXREFFILE-STATUS \u003d \u002710\u0027?\n",
+      "name": "IS \nXREFFILE-STATUS \u003d \u002710\u0027?\n",
+      "originalText": "IF  XREFFILE-STATUS \u003d \u002710\u0027\n                   MOVE 16 TO APPL-RESULT\n               ELSE\n                   MOVE 12 TO APPL-RESULT\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5030a81b-85a8-46ba-8e74-80a3502598f0",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "MOVE 16 TO APPL-RESULT",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4ccb7311-f308-455e-a363-ff5941fc69b9",
+      "label": "MOVE16TOAPPL-RE",
+      "name": "MOVE16TOAPPL-RE",
+      "originalText": "MOVE 16 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "cf454644-c380-4daa-b9d7-eb41dc20ba40",
+      "label": "No",
+      "name": "No",
+      "originalText": "ELSE\n                   MOVE 12 TO APPL-RESULT",
+      "type": "IF_NO",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0fde0e1d-8340-4c79-9385-6a1fb8ead593",
+      "label": "ELSE",
+      "name": "ELSE",
+      "originalText": "ELSE",
+      "type": "SYMBOL",
+      "categories": [
+        "SYMBOL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "a6e6a04f-02f8-4d8c-83cd-cc1845a1faa3",
+      "label": "MOVE12TOAPPL-RE",
+      "name": "MOVE12TOAPPL-RE",
+      "originalText": "MOVE 12 TO APPL-RESULT",
+      "type": "MOVE",
+      "categories": [
+        "DATA_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8486a1d8-90cf-45f5-aafb-5e675d73ca2a",
+      "label": "READXREFFILE-FI",
+      "name": "READXREFFILE-FI",
+      "originalText": "READ XREFFILE-FILE INTO CARD-XREF-RECORD",
+      "type": "GENERIC_STATEMENT",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "5b2c0b29-ef5b-4818-8ca1-870e5172fb85",
+      "label": "GOBACK",
+      "name": "GOBACK",
+      "originalText": "GOBACK",
+      "type": "EXIT",
+      "categories": [
+        "TERMINAL"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "57ddee03-069d-428d-94fa-256ccad1feca",
+      "label": "DISPLAY\u0027END OF ",
+      "name": "DISPLAY\u0027END OF ",
+      "originalText": "DISPLAY \u0027END OF EXECUTION OF PROGRAM CBACT03C\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "961eb49c-d5d6-42a5-98d8-dd73fca5dce5",
+      "label": "PERFORM 9000-XREFFILE-CLOSE",
+      "name": "PERFORM9000-XRE",
+      "originalText": "PERFORM 9000-XREFFILE-CLOSE",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2c9cc58c-e4ab-4991-ba5f-efd6de9c8dce",
+      "label": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y",
+      "name": "PERFORMUNTILEND",
+      "originalText": "PERFORM UNTIL END-OF-FILE \u003d \u0027Y\u0027\n               IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-XREFFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-XREF-RECORD\n                   END-IF\n               END-IF\n           END-PERFORM",
+      "type": "PERFORM",
+      "categories": [
+        "LOOP"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "0831f7d9-75fc-43ce-8ea0-4bf2783bea8c",
+      "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                   PERFORM 1000-XREFFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-XREF-RECORD\n                   END-IF\n               END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "2aaadab4-9374-4400-a51b-c94e9ad91958",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "PERFORM 1000-XREFFILE-GET-NEXT\n                   IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-XREF-RECORD\n                   END-IF",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "966480c3-5d89-42e1-b9af-de0997675447",
+      "label": "PERFORM 1000-XREFFILE-GET-NEXT",
+      "name": "PERFORM1000-XRE",
+      "originalText": "PERFORM 1000-XREFFILE-GET-NEXT",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "e90aaebd-83f9-482b-a979-521c89950b74",
+      "label": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "name": "IS \nEND-OF-FILE \u003d \u0027N\u0027?\n",
+      "originalText": "IF  END-OF-FILE \u003d \u0027N\u0027\n                       DISPLAY CARD-XREF-RECORD\n                   END-IF",
+      "type": "IF_BRANCH",
+      "categories": [
+        "DECISION"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "8d7c22bb-8b56-484a-a7c1-2a21f7053f7a",
+      "label": "Yes",
+      "name": "Yes",
+      "originalText": "DISPLAY CARD-XREF-RECORD",
+      "type": "IF_YES",
+      "categories": [
+        "DECISION_BRANCH"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "1128e7fe-8348-47fb-a341-3dd7ea0790fd",
+      "label": "DISPLAYCARD-XRE",
+      "name": "DISPLAYCARD-XRE",
+      "originalText": "DISPLAY CARD-XREF-RECORD",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "f0af9864-7e8e-4036-b61e-e0d163d51421",
+      "label": "PERFORM 0000-XREFFILE-OPEN",
+      "name": "PERFORM0000-XRE",
+      "originalText": "PERFORM 0000-XREFFILE-OPEN",
+      "type": "PERFORM",
+      "categories": [
+        "CONTROL_FLOW"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "id": "4051d9c7-4a0f-47a0-b3a2-84dff93df0d7",
+      "label": "DISPLAY\u0027START O",
+      "name": "DISPLAY\u0027START O",
+      "originalText": "DISPLAY \u0027START OF EXECUTION OF PROGRAM CBACT03C\u0027",
+      "type": "DISPLAY",
+      "categories": [
+        "IO"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "edges": [
+    {
+      "id": "dd1fa414-dff1-44c2-8cb5-74a924142abb",
+      "fromNodeID": "06519b53-625c-449f-b57c-92f197df28d4",
+      "toNodeID": "07a01ce6-f8c1-4d3f-9156-f2ee791cd468",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2eb43d1f-64eb-4446-a794-b30bdf46796d",
+      "fromNodeID": "07a01ce6-f8c1-4d3f-9156-f2ee791cd468",
+      "toNodeID": "4842d97c-8ca5-4a37-a0e8-a380308fc3aa",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7bb7f85d-19a9-4ee4-81e0-a12ca48e3840",
+      "fromNodeID": "4842d97c-8ca5-4a37-a0e8-a380308fc3aa",
+      "toNodeID": "f2fd043a-6ce9-45ba-b2a7-0a1778128c37",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "9ffadd89-2c96-4b65-b596-0807a9f51af1",
+      "fromNodeID": "f2fd043a-6ce9-45ba-b2a7-0a1778128c37",
+      "toNodeID": "084bc8c0-1a38-4d9d-800f-18f63cc4b884",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "52d70847-edf9-4a49-a0ee-fcef02792378",
+      "fromNodeID": "084bc8c0-1a38-4d9d-800f-18f63cc4b884",
+      "toNodeID": "c0423b07-fa3e-4f83-a70b-c95497569f2b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f93135c7-b96d-419f-b20c-c80100977dce",
+      "fromNodeID": "c0423b07-fa3e-4f83-a70b-c95497569f2b",
+      "toNodeID": "d100cd18-0534-44f4-9cdb-fd34afbe44fc",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "bd80fbe4-0273-4b4e-9861-c17872e6fe36",
+      "fromNodeID": "d100cd18-0534-44f4-9cdb-fd34afbe44fc",
+      "toNodeID": "42bd54ef-63cf-4b7e-9927-2b5058fc4a99",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "b95931f1-5039-458a-badc-1cd796b29ba8",
+      "fromNodeID": "42bd54ef-63cf-4b7e-9927-2b5058fc4a99",
+      "toNodeID": "c319356c-75e5-4796-ae88-26f780942a58",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "666068df-a0bb-476c-8dcd-8401bcdaedc0",
+      "fromNodeID": "c319356c-75e5-4796-ae88-26f780942a58",
+      "toNodeID": "cace617e-3f6b-48b0-9288-3803e7a14ae5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4bc2017a-57ed-46e4-acab-2268b58701a6",
+      "fromNodeID": "cace617e-3f6b-48b0-9288-3803e7a14ae5",
+      "toNodeID": "8947bfcb-2032-49d6-b1c7-fced48d93d59",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c68ad495-dbc3-4f69-bf18-6645ccef80b9",
+      "fromNodeID": "8947bfcb-2032-49d6-b1c7-fced48d93d59",
+      "toNodeID": "10f38304-9505-4906-9d65-acd9facc6136",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "46f8f7a7-8bc8-47c7-8629-bc38c1d4632d",
+      "fromNodeID": "10f38304-9505-4906-9d65-acd9facc6136",
+      "toNodeID": "f8e911da-9fed-485d-8819-8d06305baf81",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "1003111d-d1ab-4332-afff-b3823911065f",
+      "fromNodeID": "f8e911da-9fed-485d-8819-8d06305baf81",
+      "toNodeID": "47b4e6ac-5f17-4ab1-a701-17b0f7bc717a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "dec343ef-9d23-49fb-bcff-db77c134ebe9",
+      "fromNodeID": "47b4e6ac-5f17-4ab1-a701-17b0f7bc717a",
+      "toNodeID": "7bf047b0-3f6b-41ef-af28-6dcc09b16438",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a8f058c4-f165-4820-9815-958adb6e066b",
+      "fromNodeID": "7bf047b0-3f6b-41ef-af28-6dcc09b16438",
+      "toNodeID": "efcb269c-d3e6-4268-ba15-1ffe86d859cd",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "312c2784-2c06-4b05-87ab-5ed7d663777f",
+      "fromNodeID": "efcb269c-d3e6-4268-ba15-1ffe86d859cd",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "d25a1364-d0d8-462d-bc17-177ec02afc47",
+      "fromNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "toNodeID": "123a024d-9a0d-426e-87d0-b7094cbe3a80",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "6bfaaa22-717e-4919-9440-aec9de7d0cb8",
+      "fromNodeID": "123a024d-9a0d-426e-87d0-b7094cbe3a80",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "3d17f602-bc08-4774-ac06-6988b72b57c6",
+      "fromNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "toNodeID": "db0b8cdf-53cb-405d-9168-dcb4b1e244cb",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8045138c-4c24-409f-9449-ff69f84191db",
+      "fromNodeID": "db0b8cdf-53cb-405d-9168-dcb4b1e244cb",
+      "toNodeID": "77dba335-5a7b-4b90-b488-a2111c107891",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "a0f69881-5da5-409e-8efd-6cc78f3ae172",
+      "fromNodeID": "77dba335-5a7b-4b90-b488-a2111c107891",
+      "toNodeID": "5cf0fd5c-a553-4a98-aeb0-ead120d1da89",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "655e9fae-3616-4c5e-a3d1-7448097b4319",
+      "fromNodeID": "77dba335-5a7b-4b90-b488-a2111c107891",
+      "toNodeID": "54555c40-c0d3-4dbd-a965-9ee57c8130d0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e3a4cd80-4d78-42b7-951b-80b5a5f0e361",
+      "fromNodeID": "77dba335-5a7b-4b90-b488-a2111c107891",
+      "toNodeID": "e8f25e26-0802-4dd4-97fd-7d7297b98ab3",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "a1f2fb74-ba60-484e-9ff4-5cb83053c554",
+      "fromNodeID": "54555c40-c0d3-4dbd-a965-9ee57c8130d0",
+      "toNodeID": "634f5675-8373-41fb-8a43-999fd9701f0e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "a3691b74-e03e-4442-a85f-a740a3a56fd8",
+      "fromNodeID": "634f5675-8373-41fb-8a43-999fd9701f0e",
+      "toNodeID": "0446f950-f55e-4bc4-9ebf-e64936030ab8",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "3de00d59-d038-47d2-8416-37cd62a9483c",
+      "fromNodeID": "0446f950-f55e-4bc4-9ebf-e64936030ab8",
+      "toNodeID": "c5f7cbcb-1651-4ffc-b431-cfde79e5f26f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4d72e07a-41ce-409a-963a-7910fa3f4a42",
+      "fromNodeID": "c5f7cbcb-1651-4ffc-b431-cfde79e5f26f",
+      "toNodeID": "a0a264cf-b171-4a74-9f7c-8bd415c06ccf",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "16f3e95e-f93f-4187-8b0a-bb628c628120",
+      "fromNodeID": "a0a264cf-b171-4a74-9f7c-8bd415c06ccf",
+      "toNodeID": "9a90bc76-e42d-449f-987f-7a1d859c9195",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "630e87ef-dc6e-4479-90e3-61dfc99938dc",
+      "fromNodeID": "e8f25e26-0802-4dd4-97fd-7d7297b98ab3",
+      "toNodeID": "335fa263-b4fa-4bcb-b1e8-fee8f78bfb26",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e2f73bff-a225-46d5-8631-1054e4358b1c",
+      "fromNodeID": "335fa263-b4fa-4bcb-b1e8-fee8f78bfb26",
+      "toNodeID": "88fdccae-0b36-459b-84f7-9df023325858",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "be90f901-ed2d-4274-8b9b-429e5b6c4504",
+      "fromNodeID": "88fdccae-0b36-459b-84f7-9df023325858",
+      "toNodeID": "673cb449-450f-4b43-baf0-71b96915f4c5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0aaedb17-df2c-4156-ae8d-db6009c04340",
+      "fromNodeID": "673cb449-450f-4b43-baf0-71b96915f4c5",
+      "toNodeID": "17257bee-7743-40f7-84a4-b489be24c93d",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "44c8c8d5-0a0f-43cd-bc69-158192ad6fc8",
+      "fromNodeID": "123a024d-9a0d-426e-87d0-b7094cbe3a80",
+      "toNodeID": "b68d6a48-4f80-4db8-bc09-f908684748c9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "20e8de15-747b-43c3-b829-58bd371cae07",
+      "fromNodeID": "b68d6a48-4f80-4db8-bc09-f908684748c9",
+      "toNodeID": "235194c2-3510-4e63-b504-b029d15be507",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4256085b-a65d-47a2-997f-69eed7d5eb37",
+      "fromNodeID": "235194c2-3510-4e63-b504-b029d15be507",
+      "toNodeID": "f321792d-a949-433e-af72-dec42797ac8e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c5638b03-5709-40a6-81e4-e12bcd5c9f04",
+      "fromNodeID": "f321792d-a949-433e-af72-dec42797ac8e",
+      "toNodeID": "dd17e3f9-e93c-4e64-841b-ea259a90d5ce",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "43d4a5c6-512a-4e48-9fbf-aeebad8b7387",
+      "fromNodeID": "efcb269c-d3e6-4268-ba15-1ffe86d859cd",
+      "toNodeID": "35d00c13-68db-4602-970c-9830b98a3014",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8d6e65ca-81d1-4ffc-bc5a-809a13bf13d3",
+      "fromNodeID": "35d00c13-68db-4602-970c-9830b98a3014",
+      "toNodeID": "4823ed52-e3fa-4e65-8776-8dc3f5600f54",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "cdef2c8a-4922-4bf9-a4d5-bbdf60c696f1",
+      "fromNodeID": "4823ed52-e3fa-4e65-8776-8dc3f5600f54",
+      "toNodeID": "5c3d3153-954a-46d4-91ea-98efe6815cf5",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7b915231-3558-4591-8c9a-086db47768f1",
+      "fromNodeID": "5c3d3153-954a-46d4-91ea-98efe6815cf5",
+      "toNodeID": "8dcb678e-f7eb-464e-9f42-8d7f3edb6ad0",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "c3510d1a-dcd5-4786-8f93-7e2519bceb3b",
+      "fromNodeID": "5c3d3153-954a-46d4-91ea-98efe6815cf5",
+      "toNodeID": "5c07798e-99ea-4e0f-aec9-5b9972c0b75b",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f1400bea-d8bf-40fb-810d-9c98bedf875f",
+      "fromNodeID": "5c3d3153-954a-46d4-91ea-98efe6815cf5",
+      "toNodeID": "b0233e05-7253-4e6e-8f9c-528a91f80898",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "5413d494-5511-48ec-bbd0-42480cdca987",
+      "fromNodeID": "5c07798e-99ea-4e0f-aec9-5b9972c0b75b",
+      "toNodeID": "403ea1c9-e7e4-4489-8ff0-cf359e8ffc48",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "a2d2fa55-f04a-4c4a-a226-539a5af96f2f",
+      "fromNodeID": "b0233e05-7253-4e6e-8f9c-528a91f80898",
+      "toNodeID": "195f2411-2690-400d-b0d8-b8f6e735d456",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0ce4d303-f9f2-43eb-9417-532f39253ee4",
+      "fromNodeID": "195f2411-2690-400d-b0d8-b8f6e735d456",
+      "toNodeID": "8dcc965b-8027-406d-af39-476543d8d153",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4aa71dba-8a6d-417e-8d6d-9d665bdf7409",
+      "fromNodeID": "8dcc965b-8027-406d-af39-476543d8d153",
+      "toNodeID": "9a9620f8-7e4c-4149-86bf-724f14e4b733",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "222e9367-989b-4231-8e0e-c55da1d5d0c1",
+      "fromNodeID": "9a9620f8-7e4c-4149-86bf-724f14e4b733",
+      "toNodeID": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f3d1a9dd-5f8b-40bd-a6b8-1f4fba5f8d6c",
+      "fromNodeID": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "toNodeID": "fadfe103-5368-4e2a-96b3-1e9f9ffc4c8f",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "291171c6-73c7-48a0-93e8-0d540d79dc6b",
+      "fromNodeID": "fadfe103-5368-4e2a-96b3-1e9f9ffc4c8f",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f184cb95-d745-4a0d-abe0-6c21657beadd",
+      "fromNodeID": "fadfe103-5368-4e2a-96b3-1e9f9ffc4c8f",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "def6b0a9-77b7-4efc-ae99-51c26469f36b",
+      "fromNodeID": "fadfe103-5368-4e2a-96b3-1e9f9ffc4c8f",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "4c484de0-4563-45ec-8991-de87b5edcbfa",
+      "fromNodeID": "fadfe103-5368-4e2a-96b3-1e9f9ffc4c8f",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "393548c4-0a3d-4587-bd57-08269da8c34c",
+      "fromNodeID": "fadfe103-5368-4e2a-96b3-1e9f9ffc4c8f",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "5fdf4892-f10f-4fe0-9ca6-e90b1701ad81",
+      "fromNodeID": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "36f8070c-d5da-4c3c-8ee4-5c65bbf15dba",
+      "fromNodeID": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e5a79434-cbe2-4a41-b8c1-3de0cd81347d",
+      "fromNodeID": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "72a15b8b-eb87-459d-ae62-90c3e5c93cde",
+      "fromNodeID": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d20eab8c-3766-4f14-9e56-7885fcdf8051",
+      "fromNodeID": "bebb8532-fa7b-44fe-b2a5-e7be17d8d332",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "9440b944-cccf-4887-832b-4f531f031f7e",
+      "fromNodeID": "4823ed52-e3fa-4e65-8776-8dc3f5600f54",
+      "toNodeID": "ccb11b5c-2083-4c0e-a9e4-de004b053349",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f7292528-5cd6-4fb1-bd4a-0ead8382b74f",
+      "fromNodeID": "4823ed52-e3fa-4e65-8776-8dc3f5600f54",
+      "toNodeID": "f8947696-ecc6-47bc-8813-5a709745992d",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "dc3fe24c-0142-4500-b172-ab454fb8e5dd",
+      "fromNodeID": "ccb11b5c-2083-4c0e-a9e4-de004b053349",
+      "toNodeID": "f030ccde-37ef-4b45-8f53-26cc5d032931",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f9c6abe3-2b93-4b47-b3d2-d9fb33c60b73",
+      "fromNodeID": "f8947696-ecc6-47bc-8813-5a709745992d",
+      "toNodeID": "d1e47e1f-2085-454e-a592-00efedee954a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "42247140-a1c3-4c1a-af91-ea76c7484f2e",
+      "fromNodeID": "d1e47e1f-2085-454e-a592-00efedee954a",
+      "toNodeID": "97e6a270-abd8-4021-95a8-cfa502e86058",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "e3d2bd8a-0d06-4a15-b77b-541d886d2624",
+      "fromNodeID": "7bf047b0-3f6b-41ef-af28-6dcc09b16438",
+      "toNodeID": "44235e02-bd3b-4ca3-8895-cb30fafff5cf",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "445fa807-8fc2-4d68-b96d-209387e58190",
+      "fromNodeID": "f8e911da-9fed-485d-8819-8d06305baf81",
+      "toNodeID": "e18b2614-f1ee-42a7-9bd4-f0cac6d78730",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "0f7aa1d5-5eeb-4479-bdb2-4f74e82b0235",
+      "fromNodeID": "e18b2614-f1ee-42a7-9bd4-f0cac6d78730",
+      "toNodeID": "ae2e8556-338a-4917-9555-e1f2b909067c",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "a3ff741e-7297-45d3-b66f-94984aa7e0fe",
+      "fromNodeID": "ae2e8556-338a-4917-9555-e1f2b909067c",
+      "toNodeID": "209bbd3c-75b3-4166-9964-a699782ad284",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "689b5d2b-44e0-4b92-a6ef-de100abcf717",
+      "fromNodeID": "209bbd3c-75b3-4166-9964-a699782ad284",
+      "toNodeID": "33fb813e-ada2-473f-a16b-361e8584ccfa",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8d1d8a43-78a5-4017-8589-cffa47138da9",
+      "fromNodeID": "209bbd3c-75b3-4166-9964-a699782ad284",
+      "toNodeID": "5541a7dc-252f-4f47-80c6-1ff2e4555dac",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "1175f05e-dcd5-4d63-bc2a-7d6c42a59fec",
+      "fromNodeID": "209bbd3c-75b3-4166-9964-a699782ad284",
+      "toNodeID": "fea3d51f-2605-4126-b8c8-1581419a469a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "e244495d-2593-44e2-8e4f-70195cb39241",
+      "fromNodeID": "5541a7dc-252f-4f47-80c6-1ff2e4555dac",
+      "toNodeID": "f1526df3-5d95-43f1-b00d-e9da295a5c73",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "bd42590b-fbb7-4041-8bef-2348db482caa",
+      "fromNodeID": "fea3d51f-2605-4126-b8c8-1581419a469a",
+      "toNodeID": "161182ff-43a5-4cea-a92b-bec8e9ad844e",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f32d03bd-a00f-4ee9-90e0-846ffaa1fb6c",
+      "fromNodeID": "161182ff-43a5-4cea-a92b-bec8e9ad844e",
+      "toNodeID": "c40519a4-4c01-4fbc-b185-70db57427bac",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8ea8fa00-7d52-4231-93be-2fc5e03cebfb",
+      "fromNodeID": "c40519a4-4c01-4fbc-b185-70db57427bac",
+      "toNodeID": "850e0a4e-2ad5-422a-8ec2-df38bc0774e6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4c8d9c61-5c28-473d-bcfc-fe120f0a0908",
+      "fromNodeID": "850e0a4e-2ad5-422a-8ec2-df38bc0774e6",
+      "toNodeID": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "f0137696-7f82-4d22-a873-38d572055142",
+      "fromNodeID": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "toNodeID": "378df039-28da-4eb7-baf6-b9a588b2825b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "cde617be-8782-49a1-ab56-5991674a918c",
+      "fromNodeID": "378df039-28da-4eb7-baf6-b9a588b2825b",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d0bbd94e-abbf-4c31-a51e-1be99d32abd8",
+      "fromNodeID": "378df039-28da-4eb7-baf6-b9a588b2825b",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "85ce760d-ab8c-4943-b2af-ccfb7cf3076c",
+      "fromNodeID": "378df039-28da-4eb7-baf6-b9a588b2825b",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "69c8c786-8547-4d43-901f-353ec4bed522",
+      "fromNodeID": "378df039-28da-4eb7-baf6-b9a588b2825b",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "3f9adb05-f154-4f87-b5a1-6f8fd3bc1742",
+      "fromNodeID": "378df039-28da-4eb7-baf6-b9a588b2825b",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "75f553e8-bd11-4a67-b27f-209ef60586b1",
+      "fromNodeID": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "af5fb0d0-6fcd-4118-b5f6-493964a60db5",
+      "fromNodeID": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "ac5e0886-74dc-482b-9941-a9c3f2fc5867",
+      "fromNodeID": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a0d50270-a32c-4843-8378-2768023e64ff",
+      "fromNodeID": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "f82e985c-9d7a-46db-92cf-13e414c8c635",
+      "fromNodeID": "8fe929cd-9f37-4f27-9f3a-94511a1fd424",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "c5a0ec7b-07f5-4c1b-95b9-761416beecb1",
+      "fromNodeID": "ae2e8556-338a-4917-9555-e1f2b909067c",
+      "toNodeID": "30297bea-5ce1-4d4f-a739-ee4ef37658e8",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "54b0c17c-05d5-481b-96c8-1a701a84af54",
+      "fromNodeID": "ae2e8556-338a-4917-9555-e1f2b909067c",
+      "toNodeID": "f27c1da8-81be-49e5-9bd6-f05ce31ad58f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "3a88b69f-bfae-4f04-ab9f-7fbe655e9b1d",
+      "fromNodeID": "30297bea-5ce1-4d4f-a739-ee4ef37658e8",
+      "toNodeID": "4bfa3a6d-ded6-499c-8b6f-cf8517f39867",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c240058d-3e0e-4723-ac4c-1337f9433476",
+      "fromNodeID": "f27c1da8-81be-49e5-9bd6-f05ce31ad58f",
+      "toNodeID": "72287707-897b-4e72-a4f6-906b835e42f1",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "51684780-8cf0-4d91-adeb-9ce4cb879e4f",
+      "fromNodeID": "72287707-897b-4e72-a4f6-906b835e42f1",
+      "toNodeID": "9b41c47d-6e48-4bb0-beee-6b7dda02e7cb",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "db63b749-bcc3-4ff3-9afa-edc2d12e0451",
+      "fromNodeID": "10f38304-9505-4906-9d65-acd9facc6136",
+      "toNodeID": "ad8b345b-7cc2-4f94-93f5-03891cc80ca5",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6fa511f6-fec9-468d-b739-97e4678f63d2",
+      "fromNodeID": "cace617e-3f6b-48b0-9288-3803e7a14ae5",
+      "toNodeID": "bfbd13ee-fea8-471e-9317-8844d7f16a63",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6f9b39bd-ca6a-4b1e-9b97-694163a112b3",
+      "fromNodeID": "bfbd13ee-fea8-471e-9317-8844d7f16a63",
+      "toNodeID": "399ad2f8-b563-4da9-abe1-ed7cdcdd858a",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2ce10bf3-47d0-49cb-b7b2-fd7750de834c",
+      "fromNodeID": "399ad2f8-b563-4da9-abe1-ed7cdcdd858a",
+      "toNodeID": "476833a6-6078-4ab4-be65-1033ed5654c7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "60eef537-f815-4fb1-8b83-86a14d941c9a",
+      "fromNodeID": "399ad2f8-b563-4da9-abe1-ed7cdcdd858a",
+      "toNodeID": "88881048-355f-451c-b323-6483d629bbeb",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "66e25400-cd35-40e6-81c9-68b25c9b82c1",
+      "fromNodeID": "399ad2f8-b563-4da9-abe1-ed7cdcdd858a",
+      "toNodeID": "598060c1-5c97-49f6-9eea-0b83cb1b5ec2",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "14397c28-161f-42b9-8f97-09556053df95",
+      "fromNodeID": "88881048-355f-451c-b323-6483d629bbeb",
+      "toNodeID": "ad1c2cd6-7a70-44f2-9c05-275e9865e2c1",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "dab8cca8-905a-43c0-b40e-b8ba1189b22b",
+      "fromNodeID": "598060c1-5c97-49f6-9eea-0b83cb1b5ec2",
+      "toNodeID": "9a70545e-3f57-4090-a85f-9d242108be53",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "8914b9eb-8f4d-48ec-b5cd-f20f2d3a4a2a",
+      "fromNodeID": "9a70545e-3f57-4090-a85f-9d242108be53",
+      "toNodeID": "87014628-68ef-4e78-abdb-eedac3cdcce2",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2ed4c361-a9a6-47a5-999a-2dba36b834e9",
+      "fromNodeID": "87014628-68ef-4e78-abdb-eedac3cdcce2",
+      "toNodeID": "90a4b588-5331-4907-95b8-111b280ef59f",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2c76d703-f17e-4b09-99e0-71b045150875",
+      "fromNodeID": "87014628-68ef-4e78-abdb-eedac3cdcce2",
+      "toNodeID": "af5b4f3c-a4f8-4b9f-b358-a8c65247dcbf",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "82e267b1-7593-4b18-ac84-a09b0f0a66ee",
+      "fromNodeID": "90a4b588-5331-4907-95b8-111b280ef59f",
+      "toNodeID": "bba4a6fd-ef05-41de-81cc-3cf8ef8ed0da",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "06f815f2-0a20-440b-98de-a7b31ecd3d11",
+      "fromNodeID": "af5b4f3c-a4f8-4b9f-b358-a8c65247dcbf",
+      "toNodeID": "2d423ee4-15c6-46be-8d3f-c40ad9b944af",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "becd7e37-799a-4a13-bd12-caeef3c62dda",
+      "fromNodeID": "2d423ee4-15c6-46be-8d3f-c40ad9b944af",
+      "toNodeID": "f574989f-2c4f-4c99-8e8e-32a61ebad8ec",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "0a1a02cb-d70a-46aa-8da8-5e7e4c2acb90",
+      "fromNodeID": "f574989f-2c4f-4c99-8e8e-32a61ebad8ec",
+      "toNodeID": "24f0e633-8375-4ab9-bb61-68432d96424b",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "ded53bce-53d5-445c-b1bb-edf12992dedf",
+      "fromNodeID": "24f0e633-8375-4ab9-bb61-68432d96424b",
+      "toNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "8af792ae-29c4-4c37-976b-08c6f496eb22",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "7c178830-e1cb-4dfa-9695-04e9304781d3",
+      "fromNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "02ac568d-9ae6-41b8-a553-1ebd876f9087",
+      "fromNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "02716c58-88f0-40e8-8b7e-dad54a62d2ec",
+      "fromNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "294e3e35-3d5d-46f8-acec-07b831c8d907",
+      "fromNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "e5b0577b-d0bd-4c59-87f6-b7c6b4c9bf66",
+      "fromNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "7e934e35-3c59-41d7-ad24-c867c31d11cf",
+      "fromNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d4cc6e9a-68c3-4064-aa6f-beb1c6663d1d",
+      "fromNodeID": "12cb6584-165f-4730-9c6d-da33c68864b6",
+      "toNodeID": "394b3d79-9da8-4922-839f-7a04d9749ce0",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "02d4ef0f-1374-4352-92e1-e49505c855e9",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "72b38b28-576f-45f6-aa0d-5f6d0cc60835",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "559a0c11-da91-4bfb-8674-ef2a7b43a1e1",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d9c1d6ea-f08d-4819-b9a4-838840782a68",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a3b43e57-e915-49e4-84c8-509ced123d6e",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "4367a1d2-c8e8-443a-b59a-78295b9590bc",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "d446e56d-2322-401c-9498-511fa809452b",
+      "fromNodeID": "d086f3af-bfd9-4d25-90a3-c999870900d6",
+      "toNodeID": "6ee0c611-ca2a-4c61-a4ce-e9edea7ce766",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "6bb6fd10-26ee-452f-8364-ee53f14e002e",
+      "fromNodeID": "bfbd13ee-fea8-471e-9317-8844d7f16a63",
+      "toNodeID": "5bf716c0-c94b-4aaf-9081-c4c95341b744",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f6164d9c-2312-4744-b894-c548df561900",
+      "fromNodeID": "bfbd13ee-fea8-471e-9317-8844d7f16a63",
+      "toNodeID": "b7f2a72c-c533-4c13-8de7-2abacb8b4022",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "924b5611-2ba8-4e7d-a3f0-c08919d56317",
+      "fromNodeID": "5bf716c0-c94b-4aaf-9081-c4c95341b744",
+      "toNodeID": "46c2a3e4-f6ba-4922-94ce-eb29098d9baa",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "d1454db3-2146-483b-a503-2633641cadf7",
+      "fromNodeID": "46c2a3e4-f6ba-4922-94ce-eb29098d9baa",
+      "toNodeID": "c1820d78-6c44-4c85-80b0-e279b01d8f0e",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "4da75f13-b7bf-409d-a960-cbc4897df485",
+      "fromNodeID": "b7f2a72c-c533-4c13-8de7-2abacb8b4022",
+      "toNodeID": "69b3c91e-0b7e-40ea-8378-01d26b8b1424",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "f4af3a80-a64d-47c6-9e4f-0fe498bd6c50",
+      "fromNodeID": "69b3c91e-0b7e-40ea-8378-01d26b8b1424",
+      "toNodeID": "d7becc04-104b-443b-9157-700d685b31b7",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "2f7d9784-c3a2-46f0-a17b-79dee2f34439",
+      "fromNodeID": "d7becc04-104b-443b-9157-700d685b31b7",
+      "toNodeID": "5030a81b-85a8-46ba-8e74-80a3502598f0",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "93a9ceb0-0196-42ff-82c2-01cba3213853",
+      "fromNodeID": "d7becc04-104b-443b-9157-700d685b31b7",
+      "toNodeID": "cf454644-c380-4daa-b9d7-eb41dc20ba40",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "309b1766-7ae1-4181-9db6-e9a1ff8ad657",
+      "fromNodeID": "5030a81b-85a8-46ba-8e74-80a3502598f0",
+      "toNodeID": "4ccb7311-f308-455e-a363-ff5941fc69b9",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "c5518654-ce1a-4368-8e97-6d45ee661aa9",
+      "fromNodeID": "cf454644-c380-4daa-b9d7-eb41dc20ba40",
+      "toNodeID": "0fde0e1d-8340-4c79-9385-6a1fb8ead593",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "396986bb-0ede-423d-aaff-b5488a2228bf",
+      "fromNodeID": "0fde0e1d-8340-4c79-9385-6a1fb8ead593",
+      "toNodeID": "a6e6a04f-02f8-4d8c-83cd-cc1845a1faa3",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "bddc7113-77d1-4e6c-b17c-8ef6badb053d",
+      "fromNodeID": "c319356c-75e5-4796-ae88-26f780942a58",
+      "toNodeID": "8486a1d8-90cf-45f5-aafb-5e675d73ca2a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2b07bfe6-2331-4c53-a449-57a55670d2b0",
+      "fromNodeID": "d100cd18-0534-44f4-9cdb-fd34afbe44fc",
+      "toNodeID": "5b2c0b29-ef5b-4818-8ca1-870e5172fb85",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "032b63d7-a2ea-442c-b218-efffa03acc34",
+      "fromNodeID": "c0423b07-fa3e-4f83-a70b-c95497569f2b",
+      "toNodeID": "57ddee03-069d-428d-94fa-256ccad1feca",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "b0f339c2-e287-4705-9e8c-3597eedbcac7",
+      "fromNodeID": "084bc8c0-1a38-4d9d-800f-18f63cc4b884",
+      "toNodeID": "961eb49c-d5d6-42a5-98d8-dd73fca5dce5",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "7474d17e-e4ac-414a-a8e6-42f1a6f276ea",
+      "fromNodeID": "961eb49c-d5d6-42a5-98d8-dd73fca5dce5",
+      "toNodeID": "47b4e6ac-5f17-4ab1-a701-17b0f7bc717a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "b21526dd-eeac-4385-b125-0d89bf762c32",
+      "fromNodeID": "961eb49c-d5d6-42a5-98d8-dd73fca5dce5",
+      "toNodeID": "47b4e6ac-5f17-4ab1-a701-17b0f7bc717a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "209ec761-ec23-4301-bb80-792cf8652090",
+      "fromNodeID": "961eb49c-d5d6-42a5-98d8-dd73fca5dce5",
+      "toNodeID": "47b4e6ac-5f17-4ab1-a701-17b0f7bc717a",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "888578dd-ca3d-46a7-beb5-727305be58c8",
+      "fromNodeID": "f2fd043a-6ce9-45ba-b2a7-0a1778128c37",
+      "toNodeID": "2c9cc58c-e4ab-4991-ba5f-efd6de9c8dce",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "896d76ba-2dba-466f-baae-b77429219c82",
+      "fromNodeID": "2c9cc58c-e4ab-4991-ba5f-efd6de9c8dce",
+      "toNodeID": "0831f7d9-75fc-43ce-8ea0-4bf2783bea8c",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "2cb904a6-2efa-45a3-af92-b2b95ed78133",
+      "fromNodeID": "0831f7d9-75fc-43ce-8ea0-4bf2783bea8c",
+      "toNodeID": "2aaadab4-9374-4400-a51b-c94e9ad91958",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "01d561c0-b2ba-4463-9dc0-2c5bc744dd7a",
+      "fromNodeID": "2aaadab4-9374-4400-a51b-c94e9ad91958",
+      "toNodeID": "966480c3-5d89-42e1-b9af-de0997675447",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "6696e612-c67b-4478-b523-82655f170554",
+      "fromNodeID": "966480c3-5d89-42e1-b9af-de0997675447",
+      "toNodeID": "e90aaebd-83f9-482b-a979-521c89950b74",
+      "edgeType": "FOLLOWED_BY"
+    },
+    {
+      "id": "26c7e03a-01c2-4627-bcb1-dd26b98d8461",
+      "fromNodeID": "e90aaebd-83f9-482b-a979-521c89950b74",
+      "toNodeID": "8d7c22bb-8b56-484a-a7c1-2a21f7053f7a",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "aede8ddf-6ded-4463-a34c-2dc86768fac5",
+      "fromNodeID": "8d7c22bb-8b56-484a-a7c1-2a21f7053f7a",
+      "toNodeID": "1128e7fe-8348-47fb-a341-3dd7ea0790fd",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "084a5065-37a6-4274-abc1-d7307ded23e1",
+      "fromNodeID": "966480c3-5d89-42e1-b9af-de0997675447",
+      "toNodeID": "42bd54ef-63cf-4b7e-9927-2b5058fc4a99",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "0e842089-45a7-45a5-ada7-bea3be34368b",
+      "fromNodeID": "966480c3-5d89-42e1-b9af-de0997675447",
+      "toNodeID": "42bd54ef-63cf-4b7e-9927-2b5058fc4a99",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "320b5352-2789-489a-9b88-04d76cb27eca",
+      "fromNodeID": "966480c3-5d89-42e1-b9af-de0997675447",
+      "toNodeID": "42bd54ef-63cf-4b7e-9927-2b5058fc4a99",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "bcbab262-b149-4f8e-98eb-72de414caa78",
+      "fromNodeID": "2c9cc58c-e4ab-4991-ba5f-efd6de9c8dce",
+      "toNodeID": "bdba22f5-874a-4731-86bd-77333d40045c",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "bdc032bf-6740-48eb-855d-c320a0032de6",
+      "fromNodeID": "4842d97c-8ca5-4a37-a0e8-a380308fc3aa",
+      "toNodeID": "f0af9864-7e8e-4036-b61e-e0d163d51421",
+      "edgeType": "STARTS_WITH"
+    },
+    {
+      "id": "26a79dfa-6976-4dda-bde9-debfb44551c5",
+      "fromNodeID": "f0af9864-7e8e-4036-b61e-e0d163d51421",
+      "toNodeID": "8947bfcb-2032-49d6-b1c7-fced48d93d59",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "97d5145a-f6d0-4692-9bdd-715f63bf209f",
+      "fromNodeID": "f0af9864-7e8e-4036-b61e-e0d163d51421",
+      "toNodeID": "8947bfcb-2032-49d6-b1c7-fced48d93d59",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "834fc5c0-a0f7-4f14-ba11-0d99b8dfaea9",
+      "fromNodeID": "f0af9864-7e8e-4036-b61e-e0d163d51421",
+      "toNodeID": "8947bfcb-2032-49d6-b1c7-fced48d93d59",
+      "edgeType": "JUMPS_TO"
+    },
+    {
+      "id": "a918e083-a5a9-46cd-9864-59187a4aded4",
+      "fromNodeID": "07a01ce6-f8c1-4d3f-9156-f2ee791cd468",
+      "toNodeID": "4051d9c7-4a0f-47a0-b3a2-84dff93df0d7",
+      "edgeType": "STARTS_WITH"
+    }
+  ],
+  "idProvider": {}
+}

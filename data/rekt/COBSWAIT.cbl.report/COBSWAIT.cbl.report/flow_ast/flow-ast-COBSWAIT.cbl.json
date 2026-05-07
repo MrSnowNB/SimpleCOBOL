@@ -1,0 +1,113 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "c9015d2b-feb3-4bf9-bb80-5a1d141236b3",
+          "label": "ACCEPTPARM-VALU",
+          "name": "ACCEPTPARM-VALU",
+          "originalText": "ACCEPT PARM-VALUE      FROM SYSIN",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "1c6f91cf-b324-413a-8c58-3bd899104761",
+      "label": "ACCEPTPARM-VALU",
+      "name": "ACCEPTPARM-VALU",
+      "originalText": "ACCEPT PARM-VALUE      FROM SYSIN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "bf593013-fb3a-472f-8f31-087488c23428",
+          "label": "MOVEPARM-VALUET",
+          "name": "MOVEPARM-VALUET",
+          "originalText": "MOVE  PARM-VALUE       TO MVSWAIT-TIME",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "d2370f77-d505-4639-820a-e263b98c3da1",
+      "label": "MOVEPARM-VALUET",
+      "name": "MOVEPARM-VALUET",
+      "originalText": "MOVE  PARM-VALUE       TO MVSWAIT-TIME.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "6c7dba50-a871-47da-b641-360f4cbc91e5",
+          "label": "CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME",
+          "name": "CALL\u0027MVSWAIT\u0027US",
+          "originalText": "CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME",
+          "type": "CALL",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "96afbbce-4090-487d-8e27-2ec93bdfbe22",
+      "label": "CALL\u0027MVSWAIT\u0027US",
+      "name": "CALL\u0027MVSWAIT\u0027US",
+      "originalText": "CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "8658edd7-b041-4458-8927-9262e6ac4c2a",
+          "label": "STOPRUN",
+          "name": "STOPRUN",
+          "originalText": "STOP RUN",
+          "type": "STOP",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "07740971-e7f7-466b-af0b-d09233354d9c",
+      "label": "STOPRUN.",
+      "name": "STOPRUN.",
+      "originalText": "STOP RUN.",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "id": "814d3620-79e3-4009-86a3-41599c4563d9",
+  "label": "ProcedureDivisionBodyContext/814d3620-79e3-4009-86a3-41599c4563d9",
+  "name": "ProcedureDivisionBodyContext/814d3620-79e3-4009-86a3-41599c4563d9",
+  "originalText": "ACCEPT PARM-VALUE      FROM SYSIN.\n           MOVE  PARM-VALUE       TO MVSWAIT-TIME.\n           CALL \u0027MVSWAIT\u0027       USING MVSWAIT-TIME.\n       \n           STOP RUN.",
+  "type": "PROCEDURE_DIVISION_BODY",
+  "categories": [
+    "CODE_BLOCK"
+  ],
+  "nodeType": "CODE_VERTEX"
+}

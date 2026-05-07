@@ -1,0 +1,280 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "d5c919bf-3a95-4339-a6a6-b65d00e26604",
+          "label": "INITIALIZEWS-ME",
+          "name": "INITIALIZEWS-ME",
+          "originalText": "INITIALIZE WS-MESSAGE",
+          "type": "GENERIC_STATEMENT",
+          "categories": [
+            "GENERIC_CODE"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "2bd7c851-3b8e-4f89-92af-34fd65aa09ed",
+          "label": "MOVESPACESTOWS-",
+          "name": "MOVESPACESTOWS-",
+          "originalText": "MOVE SPACES TO WS-DATE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "a8534111-6445-4729-9e56-89dfaf85172d",
+          "label": "PERFORM A000-MAIN\n            ",
+          "name": "PERFORMA000-MAI",
+          "originalText": "PERFORM A000-MAIN\n              THRU A000-MAIN-EXIT",
+          "type": "PERFORM",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "f355ed25-c988-4b60-b3c3-54a3761d1bad",
+          "label": "MOVEWS-MESSAGET",
+          "name": "MOVEWS-MESSAGET",
+          "originalText": "MOVE WS-MESSAGE                 TO LS-RESULT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "41c7cc82-62e7-485c-9a3b-57dc71b250ec",
+          "label": "MOVEWS-SEVERITY",
+          "name": "MOVEWS-SEVERITY",
+          "originalText": "MOVE WS-SEVERITY-N              TO RETURN-CODE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "2be440a7-3183-4efe-bf79-763c754533af",
+          "label": "EXITPROGRAM",
+          "name": "EXITPROGRAM",
+          "originalText": "EXIT PROGRAM",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "1c5365dd-7a5d-4d10-9edb-1d6703543bdf",
+      "label": "INITIALIZEWS-ME",
+      "name": "INITIALIZEWS-ME",
+      "originalText": "INITIALIZE WS-MESSAGE\n           MOVE SPACES TO WS-DATE\n       \n           PERFORM A000-MAIN\n              THRU A000-MAIN-EXIT\n       \n       \n           MOVE WS-MESSAGE                 TO LS-RESULT\n           MOVE WS-SEVERITY-N              TO RETURN-CODE\n       \n           EXIT PROGRAM\n       \n           .",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "cce52ae1-87fa-422b-bfea-eafcbad4ae1e",
+      "label": "A000-MAIN",
+      "name": "A000-MAIN",
+      "originalText": "A000-MAIN.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "37f9be1d-a580-4f78-b048-e12dc06cf03c",
+          "label": "MOVELENGTHOFLS-",
+          "name": "MOVELENGTHOFLS-",
+          "originalText": "MOVE LENGTH OF LS-DATE\n                        TO VSTRING-LENGTH  OF WS-DATE-TO-TEST",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "b02d21b5-761f-4c8a-a992-399f3518a35a",
+          "label": "MOVELS-DATETOVS",
+          "name": "MOVELS-DATETOVS",
+          "originalText": "MOVE LS-DATE TO VSTRING-TEXT    OF WS-DATE-TO-TEST\n                           WS-DATE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c5dc6b1a-a39b-4c4f-983a-63c819c55895",
+          "label": "MOVELENGTHOFLS-",
+          "name": "MOVELENGTHOFLS-",
+          "originalText": "MOVE LENGTH OF LS-DATE-FORMAT\n                         TO VSTRING-LENGTH OF WS-DATE-FORMAT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "1621c9b0-3cb4-496c-8f2d-1a07661324f4",
+          "label": "MOVELS-DATE-FOR",
+          "name": "MOVELS-DATE-FOR",
+          "originalText": "MOVE LS-DATE-FORMAT\n                         TO VSTRING-TEXT   OF WS-DATE-FORMAT\n                            WS-DATE-FMT",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "956476fa-98ca-4443-83ba-34bce3e7ba7f",
+          "label": "MOVE0TOOUTPUT-L",
+          "name": "MOVE0TOOUTPUT-L",
+          "originalText": "MOVE 0        TO OUTPUT-LILLIAN",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "68a22e06-7ddd-4a77-a174-037773d470a1",
+          "label": "CALL \"CEEDAYS\" USING\n                  WS-DATE-TO-TEST, \n                  WS-DATE-FORMAT, \n                  OUTPUT-LILLIAN, \n                  FEEDBACK-CODE",
+          "name": "CALL\"CEEDAYS\"US",
+          "originalText": "CALL \"CEEDAYS\" USING\n                  WS-DATE-TO-TEST, \n                  WS-DATE-FORMAT, \n                  OUTPUT-LILLIAN, \n                  FEEDBACK-CODE",
+          "type": "CALL",
+          "categories": [
+            "CONTROL_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "c812bac9-0de7-467b-815f-acb1f02ff127",
+          "label": "MOVEWS-DATE-TO-",
+          "name": "MOVEWS-DATE-TO-",
+          "originalText": "MOVE WS-DATE-TO-TEST            TO WS-DATE",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "5f5f4a59-5728-402f-8666-81405328265a",
+          "label": "MOVESEVERITYOFF",
+          "name": "MOVESEVERITYOFF",
+          "originalText": "MOVE SEVERITY OF FEEDBACK-CODE  TO WS-SEVERITY-N",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "8b32287a-2e4f-41f3-b3df-c05ae3e4823b",
+          "label": "MOVEMSG-NOOFFEE",
+          "name": "MOVEMSG-NOOFFEE",
+          "originalText": "MOVE MSG-NO OF FEEDBACK-CODE    TO WS-MSG-NO-N",
+          "type": "MOVE",
+          "categories": [
+            "DATA_FLOW"
+          ],
+          "nodeType": "CODE_VERTEX"
+        },
+        {
+          "children": [],
+          "id": "675d3380-138f-440c-a965-bfe677a5a931",
+          "label": "EVALUATE",
+          "name": "EVALUATE",
+          "originalText": "EVALUATE TRUE\n              WHEN FC-INVALID-DATE\n                 MOVE \u0027Date is valid\u0027      TO WS-RESULT\n              WHEN FC-INSUFFICIENT-DATA\n                 MOVE \u0027Insufficient\u0027       TO WS-RESULT\n              WHEN FC-BAD-DATE-VALUE\n                 MOVE \u0027Datevalue error\u0027    TO WS-RESULT\n              WHEN FC-INVALID-ERA\n                 MOVE \u0027Invalid Era    \u0027    TO WS-RESULT\n              WHEN FC-UNSUPP-RANGE\n                 MOVE \u0027Unsupp. Range  \u0027    TO WS-RESULT\n              WHEN FC-INVALID-MONTH\n                 MOVE \u0027Invalid month  \u0027    TO WS-RESULT\n              WHEN FC-BAD-PIC-STRING\n                 MOVE \u0027Bad Pic String \u0027    TO WS-RESULT\n              WHEN FC-NON-NUMERIC-DATA\n                 MOVE \u0027Nonnumeric data\u0027    TO WS-RESULT\n              WHEN FC-YEAR-IN-ERA-ZERO\n                 MOVE \u0027YearInEra is 0 \u0027    TO WS-RESULT\n              WHEN OTHER\n                 MOVE \u0027Date is invalid\u0027    TO WS-RESULT\n           END-EVALUATE",
+          "type": "EVALUATE",
+          "categories": [
+            "DECISION"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "6ec915be-a71f-4e1e-883f-2fa05e5e2d12",
+      "label": "MOVELENGTHOFLS-",
+      "name": "MOVELENGTHOFLS-",
+      "originalText": "MOVE LENGTH OF LS-DATE\n                        TO VSTRING-LENGTH  OF WS-DATE-TO-TEST\n           MOVE LS-DATE TO VSTRING-TEXT    OF WS-DATE-TO-TEST\n                           WS-DATE\n           MOVE LENGTH OF LS-DATE-FORMAT\n                         TO VSTRING-LENGTH OF WS-DATE-FORMAT\n           MOVE LS-DATE-FORMAT\n                         TO VSTRING-TEXT   OF WS-DATE-FORMAT\n                            WS-DATE-FMT\n           MOVE 0        TO OUTPUT-LILLIAN\n       \n           CALL \"CEEDAYS\" USING\n                  WS-DATE-TO-TEST, \n                  WS-DATE-FORMAT, \n                  OUTPUT-LILLIAN, \n                  FEEDBACK-CODE\n       \n           MOVE WS-DATE-TO-TEST            TO WS-DATE\n           MOVE SEVERITY OF FEEDBACK-CODE  TO WS-SEVERITY-N\n           MOVE MSG-NO OF FEEDBACK-CODE    TO WS-MSG-NO-N\n       \n       \n       \n           EVALUATE TRUE\n              WHEN FC-INVALID-DATE\n                 MOVE \u0027Date is valid\u0027      TO WS-RESULT\n              WHEN FC-INSUFFICIENT-DATA\n                 MOVE \u0027Insufficient\u0027       TO WS-RESULT\n              WHEN FC-BAD-DATE-VALUE\n                 MOVE \u0027Datevalue error\u0027    TO WS-RESULT\n              WHEN FC-INVALID-ERA\n                 MOVE \u0027Invalid Era    \u0027    TO WS-RESULT\n              WHEN FC-UNSUPP-RANGE\n                 MOVE \u0027Unsupp. Range  \u0027    TO WS-RESULT\n              WHEN FC-INVALID-MONTH\n                 MOVE \u0027Invalid month  \u0027    TO WS-RESULT\n              WHEN FC-BAD-PIC-STRING\n                 MOVE \u0027Bad Pic String \u0027    TO WS-RESULT\n              WHEN FC-NON-NUMERIC-DATA\n                 MOVE \u0027Nonnumeric data\u0027    TO WS-RESULT\n              WHEN FC-YEAR-IN-ERA-ZERO\n                 MOVE \u0027YearInEra is 0 \u0027    TO WS-RESULT\n              WHEN OTHER\n                 MOVE \u0027Date is invalid\u0027    TO WS-RESULT\n           END-EVALUATE\n       \n           .",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [],
+      "id": "d74b5e36-5faf-4d18-a555-aec2bb15329a",
+      "label": "A000-MAIN-EXIT",
+      "name": "A000-MAIN-EXIT",
+      "originalText": "A000-MAIN-EXIT.",
+      "type": "ATOMIC",
+      "categories": [
+        "GENERIC_CODE"
+      ],
+      "nodeType": "CODE_VERTEX"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "id": "accedfd6-4fd1-4e11-8a7b-58e5455f2576",
+          "label": "EXIT",
+          "name": "EXIT",
+          "originalText": "EXIT",
+          "type": "EXIT",
+          "categories": [
+            "TERMINAL"
+          ],
+          "nodeType": "CODE_VERTEX"
+        }
+      ],
+      "id": "619ab8c7-fa22-4e19-8ec6-6ee11b541a4a",
+      "label": "EXIT.",
+      "name": "EXIT.",
+      "originalText": "EXIT\n           .",
+      "type": "SENTENCE",
+      "categories": [
+        "CODE_BLOCK"
+      ],
+      "nodeType": "CODE_VERTEX"
+    }
+  ],
+  "id": "95157add-0160-4465-a687-f45ee06daa84",
+  "label": "ProcedureDivisionBodyContext/95157add-0160-4465-a687-f45ee06daa84",
+  "name": "ProcedureDivisionBodyContext/95157add-0160-4465-a687-f45ee06daa84",
+  "originalText": "INITIALIZE WS-MESSAGE\n           MOVE SPACES TO WS-DATE\n       \n           PERFORM A000-MAIN\n              THRU A000-MAIN-EXIT\n       \n       \n           MOVE WS-MESSAGE                 TO LS-RESULT\n           MOVE WS-SEVERITY-N              TO RETURN-CODE\n       \n           EXIT PROGRAM\n       \n           .\n       A000-MAIN.\n       \n           MOVE LENGTH OF LS-DATE\n                        TO VSTRING-LENGTH  OF WS-DATE-TO-TEST\n           MOVE LS-DATE TO VSTRING-TEXT    OF WS-DATE-TO-TEST\n                           WS-DATE\n           MOVE LENGTH OF LS-DATE-FORMAT\n                         TO VSTRING-LENGTH OF WS-DATE-FORMAT\n           MOVE LS-DATE-FORMAT\n                         TO VSTRING-TEXT   OF WS-DATE-FORMAT\n                            WS-DATE-FMT\n           MOVE 0        TO OUTPUT-LILLIAN\n       \n           CALL \"CEEDAYS\" USING\n                  WS-DATE-TO-TEST, \n                  WS-DATE-FORMAT, \n                  OUTPUT-LILLIAN, \n                  FEEDBACK-CODE\n       \n           MOVE WS-DATE-TO-TEST            TO WS-DATE\n           MOVE SEVERITY OF FEEDBACK-CODE  TO WS-SEVERITY-N\n           MOVE MSG-NO OF FEEDBACK-CODE    TO WS-MSG-NO-N\n       \n       \n       \n           EVALUATE TRUE\n              WHEN FC-INVALID-DATE\n                 MOVE \u0027Date is valid\u0027      TO WS-RESULT\n              WHEN FC-INSUFFICIENT-DATA\n                 MOVE \u0027Insufficient\u0027       TO WS-RESULT\n              WHEN FC-BAD-DATE-VALUE\n                 MOVE \u0027Datevalue error\u0027    TO WS-RESULT\n              WHEN FC-INVALID-ERA\n                 MOVE \u0027Invalid Era    \u0027    TO WS-RESULT\n              WHEN FC-UNSUPP-RANGE\n                 MOVE \u0027Unsupp. Range  \u0027    TO WS-RESULT\n              WHEN FC-INVALID-MONTH\n                 MOVE \u0027Invalid month  \u0027    TO WS-RESULT\n              WHEN FC-BAD-PIC-STRING\n                 MOVE \u0027Bad Pic String \u0027    TO WS-RESULT\n              WHEN FC-NON-NUMERIC-DATA\n                 MOVE \u0027Nonnumeric data\u0027    TO WS-RESULT\n              WHEN FC-YEAR-IN-ERA-ZERO\n                 MOVE \u0027YearInEra is 0 \u0027    TO WS-RESULT\n              WHEN OTHER\n                 MOVE \u0027Date is invalid\u0027    TO WS-RESULT\n           END-EVALUATE\n       \n           .\n       A000-MAIN-EXIT.\n           EXIT\n           .",
+  "type": "PROCEDURE_DIVISION_BODY",
+  "categories": [
+    "CODE_BLOCK"
+  ],
+  "nodeType": "CODE_VERTEX"
+}
