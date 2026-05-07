@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 server.py  —  FastAPI COBOL Oracle
-The LLM (gemma3:4b via Ollama) ONLY sees structured_facts.json — never raw COBOL.
+The LLM (gemma3:latest via Ollama) ONLY sees structured_facts.json — never raw COBOL.
 
 Endpoints:
   POST /query         single-shot question about one program
@@ -21,7 +21,7 @@ app       = FastAPI(title="COBOL Oracle POC")
 FACTS_DIR = Path("poc/facts")
 MD_DIR    = Path("poc/md")
 OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL      = "gemma3:4b"  # ollama pull gemma3:4b
+MODEL      = "gemma3:latest"
 
 SYSTEM_PROMPT = """You are a COBOL program analyst for the AWS CardDemo system.
 You answer questions ONLY from the verified structural facts provided.
