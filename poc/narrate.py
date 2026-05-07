@@ -15,7 +15,7 @@ from pathlib import Path
 FACTS_DIR  = Path("poc/facts")
 MD_DIR     = Path("poc/md")
 OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL      = "qwen3:4b"
+MODEL      = "gemma3:4b"  # ollama pull gemma3:4b
 
 NARRATE_SYSTEM = """You are a COBOL technical writer.
 Given a structured facts JSON about a COBOL program, write:
